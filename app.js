@@ -6,7 +6,6 @@ widgets.controller('RestaurantCtrl',
     function($scope){
 
       $scope.restaurants = [];
-      $scope.orderQuery = $scope.restaurantName;
 
       $scope.createRestaurant = function () {
         var newRestaurant = {}
