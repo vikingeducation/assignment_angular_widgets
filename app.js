@@ -1,19 +1,48 @@
 var widgets = angular.module("widgets", []);
 
 widgets.controller("PhotosCtrl", ["$scope", function($scope){
-  $scope.rawFeed = window.instagramResponse.data
-  $scope.IGFilters = (function() {
-    var filters = []
-    for (var i = 0; i < $scope.rawFeed.length; i++) {
-      var photo = $scope.rawFeed[i]
-      if (filters.indexOf(photo.filter) === -1 ) {
-        filters.push(photo.filter)
+  $scope.rawFeed = window.instagramResponse.data;
+  $scope.search = {tags: undefined};
+  $scope.tagsArray=[];
+  $scope.hashtagFilter = function(val, idx, arr){
+    console.log('inside hashtagfilter');
+    for(var i=0; i < $scope.tagsArray.length; i++){
+      console.log(val.tags);
+      if (val.tags == $scope.tagsArray[i]){
+        console.log('true');
+        return true;
+      }else if (val.tags.indexOf($scope.tagsArray[i]) != -1){
+        return true;
       }
-    };
-    return filters
-  })()
+    }
+  };
 
-}])
+  $scope.IGFilters = (function() {
+    var filters = [];
+    for (var i = 0; i < $scope.rawFeed.length; i++) {
+      var photo = $scope.rawFeed[i];
+      if (filters.indexOf(photo.filter) === -1 ) {
+        filters.push(photo.filter);
+      }
+    }
+    return filters;
+  })();
+
+  $scope.hashtags = (function() {
+
+    var tags = [];
+    for (var i = 0; i < $scope.rawFeed.length; i++) {
+      var photo = $scope.rawFeed[i];
+      for (var j=0; j < photo.tags.length; j++){
+        if (tags.indexOf(photo.tags[j]) === -1 ) {
+          tags.push(photo.tags[j]);
+        }
+      }
+    }
+    return tags;
+  })();
+
+}]);
 
 widgets.controller("RestaurantCtrl", ["$scope", function($scope){
   $scope.restaurants = [];
