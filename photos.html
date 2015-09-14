@@ -49,21 +49,23 @@
       </div>
 
       <div class="row">
-        <div class="col-md-4 col-xs-6 push-div" ng-repeat="(index, image) in filteredCollection = (rawFeed | filter: {filter: selectedFilter, user: userSelected } | hashtagFilter: selectedHashtags) | pageFilter: currentPage">
-          <h2>
-            <a ng-href="https://instagram.com/{{image.user.username}}">{{ image.user.username }}</a>
-          </h2>
-          <h6> {{ image.created_time * 1000 | date: 'MMM d,y @ h:mma' }} </h6>
-          <a ng-href="{{ image.link }}">
-            <img ng-src="{{ image.images.low_resolution.url }}" class="img img-responsive">
-          </a>
-          <div class = "like-count"><span class = "glyphicon glyphicon-heart"></span> {{ image.likes.count }}</div>
-          <div class = "comment-count"><span class = "glyphicon glyphicon-comment"></span> {{ image.comments.count }}</div>
-          <div class = "filter-used"><strong>Filter:</strong> {{ image.filter }}</div>
-          <ul class = "tags">
-            <li ng-repeat = "tag in image.tags">#{{ tag }}&nbsp;</li>
-          </ul>
-        <!-- <div class = "row" ng-if="index % 3 == 0"></div> -->
+        <div ng-repeat = "(index, image) in filteredCollection = (rawFeed | filter: {filter: selectedFilter, user: userSelected } | hashtagFilter: selectedHashtags) | pageFilter: currentPage">
+          <div class="col-md-4 col-xs-6">
+            <h2>
+              <a ng-href="https://instagram.com/{{image.user.username}}">{{ image.user.username }}</a>
+            </h2>
+            <h6> {{ image.created_time * 1000 | date: 'MMM d,y @ h:mma' }} </h6>
+            <a ng-href="{{ image.link }}">
+              <img ng-src="{{ image.images.low_resolution.url }}" class="img img-responsive">
+            </a>
+            <div class = "like-count"><span class = "glyphicon glyphicon-heart"></span> {{ image.likes.count }}</div>
+            <div class = "comment-count"><span class = "glyphicon glyphicon-comment"></span> {{ image.comments.count }}</div>
+            <div class = "filter-used"><strong>Filter:</strong> {{ image.filter }}</div>
+            <ul class = "tags">
+              <li ng-repeat = "tag in image.tags">#{{ tag }}&nbsp;</li>
+            </ul>
+          </div>
+          <div class="row" ng-if="index % 3 == 2"></div>
         </div>
       </div>
 
@@ -76,21 +78,25 @@
       </div>
 
       <div class="row">
-        <div class="col-md-4 col-xs-6" ng-repeat = "image in rawFeed">
+        <div ng-repeat = "(index, image) in rawFeed">
+          <div class="col-md-4 col-xs-6">
 
-        <div class="row">
-          <div class="col-xs-4">
-            <img ng-src="{{ image.user.profile_picture }}" class = "img img-responsive">
+            <div class="row">
+              <div class="col-xs-4">
+                <img ng-src="{{ image.user.profile_picture }}" class = "img img-responsive">
+              </div>
+
+              <div class="col-xs-8">
+                <h3>
+                  <a ng-model = "userSelected" ng-click = "selectUser(image.user)" ng-href = '#' >{{ image.user.username }}</a>
+                </h3>
+                <h5>Full name: {{ image.user.full_name ? image.user.full_name : "No name registered" }}</h5>
+              </div>
+            </div>
+            <br>
+
           </div>
-
-          <div class="col-xs-8">
-            <h3>
-              <a ng-model = "userSelected" ng-click = "selectUser(image.user)" ng-href = '#' >{{ image.user.username }}</a>
-            </h3>
-            <h5>Full name: {{ image.user.full_name ? image.user.full_name : "No name registered" }}</h5>
-          </div>
-        </div>
-
+          <div class="row" ng-if="index % 3 == 2"></div>
         </div>
       </div>
 
