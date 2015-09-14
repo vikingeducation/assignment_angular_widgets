@@ -18,11 +18,11 @@
         <option ng-repeat="filter in IGFilters" value='{{filter}}'>{{filter}}</option>
       </select>
 
-      <select name="hashtags" id="" ng-model="tagsArray" multiple>
+      <select name="hashtags" id="" ng-model="tagFilters" multiple>
         <option value="">No hashtag</option>
         <option ng-repeat="tag in hashtags" value='{{tag}}'>{{tag}}</option>
       </select>
-      {{tagsArray}}
+      {{tagFilters}}
     </div>
     </div>
     <div ng-repeat="picture in rawFeed | filter:search | filter:hashtagFilter" ng-class="{row:$index%3==2}">

@@ -3,15 +3,18 @@ var widgets = angular.module("widgets", []);
 widgets.controller("PhotosCtrl", ["$scope", function($scope){
   $scope.rawFeed = window.instagramResponse.data;
   $scope.search = {tags: undefined};
-  $scope.tagsArray=[];
+  $scope.tagFilters=[];
   $scope.hashtagFilter = function(val, idx, arr){
     console.log('inside hashtagfilter');
-    for(var i=0; i < $scope.tagsArray.length; i++){
+    if($scope.tagFilters.length ==0){
+      return true;
+    }
+    for(var i=0; i < $scope.tagFilters.length; i++){
       console.log(val.tags);
-      if (val.tags == $scope.tagsArray[i]){
+      if (val.tags == $scope.tagFilters[i]){
         console.log('true');
         return true;
-      }else if (val.tags.indexOf($scope.tagsArray[i]) != -1){
+      }else if (val.tags.indexOf($scope.tagFilters[i]) != -1){
         return true;
       }
     }
