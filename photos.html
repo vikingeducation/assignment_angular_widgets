@@ -11,11 +11,15 @@
     </div>
     <div class='row'>
       <div class='col-sm-4' ng-repeat="photo in rawFeed.data">
-        <img ng-src="{{photo.images.standard_resolution.url}}" class="img-responsive">
+        <a ng-href= "{{photo.link}}" >
+          <img ng-src="{{photo.images.standard_resolution.url}}" class="img-responsive">
+        </a>
         <p>User Name: {{ photo.user.username }}</p>
         <p>Comment Count: {{photo.comments.count}}</p>
         <p>Like Count{{photo.likes.count}}</p>
         <p>Posted On: {{photo.created_time}}</p>
+        <p>Filter: {{photo.filter}}</p>
+        <p><span ng-repeat='tag in photo.tags'>#{{tag}} </span></p>
       </div>
     </div>
   </div>
