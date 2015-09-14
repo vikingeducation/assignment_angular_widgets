@@ -21,6 +21,6 @@ widgets.controller('RestaurantCtrl',
     $scope.deleteRestaurant = function(restaurant){
       var index = $scope.restaurants.indexOf(restaurant);
       $scope.restaurants.splice(index, 1);
-    }
+    };
 
   }]);

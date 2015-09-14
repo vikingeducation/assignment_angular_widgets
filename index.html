@@ -5,9 +5,13 @@
   <title></title>
 </head>
 <body ng-controller='RestaurantCtrl'>
-  <input type='text' ng-model='name'>
-  <input type='text' ng-model='foodType'>
-  <input type='text' ng-model='img'>
+  <h1>Add a restaurant</h1>
+  <label> Name </label><br>
+  <input type='text' label='Name' ng-model='name'><br>
+  <label> Food Type </label><br>
+  <input type='text' ng-model='foodType'><br>
+  <label> Image URL </label><br>
+  <input type='url' ng-model='img'><br><br>
 
   <button ng-click="createRestaurant()">
     Create Restaurant
@@ -18,10 +22,31 @@
     <thead>
       <th>Name</th>
       <th>Food Type</th>
-      <th></th>
+      <th>Image</th>
       <th>Delete</th>
     </thead>
     <tbody ng-repeat='restaurant in restaurants | orderBy: "foodType"'>
+      <tr>
+        <td>{{ restaurant.name }}</td>
+        <td>{{ restaurant.foodType }}</td>
+        <td><image ng-src="{{restaurant.img}}"></td>
+        <td><button ng-click="deleteRestaurant(restaurant)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>Search Restaurants</h1>
+  <input type='text' ng-model='searchTerm'>
+  <h1>Restaurants</h1>
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Food Type</th>
+      <th>Image</th>
+      <th>Delete</th>
+    </thead>
+    <tbody ng-repeat="restaurant in restaurants
+                      | filter: { name: searchTerm }">
       <tr>
         <td>{{ restaurant.name }}</td>
         <td>{{ restaurant.foodType }}</td>
