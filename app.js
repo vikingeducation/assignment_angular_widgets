@@ -2,8 +2,16 @@ var widgets = angular.module("widgets", []);
 
 widgets.controller("PhotosCtrl", ["$scope", function($scope){
   $scope.rawFeed = window.instagramResponse.data
-
-
+  $scope.IGFilters = (function() {
+    var filters = []
+    for (var i = 0; i < $scope.rawFeed.length; i++) {
+      var photo = $scope.rawFeed[i]
+      if (filters.indexOf(photo.filter) === -1 ) {
+        filters.push(photo.filter)
+      }
+    };
+    return filters
+  })()
 
 }])
 
