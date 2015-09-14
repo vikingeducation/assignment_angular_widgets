@@ -40,6 +40,20 @@ widgets.controller('PhotosCtrl',
 
       $scope.filters = [];
       $scope.hashtags = [];
+      $scope.currentPage = 0;
+      
+      $scope.pagePrev = function(){
+        if ($scope.currentPage > 0){
+          $scope.currentPage--;
+        }
+      }
+
+      $scope.pageNext = function(){
+        if ($scope.currentPage  < $scope.filtered.length/12 ){
+          $scope.currentPage++;
+        }
+      }
+
 
       var generateFiltersList = (function(){
         for (var i = 0; i < $scope.rawFeed.length; i++) {
@@ -84,4 +98,13 @@ widgets.filter('hashtagFilter', function() {
 
   }
 
+
+});
+
+widgets.filter('pageFilter', function(){
+
+  return function(images, pageNumber){
+
+    return images.slice(pageNumber * 12, (pageNumber * 12) + 12)
+  }
 });

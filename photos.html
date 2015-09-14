@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-  <script type="text/javascript" src = "photo.js"></script>
+  <script type="text/javascript" src = "photos.js"></script>
   <script src="app.js"></script>
 </head>
 <body>
@@ -39,10 +39,15 @@
             </select>
           </label>
         </div>
+        <div class="col-xs-4">
+            <button ng-click="pagePrev()">Prev</button>
+            <button ng-click="pageNext()">Next</button>
+        </div>
       </div>
 
       <div class="row">
-        <div class="col-md-4 col-xs-6" ng-repeat="(index, image) in filtered = (rawFeed | filter: {filter: selectedFilter} | hashtagFilter: selectedHashtags)">
+        <div class="col-md-4 col-xs-6 push-div" ng-repeat="(index, image) in filtered = (rawFeed | filter: {filter: selectedFilter} | hashtagFilter: selectedHashtags | pageFilter: currentPage)">
+          {{rawFeed.length}}
           <h2>
             <a ng-href="https://instagram.com/{{image.user.username}}">{{ image.user.username }}</a>
           </h2>
