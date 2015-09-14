@@ -39,15 +39,17 @@
             </select>
           </label>
         </div>
-        <div class="col-xs-4">
-            <button ng-click="pagePrev()">Prev</button>
-            <button ng-click="pageNext()">Next</button>
+
+        <div class="col-xs-4 text-center">
+          <label>Current Page: {{ currentPage }}</label><br>
+          <button ng-click="pagePrev()" class = "btn btn-primary">Prev</button>
+<!--           <button ng-repeat="page in Array.apply(null, {length: Math.floor(filteredCollection.length / 12)}).map(Number.call, Number)">{{ page }}</button> -->
+          <button ng-click="pageNext(filteredCollection.length)" class = "btn btn-primary">Next</button>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-4 col-xs-6 push-div" ng-repeat="(index, image) in filtered = (rawFeed | filter: {filter: selectedFilter} | hashtagFilter: selectedHashtags | pageFilter: currentPage)">
-          {{rawFeed.length}}
+        <div class="col-md-4 col-xs-6 push-div" ng-repeat="(index, image) in filteredCollection = (rawFeed | filter: {filter: selectedFilter, user: userSelected } | hashtagFilter: selectedHashtags) | pageFilter: currentPage">
           <h2>
             <a ng-href="https://instagram.com/{{image.user.username}}">{{ image.user.username }}</a>
           </h2>
@@ -64,9 +66,37 @@
         <!-- <div class = "row" ng-if="index % 3 == 0"></div> -->
         </div>
       </div>
-    </div>
 
+      <hr><hr>
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h2>Users</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 col-xs-6" ng-repeat = "image in rawFeed">
+
+        <div class="row">
+          <div class="col-xs-4">
+            <img ng-src="{{ image.user.profile_picture }}" class = "img img-responsive">
+          </div>
+
+          <div class="col-xs-8">
+            <h3>
+              <a ng-model = "userSelected" ng-click = "selectUser(image.user)" ng-href = '#' >{{ image.user.username }}</a>
+            </h3>
+            <h5>Full name: {{ image.user.full_name ? image.user.full_name : "No name registered" }}</h5>
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
+
 
 </body>
 </html>

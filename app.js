@@ -41,23 +41,28 @@ widgets.controller('PhotosCtrl',
       $scope.filters = [];
       $scope.hashtags = [];
       $scope.currentPage = 0;
-      
+
       $scope.pagePrev = function(){
         if ($scope.currentPage > 0){
           $scope.currentPage--;
         }
       }
 
-      $scope.pageNext = function(){
-        if ($scope.currentPage  < $scope.filtered.length/12 ){
+      $scope.pageNext = function(collectionLength){
+        console.log(Math.floor(collectionLength / 12))
+        // If the next page still has any elements on it...
+        if ($scope.currentPage + 1 < Math.ceil(collectionLength / 12) ){
           $scope.currentPage++;
         }
+      }
+
+      $scope.selectUser = function(user) {
+        $scope.userSelected = user;
       }
 
 
       var generateFiltersList = (function(){
         for (var i = 0; i < $scope.rawFeed.length; i++) {
-          console.log($scope.rawFeed[i].filter)
           // Adds unique filters
           if ($scope.filters.indexOf($scope.rawFeed[i].filter) === -1) {
             $scope.filters.push($scope.rawFeed[i].filter)
