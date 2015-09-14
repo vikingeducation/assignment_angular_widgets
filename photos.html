@@ -28,16 +28,17 @@
     </select>
     <p>Ordered by: {{tagSelect}}</p>
     
-    <div ng-init="isDisabled = false">
-      <button ng-click="prePage()" disabled="{{isDisabled}}">Pre</button>
-    </div>
-    <button ng-click="nextPage()">Nxt</button>
+    <!-- <div ng-init="isDisabled = false"> -->
+      <button ng-click="prePage()" ng-disabled="pageNum < 2">Pre</button>
+      {{isDisabled}}
+    <!-- </div> -->
+    <button ng-click="nextPage()" ng-disabled="pageNum >= maxPageNum">Nxt</button>
 
     <div class="row">
     
  
 
-      <div class="col-sm-6 col-md-4" ng-repeat="photo in rawFeed.data | filter : filterSelect | myFilter : tagSelect | limitTo: photoPerPage : (pageNum-1)*photoPerPage">
+      <div class="col-sm-6 col-md-4" ng-repeat="photo in rawFeed.data | filter : filterSelect | filter: userSelect | myFilter : tagSelect | limitTo: photoPerPage : (pageNum-1)*photoPerPage">
         
         
         <div class="thumbnail">
@@ -60,6 +61,20 @@
 
         
       </div>
+
+      <div>
+        <table ng-repeat="photo in rawFeed.data">
+          <tbody>
+            <tr>
+              <td><img ng-src="{{photo.user.profile_picture}}" ng-style="{ 'width' : 20, 'height' : 20 }"/></td>
+              <td>{{photo.user.username}}</td>
+              <td>{{photo.user.full_name}}</td>
+              <td>{{photo.user.id}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
 
 

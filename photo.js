@@ -3,8 +3,10 @@
 widgets.controller('PhotosCtrl', ['$scope', function($scope){
   $scope.rawFeed = instagramResponse;
   $scope.filterSelect = "";
-  $scope.photoPerPage = 12;
+  $scope.photoPerPage = 6;
   $scope.pageNum = 1;
+  $scope.maxPageNum = Math.floor($scope.rawFeed.data.length/$scope.photoPerPage);
+  // $scope.isDisabled = false;
   (function(){
     $scope.filters = [];
     $scope.rawFeed.data.forEach(function(el){
@@ -28,8 +30,11 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
   $scope.prePage = function() {
     if ($scope.pageNum > 1) {
       $scope.pageNum--;
-      
     }
+      // $scope.isDisabled = false;
+    // } else {
+    //   $scope.isDisabled = true;
+    // }
   };
 
   $scope.nextPage = function() {
