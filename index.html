@@ -23,8 +23,10 @@
 
       <table>
         <tr>
-          <th>Restaurant Name</th>
-          <th>Cuisine</th>
+          <th ng-click="sort('name')">Restaurant Name</th>
+          <th ng-click="sort('foodType')">Cuisine</th>
+          <th>Delete</th>
+          <th>Image</th>
         </tr>
         <tr ng-repeat='restaurant in restaurants | filter:foodTypeFilter'>
           <td>{{restaurant.name}}</td>
