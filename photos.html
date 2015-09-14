@@ -16,14 +16,24 @@
 <body ng-app="widgets">
 
   <div ng-controller="PhotosCtrl">
-    <select  ng-model="filterSelect" ng-options="filter as data.filter for data in rawFeed.data">
-
+    <select ng-model="filterSelect">
+      <option value="">any filter</option>
+      <option ng-repeat="filter in filters">{{filter}}</option>
     </select>
-    <p>Ordered by: {{filterSelect.filter}}</p>
+    <p>Ordered by: {{filterSelect}}</p>
+
+    <select ng-model="tagSelect" multiple>
+      <option value="">any tag</option>
+      <option ng-repeat="tag in tags">{{tag}}</option>
+    </select>
+    <p>Ordered by: {{tagSelect}}</p>
+
+    <button ng-click="prePage()">Pre</button>
+    <button ng-click="nextPage()">Nxt</button>
 
     <div class="row">
 
-      <div class="col-sm-6 col-md-4" ng-repeat="photo in rawFeed.data | filter : filterSelect">
+      <div class="col-sm-6 col-md-4" ng-repeat="photo in rawFeed.data | filter : filterSelect | myFilter : tagSelect | limitTo: 0: 12" >
         <div class="thumbnail">
           <a ng-href="{{photo.link}}">
             <img ng-src="{{photo.images.standard_resolution.url}}" alt="...">
@@ -34,13 +44,17 @@
             <a ng-href="https://instagram.com/{{photo.user.username}}/">
               <p>{{photo.user.username}}</p>
             </a>
-            <p>{{photo.filter}}</p>
-            <p>{{photo.caption.text.slice(0,40)}}...</p>
+            <p>{{photo.filter}}</p> <br>
+            <p>
+              <span ng-repeat="tag in photo.tags">#{{tag}} </span>
+            </p>
 
           </div>
         </div>
       </div>
     </div>
+
+
   </div>
 
 

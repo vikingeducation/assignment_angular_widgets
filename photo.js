@@ -3,12 +3,65 @@
 widgets.controller('PhotosCtrl', ['$scope', function($scope){
   $scope.rawFeed = instagramResponse;
   $scope.filterSelect = "";
+  $scope.photoPerPage = 12;
+  $scope.pageNum = 0;
+  (function(){
+    $scope.filters = [];
+    $scope.rawFeed.data.forEach(function(el){
+      if ($scope.filters.indexOf(el.filter)===-1) {      
+        $scope.filters.push(el.filter);
+      }
+    })
+  })();
+
+  (function(){
+    $scope.tags = [];
+    $scope.rawFeed.data.forEach(function(el){
+      for (var i=0; i<el.tags.length; i++) {        
+        if ($scope.tags.indexOf(el.tags[i])===-1) {      
+          $scope.tags.push(el.tags[i]);
+        }
+      }
+    })
+  })();
   
+  $scope.prePage = function() {
+    if ($scope.pageNum > 0) {
+      $scope.pageNum--;
+    }
+  };
+
+  $scope.nextPage = function() {
+    var maxPageNum = Math.floor($scope.rawFeed.data.length/$scope.photoPerPage)
+    if ($scope.pageNum <= maxPageNum) {
+      $scope.pageNum++;
+    }
+  };
   // $scope.rawFeed.data.forEach(function(el){
   //   $scope.filters.push(el)
   // })
   // $scope.filters.uniq()
 }])
+
+widgets.filter('myFilter', function(){
+  return function( collection, tagFilter ) {
+    if (!tagFilter) return collection;
+    var filteredResults = [];
+    angular.forEach(collection, function(photo){
+      // console.log(photo.tags);
+      var hasTag = false;
+      for (var i=0; i<photo.tags.length; i++) {
+        if (tagFilter.indexOf(photo.tags[i])!==-1){
+
+          hasTag = true;
+          // console.log(hasTag);
+        }
+      }
+      if (hasTag) filteredResults.push(photo);
+    })
+    return filteredResults;
+  }
+})
 
 
 var instagramResponse = {
@@ -18,7 +71,7 @@ var instagramResponse = {
   "data": [
     {
       "attribution": null,
-      "tags": [],
+      "tags": ["family", "squad"],
       "type": "image",
       "location": null,
       "comments": {
