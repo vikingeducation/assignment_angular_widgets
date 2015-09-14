@@ -4,6 +4,7 @@
   <title>Photo Widget</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
   <script type="text/javascript" src = "photo.js"></script>
@@ -13,9 +14,39 @@
   <div ng-controller = "PhotosCtrl">
 
     <div class="container">
+
       <div class="row">
-        <div class="col-md-4">
-          <img ng-src="{{ rawFeed.data[0].data[0].from['profile_picture']" }}>
+        <div class="col-xs-12 text-center">
+          <h5>Search:</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4 text-center">
+          <h6>Filters:</h6>
+          <select ng-model="filter"
+                  [name="filter"]
+                  [ng-change="string"]>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 col-xs-6" ng-repeat="(index, image) in rawFeed">
+          <h2>
+            <a ng-href="https://instagram.com/{{image.user.username}}">{{ image.user.username }}</a>
+          </h2>
+          <h6> {{ image.created_time * 1000 | date: 'MMM d,y @ h:mma' }} </h6>
+          <a ng-href="{{ image.link }}">
+            <img ng-src="{{ image.images.low_resolution.url }}" class="img img-responsive">
+          </a>
+          <div class = "like-count"><span class = "glyphicon glyphicon-heart"></span> {{ image.likes.count }}</div>
+          <div class = "comment-count"><span class = "glyphicon glyphicon-comment"></span> {{ image.comments.count }}</div>
+          <div class = "filter-used"><strong>Filter:</strong> {{ image.filter }}</div>
+          <ul class = "tags">
+            <li ng-repeat = "tag in image.tags">#{{ tag }}&nbsp;</li>
+          </ul>
+        <!-- <div class = "row" ng-if="index % 3 == 0"></div> -->
         </div>
       </div>
     </div>

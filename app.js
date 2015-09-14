@@ -36,7 +36,9 @@ widgets.controller('PhotosCtrl',
     ['$scope',
     function($scope){
 
-      $scope.rawFeed = instagramResponse;
+      $scope.rawFeed = instagramResponse.data;
+
+      
 
 
     }]);
