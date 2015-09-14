@@ -43,8 +43,19 @@
       </div>
 
     </div>
-<a href="#" ng-click="prevPage()" ng-if="currentPage > 0">Previous Page</a>
-<a href="#" ng-click="nextPage()" ng-if="currentPage < 1">Next Page</a>
+    <div class="row">
+      <a href="#" ng-click="prevPage()" ng-if="currentPage > 0">Previous Page</a>
+      <a href="#" ng-click="nextPage()" ng-if="filteredPicCount > (currentPage*12)">Next Page</a>
+    </div>
+    <div class="row">
+      <div class="col-md-2 col-sm-3" ng-repeat="user in IGUsers">
+        <a href="" ng-click="userFilter(user.username)">
+          <img ng-src="{{user.profile_picture}}">
+          {{user.username}}
+          {{user.full_name}}
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 </div>

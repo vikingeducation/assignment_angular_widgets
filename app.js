@@ -2,32 +2,57 @@ var widgets = angular.module("widgets", []);
 
 widgets.controller("PhotosCtrl", ["$scope", function($scope){
   $scope.rawFeed = window.instagramResponse.data;
-  $scope.search = {tags: undefined};
+  $scope.search = {tags: undefined,
+                    user: {username: undefined}};
   $scope.tagFilters=[];
+  $scope.filteredPicCount;
   $scope.currentPage = 0;
+
+  $scope.resetPage = function(){
+    $scope.currentPage =0;
+  };
+
   $scope.nextPage = function() {
-    $scope.currentPage++
-    console.log($scope.currentPage)
-  }
+    $scope.currentPage++;
+    console.log($scope.currentPage);
+  };
+
   $scope.prevPage = function() {
-    $scope.currentPage--
-  }
+    $scope.currentPage--;
+  };
 
   $scope.hashtagFilter = function(val, idx, arr){
-    console.log('inside hashtagfilter');
-    if($scope.tagFilters.length ==0){
+
+    $scope.filteredPicCount=0;
+    if($scope.tagFilters.length == 0){
+      $scope.filteredPicCount++;
       return true;
     }
     for(var i=0; i < $scope.tagFilters.length; i++){
-      console.log(val.tags);
       if (val.tags == $scope.tagFilters[i]){
-        console.log('true');
+        $scope.filteredPicCount++;
         return true;
       }else if (val.tags.indexOf($scope.tagFilters[i]) != -1){
+        $scope.filteredPicCount++;
         return true;
       }
     }
   };
+
+  $scope.userFilter = function(username){
+    $scope.search.user.username = username;
+  };
+
+  $scope.IGUsers = (function(){
+    var users = [];
+    for (var i = 0; i < $scope.rawFeed.length; i++) {
+      var photo = $scope.rawFeed[i];
+      if (users.indexOf(photo.user) === -1 ) {
+        users.push(photo.user);
+      }
+    }
+    return users;
+  })(); // user objects
 
   $scope.IGFilters = (function() {
     var filters = [];
