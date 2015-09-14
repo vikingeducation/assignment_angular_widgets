@@ -4,6 +4,15 @@ widgets.controller("PhotosCtrl", ["$scope", function($scope){
   $scope.rawFeed = window.instagramResponse.data;
   $scope.search = {tags: undefined};
   $scope.tagFilters=[];
+  $scope.currentPage = 0;
+  $scope.nextPage = function() {
+    $scope.currentPage++
+    console.log($scope.currentPage)
+  }
+  $scope.prevPage = function() {
+    $scope.currentPage--
+  }
+
   $scope.hashtagFilter = function(val, idx, arr){
     console.log('inside hashtagfilter');
     if($scope.tagFilters.length ==0){
