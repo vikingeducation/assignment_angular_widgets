@@ -9,8 +9,6 @@ widgets.controller('RestaurantCtrl',
 
     $scope.sortCol = "foodType";
 
-    $scope.photoFilter = false;
-
     $scope.createRestaurant = function(){
       var newRestaurant = {};
       newRestaurant.name = $scope.name;
@@ -34,8 +32,9 @@ widgets.controller('PhotosCtrl',
     '$window',
     function($scope, $window){
       $scope.rawFeed = $window.instagramResponse;
-      $scope.availableFilters = [''];
-      $scope.availableTags = [''];
+      $scope.availableFilters = ["None"];
+      $scope.availableTags = ["None"];
+      $scope.photoFilter = "None";
 
       $scope.collectFilters = (function(){
         for (var i=0; i< $scope.rawFeed.data.length; i++){
@@ -53,6 +52,7 @@ widgets.controller('PhotosCtrl',
             }
           }
         }
+
       })();
 
   }]);
@@ -61,12 +61,31 @@ widgets.filter('filterPhotoByFilter', function(){
 
   return function(collection, activatePhotoFilter) {
 
-    // if(!activatePhotoFilter){return false;}
+    if(activatePhotoFilter === "None"){return collection;}
 
     var filteredPhotos = [];
 
     angular.forEach(collection, function(photo){
       if(photo.filter == activatePhotoFilter){
+        filteredPhotos.push(photo);
+      }
+    });
+
+    return filteredPhotos;
+  };
+
+});
+
+widgets.filter('filterPhotoByTag', function(){
+
+  return function(collection, activateTagFilter) {
+
+    if(activateTagFilter === "None"){return collection;}
+
+    var filteredPhotos = [];
+
+    angular.forEach(collection, function(photo){
+      if(photo.tags.indexOf(activateTagFilter) > -1){
         filteredPhotos.push(photo);
       }
     });
