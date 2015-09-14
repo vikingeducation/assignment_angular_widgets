@@ -13,7 +13,7 @@
     <h3 class="text-center">Photos</h3>
     <div ng-repeat="photos in rawFeed" ng-if="$index % 3 == 0" class="row">
 
-      <div class="col-md-4" ng-init="picture = rawFeed[$index]">
+      <div class="col-md-4" data-ng-init="picture = rawFeed[$index]">
         <a href="{{picture.link}}"><img ng-src="{{picture.images.standard_resolution.url}}" width="100%"></a>
         <br>
         <p>Created by: <a href = "https://instagram.com/{{picture.user.username}}">{{picture.user.username}}</a> at {{picture.created_time*1000 | date: "MMM dd, yyyy hh:mm a"}}</p>
@@ -28,34 +28,34 @@
         <p>{{picture.comments.count}} Comments</p>
       </div>
 
-      <div class="col-md-4" ng-init="picture = rawFeed[$index+1]">
-        <a href="{{picture.link}}"><img ng-src="{{picture.images.standard_resolution.url}}" width="100%"></a>
+      <div class="col-md-4" data-ng-init="picture1 = rawFeed[$index+1]">
+        <a href="{{picture1.link}}"><img ng-src="{{picture1.images.standard_resolution.url}}" width="100%"></a>
         <br>
-        <p>Created by: <a href = "https://instagram.com/{{picture.user.username}}">{{picture.user.username}}</a> at {{picture.created_time*1000 | date: "MMM dd, yyyy hh:mm a"}}</p>
-        <p>{{picture.filter}} Filter</p>
+        <p>Created by: <a href = "https://instagram.com/{{picture1.user.username}}">{{picture1.user.username}}</a> at {{picture1.created_time*1000 | date: "MMM dd, yyyy hh:mm a"}}</p>
+        <p>{{picture1.filter}} Filter</p>
 
         <p class="tags"> tags:
-          <span ng-repeat="tag in picture.tags">
+          <span ng-repeat="tag in picture1.tags">
             {{tag}}{{$last? "" : ", "}}
           </span>
         </p>
-        <p>{{picture.likes.count}} Likes</p>
-        <p>{{picture.comments.count}} Comments</p>
+        <p>{{picture1.likes.count}} Likes</p>
+        <p>{{picture1.comments.count}} Comments</p>
       </div>
 
-      <div class="col-md-4" ng-init="picture = rawFeed[$index+2]">
-        <a href="{{picture.link}}"><img ng-src="{{picture.images.standard_resolution.url}}" width="100%"></a>
+      <div class="col-md-4" data-ng-init="picture2 = rawFeed[$index+2]">
+        <a href="{{picture2.link}}"><img ng-src="{{picture2.images.standard_resolution.url}}" width="100%"></a>
         <br>
-        <p>Created by: <a href = "https://instagram.com/{{picture.user.username}}">{{picture.user.username}}</a> at {{picture.created_time*1000 | date: "MMM dd, yyyy hh:mm a"}}</p>
-        <p>{{picture.filter}} Filter</p>
+        <p>Created by: <a href = "https://instagram.com/{{picture2.user.username}}">{{picture2.user.username}}</a> at {{picture2.created_time*1000 | date: "MMM dd, yyyy hh:mm a"}}</p>
+        <p>{{picture2.filter}} Filter</p>
 
         <p class="tags"> tags:
-          <span ng-repeat="tag in picture.tags">
+          <span ng-repeat="tag in picture2.tags">
             {{tag}}{{$last? "" : ", "}}
           </span>
         </p>
-        <p>{{picture.likes.count}} Likes</p>
-        <p>{{picture.comments.count}} Comments</p>
+        <p>{{picture2.likes.count}} Likes</p>
+        <p>{{picture2.comments.count}} Comments</p>
       </div>
 
     </div>
