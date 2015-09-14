@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body ng-app="widgets">
+
+<div ng-controller="RestaurantCtrl">
+  <form >
+    <input type="text" ng-model="foodName">
+    {{foodName}}
+    <br>
+    <input type="text" ng-model="foodType">
+    {{foodType}}
+    <br>
+    <input type="submit" value="Create Restaurant" ng-click="fun()" >
+  </form>
+  {{restaurants}}
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="app.js"></script>
+<script src="/controllers/RestaurantCtrl.js"></script>
+</body>
+</html>
