@@ -23,16 +23,26 @@
 
       <div class="row">
         <div class="col-xs-4 text-center">
-          <h6>Filters:</h6>
-          <select ng-model="filter"
-                  [name="filter"]
-                  [ng-change="string"]>
-          </select>
+          <label for = "filterSelect">Filters:
+            <select name="filterSelect" ng-model="selectedFilter" class="form-control">
+              <option value="">Any Filter</option>
+              <option ng-repeat="filter in filters">{{ filter }}</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="col-xs-4 text-center">
+          <label for = "hashtagSelect">Hashtags:
+            <select name="hashtagSelect" ng-model="selectedHashtags" class="form-control" multiple>
+              <option value="">Any Hashtag</option>
+              <option ng-repeat="hashtag in hashtags">{{ hashtag }}</option>
+            </select>
+          </label>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-4 col-xs-6" ng-repeat="(index, image) in rawFeed">
+        <div class="col-md-4 col-xs-6" ng-repeat="(index, image) in filtered = (rawFeed | filter: {filter: selectedFilter} | hashtagFilter: selectedHashtags)">
           <h2>
             <a ng-href="https://instagram.com/{{image.user.username}}">{{ image.user.username }}</a>
           </h2>

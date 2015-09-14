@@ -38,7 +38,50 @@ widgets.controller('PhotosCtrl',
 
       $scope.rawFeed = instagramResponse.data;
 
-      
+      $scope.filters = [];
+      $scope.hashtags = [];
+
+      var generateFiltersList = (function(){
+        for (var i = 0; i < $scope.rawFeed.length; i++) {
+          console.log($scope.rawFeed[i].filter)
+          // Adds unique filters
+          if ($scope.filters.indexOf($scope.rawFeed[i].filter) === -1) {
+            $scope.filters.push($scope.rawFeed[i].filter)
+          };
+          // Adds unique hashtags
+          for (var j = 0; j < $scope.rawFeed[i].tags.length; j++) {
+            if ($scope.hashtags.indexOf($scope.rawFeed[i].tags[j]) === -1) {
+              $scope.hashtags.push($scope.rawFeed[i].tags[j])
+            };
+          };
+        }
+      })();
+
 
 
     }]);
+
+widgets.filter('hashtagFilter', function() {
+
+  return function(images, selection) {
+
+    if (!selection || selection.indexOf("") !== -1 ) return images;
+
+    var filtered = [];
+
+    // We iterate over all the images
+    for (var w = 0; w < images.length; w++) {
+      // We iterate over all the selected hashtags
+      for (var i = 0; i < selection.length; i++) {
+        // If the hashtag is part of the image list of hashtags, and the image wasn't selected already we add it
+        if (images[w].tags.indexOf(selection[i]) !== -1 && filtered.indexOf(images[w]) === -1) {
+          filtered.push(images[w])
+        }
+      };
+    };
+
+    return filtered;
+
+  }
+
+});
