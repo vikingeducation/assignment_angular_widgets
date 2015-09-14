@@ -7,6 +7,8 @@ widgets.controller('RestaurantCtrl',
 
     $scope.restaurants = [];
 
+    $scope.sortCol = "foodType";
+
     $scope.createRestaurant = function(){
       var newRestaurant = {};
       newRestaurant.name = $scope.name;
@@ -22,5 +24,12 @@ widgets.controller('RestaurantCtrl',
       var index = $scope.restaurants.indexOf(restaurant);
       $scope.restaurants.splice(index, 1);
     };
+
+  }]);
+
+widgets.controller('PhotosCtrl',
+  [ '$scope',
+    function($scope){
+
 
   }]);

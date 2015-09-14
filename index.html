@@ -40,13 +40,13 @@
   <h1>Restaurants</h1>
   <table>
     <thead>
-      <th>Name</th>
-      <th>Food Type</th>
+      <th><a href="" ng-click="sortCol = 'name'">Name</a></th>
+      <th><a href="" ng-click="sortCol = 'foodType'">Food Type</a></th>
       <th>Image</th>
       <th>Delete</th>
     </thead>
     <tbody ng-repeat="restaurant in restaurants
-                      | filter: { name: searchTerm }">
+                      | filter: { name: searchTerm } | orderBy: sortCol">
       <tr>
         <td>{{ restaurant.name }}</td>
         <td>{{ restaurant.foodType }}</td>
