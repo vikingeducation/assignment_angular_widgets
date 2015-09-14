@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app = "widgets">
+<head>
+  <title>Photo Widget</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script type="text/javascript" src = "photo.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+  <div ng-controller = "PhotosCtrl">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <img ng-src="{{ rawFeed.data[0].data[0].from['profile_picture']" }}>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
