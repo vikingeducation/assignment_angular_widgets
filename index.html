@@ -6,34 +6,41 @@
 
 <div ng-controller="RestaurantCtrl">
   <form >
-    <input type="text" ng-model="foodName">
+    <input type="text" ng-model="newRestaurant.foodName">
     <br>
-    <input type="text" ng-model="foodType">
+
+    <input type="text" ng-model="newRestaurant.foodType">
     <br>
-    <input type="text" ng-model="icon">
+    <input type="text" ng-model="newRestaurant.icon">
     <br>
-    <input type="submit" value="Create Restaurant" ng-click="fun()" >
+    <input type="submit" value="Create Restaurant" ng-click="addRestaurant()" >
   </form>
 
   <table>
     <thead>
       <th>Picture</th>
-      <th>Food Name</th>
-      <th>Food Type</th>
+      <th ng-click='Sorting("name")'>Food Name</th>
+      <th ng-click='Sorting("type")'>Food Type</th>
       <th>Delete</th>
     </thead>
-    <tbody ng-repeat="(index, restaurant) in restaurants | orderBy: 'type'">
+    {{restaurants}}
+    <tbody ng-repeat="(index, restaurant) in restaurants | filter: {foodName: nameFilter} | filter: {foodType: typeFilter}| orderBy: SortWay ">
       <td><img ng-src="{{restaurant.icon}}"/></td>
-      <td>{{restaurant.name}}</td>
-      <td>{{restaurant.type}}</td>
+      <td>{{restaurant.foodName}}</td>
+      <td>{{restaurant.foodType}}</td>
       <td><button ng-click="removeRestaurant(index)">Delete</button></td>
     </tbody>
   </table>
 
   <div>
     <h3>Search Restaurants</h3>
+    Name filter
     <input type="text" ng-model="nameFilter">
+    {{nameFilter}}
+    <br>
+    Type filter
     <input type="text" ng-model="typeFilter">
+    {{typeFilter}}
   </div>
 </div>
 
