@@ -32,15 +32,23 @@ widgets.controller('PhotosCtrl',
     '$window',
     function($scope, $window){
       $scope.rawFeed = $window.instagramResponse;
-      // Comment count
-      $scope.commentCount = $scope.rawFeed['data'][0]['comments']['count'];
-      // Like count
-      $scope.likeCount = $scope.rawFeed['data'][0]['likes']['count'];
-      // Created at
-      $scope.createdAt = $scope.rawFeed['data'][0]['created_time'];
-      // URL
-      $scope.url = $scope.rawFeed['data'][0]['images']['standard_resolution']['url'];
-      // Username
-      $scope.userName = $scope.rawFeed['data'][0]['user']['username'];
+      $scope.availableFilters = [];
+      $scope.availableTags = [];
+      $scope.collectFilters = (function(){
+        for (var i=0; i< $scope.rawFeed.data.length; i++){
+          if ($scope.availableFilters.indexOf($scope.rawFeed.data[i].filter) < 0){
+            $scope.availableFilters.push($scope.rawFeed.data[i].filter)
+          }
+        }
+      })()
+      $scope.collectTags = (function(){
+        for (var i=0; i<$scope.rawFeed.data.length; i++){
+          for (var j=0; j<$scope.rawFeed.data[i].tags.length; j++){
+            if ($scope.availableTags.indexOf($scope.rawFeed.data[i].tags[j]) < 0){
+              $scope.availableTags.push($scope.rawFeed.data[i].tags[j])
+            }
+          }
+        }
+      })()
 
   }]);
