@@ -2,6 +2,12 @@
 // Use it for good, solely on the front end, to create a photo gallery widget!
 widgets.controller('PhotosCtrl', ['$scope', function($scope){
   $scope.rawFeed = instagramResponse;
+  $scope.filterSelect = "";
+  
+  // $scope.rawFeed.data.forEach(function(el){
+  //   $scope.filters.push(el)
+  // })
+  // $scope.filters.uniq()
 }])
 
 

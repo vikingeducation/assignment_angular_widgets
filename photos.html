@@ -16,9 +16,14 @@
 <body ng-app="widgets">
 
   <div ng-controller="PhotosCtrl">
+    <select  ng-model="filterSelect" ng-options="filter as data.filter for data in rawFeed.data">
+
+    </select>
+    <p>Ordered by: {{filterSelect.filter}}</p>
+
     <div class="row">
 
-      <div class="col-sm-6 col-md-4" ng-repeat="photo in rawFeed.data">
+      <div class="col-sm-6 col-md-4" ng-repeat="photo in rawFeed.data | filter : filterSelect">
         <div class="thumbnail">
           <a ng-href="{{photo.link}}">
             <img ng-src="{{photo.images.standard_resolution.url}}" alt="...">
@@ -30,7 +35,7 @@
               <p>{{photo.user.username}}</p>
             </a>
             <p>{{photo.filter}}</p>
-            <p>{{photo.caption.text}}</p>
+            <p>{{photo.caption.text.slice(0,40)}}...</p>
 
           </div>
         </div>
