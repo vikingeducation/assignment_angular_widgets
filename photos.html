@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="widgets">
+
+  <div ng-controller="PhotosCtrl">
+    <div class="row">
+
+      <div class="col-sm-6 col-md-4" ng-repeat="photo in rawFeed.data">
+        <div class="thumbnail">
+          <a ng-href="{{photo.link}}">
+            <img ng-src="{{photo.images.standard_resolution.url}}" alt="...">
+          </a>
+          <div class="caption">
+            <p>{{photo.created_time | date}}</p>
+            <P>{{photo.likes.count}}</P>
+            <a ng-href="https://instagram.com/{{photo.user.username}}/">
+              <p>{{photo.user.username}}</p>
+            </a>
+            <p>{{photo.filter}}</p>
+            <p>{{photo.caption.text}}</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="app.js"></script>
+<script src="photo.js"></script>
+<!-- <script src="/controllers/RestaurantCtrl.js"></script>
+ --></body>
+</html>
