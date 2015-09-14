@@ -28,7 +28,7 @@
 
     <div class='row'>
       <div class='col-sm-4' ng-repeat="photo in rawFeed.data |
-           filterPhotoByFilter: true, photoFilter">
+           filterPhotoByFilter: photoFilter">
         <a ng-href= "{{photo.link}}" >
           <img  ng-src="{{photo.images.standard_resolution.url}}"
                 class="img-responsive">

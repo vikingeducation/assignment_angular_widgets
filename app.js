@@ -9,7 +9,7 @@ widgets.controller('RestaurantCtrl',
 
     $scope.sortCol = "foodType";
 
-    $scope.photoFilter = false;
+    $scope.photoFilter = '';
 
     $scope.createRestaurant = function(){
       var newRestaurant = {};
@@ -34,8 +34,8 @@ widgets.controller('PhotosCtrl',
     '$window',
     function($scope, $window){
       $scope.rawFeed = $window.instagramResponse;
-      $scope.availableFilters = [''];
-      $scope.availableTags = [''];
+      $scope.availableFilters = [];
+      $scope.availableTags = [];
 
       $scope.collectFilters = (function(){
         for (var i=0; i< $scope.rawFeed.data.length; i++){
@@ -61,7 +61,7 @@ widgets.filter('filterPhotoByFilter', function(){
 
   return function(collection, activatePhotoFilter) {
 
-    // if(!activatePhotoFilter){return false;}
+    if(!activatePhotoFilter){return false;}
 
     var filteredPhotos = [];
 
