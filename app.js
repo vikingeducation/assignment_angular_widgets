@@ -39,7 +39,7 @@ widgets.controller('PhotosCtrl',
       // Created at
       $scope.createdAt = $scope.rawFeed['data'][0]['created_time'];
       // URL
-      $scope.url = $scope.rawFeed['data'][0]['images']['standard_resolution'];
+      $scope.url = $scope.rawFeed['data'][0]['images']['standard_resolution']['url'];
       // Username
       $scope.userName = $scope.rawFeed['data'][0]['user']['username'];
 
