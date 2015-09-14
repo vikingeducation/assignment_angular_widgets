@@ -2,23 +2,26 @@ var widgets = angular.module("widgets", []);
 
 widgets.controller("RestaurantCtrl", ["$scope", function($scope){
   $scope.restaurants = [];
-  $scope.name ="cool Restaurant";
-  $scope.foodType = "delicious food";
-  $scope.createRestaurant = function(){
-    console.log('inside fn');
-    console.log($scope.name);
-    console.log($scope.foodType);
+  $scope.name ="";
+  $scope.foodType = "";
+  $scope.restaurantImage = ""
+  $scope.foodTypeFilter = "";
+    $scope.createRestaurant = function(){
+
 
     $scope.restaurants.push({
       name: $scope.name,
-      foodType: $scope.foodType
+      foodType: $scope.foodType,
+      image: $scope.restaurantImage
     });
     $scope.name = "";
     $scope.foodType = "";
 
   };
-  $scope.$watch("name", function(newVal, oldVal){
 
-  });
+  $scope.removeRestaurant = function(index){
+    $scope.restaurants.splice(index, 1)
+  }
+
 
 }]);

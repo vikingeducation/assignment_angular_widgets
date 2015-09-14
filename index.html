@@ -12,8 +12,13 @@
 
       <input type="text" name="Type of Food" ng-model="foodType">
 
+      <input type="text" name="Image" ng-model = "restaurantImage">
+
       <input type="submit" name="Create Restaurant" ng-click="createRestaurant()">
+
     </form>
+
+      Filter: <input type="text" ng-model="foodTypeFilter">
     <div>
 
       <table>
@@ -21,9 +26,11 @@
           <th>Restaurant Name</th>
           <th>Cuisine</th>
         </tr>
-        <tr ng-repeat="restaurant in restaurants">
+        <tr ng-repeat='restaurant in restaurants | filter:foodTypeFilter'>
           <td>{{restaurant.name}}</td>
           <td>{{restaurant.foodType}}</td>
+          <td ng-click='removeRestaurant($index)'><a href='#'>REMOVE</a></td>
+          <td> <img ng-src='{{restaurant.image}}' alt=""/></td>
         </tr>
       </table>
 
