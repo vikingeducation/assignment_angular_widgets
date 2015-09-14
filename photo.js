@@ -12,7 +12,7 @@ var instagramResponse = {
       "type": "image",
       "location": null,
       "comments": {
-        "count": 62,
+        "count": 62, //GET THIS
         "data": [
           {
             "created_time": "1440698882",
@@ -105,10 +105,10 @@ var instagramResponse = {
         ]
       },
       "filter": "Normal",
-      "created_time": "1440696547",
-      "link": "https://instagram.com/p/65S1D8AJKt/",
+      "created_time": "1440696547",  //GET THIS
+      "link": "https://instagram.com/p/65S1D8AJKt/",  //GET THIS
       "likes": {
-        "count": 7677,
+        "count": 7677,  //GET THIS
         "data": [
           {
             "username": "odemiskardesler",
@@ -143,12 +143,12 @@ var instagramResponse = {
           "height": 320
         },
         "thumbnail": {
-          "url": "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s150x150/e35/11934634_844560522259226_320398962_n.jpg",
+          "url": "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s150x150/e35/11934634_844560522259226_320398962_n.jpg", //GET THIS
           "width": 150,
           "height": 150
         },
         "standard_resolution": {
-          "url": "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s640x640/sh0.08/e35/11934634_844560522259226_320398962_n.jpg",
+          "url": "https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s640x640/sh0.08/e35/11934634_844560522259226_320398962_n.jpg", //GET THIS
           "width": 640,
           "height": 640
         }
@@ -181,7 +181,7 @@ var instagramResponse = {
       "user_has_liked": false,
       "id": "1060961998419825325_290825035",
       "user": {
-        "username": "thisisamans.world",
+        "username": "thisisamans.world", //GET THIS
         "profile_picture": "https://igcdn-photos-d-a.akamaihd.net/hphotos-ak-xfa1/t51.2885-19/11809655_1657096704507515_1715105450_a.jpg",
         "id": "290825035",
         "full_name": ""

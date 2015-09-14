@@ -29,7 +29,18 @@ widgets.controller('RestaurantCtrl',
 
 widgets.controller('PhotosCtrl',
   [ '$scope',
-    function($scope){
-
+    '$window',
+    function($scope, $window){
+      $scope.rawFeed = $window.instagramResponse;
+      // Comment count
+      $scope.commentCount = $scope.rawFeed['data'][0]['comments']['count'];
+      // Like count
+      $scope.likeCount = $scope.rawFeed['data'][0]['likes']['count'];
+      // Created at
+      $scope.createdAt = $scope.rawFeed['data'][0]['created_time'];
+      // URL
+      $scope.url = $scope.rawFeed['data'][0]['images']['standard_resolution'];
+      // Username
+      $scope.userName = $scope.rawFeed['data'][0]['user']['username'];
 
   }]);
