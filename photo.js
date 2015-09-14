@@ -4,7 +4,7 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
   $scope.rawFeed = instagramResponse;
   $scope.filterSelect = "";
   $scope.photoPerPage = 12;
-  $scope.pageNum = 0;
+  $scope.pageNum = 1;
   (function(){
     $scope.filters = [];
     $scope.rawFeed.data.forEach(function(el){
@@ -26,14 +26,17 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
   })();
   
   $scope.prePage = function() {
-    if ($scope.pageNum > 0) {
+    if ($scope.pageNum > 1) {
       $scope.pageNum--;
+      
     }
   };
 
   $scope.nextPage = function() {
+
     var maxPageNum = Math.floor($scope.rawFeed.data.length/$scope.photoPerPage)
-    if ($scope.pageNum <= maxPageNum) {
+    console.log(maxPageNum)
+    if ($scope.pageNum < maxPageNum) {
       $scope.pageNum++;
     }
   };

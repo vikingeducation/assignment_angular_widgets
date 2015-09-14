@@ -27,13 +27,19 @@
       <option ng-repeat="tag in tags">{{tag}}</option>
     </select>
     <p>Ordered by: {{tagSelect}}</p>
-
-    <button ng-click="prePage()">Pre</button>
+    
+    <div ng-init="isDisabled = false">
+      <button ng-click="prePage()" disabled="{{isDisabled}}">Pre</button>
+    </div>
     <button ng-click="nextPage()">Nxt</button>
 
     <div class="row">
+    
+ 
 
-      <div class="col-sm-6 col-md-4" ng-repeat="photo in rawFeed.data | filter : filterSelect | myFilter : tagSelect | limitTo: 0: 12" >
+      <div class="col-sm-6 col-md-4" ng-repeat="photo in rawFeed.data | filter : filterSelect | myFilter : tagSelect | limitTo: photoPerPage : (pageNum-1)*photoPerPage">
+        
+        
         <div class="thumbnail">
           <a ng-href="{{photo.link}}">
             <img ng-src="{{photo.images.standard_resolution.url}}" alt="...">
@@ -51,6 +57,8 @@
 
           </div>
         </div>
+
+        
       </div>
     </div>
 
@@ -59,7 +67,7 @@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
 <script src="app.js"></script>
 <script src="photo.js"></script>
 <!-- <script src="/controllers/RestaurantCtrl.js"></script>
