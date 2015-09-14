@@ -8,15 +8,60 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body ng-controller ="PhotosCtrl">
-  <h3>Photos</h3>
+
   <div class="container">
-    <div class="row">
-      <div class="col-xs-4">
-        <a href="{{rawFeed[0].link}}"><img ng-src="{{rawFeed[0].images.standard_resolution.url}}" width="100%">
+    <h3 class="text-center">Photos</h3>
+    <div ng-repeat="photos in rawFeed" ng-if="$index % 3 == 0" class="row">
+
+      <div class="col-md-4" ng-init="picture = rawFeed[$index]">
+        <a href="{{picture.link}}"><img ng-src="{{picture.images.standard_resolution.url}}" width="100%"></a>
+        <br>
+        <p>Created by: <a href = "https://instagram.com/{{picture.user.username}}">{{picture.user.username}}</a> at {{picture.created_time*1000 | date: "MMM dd, yyyy hh:mm a"}}</p>
+        <p>{{picture.filter}} Filter</p>
+
+        <p class="tags"> tags:
+          <span ng-repeat="tag in picture.tags">
+            {{tag}}{{$last? "" : ", "}}
+          </span>
+        </p>
+        <p>{{picture.likes.count}} Likes</p>
+        <p>{{picture.comments.count}} Comments</p>
       </div>
+
+      <div class="col-md-4" ng-init="picture = rawFeed[$index+1]">
+        <a href="{{picture.link}}"><img ng-src="{{picture.images.standard_resolution.url}}" width="100%"></a>
+        <br>
+        <p>Created by: <a href = "https://instagram.com/{{picture.user.username}}">{{picture.user.username}}</a> at {{picture.created_time*1000 | date: "MMM dd, yyyy hh:mm a"}}</p>
+        <p>{{picture.filter}} Filter</p>
+
+        <p class="tags"> tags:
+          <span ng-repeat="tag in picture.tags">
+            {{tag}}{{$last? "" : ", "}}
+          </span>
+        </p>
+        <p>{{picture.likes.count}} Likes</p>
+        <p>{{picture.comments.count}} Comments</p>
       </div>
+
+      <div class="col-md-4" ng-init="picture = rawFeed[$index+2]">
+        <a href="{{picture.link}}"><img ng-src="{{picture.images.standard_resolution.url}}" width="100%"></a>
+        <br>
+        <p>Created by: <a href = "https://instagram.com/{{picture.user.username}}">{{picture.user.username}}</a> at {{picture.created_time*1000 | date: "MMM dd, yyyy hh:mm a"}}</p>
+        <p>{{picture.filter}} Filter</p>
+
+        <p class="tags"> tags:
+          <span ng-repeat="tag in picture.tags">
+            {{tag}}{{$last? "" : ", "}}
+          </span>
+        </p>
+        <p>{{picture.likes.count}} Likes</p>
+        <p>{{picture.comments.count}} Comments</p>
+      </div>
+
     </div>
   </div>
+</div>
+</div>
 
 
 </body>
