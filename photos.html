@@ -7,23 +7,31 @@
 </head>
 <body ng-controller='PhotosCtrl'>
   <div class="container">
+
     <div class="row">
       <div class="col-xs-offset-2 col-xs-4">
         <select name="photoFilter" class="form-control" ng-model="photoFilter">
-          <option ng-repeat="option in availableFilters" value="{{option}}">{{option}}</option>
+          <option ng-repeat="option in availableFilters" value="{{option}}">
+            {{option}}
+          </option>
         </select>
       </div>
       <div class="col-xs-4">
-        <select name="hashFilter" class="form-control"ng-model="hashFilter">
-          <option ng-repeat="option in availableTags" value="{{option}}">{{option}}</option>
+        <select name="tagFilter" class="form-control" ng-model="tagFilter">
+          <option ng-repeat="option in availableTags" value="{{option}}">
+            {{option}}
+          </option>
         </select>
       </div>
     </div>
     <br>
+
     <div class='row'>
-      <div class='col-sm-4' ng-repeat="photo in rawFeed.data">
+      <div class='col-sm-4' ng-repeat="photo in rawFeed.data |
+           filterPhotoByFilter: true, photoFilter">
         <a ng-href= "{{photo.link}}" >
-          <img ng-src="{{photo.images.standard_resolution.url}}" class="img-responsive">
+          <img  ng-src="{{photo.images.standard_resolution.url}}"
+                class="img-responsive">
         </a>
         <p>User Name: {{ photo.user.username }}</p>
         <p>Comment Count: {{photo.comments.count}}</p>
