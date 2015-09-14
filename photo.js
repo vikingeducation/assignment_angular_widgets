@@ -26,7 +26,10 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
       }
     })
   })();
-  
+  $scope.selectUser = function(value){
+    $scope.userSelect = value
+    console.log(value)
+  }
   $scope.prePage = function() {
     if ($scope.pageNum > 1) {
       $scope.pageNum--;
