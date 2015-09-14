@@ -1,5 +1,12 @@
 var widgets = angular.module("widgets", []);
 
+widgets.controller("PhotosCtrl", ["$scope", function($scope){
+  $scope.rawFeed = window.instagramResponse.data
+
+
+
+}])
+
 widgets.controller("RestaurantCtrl", ["$scope", function($scope){
   $scope.restaurants = [];
   $scope.name ="";
