@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 
 <html ng-app='widgets'>
+
 <head>
-  <title></title>
+  <title>Photos</title>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
+
 <body ng-controller='PhotosCtrl'>
 
   <div class="container">
-      <h1> {{elements.length}} </h1>
 
     <div class="row">
 
@@ -37,26 +38,37 @@
     <div class="row">
       <nav class="col-xs-4 col-xs-offset-4 text-center">
         <ul class="pagination">
+
           <li>
             <a href="#" aria-label="Previous">
-              <span aria-hidden="true" ng-click="currentPage = currentPage - 1">&laquo;</span>
+              <span aria-hidden="true" ng-click="changePage(currentPage - 1)">&laquo;</span>
             </a>
           </li>
-          <li ng-repeat="page in pages"><a href="#" ng-click="changePage(page)">{{page + 1}}</a></li>
+
+          <li ng-repeat="page in pages">
+            <a href="#" ng-click="changePage(page)">
+              {{page + 1}}
+            </a>
+          </li>
+
           <li>
             <a href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
+              <span aria-hidden="true" ng-click="changePage(currentPage + 1)">
+                &raquo;
+              </span>
             </a>
           </li>
+
         </ul>
       </nav>
     </div>
 
     <div class='row'>
-
-      <div class='col-sm-4' ng-repeat="photo in elements = (rawFeed.data |
-           filterPhotoByFilter: photoFilter | filterPhotoByTag: tagFilter) | limitTo : 12 : currentPage * 12">
-        <a ng-href= "{{photo.link}}" >
+      <div class='col-sm-4' ng-repeat= "photo in elements = (rawFeed.data |
+                                        filterPhotoByFilter: photoFilter  |
+                                        filterPhotoByTag: tagFilter)      |
+                                        limitTo : 12 : currentPage * 12"  >
+        <a ng-href= "{{photo.link}}">
           <img  ng-src="{{photo.images.standard_resolution.url}}"
                 class="img-responsive">
         </a>
@@ -65,18 +77,16 @@
         <p>Like Count{{photo.likes.count}}</p>
         <p>Posted On: {{photo.created_time}}</p>
         <p>Filter: {{photo.filter}}</p>
-        <p><span ng-repeat='tag in photo.tags'>#{{tag}} </span></p>
+        <p><span ng-repeat='tag in photo.tags'> #{{tag}} </span></p>
       </div>
-
     </div>
-  </div>
+
+  </div> <!-- end of container -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-  </script>
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="photo.js"></script>
   <script src="app.js"></script>
+
 </body>
 </html>

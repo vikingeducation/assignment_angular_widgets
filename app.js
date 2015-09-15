@@ -1,6 +1,5 @@
 var widgets = angular.module('widgets', []);
 
-
 widgets.controller('RestaurantCtrl',
   [ '$scope',
     function($scope){
@@ -41,14 +40,16 @@ widgets.controller('PhotosCtrl',
 
       // Pagination
       $scope.currentPage = 0;
-      $scope.changePage = function(page){
-        $scope.currentPage = page;
-      };
-
       $scope.numPerPage = 12;
       $scope.elements = [];
       $scope.elementCount = $scope.elements.length;
       $scope.pages = [];
+
+      $scope.changePage = function(page){
+        if ($scope.pages.length > 1) {
+          $scope.currentPage = page;
+        }
+      };
 
       $scope.pageCount = (function(){
         var elementCount = $scope.elements.length;
@@ -85,10 +86,9 @@ widgets.controller('PhotosCtrl',
 widgets.filter('filterPhotoByFilter', function(){
 
   return function(collection, activatePhotoFilter) {
+    var filteredPhotos = [];
 
     if(activatePhotoFilter.indexOf("None") > -1 ){return collection;}
-
-    var filteredPhotos = [];
 
     angular.forEach(collection, function(photo){
       if(activatePhotoFilter.indexOf(photo.filter) > -1){
@@ -104,10 +104,9 @@ widgets.filter('filterPhotoByFilter', function(){
 widgets.filter('filterPhotoByTag', function(){
 
   return function(collection, activateTagFilter) {
+    var filteredPhotos = [];
 
     if(activateTagFilter.indexOf("None") > -1){return collection;}
-
-    var filteredPhotos = [];
 
     angular.forEach(collection, function(photo){
 
@@ -117,7 +116,6 @@ widgets.filter('filterPhotoByTag', function(){
           break;
         }
       }
-
     });
 
     return filteredPhotos;
