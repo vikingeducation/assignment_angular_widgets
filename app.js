@@ -3,10 +3,15 @@ var widgets = angular.module("widgets", []);
 widgets.controller("PhotosCtrl", ["$scope", function($scope){
   $scope.rawFeed = window.instagramResponse.data;
   $scope.search = {tags: undefined,
-                    user: {username: undefined}};
+    user: {username: undefined}};
   $scope.tagFilters=[];
-  $scope.filteredPicCount;
   $scope.currentPage = 0;
+
+  $scope.resetFilter= function(){
+    $scope.search = {tags: undefined,
+      user: {username: undefined}};
+    $scope.tagFilters=[];
+  };
 
   $scope.resetPage = function(){
     $scope.currentPage =0;
@@ -23,17 +28,15 @@ widgets.controller("PhotosCtrl", ["$scope", function($scope){
 
   $scope.hashtagFilter = function(val, idx, arr){
 
-    $scope.filteredPicCount=0;
+    // for pictures w/o tags
     if($scope.tagFilters.length == 0){
-      $scope.filteredPicCount++;
       return true;
     }
+
     for(var i=0; i < $scope.tagFilters.length; i++){
-      if (val.tags == $scope.tagFilters[i]){
-        $scope.filteredPicCount++;
-        return true;
-      }else if (val.tags.indexOf($scope.tagFilters[i]) != -1){
-        $scope.filteredPicCount++;
+
+      // if selected tag is a tag in photo
+      if (val.tags.indexOf($scope.tagFilters[i]) != -1){
         return true;
       }
     }
@@ -51,7 +54,7 @@ widgets.controller("PhotosCtrl", ["$scope", function($scope){
         users.push(photo.user);
       }
     }
-    return users;
+      return users;
   })(); // user objects
 
   $scope.IGFilters = (function() {
@@ -66,7 +69,6 @@ widgets.controller("PhotosCtrl", ["$scope", function($scope){
   })();
 
   $scope.hashtags = (function() {
-
     var tags = [];
     for (var i = 0; i < $scope.rawFeed.length; i++) {
       var photo = $scope.rawFeed[i];
