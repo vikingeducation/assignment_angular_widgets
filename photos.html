@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+<head>
+  <title>Photos</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="photos.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+
+<body ng-controller ="PhotosCtrl">
+
+  <div class="container">
+
+    <div class="row">
+      <h3 class="text-center col-md-12 text-center">Photos</h3>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <h4 class="text-center col-md-12 text-center">Filters</h4>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4 text-center">
+        <p>Show Only:</p>
+
+        <select name="IGFilter" id="" ng-model="search.filter" ng-change="resetPage()">
+          <option ng-repeat="filter in IGFilters" value='{{filter}}'>{{filter}} Filter</option>
+        </select>
+
+      </div>
+
+      <div class="col-md-4 text-center">
+        <p>And:</p>
+
+        <select name="hashtags" id="" ng-model="tagFilters" ng-change="resetPage()" multiple>
+          <option value="">No hashtag</option>
+          <option ng-repeat="tag in hashtags" value='{{tag}}'>{{tag}}</option>
+        </select>
+
+      </div>
+
+      <div class="col-md-4 text-center">
+        <a ng-click="resetFilter()">Clear ALL Filters</a>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div ng-repeat="picture in filtered = ( rawFeed | filter:search | filter:hashtagFilter | limitTo : 12 : currentPage*12)" ng-class="{row:$index%3==2}">
+
+      <div class="col-md-4" height="175px">
+        <a href="{{picture.link}}">
+          <img ng-src="{{picture.images.standard_resolution.url}}" width="100%">
+        </a>
+
+        <br>
+
+        <p>Created by:
+          <a href = "https://instagram.com/{{picture.user.username}}">
+            {{picture.user.username}}
+          </a> at {{picture.created_time*1000 | date: "MMM dd, yyyy hh:mm a"}}
+        </p>
+
+        <p>Filter: {{picture.filter}}</p>
+
+        <p class="tags">
+          <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+          <span ng-repeat="tag in picture.tags">
+             {{tag}}{{$last? "" : ", "}}
+          </span>
+        </p>
+
+        <p>
+          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> {{picture.likes.count}}
+        </p>
+
+        <p>
+          <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> {{picture.comments.count}}
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <h4>
+
+        <a ng-click="prevPage()" ng-if="currentPage > 0" class="col-md-3">
+          Previous Page
+        </a>
+
+        <a ng-click="nextPage()" ng-if="filtered.length >= ((currentPage+1)*12)" class="col-md-3 pull-right">
+          Next Page
+        </a>
+
+      </h4>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4 col-md-offset-4">
+        <h3>Filter by User</h3>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-sm-3" ng-repeat="user in IGUsers">
+        <a href="" ng-click="userFilter(user.username)">
+          <img ng-src="{{user.profile_picture}}">
+        </a>
+
+        <p>{{user.full_name}}</p>
+
+        <p>
+          <a href="https://instagram.com/{{user.username}}">Go to {{user.username}}'s Page</a>
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+</body>
+</html>
