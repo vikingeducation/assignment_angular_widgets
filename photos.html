@@ -11,7 +11,8 @@
 
     <div class="row">
 
-      <div class="col-xs-offset-2 col-xs-4">
+      <div class="col-xs-offset-2 col-xs-4 text-center">
+        <h2>Filters</h2>
         <select multiple="true" name="photoFilter" class="form-control" ng-model="photoFilter">
           <option ng-repeat="option in availableFilters" value="{{option}}">
             {{option}}
@@ -19,7 +20,8 @@
         </select>
       </div>
 
-      <div class="col-xs-4">
+      <div class="col-xs-4 text-center">
+        <h2>Hash Tags</h2>
         <select multiple="true" name="tagFilter" class="form-control" ng-model="tagFilter">
           <option ng-repeat="option in availableTags" value="{{option}}">
             {{option}}
@@ -28,32 +30,31 @@
       </div>
 
     </div>
+
     <br>
 
-  <nav>
-    <ul class="pagination">
-      <li>
-        <a href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-      <li>
-        <a href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+    <div class="row">
+      <nav class="col-xs-4 col-xs-offset-4 text-center">
+        <ul class="pagination">
+          <li>
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true" ng-click="currentPage = currentPage - 1">&laquo;</span>
+            </a>
+          </li>
+          <li ng-repeat="page in pages"><a href="#" ng-click="changePage(page)">{{page + 1}}</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
     <div class='row'>
 
-      <div class='col-sm-4' ng-repeat="photo in rawFeed.data |
-           filterPhotoByFilter: photoFilter | filterPhotoByTag: tagFilter">
+      <div class='col-sm-4' ng-repeat="photo in elementCount = (rawFeed.data |
+           filterPhotoByFilter: photoFilter | filterPhotoByTag: tagFilter) | limitTo : 12 : currentPage * 12">
         <a ng-href= "{{photo.link}}" >
           <img  ng-src="{{photo.images.standard_resolution.url}}"
                 class="img-responsive">
@@ -67,10 +68,9 @@
       </div>
 
     </div>
-
   </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   </script>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

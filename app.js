@@ -40,8 +40,19 @@ widgets.controller('PhotosCtrl',
       $scope.tagFilter = "None";
 
       // Pagination
-      $scope.currentPage = 1;
+      $scope.currentPage = 0;
+      $scope.changePage = function(page){
+        $scope.currentPage = page;
+      }
       $scope.numPerPage = 12;
+      $scope.elementCount = 0;
+      $scope.pages = [];
+
+      $scope.pageCount = (function(){
+        for (var i=0; i <= (Math.floor($scope.elementCount / $scope.numPerPage) + 1); i++){
+          $scope.pages.push(i)
+        }
+      })()
 
       $scope.collectFilters = (function(){
         for (var i=0; i< $scope.rawFeed.data.length; i++){
