@@ -11,6 +11,7 @@ widgets.controller("PhotosCtrl", ["$scope", function($scope){
     $scope.search = {tags: undefined,
       user: {username: undefined}};
     $scope.tagFilters=[];
+    $scope.resetPage();
   };
 
   $scope.resetPage = function(){
