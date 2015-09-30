@@ -12,6 +12,16 @@
 
   <body ng-app="widgets">
 
+    <div class='container' ng-controller='PhotosCtrl'>
+
+      <div class='panel panel-default'>
+        <div class='panel-body'>
+          <img ng-src="{{photos[1].images.standard_resolution.url}}">
+        </div>
+      </div>
+
+    </div>
+
   </body>
 
 </html>
