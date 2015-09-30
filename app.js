@@ -31,3 +31,13 @@ widgets.controller('RestaurantCtrl',
     };
 
   }]);
+
+
+
+  widgets.controller('PhotosCtrl',
+    ['$scope',
+    function($scope) {
+
+      $scope.rawFeed = instagramResponse;
+
+    }]);
