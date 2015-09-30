@@ -14,6 +14,7 @@ widgets.controller('RestaurantCtrl',
         imageURL: imageURL
       };
 
+      //store as a property on an object...access through it
       $scope.restaurants.push(newRestaurant);
       $scope.name = null;
       $scope.foodType = null;
