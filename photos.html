@@ -15,18 +15,37 @@
     <div class='container' ng-controller='PhotosCtrl'>
 
       <div class='row'>
+        <div cass='col-md-12'>
 
-        <div class='col-md-4' ng-repeat="photo in photos">
+          <label for="filter-list">Filters:</label>
+          <select name="filter-list" ng-model="filterSearch">
+            <option ng-repeat="filter in allFilters | orderBy: filter" value="{{filter}}">{{filter}}</option>
+          </select>
+
+          <label for="tag-list">Tags:</label>
+          <select name="tag-list" ng-model="tagSearch" multiple>
+            <option ng-repeat="tag in allTags | orderBy: tag" value="{{tag}}">{{tag}}</option>
+          </select>
+
+          <h4 class='pull-right'>
+            <ng-pluralize
+              count="filteredPhotos.length"
+              when="{'0': 'No results found...',
+                   '1': '1 result found...',
+                   'other': '{} results found...'}">
+          </h4>
+
+        </div>
+      </div>
+
+      <div class='row'>
+
+        <div class='col-md-4' ng-repeat="photo in filteredPhotos = (photos | filter: customFilter | filter: {filter: filterSearch} )">
           <div class='panel panel-default'>
             <div class='panel-body'>
-              <h3>
+              <h3 class='text-center'>
                 <a href="https://instagram.com/{{photo.user.username}}/">{{ photo.user.username }}</a>
               </h3>
-
-              <p>
-                <br>
-                {{ photo.caption.text }}
-              </p>
 
               <a href="{{ photo.link }}">
                 <img class='img-responsive' ng-src="{{photo.images.standard_resolution.url}}">
@@ -44,8 +63,12 @@
                 Likes: {{ photo.likes.count | number }}
               </p>
 
+              <p>
+                {{ photo.caption.text }}
+              </p>
+
               <ul class='list-inline'>
-                <li class='btn btn-default' ng-repeat="tag in photo.tags">#{{ tag }}</li>
+                <li ng-repeat="tag in photo.tags"><small>#{{ tag }}</small></li>
               </ul>
 
             </div>

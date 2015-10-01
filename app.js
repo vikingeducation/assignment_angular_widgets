@@ -40,8 +40,36 @@ widgets.controller('RestaurantCtrl',
 
       $scope.rawFeed = instagramResponse;
 
-      // instagramResponse["data"][1]["images"]["standard_resolution"]
       $scope.photos = $scope.rawFeed["data"];
-      //tags
+
+      $scope.allFilters = [];
+      $scope.photos.forEach( function(photo) {
+        if ($scope.allFilters.indexOf(photo.filter) === -1) {
+          $scope.allFilters.push(photo.filter);
+        };
+      });
+
+      $scope.allTags = [];
+      $scope.photos.forEach( function(photo) {
+        $scope.allTags = $scope.allTags.concat(photo.tags)
+      });
+
+      $scope.tagFilter = function(tags) {
+        return function(photo) {
+          photo.tags.indexOf(tags[0]) !== -1;
+        }
+      }
+
+      $scope.customFilter = function(photo) {
+        var match = true;
+        if ($scope.tagSearch) {
+          $scope.tagSearch.forEach(function(tag) {
+            if (photo.tags.indexOf(tag) === -1) {
+              match = false;
+            };
+          })
+        };
+        return match;
+      };
 
     }]);
