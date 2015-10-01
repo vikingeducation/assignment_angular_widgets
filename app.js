@@ -1,8 +1,8 @@
 var widgets = angular.module('widgets', []);
 
 widgets.controller('RestaurantCtrl',
-  ['$scope',
-  function($scope){
+  ['$scope', '$window'
+  function($scope, $window){
 
     $scope.restaurants = [];
     $scope.sort = "foodType";
@@ -90,6 +90,7 @@ widgets.controller('PhotosCtrl',
 
     $scope.resetPage = function() {
       $scope.page.number = 1;
+      $window.scrollTo(0,0);
     };
 
 
