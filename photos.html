@@ -14,10 +14,44 @@
 
     <div class='container' ng-controller='PhotosCtrl'>
 
-      <div class='panel panel-default'>
-        <div class='panel-body'>
-          <img ng-src="{{photos[1].images.standard_resolution.url}}">
+      <div class='row'>
+
+        <div class='col-md-4' ng-repeat="photo in photos">
+          <div class='panel panel-default'>
+            <div class='panel-body'>
+              <h3>
+                <a href="https://instagram.com/{{photo.user.username}}/">{{ photo.user.username }}</a>
+              </h3>
+
+              <p>
+                <br>
+                {{ photo.caption.text }}
+              </p>
+
+              <a href="{{ photo.link }}">
+                <img class='img-responsive' ng-src="{{photo.images.standard_resolution.url}}">
+              </a>
+
+              <p class='pull-left'>
+                <small>{{ photo.created_time | date:'short'}}
+                <br>
+                Comments: {{ photo.comments.count | number }}</small>
+              </p>
+
+              <p class='pull-right'>
+                Filter: {{ photo.filter }}
+                <br>
+                Likes: {{ photo.likes.count | number }}
+              </p>
+
+              <ul class='list-inline'>
+                <li class='btn btn-default' ng-repeat="tag in photo.tags">#{{ tag }}</li>
+              </ul>
+
+            </div>
+          </div>
         </div>
+
       </div>
 
     </div>

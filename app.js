@@ -42,5 +42,6 @@ widgets.controller('RestaurantCtrl',
 
       // instagramResponse["data"][1]["images"]["standard_resolution"]
       $scope.photos = $scope.rawFeed["data"];
+      //tags
 
     }]);
