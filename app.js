@@ -40,8 +40,13 @@ widgets.controller('RestaurantCtrl',
     function($scope) {
 
       $scope.rawFeed = instagramResponse;
-
       $scope.photos = $scope.rawFeed["data"];
+
+      $scope.page = {
+        number: 1,
+        perPage: 3,
+        offset: function() { return (this.number - 1) * this.perPage }
+      };
 
       $scope.allFilters = [];
       $scope.photos.forEach( function(photo) {
@@ -55,11 +60,6 @@ widgets.controller('RestaurantCtrl',
         $scope.allTags = $scope.allTags.concat(photo.tags)
       });
 
-      $scope.tagFilter = function(tags) {
-        return function(photo) {
-          photo.tags.indexOf(tags[0]) !== -1;
-        }
-      }
 
       $scope.customFilter = function(photo) {
         var match = true;
@@ -71,6 +71,25 @@ widgets.controller('RestaurantCtrl',
           })
         };
         return match;
+      };
+
+
+      $scope.pageDown = function() {
+        if ($scope.page.number > 1) {
+          $scope.page.number--;
+        };
+      };
+
+      $scope.pageUp = function() {
+        var totalPages = Math.ceil($scope.filteredPhotos.length / $scope.page.perPage);
+        if ($scope.page.number < totalPages) {
+          $scope.page.number++;
+        };
+      };
+
+
+      $scope.resetPage = function() {
+        $scope.page.number = 1;
       };
 
     }]);

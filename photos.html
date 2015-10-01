@@ -18,29 +18,39 @@
         <div cass='col-md-12'>
 
           <label for="filter-list">Filters:</label>
-          <select name="filter-list" ng-model="filterSearch">
+          <select name="filter-list" ng-model="filterSearch" ng-change="resetPage()">
             <option ng-repeat="filter in allFilters | orderBy: filter" value="{{filter}}">{{filter}}</option>
           </select>
 
           <label for="tag-list">Tags:</label>
-          <select name="tag-list" ng-model="tagSearch" multiple>
+          <select name="tag-list" ng-model="tagSearch" ng-change="resetPage()" multiple>
             <option ng-repeat="tag in allTags | orderBy: tag" value="{{tag}}">{{tag}}</option>
           </select>
 
-          <h4 class='pull-right'>
-            <ng-pluralize
-              count="filteredPhotos.length"
-              when="{'0': 'No results found...',
-                   '1': '1 result found...',
-                   'other': '{} results found...'}">
-          </h4>
+          <div class='pull-right'>
+
+            <h4>
+              <ng-pluralize
+                count="filteredPhotos.length"
+                when="{'0': 'No results found...',
+                     '1': '1 result found...',
+                     'other': '{} results found...'}">
+            </h4>
+
+            <ul class='list-inline'>
+              <li><a ng-click="pageDown()"> << </a></li>
+              <li><p>Page: {{page.number}}</p></li>
+              <li><a ng-click="pageUp()"> >> </a></li>
+            </ul>
+
+          </div>
 
         </div>
       </div>
 
       <div class='row'>
 
-        <div class='col-md-4' ng-repeat="photo in filteredPhotos = (photos | filter: customFilter | filter: {filter: filterSearch} )">
+        <div class='col-md-4' ng-repeat="photo in filteredPhotos = (photos | filter: customFilter | filter: {filter: filterSearch} ) | limitTo: page.perPage : page.offset() ">
           <div class='panel panel-default'>
             <div class='panel-body'>
               <h3 class='text-center'>
@@ -74,6 +84,8 @@
             </div>
           </div>
         </div>
+
+        
 
       </div>
 
