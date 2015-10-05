@@ -1,7 +1,7 @@
 var widgets = angular.module('widgets', []);
 
 widgets.controller('RestaurantCtrl',
-  ['$scope', '$window'
+  ['$scope', '$window',
   function($scope, $window){
 
     $scope.restaurants = [];
