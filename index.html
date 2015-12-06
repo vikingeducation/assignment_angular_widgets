@@ -46,8 +46,8 @@
 				<table class="table table-hover table-bordered">
 					<!-- Great help for sorting by table header here: http://stackoverflow.com/questions/19122942/angular-js-sorting-rows-by-table-header . Thanks! -->
 					<thead>
-						<th><a href="#" ng-click="orderByField='name'; reverseSort = !reverseSort">Restaurant Name <span ng-show="orderByField == 'name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span></a></th>
-						<th><a href="#" ng-click="orderByField='foodType'; reverseSort = !reverseSort">Type of Food <span ng-show="orderByField == 'foodType'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span></a></th>
+						<th><a href="" ng-click="orderByField='name'; reverseSort = !reverseSort">Restaurant Name <span ng-show="orderByField == 'name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span></a></th>
+						<th><a href="" ng-click="orderByField='foodType'; reverseSort = !reverseSort">Type of Food <span ng-show="orderByField == 'foodType'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span></a></th>
 					</thead>
 					<tbody ng-repeat="restaurant in restaurants | filter:filterText | orderBy:orderByField:reverseSort">
 						<tr>
