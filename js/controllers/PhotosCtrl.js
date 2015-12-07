@@ -60,5 +60,15 @@ app.controller('PhotosCtrl',
 			return paged;
 		};
 
+		// This made it a lot easier.
+		$scope.filterUserName = function(username){
+			$scope.filterName = username;
+		};
+
+		// TODO: Ok this definitely isn't perfect yet. When you filter the results the
+		// pagedItems doesn't rebuild. B/c of this items that are valid in the filter 
+		// but are on the second page aren't showing up on the first page. I need to 
+		// rewrite this so that pagedItems rebuilds whenever filterName changes. But 
+		// for now this excercise is good.
 
 	}]);

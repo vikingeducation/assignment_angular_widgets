@@ -42,7 +42,7 @@
 				</section>
 			</div>
 			
-			<div class="user-photo col-sm-4" ng-repeat="data in filtered = (pagedItems()[currentPage] | filter:filterName)">
+			<div class="user-photo col-sm-4" ng-repeat="data in filtered = (pagedItems()[currentPage] | filter:filterName )">
 				<a href="{{ data.link }}"><img ng-src="{{ data.images.standard_resolution.url }}" style="width:100%;"></a>
 				<div class="col-sm-12" class="photo-meta">
 					<p>Username: <a href="http://instagram.com/{{data.user.username}}">{{ data.user.username }}</a></p>
@@ -52,8 +52,30 @@
 				</div>
 			</div>
 
+			<section class="user-filter">
+				<h2>All Users:</h2>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>User ID</th>
+							<th>Full Name</th>
+							<th>Profile URL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="data in rawFeed.data">
+							<td ng-click="filterUserName(data.user.username)"><a href="">{{ data.user.username }}</a></td>
+							<td>{{ data.user.id }}</td>
+							<td>{{ data.user.fullname }}</td>
+							<td><a href="http://instagram.com/{{data.user.username}}">Profile</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
 		</div>
-		<!-- END RestaurantCtrl -->
+		<!-- END PhotoCtrl -->
 
 	</body>
 
