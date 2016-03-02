@@ -37,8 +37,15 @@
           <!-- Filters -->
           <form>
             <div class="form-group">
-              <select ng-model="filterTags" multiple="true" class="form-control">
+              <select id="tags" ng-model="filterTags" multiple="true" class="form-control">
+                <option value=""></option>
                 <option ng-repeat="tag in tags" value="{{ tag }}">#{{ tag }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select id="users" ng-model="filterUsers" multiple="true" class="form-control">
+                <option value=""></option>
+                <option ng-repeat="user in users" value="{{ user.username }}">{{ user.username }}</option>
               </select>
             </div>
             <div class="form-group">

@@ -1,8 +1,6 @@
 // custom pagination filter
 Widgets.filter('startFrom', function() {
   return function(collection, start) {
-    // start = parseInt(start);
-    console.log(start)
     return collection.slice(start);
   }
 });
@@ -16,6 +14,7 @@ Widgets.controller('PhotosCtrl', ['$scope', function($scope) {
     return {
       profileUrl: 'http://instagram.com/' + object['user']['username'],
       username: object['user']['username'],
+      fullName: object['user']['full_name'],
       url: object['images']['standard_resolution']['url'],
       tags: object['tags'],
       filter: object['filter'],
@@ -27,6 +26,7 @@ Widgets.controller('PhotosCtrl', ['$scope', function($scope) {
   // filters
   $scope.filterType = '';
   $scope.filterTypes = [];
+  $scope.filterUsers = [];
   $scope.filterTags = [];
   $scope.tags = [];
 
@@ -55,9 +55,11 @@ Widgets.controller('PhotosCtrl', ['$scope', function($scope) {
   // filtering
   $scope.filterPhoto = function(photo) {
     if ($scope.filterType == '' &&
-        $scope.filterTags.length == 0) {
+        $scope.filterTags.length == 0 &&
+        $scope.filterUsers.length == 0) {
       return true
     }
+
 
     var hasTag = false;
     for (var i = 0; i < $scope.filterTags.length; i++) {
@@ -74,9 +76,20 @@ Widgets.controller('PhotosCtrl', ['$scope', function($scope) {
       }
     }
 
+    console.log($scope.filterUsers);
+
+    var hasUser = false;
+    for (var i = 0; i < $scope.filterUsers.length; i++) {
+      var filterUser = $scope.filterUsers[i];
+      if (photo.username == filterUser) {
+        hasUser = true;
+        break;
+      }
+    }
+
     var hasFilter = photo.filter == $scope.filterType;
 
-    return hasFilter || hasTag;
+    return hasFilter || hasTag || hasUser;
   };
 
 
@@ -84,6 +97,11 @@ Widgets.controller('PhotosCtrl', ['$scope', function($scope) {
   $scope.page = 0;
   $scope.pageSize = 12;
 
+
+  // users
+  $scope.users = $scope.feed.map(function(object) {
+    return object['user'];    
+  });
 
 }]);
 
