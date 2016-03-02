@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ng-app="Widgets" ng-controller="PhotosCtrl">
+  <head>
+    <meta charset="UTF=8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Angular Widgets</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  </head>
+  <body>
+
+    <main class="container">
+
+      <header class="page-header">
+        <h1>
+          Photo Widgets
+          <small>
+            <a href="/index.html">Go to Restaurants</a>
+          </small>
+        </h1>
+      </header>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+          <!-- Filters -->
+          <form>
+            <div class="form-group">
+              <select ng-model="filterTags" multiple="true" class="form-control">
+                <option ng-repeat="tag in tags" value="{{ tag }}">#{{ tag }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="filter">Filter Type</label>
+              <select id="filter" ng-model="filterType" class="form-control">
+                <option value=""></option>
+                <option ng-repeat="filterType in filterTypes" value="{{ filterType }}">{{ filterType }}</option>
+              </select>
+            </div>
+          </form>
+
+          <!-- Results -->
+          <h2>
+            Showing {{ totalPhotos = (photos | filter: filterPhoto).length }} Photos
+            <small>
+              {{ pageSize }} Per Page,
+              on Page {{ page + 1 }}
+            </small>
+          </h2>
+
+          <!-- Pagination -->
+          <nav>
+            <ul class="pagination">
+
+              <li ng-hide="page == 0">
+                <a href="#" aria-label="Previous" ng-click="page = page - 1">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+
+              <li ng-hide="(page + 1) * pageSize == totalPhotos">
+                <a href="#" aria-label="Next" ng-click="page = page + 1">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+
+            </ul>
+          </nav>
+
+
+          <!-- Photos -->
+          <div class="row">
+
+            <!-- Photo -->
+            <div class="col-xs-3" ng-repeat="photo in filteredPhotos = (photos | filter: filterPhoto | startFrom: page * pageSize | limitTo: pageSize)">
+              <div class="panel panel-default" style="height: 384px; overflow-y: scroll;">
+                <header class="panel-heading">
+                  <a ng-href="{{ photo.profileUrl}}">
+                    {{ photo.username }}
+                  </a>
+                </header>
+                <div class="panel-body">
+                  <a ng-href="{{ photo.link }}">
+                    <img ng-src="{{ photo.url }}" alt="Image" class="img-responsive">
+                  </a>
+                  <p>
+                    <span ng-repeat="tag in photo.tags" style="word-wrap: break-word;">
+                      #{{ tag }}{{ $last ? '' : ',' }}
+                    </span>
+                  </p>
+                  <p>
+                    Filter: {{ photo.filter }}
+                  </p>
+                  <p>
+                    Posted on: {{ photo.createdAt }}
+                  </p>
+                </div>
+              </div>
+            </div><!-- photo col -->
+          </div><!-- photos row -->
+
+        </div>
+      </div>
+    </main>
+
+    <!-- My Scripts -->
+    <script src="photos.js"></script>
+    <script src="/app.js"></script>
+    <script src="/PhotosCtrl.js"></script>
+  </body>
+</html>
+
