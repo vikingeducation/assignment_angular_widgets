@@ -24,3 +24,20 @@ widgets.controller('RestaurantCtrl',
     }
   }
 ]);
+
+
+widgets.controller('PhotosCtrl', ['$scope', function($scope){
+  $scope.rawFeed = instagramResponse['data'];
+  $scope.photos = $scope.rawFeed.map(function(obj){
+    return {
+      url: obj.images.low_resolution.url,
+      username: obj.user.username, 
+      createdAt:  obj.created_time, 
+      likes: obj.likes.count,
+      comments: obj.comments.count,
+      photoLink: obj.link,
+      tags: obj.tags.join(', '),
+      filter: obj.filter
+    };
+  })
+}]);
