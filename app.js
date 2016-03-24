@@ -1,4 +1,4 @@
-var widgets = angular.module('widgets', []);
+var widgets = angular.module('widgets', ['angular.filter']);
 
 widgets.controller('RestaurantCtrl',
 ['$scope',
