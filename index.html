@@ -13,7 +13,8 @@
     <form>
       <input type="text" label="Name" ng-model="name" name="name"> 
       <input type="text" label="Type of Food" ng-model="foodType" name="foodType">
-      <input type="submit" ng-click="addRestaurant(name, foodType)">
+      <input type="text" label="Image URL" name="img" ng-model="img">
+      <input type="submit" ng-click="addRestaurant({name: name, foodType: foodType, img: img})">
     </form>
 
     <table>
@@ -24,9 +25,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="r in restaurants">
+      <tr ng-repeat="r in restaurants | orderBy: 'foodType'">
         <td>{{ r.name }}</td>
         <td>{{ r.foodType }}</td>
+        <td ng-click="deleteRestaurant($index)">Delete</td>
+        <td>
+          <img ng-src="{{ r.img }}">
+        </td>
       </tr>
     </tbody>
     </table>
