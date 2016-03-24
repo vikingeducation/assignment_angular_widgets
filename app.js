@@ -14,20 +14,15 @@ widgets.controller('RestaurantCtrl',
       $scope.foodType = "italian";
       $scope.img = "http://findicons.com/files/icons/7/dinosaurs_toys/128/stegosaurus.png";
       $scope.addRestaurant = function(restaurant) {
-        $scope.restaurants.push( 
-          restaurant
-          // name: $scope.name,
-          // foodType: $scope.foodType
-        )
+        $scope.restaurants.push( restaurant );
         $scope.name = "";
         $scope.foodType = "";
         $scope.img = "";
       };
 
       $scope.deleteRestaurant = function(index) {
-        $scope.restaurants.splice(index, 1)
+        $scope.restaurants.splice(index, 1);
       };
-
       $scope.sortType = "foodType"
       $scope.sortOrder = "+";
       $scope.sortBy = $scope.sortOrder + $scope.sortType
@@ -53,14 +48,9 @@ widgets.controller( 'PhotosCtrl', [
       $scope.rawFeed = instagramResponse;
       $scope.img = "http://findicons.com/files/icons/7/dinosaurs_toys/128/stegosaurus.png";
 
-      // console.log( $scope.rawFeed.data[0]);
-      // console.log( $scope.rawFeed.data[0]["images"]["standard_resolution"]["url"]);
       $scope.photosArr = []
       $scope.rawFeed.data.forEach( function( elt){
         $scope.photosArr.push( elt["images"]["standard_resolution"]["url"] );
       });
-      // console.log( $scope.photosArr);
-      console.log( $scope.photosArr[0] );
-      console.log( typeof $scope.photosArr[0] );
     }
   ]);

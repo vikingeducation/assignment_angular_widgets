@@ -36,9 +36,7 @@
     </tbody>
     </table>
 
-
     <h3>Search Restaurants</h3>
-
     <input type="text" label="search" ng-model="searchText">
       <table>
       <thead>
@@ -48,13 +46,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="r in restaurants | filter: searchText">
+        <tr ng-repeat="r in restaurants | filter: {foodType: searchText} ">
           <td>{{ r.name }}</td>
           <td>{{ r.foodType }}</td>
         </tr>
       </tbody>
-
-
-
   </body>
 </html>
