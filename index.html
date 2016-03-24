@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='widgets'>
   <head>
     <meta charset="utf-8">
     <title></title>
   </head>
   <body>
+
+    <div ng-controller='RestaurantCtrl' class="">
+
+      <input type="text" name="name" ng-model='name' value="">
+
+      <input type="text" name="typeOfFood" ng-model='typeOfFood' value="">
+
+      <p>Name: {{ name }}</p>
+      <p>Type of Food: {{ typeOfFood }}</p>
+
+      <input type="button" name="create-restaurant" ng-click="createRestaurant()" value="Create Restaurant">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>
+              Name
+            </th>
+            <th>
+              Type of Food
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="restaurant in restaurants">
+            <td>
+              {{ restaurant.name }}
+            </td>
+            <td>
+              {{ restaurant.typeOfFood }}
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
