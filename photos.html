@@ -26,18 +26,23 @@
         <section class="col-sm-12">
 
           <select class="" name="filter" ng-model="igFilter">
+            <option></option>
             <option ng-repeat="filter in filters">{{ filter }}</option>
           </select>
 
-          <select class="" name="tag" ng-model="tag">
+          <select class="" name="tag" ng-model="igTag">
+            <option></option>
             <option ng-repeat="tag in tags">{{ tag }}</option>
           </select>
 
+          <p> {{ igFilter }}</p>
+
+          <p>{{ igTag }}</p>
         </section>
       </section>
 
       <section class="row">
-        <section ng-repeat="photo in photos | filter: { filter: igFilter }" class="col-sm-3">
+        <section ng-repeat="photo in photos | filter: { filter: igFilter, tags: igTag }" class="col-sm-3">
 
           <div class="panel panel-default">
 
@@ -56,6 +61,11 @@
                 <span>Likes: {{ photo.likes }}</span>
                 <span>Comments: {{ photo.comments }}</span>
               </p>
+              <!-- <p>
+                <ul>
+                  <li ng-repeat="tag in photo.tags">{{ tag }}</li>
+                </ul>
+              </p> -->
             </div>
           </div>
 
