@@ -40,6 +40,17 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
     return $scope.filters.indexOf(value) == index;
   });
 
+  // Grab all tags for current photo instagram photo gallery
+  $scope.hashtags = [];
+  for (var i = 0; i < $scope.rawFeed.length; i++) {
+    $scope.hashtags = $scope.hashtags.concat($scope.rawFeed[i].tags);
+  }
+
+  // Remove duplicate tags
+  $scope.hashtags = $scope.hashtags.filter(function(value, index) {
+    return $scope.hashtags.indexOf(value) == index;
+  });
+
   $scope.photos = $scope.rawFeed.map(function(obj){
     return {
       url: obj.images.low_resolution.url,
@@ -48,10 +59,11 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
       likes: obj.likes.count,
       comments: obj.comments.count,
       photoLink: obj.link,
-      tags: obj.tags.join(', '),
+      hashtags: obj.tags.join(', '),
       filter: obj.filter
     };
   });
 
   $scope.selectFilter = "";
+  $scope.selectTag = "";
 }]);

@@ -17,21 +17,22 @@
           <label for="filter">Show by filter:</label>
           <select name="filter" ng-model="selectFilter">
             <option value=""></option>
-            <option ng-repeat="filter in filters" value=" {{ filter }}">{{ filter }}</option>
+            <option ng-repeat="filter in filters" value="{{ filter }}">{{ filter }}</option>
           </select>
         </div>
         <!-- Filter by Tags -->
         <div class="col-md-6">
-          <label for="tag">Show by filter:</label>
-          <select name="tag" ng-model="selectTag" multiple>
+          <label for="hashtag">Show by hashtag:</label>
+          <select name="hashtag" ng-model="selectTag" multiple>
             <option value=""></option>
-            <option ng-repeat="filter in filters" value=" {{ filter }}">{{ filter }}</option>
+            <option ng-repeat="hashtag in hashtags" value="{{ hashtag }}">{{ hashtag }}</option>
           </select>
+          <p>{{ selectTag }}</p>
         </div>
       </div>
       <!-- Photo Gallery -->
       <div class="row" style="margin-top: 25px;">
-        <div class="col-md-4" ng-repeat='photo in photos | filter: selectFilter'>
+        <div class="col-md-4" ng-repeat='photo in photos | filter: selectFilter | filter: selectTag'>
           <a ng-href="{{photo.photoLink}}"><img ng-src="{{photo.url}}"></a>
           <div>
             <a ng-href="{{'http://instagram.com/' + photo.username}}">
@@ -40,7 +41,7 @@
             <h5> Posted At: {{photo.createdAt*1000 | date:'yyyy-MM-dd HH:mm:ss Z'}} </h5>
             <h5> Like Count: {{photo.likes}} </h5>
             <h5> Comment Count: {{photo.comments}} </h5>
-            <h5> Tags: {{photo.tags}}</h5>
+            <h5> Tags: {{photo.hashtags}}</h5>
             <h5> Filter: {{photo.filter}}</h5>
           </div>
         </div>
