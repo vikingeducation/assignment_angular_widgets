@@ -6,8 +6,9 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
@@ -20,8 +21,25 @@
 
     <main class="container">
       <section class="row">
-        <section class="col-sm-3 panel panel-default">
-          
+        <section ng-repeat="photo in photos" class="col-sm-3">
+
+          <div class="panel panel-default">
+
+            <div class="panel-body">
+              <img ng-src="{{ photo.imageUrl }}"  class="img-responsive">
+            </div>
+
+            <div class="panel-footer">
+              <p>{{ photo.userName }}</p>
+              <p>{{ photo.desc }}</p>
+              <p>{{ photo.createdTime }}</p>
+              <p>
+                <span>Likes: {{ photo.likes }}</span>
+                <span>Comments: {{ photo.comments }}</span>
+              </p>
+            </div>
+          </div>
+
         </section>
       </section>
     </main>
