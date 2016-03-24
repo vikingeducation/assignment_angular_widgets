@@ -29,36 +29,50 @@ widgets.controller('RestaurantCtrl',
 
   }]);
 
-  widgets.controller('PhotosCtrl',
-    ['$scope',
-    function($scope) {
+widgets.controller('PhotosCtrl',
+  ['$scope',
+  function($scope) {
 
-      // data data from profile_picture
-      $scope.rawFeed = instagramResponse['data'];
+    // data data from profile_picture
+    $scope.rawFeed = instagramResponse['data'];
 
-      $scope.photos = [];
+    $scope.photos = [];
+    $scope.filters = [];
+    $scope.tags = [];
 
-      (function() {
-        $scope.rawFeed.forEach( function(el) {
-          var photo = {  };
+    (function() {
+      $scope.rawFeed.forEach( function(el) {
+        var photo = {  };
 
-          photo.userName = el['user']['username'];
+        photo.userName = el['user']['username'];
 
-          if (el["caption"] === null) {
-            photo.desc = "";
-          } else {
-            photo.desc = el['caption']['text'];
+        if (el["caption"] === null) {
+          photo.desc = "";
+        } else {
+          photo.desc = el['caption']['text'];
+        }
+
+        photo.imageUrl = el['images']['standard_resolution']['url'];
+        photo.createdTime = el['created_time'];
+        photo.link = el['link'];
+        photo.likes = el['likes']['count'];
+        photo.comments = el['comments']['count'];
+        photo.filter = el['filter'];
+        photo.photoTags = el['tags'];
+
+        for ( var i = 0; i < photo.photoTags.length; i++ ) {
+          if ( $scope.tags.indexOf( photo.photoTags[i] ) === -1 ) {
+            $scope.tags.push( photo.photoTags[i] );
           }
+        }
 
-          photo.imageUrl = el['images']['standard_resolution']['url'];
-          photo.createdTime = el['created_time'];
-          photo.link = el['link'];
-          photo.likes = el['likes']['count'];
-          photo.comments = el['comments']['count'];
+        if ( $scope.filters.indexOf( photo.filter ) === -1 ) {
+          $scope.filters.push( photo.filter );
+        }
 
-          $scope.photos.push(photo);
-        } )
+        $scope.photos.push(photo);
+      } )
 
-      })();
+    })();
 
-    }]);
+  }]);
