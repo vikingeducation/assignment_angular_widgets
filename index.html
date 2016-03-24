@@ -9,11 +9,21 @@
   <script src="app.js"></script>
 </head>
 
-<body ng-controller="RestaurantCtrl">
-  <form>
-    <input type="text" label="Name" name="name"> {{ name }}
-    <input type="text" label="Type of Food" name="type of food">{{ foodType }}
-    <input type="submit">
-  </form>
-</body>
+  <body ng-controller="RestaurantCtrl">
+    <form>
+      <input type="text" label="Name" ng-model="name" name="name"> 
+      <input type="text" label="Type of Food" ng-model="foodType" name="foodType">
+      <input type="submit" ng-click="addRestaurant(  )">
+    </form>
+
+    <table>
+      <div  ng-repeat="r in restaurants">
+        <tr>
+          <td>{{ r.name }}</td>
+          <td>{{ r.foodType }}</td>
+        </tr>
+      </div>
+    </table>
+
+  </body>
 </html>
