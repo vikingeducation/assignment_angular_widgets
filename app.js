@@ -48,10 +48,12 @@ widgets.controller( 'PhotosCtrl', [
       $scope.rawFeed = instagramResponse;
       $scope.img = "http://findicons.com/files/icons/7/dinosaurs_toys/128/stegosaurus.png";
 
-      $scope.photosArr = []
+      $scope.photosArr = [];
+      $scope.filtersObj= { "All": ""};
+      $scope.currentFilter = "";
       $scope.rawFeed.data.forEach( function(elt){
 
-        console.log(elt["likes"]["count"])
+        // console.log(elt["likes"]["count"])
 
         $scope.photosArr.push({
           url: elt["images"]["standard_resolution"]["url"],
@@ -63,6 +65,33 @@ widgets.controller( 'PhotosCtrl', [
           hashtags: elt["tags"],
           filter: elt["filter"]
         });
+
+        $scope.filtersObj[ elt["filter"] ] = elt["filter"];
+
       });
-    }
-  ]);
+
+      $scope.selectFilter = function( filter ) {
+
+        $scope.currentFilter = filter;
+
+        // $scope.rawFeed.data.forEach( function(elt){
+        //   if ( elt['filter'] === filter ) {
+
+        //     $scope.photosArr.push({
+        //       url: elt["images"]["standard_resolution"]["url"],
+        //       username: elt["user"]["username"],
+        //       date: (elt["created_time"]*1000),
+        //       likes: elt["likes"]["count"],
+        //       comments: elt["comments"]["count"],
+        //       link: elt["link"],
+        //       hashtags: elt["tags"],
+        //       filter: elt["filter"]
+        //     });
+        //   }
+
+        // };
+
+      // console.log($scope.filtersObj);
+    };
+  }
+]);

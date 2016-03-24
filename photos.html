@@ -11,13 +11,26 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 
 </head>
 
   <body ng-controller="PhotosCtrl">
+    <div class="header-bar">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by Filter
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <div ng-repeat="(fKey, fValue) in filtersObj">
+            <li> <a ng-click="selectFilter(fValue)">{{ fKey }}</a></li>
+          <div>
+        </ul>
+      </div>
+    </div>
+
     <div class="container">
       <div class="row">
-        <div class="col-sm-4" ng-repeat="photo in photosArr">
+        <div class="col-sm-4 picture-panel" ng-repeat="photo in photosArr | filter: { filter: currentFilter }" >
 
 
           <div class="panel panel-default">
@@ -39,7 +52,6 @@
             </div>
           </div>
           
-
         </div>
       </div>
     </div>
