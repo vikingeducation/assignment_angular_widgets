@@ -6,10 +6,20 @@ widgets.controller('RestaurantCtrl',
     $.restaurants = [];
     $.name;
     $.typeOfFood;
+    $.imgUrl;
+
     $.createRestaurant = function() {
-      $.restaurants.push({ name: $.name, typeOfFood: $.typeOfFood });
+      $.restaurants.push({ name: $.name, typeOfFood: $.typeOfFood, url: $.imgUrl});
       $.name = "";
       $.typeOfFood = "";
+      $.imgUrl = "";
       console.log($.restaurants);
     };
+
+    $.removeRestaurant = function(rest) {
+
+      var index = $.restaurants.indexOf(rest);
+      $.restaurants.splice(index, 1);
+    };
+
   }]);
