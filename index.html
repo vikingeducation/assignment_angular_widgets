@@ -23,7 +23,7 @@
         <tr ng-repeat="r in restaurants | filter:query | orderBy: orderHeading : false ">
           <td>{{ r.name }}</td>
           <td>{{ r.foodType }}</td>
-          <td><input type="submit" value="Delete" ng-click="removeRestaurant($index)"></td>
+          <td><input type="submit" value="Delete" ng-click="removeRestaurant(r)"></td>
           <td><img ng-src='{{ imageURL }}'></td>
         </tr>
       </table>
