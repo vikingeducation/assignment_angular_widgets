@@ -21,8 +21,6 @@ widgets.controller('RestaurantCtrl',
       $scope.restaurants.splice(index, 1);
     };
 
-    $scope.searchTerm;
-
     $scope.orderCategory;
 
     $scope.order = function(input) {
@@ -44,7 +42,7 @@ widgets.controller('RestaurantCtrl',
         $scope.rawFeed.forEach( function(el) {
           var photo = {  };
 
-          photo.userName = el['user']['userName'];
+          photo.userName = el['user']['username'];
 
           if (el["caption"] === null) {
             photo.desc = "";
