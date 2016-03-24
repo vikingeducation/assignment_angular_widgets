@@ -28,6 +28,18 @@ widgets.controller('RestaurantCtrl',
 
 widgets.controller('PhotosCtrl', ['$scope', function($scope){
   $scope.rawFeed = instagramResponse.data;
+
+  // Grab all filters for current photo instagram photo gallery
+  $scope.filters = [];
+  for (var i = 0; i < $scope.rawFeed.length; i++) {
+    $scope.filters.push($scope.rawFeed[i].filter);
+  }
+
+  // Remove duplicate filters
+  $scope.filters = $scope.filters.filter(function(value, index) {
+    return $scope.filters.indexOf(value) == index;
+  });
+
   $scope.photos = $scope.rawFeed.map(function(obj){
     return {
       url: obj.images.low_resolution.url,
@@ -40,4 +52,6 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
       filter: obj.filter
     };
   });
+
+  $scope.selectFilter = "";
 }]);

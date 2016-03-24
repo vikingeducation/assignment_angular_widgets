@@ -12,7 +12,26 @@
   <body>
     <div class="container" ng-controller="PhotosCtrl">
       <div class="row">
-        <div class="col-md-4" ng-repeat='photo in photos'>
+        <!-- Show by Filter -->
+        <div class="col-md-6">
+          <label for="filter">Show by filter:</label>
+          <select name="filter" ng-model="selectFilter">
+            <option value=""></option>
+            <option ng-repeat="filter in filters" value=" {{ filter }}">{{ filter }}</option>
+          </select>
+        </div>
+        <!-- Filter by Tags -->
+        <div class="col-md-6">
+          <label for="tag">Show by filter:</label>
+          <select name="tag" ng-model="selectTag" multiple>
+            <option value=""></option>
+            <option ng-repeat="filter in filters" value=" {{ filter }}">{{ filter }}</option>
+          </select>
+        </div>
+      </div>
+      <!-- Photo Gallery -->
+      <div class="row" style="margin-top: 25px;">
+        <div class="col-md-4" ng-repeat='photo in photos | filter: selectFilter'>
           <a ng-href="{{photo.photoLink}}"><img ng-src="{{photo.url}}"></a>
           <div>
             <a ng-href="{{'http://instagram.com/' + photo.username}}">
