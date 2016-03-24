@@ -47,7 +47,51 @@
               {{ restaurant.typeOfFood }}
             </td>
             <td>
-              <img ng-src="{{restaurant.url}}">
+              <img width="32" ng-src="{{restaurant.url}}">
+            </td>
+            <td>
+              <button type="delete" ng-click="removeRestaurant(restaurant)">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <br>
+      <hr>
+      <br>
+
+      <input type="text" name="searchTerm" ng-model="searchTerm" value="">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>
+              <a href="" ng-click="order('name')">Name</a>
+            </th>
+            <th>
+              <a href="" ng-click="order('typeOfFood')">Type of Food</a>
+            </th>
+            <th>
+              Image
+            </th>
+            <th>
+              Delete
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="restaurant in restaurants | orderBy: orderCategory | filter: searchTerm">
+            <td>
+              {{ restaurant.name }}
+            </td>
+            <td>
+              {{ restaurant.typeOfFood }}
+            </td>
+            <td>
+              <img width="32" ng-src="{{restaurant.url}}">
             </td>
             <td>
               <button type="delete" ng-click="removeRestaurant(restaurant)">Remove</button>
@@ -58,7 +102,6 @@
       </table>
 
     </div>
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
 

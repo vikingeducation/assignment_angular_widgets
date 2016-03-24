@@ -2,24 +2,31 @@ var widgets = angular.module('widgets', []);
 
 widgets.controller('RestaurantCtrl',
   ['$scope',
-  function($){
-    $.restaurants = [];
-    $.name;
-    $.typeOfFood;
-    $.imgUrl;
+  function($scope){
+    $scope.restaurants = [];
+    $scope.name;
+    $scope.typeOfFood;
+    $scope.imgUrl;
 
-    $.createRestaurant = function() {
-      $.restaurants.push({ name: $.name, typeOfFood: $.typeOfFood, url: $.imgUrl});
-      $.name = "";
-      $.typeOfFood = "";
-      $.imgUrl = "";
-      console.log($.restaurants);
+    $scope.createRestaurant = function() {
+      $scope.restaurants.push({ name: $scope.name, typeOfFood: $scope.typeOfFood, url: $scope.imgUrl});
+      $scope.name = "";
+      $scope.typeOfFood = "";
+      $scope.imgUrl = "";
+      console.log($scope.restaurants);
     };
 
-    $.removeRestaurant = function(rest) {
-
-      var index = $.restaurants.indexOf(rest);
-      $.restaurants.splice(index, 1);
+    $scope.removeRestaurant = function(rest) {
+      var index = $scope.restaurants.indexOf(rest);
+      $scope.restaurants.splice(index, 1);
     };
+
+    $scope.searchTerm;
+
+    $scope.orderCategory;
+
+    $scope.order = function(input) {
+      $scope.orderCategory = input;
+    }
 
   }]);
