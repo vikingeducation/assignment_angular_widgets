@@ -1,10 +1,30 @@
-<DOCTYPE! html>
-<html>
+<!DOCTYPE html>
+<html ng-app="widgets">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="app.js"></script>
   </head>
   <body>
+    <div ng-controller="RestaurantCtrl">
 
+      <form ng-submit="createRestaurant()">
+        <input type="text" ng-model="name" placeholder="Name">
+        <input type="text" ng-model="typeOfFood" placeholder="Type of Food">
+        <input type="submit" value="Create Restaurant">
+      </form>
+
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Type of Food</th>
+          <th>Delete</th>
+        </tr>
+        <tr ng-repeat="r in restaurants | orderBy: 'foodType' ">
+          <td>{{ r.name }}</td>
+          <td>{{ r.foodType }}</td>
+          <td><input type="submit" value="Delete" ng-click="removeRestaurant($index)"></td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>
