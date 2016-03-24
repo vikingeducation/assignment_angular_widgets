@@ -49,8 +49,20 @@ widgets.controller( 'PhotosCtrl', [
       $scope.img = "http://findicons.com/files/icons/7/dinosaurs_toys/128/stegosaurus.png";
 
       $scope.photosArr = []
-      $scope.rawFeed.data.forEach( function( elt){
-        $scope.photosArr.push( elt["images"]["standard_resolution"]["url"] );
+      $scope.rawFeed.data.forEach( function(elt){
+
+        console.log(elt["likes"]["count"])
+
+        $scope.photosArr.push({
+          url: elt["images"]["standard_resolution"]["url"],
+          username: elt["user"]["username"],
+          date: (elt["created_time"]*1000),
+          likes: elt["likes"]["count"],
+          comments: elt["comments"]["count"],
+          link: elt["link"],
+          hashtags: elt["tags"],
+          filter: elt["filter"]
+        });
       });
     }
   ]);
