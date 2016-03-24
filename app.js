@@ -59,23 +59,21 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
       likes: obj.likes.count,
       comments: obj.comments.count,
       photoLink: obj.link,
-      hashtags: obj.tags,
+      hashtags: obj.tags.join(', '),
       filter: obj.filter
     };
   });
 
   $scope.selectFilter = "";
-  $scope.selectTag = "";
-
-  $scope.currentTagFilters = function() {
-    var returnString = "";
-    for (i = 0; i < $scope.selectTag.length; i++) {
-      returnString += " | filter: " + $scope.selectTag[i];
-    }
-    return returnString;
-  };
+  $scope.selectTag = [];
 
   $scope.photoFilter = function(photo) {
-    
+    var tagMatch = true;
+    $scope.selectTag.forEach(function(tag) {
+      if (photo.hashtags.indexOf(tag) === -1) {
+        tagMatch = false;
+      };
+    });
+    return tagMatch;
   };
 }]);
