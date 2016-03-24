@@ -20,12 +20,12 @@
     <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Food Type</th>
+        <th ng-click="changeSortOrder('name')">Name (click to sort)</th>
+        <th ng-click="changeSortOrder('foodType')">Food Type (click to sort)</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="r in restaurants | orderBy: 'foodType'">
+      <tr ng-repeat="r in restaurants | orderBy: sortBy">
         <td>{{ r.name }}</td>
         <td>{{ r.foodType }}</td>
         <td ng-click="deleteRestaurant($index)">Delete</td>
@@ -35,6 +35,26 @@
       </tr>
     </tbody>
     </table>
+
+
+    <h3>Search Restaurants</h3>
+
+    <input type="text" label="search" ng-model="searchText">
+      <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Food Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="r in restaurants | filter: searchText">
+          <td>{{ r.name }}</td>
+          <td>{{ r.foodType }}</td>
+        </tr>
+      </tbody>
+
+
 
   </body>
 </html>
