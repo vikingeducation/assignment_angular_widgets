@@ -13,16 +13,22 @@
     <form>
       <input type="text" label="Name" ng-model="name" name="name"> 
       <input type="text" label="Type of Food" ng-model="foodType" name="foodType">
-      <input type="submit" ng-click="addRestaurant(  )">
+      <input type="submit" ng-click="addRestaurant(name, foodType)">
     </form>
 
     <table>
-      <div  ng-repeat="r in restaurants">
-        <tr>
-          <td>{{ r.name }}</td>
-          <td>{{ r.foodType }}</td>
-        </tr>
-      </div>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Food Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="r in restaurants">
+        <td>{{ r.name }}</td>
+        <td>{{ r.foodType }}</td>
+      </tr>
+    </tbody>
     </table>
 
   </body>

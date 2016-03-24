@@ -2,7 +2,7 @@
 
 var widgets = angular.module('widgetsApp', []);
 
-var restaurantCtrl = widgets.controller('RestaurantCtrl',
+widgets.controller('RestaurantCtrl',
     ['$scope',
     function($scope){
         //stuff is gonna go here
