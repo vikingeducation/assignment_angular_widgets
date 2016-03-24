@@ -2,3 +2,7 @@
 .picture-panel {
   height: 640px;
 }
+
+.dropdown {
+  display: inline-block;
+}

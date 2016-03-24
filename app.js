@@ -50,6 +50,7 @@ widgets.controller( 'PhotosCtrl', [
 
       $scope.photosArr = [];
       $scope.filtersObj= { "All": ""};
+      $scope.tagsObj= { "All": ""};
       $scope.currentFilter = "";
       $scope.rawFeed.data.forEach( function(elt){
 
@@ -67,8 +68,15 @@ widgets.controller( 'PhotosCtrl', [
         });
 
         $scope.filtersObj[ elt["filter"] ] = elt["filter"];
+      
+        if(  elt["tags"]) {
+          elt["tags"].forEach( function(tag){
+            $scope.tagsObj[ tag ] = tag;
+          });
+        }
 
       });
+      console.log($scope.tagsObj);
 
       $scope.selectFilter = function( filter ) {
 
@@ -91,7 +99,6 @@ widgets.controller( 'PhotosCtrl', [
 
         // };
 
-      // console.log($scope.filtersObj);
     };
   }
 ]);

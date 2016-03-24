@@ -17,7 +17,7 @@
 
   <body ng-controller="PhotosCtrl">
     <div class="header-bar">
-      <div class="dropdown">
+      <div class="filter-dropdown dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by Filter
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
@@ -26,13 +26,21 @@
           <div>
         </ul>
       </div>
+
+      <div class="tag-dropdown dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by Tag
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <div ng-repeat="(fKey, fValue) in tagsObj">
+            <li> <a ng-click="selectTags(fValue)">{{ fKey }}</a></li>
+          <div>
+        </ul>
+      </div>
     </div>
 
     <div class="container">
       <div class="row">
-        <div class="col-sm-4 picture-panel" ng-repeat="photo in photosArr | filter: { filter: currentFilter }" >
-
-
+        <div class="col-sm-4 picture-panel" ng-repeat="photo in photosArr | filter: { filter: currentFilter}" >
           <div class="panel panel-default">
             <div class="panel-heading">
               <a ng-href="http://www.instagram.com/{{ photo['username'] }}">
