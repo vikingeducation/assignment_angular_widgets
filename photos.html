@@ -13,13 +13,18 @@
   <body>
     <div class="container" ng-controller="PhotosCtrl">
       <div class="row">
-        <select>
+        <h1>{{newQuery.length}}</h1>
+        <select ng-model="filterQuery">
           <option ng-repeat="instaObj in rawFeed | unique: 'filter'" 
               value={{instaObj.filter}}>{{instaObj.filter}}</option>
         </select> 
+        <select ng-model="hashtagQuery">
+          <option ng-repeat="htags in hashtags() | unique: htags"
+              value={{htags}}>{{htags}}</option>
+        </select> 
       </div> 
       <div class="row">
-        <div class="col-md-4" ng-repeat='photo in photos'>
+        <div class="col-md-4" ng-repeat='photo in photos | filter: filterQuery | filter:hashtagQuery as newQuery'>
           <a ng-href="{{photo.photoLink}}"><img ng-src="{{photo.url}}"></a>
           <div>
             <a ng-href="{{'http://instagram.com/' + photo.username}}">
