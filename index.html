@@ -1,0 +1,19 @@
+
+
+<html ng-app="widgetsApp">
+<head>
+  <title>Widgets App</title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  
+  <script src="app.js"></script>
+</head>
+
+<body ng-controller="RestaurantCtrl">
+  <form>
+    <input type="text" label="Name" name="name"> {{ name }}
+    <input type="text" label="Type of Food" name="type of food">{{ foodType }}
+    <input type="submit">
+  </form>
+</body>
+</html>
