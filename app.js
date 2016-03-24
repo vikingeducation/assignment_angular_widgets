@@ -39,7 +39,27 @@ widgets.controller('PhotosCtrl',
     $scope.photos = [];
     $scope.filters = [];
     $scope.tags = [];
-    
+
+    $scope.page = 0;
+
+    $scope.nextPage = function() {
+      var numPages = Math.floor($scope.photos.length / 12)
+      if ( $scope.page < numPages - 1 ) {
+        $scope.page += 1;
+      }
+    }
+
+    $scope.previousPage = function() {
+      if ($scope.page >= 1) {
+        $scope.page -= 1;
+      }
+    }
+
+    $scope.pageResults = function() {
+      var firstIdx = $scope.page * 12;
+      return $scope.photos.slice(firstIdx, firstIdx + 12);
+    }
+
     $scope.rawFeed.forEach( function(el) {
       var photo = {  };
 
@@ -77,4 +97,26 @@ widgets.controller('PhotosCtrl',
       $scope.photos.push(photo);
     } )
 
+  }]);
+
+
+widgets.controller('UsersCtrl',
+  ['$scope',
+  function($scope) {
+
+    $scope.rawFeed = instagramResponse['data'];
+
+    $scope.users = [];
+
+    $scope.rawFeed.forEach( function(el) {
+      var user = {};
+
+      user.userName = el['user']['username'];
+
+      user.imageUrl = el['user']['profile_picture'];
+
+      user.fullName = el['user']['full_name'];
+
+      $scope.users.push(user);
+    });
   }]);
