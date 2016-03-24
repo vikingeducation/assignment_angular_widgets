@@ -12,16 +12,24 @@
 
     <div ng-controller='RestaurantCtrl' class="">
 
+      <label for="name">Name</label><br>
       <input type="text" name="name" ng-model='name' value="">
 
+      <br>
+
+      <label for="typeOfFood">Type of Food</label><br>
       <input type="text" name="typeOfFood" ng-model='typeOfFood' value="">
 
+      <br>
+
+      <label for="imgUrl">Image URL</label><br>
       <input type="text" name="imgUrl" ng-model='imgUrl' value="">
 
-      <p>Name: {{ name }}</p>
-      <p>Type of Food: {{ typeOfFood }}</p>
+      <br>
 
       <input type="button" name="create-restaurant" ng-click="createRestaurant()" value="Create Restaurant">
+
+      <br>
 
       <table>
 
