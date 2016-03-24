@@ -10,46 +10,73 @@
     <div class="header">
       <div class="container">
         <h1>Restaurant App</h1>
+
+        <div class="main" ng-controller="RestaurantCtrl">
+          <form class="form" ng-submit="createFood()">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" ng-model="name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="foodType">Food Type</label>
+              <input type="text" ng-model="foodType" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="imageUrl">Image</label>
+              <input type="text" ng-model="imageUrl" class="form-control">
+            </div>
+            <input type="submit" value="Create Restaurant" class="btn btn-success">
+          </form>
+            <div>
+              <table class="table">
+                <thead>
+                  <th>
+                    Food Name
+                    <th>
+                      <th>
+                        Food Type
+                        <th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="restaurant in restaurants">
+                    <td>{{restaurant.name}}</td>
+                    <td>{{restaurant.type}}</td>
+                    <td>
+                      <img ng-src="{{restaurant.url}}"/>
+                    </td>
+                    <td>
+                      <button value="Delete Food" name="deleteButton" ng-click="deleteRestaurant(restaurant)">
+                        Delete Food
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12">
+
+
+                <label>Search: <input ng-model="filterText"></label>
+                <table class='table'>
+                  <tr>
+                    <th ng-click="changeOrder('name')">Name</th>
+                    <th ng-click="changeOrder('type')">Food Type</th>
+                  </tr>
+                  <tr ng-repeat="restaurant in restaurants | orderBy: orderSelection | filter:filterText">
+                    <td>{{restaurant.name}}</td>
+                    <td>{{restaurant.type}}</td>
+                  </tr>
+                </table>
+
+              </div>
+            </div>
+
+
+        </div>
       </div>
     </div>
-
-    <div class="main" ng-controller="RestaurantCtrl">
-      <div class="container">
-       <input type="text" ng-model="foodName">    
-       <input type="text" ng-model="foodType">  
-       <button value="Create Restaurant" ng-click="createFood()">
-         Create Restaurant
-       </button>
-      </div>
-      <div>
-        <table>
-          <thead>
-            <th>
-              Food Name
-            <th>  
-            <th>
-              Food Type
-            <th> 
-          </thead>  
-          <tbody>
-            <tr ng-repeat="restaurant in restaurants">
-              <td>
-                {{restaurant.name}}
-              </td>
-              <td>
-                {{restaurant.type}}
-              </td>
-              <td>
-               <button value="Delete Food" name="deleteButton" ng-click="deleteRestaurant(restaurant)">
-                Delete Food
-               </button>
-              </td>
-            </tr>
-          </tbody>  
-
-        </table>  
-    </div>
-
     <!-- Modules -->
     <script src="app.js"></script>
 

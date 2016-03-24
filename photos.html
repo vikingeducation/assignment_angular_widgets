@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Include the AngularJS library -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+  </head>
+  <body ng-app="RestaurantApp">
+    <div ng-controller="PhotosCtrl">
+      <div class="container">
+        <h1>Photos</h1>
+
+        <div class="row">
+
+          <div class="col-sm-4" ng-repeat="photo in rawFeed">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">
+                  <a href="https://www.instagram.com/{{photo.user.username}}/">
+                    <strong>{{photo.user.username}}</strong>
+                  </a>
+                </div>
+              </div>
+
+              <div class="panel-body">
+                <a href="{{photo.link}}" class='thumbnail'>
+                  <img ng-src="{{photo.images.standard_resolution.url}}">
+                </a>
+              </div>
+
+              <div class="panel-footer">
+                <span class="label label-default">{{photo.comments.count}}</span> Comments
+                <br>
+                <span class="label label-default">{{photo.likes.count}}</span> Likes
+                <br>
+                Filter: {{photo.filter}}
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+    <!-- Modules -->
+    <script src="photos.js"></script>
+    <script src="app.js"></script>
+
+
+  </body>
+</html>
+
