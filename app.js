@@ -39,7 +39,20 @@ app.controller('RestaurantCtrl',
 
 app.controller('PhotosCtrl',
     ['$scope',
-    function($scope) {
-      $scope.rawFeed = instagramResponse['data'];
+      function($scope) {
+        var unique = function (value, index, self) { 
+             return self.indexOf(value) === index;
+        };
 
-    }])
+        $scope.filters = {};
+        $scope.rawFeed = instagramResponse['data'];
+        $scope.instagramFilters = instagramResponse['data'].map(function(photoBlob) {
+          return photoBlob["filter"];
+        }).filter(unique);
+
+        $scope.instagramTags = instagramResponse['data'].map(function(photoBlob) {
+          return (photoBlob["tags"]);
+        }).filter(unique).reduce(function(a, b) {
+             return a.concat(b);
+           }, []);
+    }]);

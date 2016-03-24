@@ -9,11 +9,34 @@
   <body ng-app="RestaurantApp">
     <div ng-controller="PhotosCtrl">
       <div class="container">
-        <h1>Photos</h1>
 
         <div class="row">
 
-          <div class="col-sm-4" ng-repeat="photo in rawFeed">
+          <div class="col-sm-6">
+            <label>Search by filter</label>
+            <select class='filter' ng-model="filters.filter">
+              <option ng-repeat="instagramFilter in instagramFilters" value="{{instagramFilter}}">
+                {{instagramFilter}}
+              </option>
+            </select>
+          </div>
+          
+          <div class="col-sm-6">
+            <label>Search by Tags</label>
+            <select class='filter_tags' ng-model="filters.tags">
+              <option ng-repeat="instagramTag in instagramTags" value="{{instagramTag}}">
+                {{instagramTag}}
+              </option>
+            </select>
+          </div>
+
+        </div>
+        
+        <h1>Photos</h1>
+        <div class="row">
+
+          <div class="col-sm-4" ng-repeat="photo in rawFeed | filter:filters">
+      
             <div class="panel panel-default">
               <div class="panel-heading">
                 <div class="panel-title">
