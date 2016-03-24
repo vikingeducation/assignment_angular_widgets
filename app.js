@@ -43,7 +43,7 @@ widgets.controller('RestaurantCtrl',
       (function() {
         $scope.rawFeed.forEach( function(el) {
           var photo = {  };
-          
+
           photo.userName = el['user']['userName'];
 
           if (el["caption"] === null) {
@@ -51,7 +51,7 @@ widgets.controller('RestaurantCtrl',
           } else {
             photo.desc = el['caption']['text'];
           }
-        
+
           photo.imageUrl = el['images']['standard_resolution']['url'];
           photo.createdTime = el['created_time'];
           photo.link = el['link'];
@@ -61,7 +61,6 @@ widgets.controller('RestaurantCtrl',
           $scope.photos.push(photo);
         } )
 
-      
-      } )();
+      })();
 
     }]);
