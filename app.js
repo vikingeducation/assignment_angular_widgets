@@ -30,3 +30,19 @@ widgets.controller('RestaurantCtrl',
     }
 
   }]);
+
+  widgets.controller('PhotosCtrl',
+    ['$scope',
+    function($scope) {
+
+      // data data from profile_picture
+      $scope.rawFeed = instagramResponse['data'];
+
+      $scope.photos = [];
+
+      (function() {
+        $scope.rawFeed.forEach( function(el) {
+          var photo = {  }
+        } )
+      })();
+    }]);
