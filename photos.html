@@ -21,20 +21,37 @@
 
 
     <main class="container">
+
       <section class="row">
-        <section ng-repeat="photo in photos" class="col-sm-3">
+        <section class="col-sm-12">
+
+          <select class="" name="filter" ng-model="igFilter">
+            <option ng-repeat="filter in filters">{{ filter }}</option>
+          </select>
+
+          <select class="" name="tag" ng-model="tag">
+            <option ng-repeat="tag in tags">{{ tag }}</option>
+          </select>
+
+        </section>
+      </section>
+
+      <section class="row">
+        <section ng-repeat="photo in photos | filter: { filter: igFilter }" class="col-sm-3">
 
           <div class="panel panel-default">
 
-            <div class="panel-body">
+            <div class="panel-heading">
+                <a ng-href="http://instagram.com/{{ photo.userName }}">{{ photo.userName }}</a>
+            </div>
 
-              <img ng-src="{{ photo.imageUrl }}" class="img-responsive">
+            <div class="panel-body">
+              <a ng-href="{{ photo.link }}"><img ng-src="{{ photo.imageUrl }}" class="img-responsive"></a>
             </div>
 
             <div class="panel-footer">
-              <p>{{ photo.userName }}</p>
-              <p>{{ photo.desc }}</p>
-              <p>{{ photo.createdTime }}</p>
+              <!-- <p>{{ photo.desc }}</p> -->
+              <p>{{ (photo.createdTime)*1000 | date:'yyyy-MM-dd HH:mm:ss Z' }}</p>
               <p>
                 <span>Likes: {{ photo.likes }}</span>
                 <span>Comments: {{ photo.comments }}</span>
