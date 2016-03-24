@@ -19,11 +19,12 @@
             <option value=""></option>
             <option ng-repeat="filter in filters" value="{{ filter }}">{{ filter }}</option>
           </select>
+          <p>{{selectFilter}}</p>
         </div>
         <!-- Filter by Tags -->
         <div class="col-md-6">
           <label for="hashtag">Show by hashtag:</label>
-          <select name="hashtag" ng-model="selectTag" multiple>
+          <select name="hashtag" ng-model="selectTag">
             <option value=""></option>
             <option ng-repeat="hashtag in hashtags" value="{{ hashtag }}">{{ hashtag }}</option>
           </select>
@@ -32,7 +33,7 @@
       </div>
       <!-- Photo Gallery -->
       <div class="row" style="margin-top: 25px;">
-        <div class="col-md-4" ng-repeat='photo in photos | filter: selectFilter | filter: selectTag'>
+        <div class="col-md-4" ng-repeat="photo in photos | filter: photoFilter ">
           <a ng-href="{{photo.photoLink}}"><img ng-src="{{photo.url}}"></a>
           <div>
             <a ng-href="{{'http://instagram.com/' + photo.username}}">

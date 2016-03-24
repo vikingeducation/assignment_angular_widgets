@@ -42,7 +42,7 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
 
   // Grab all tags for current photo instagram photo gallery
   $scope.hashtags = [];
-  for (var i = 0; i < $scope.rawFeed.length; i++) {
+  for (i = 0; i < $scope.rawFeed.length; i++) {
     $scope.hashtags = $scope.hashtags.concat($scope.rawFeed[i].tags);
   }
 
@@ -59,11 +59,23 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
       likes: obj.likes.count,
       comments: obj.comments.count,
       photoLink: obj.link,
-      hashtags: obj.tags.join(', '),
+      hashtags: obj.tags,
       filter: obj.filter
     };
   });
 
   $scope.selectFilter = "";
   $scope.selectTag = "";
+
+  $scope.currentTagFilters = function() {
+    var returnString = "";
+    for (i = 0; i < $scope.selectTag.length; i++) {
+      returnString += " | filter: " + $scope.selectTag[i];
+    }
+    return returnString;
+  };
+
+  $scope.photoFilter = function(photo) {
+    
+  };
 }]);
