@@ -42,7 +42,7 @@
       </section>
 
       <section class="row">
-        <section ng-repeat="photo in photos | filter: { filter: igFilter, tags: igTag }" class="col-sm-3">
+        <section ng-repeat="photo in photos | filter: { filter: igFilter, tags: igTag } as results" class="col-sm-3">
 
           <div class="panel panel-default">
 
@@ -70,6 +70,8 @@
           </div>
 
         </section>
+
+        <p>{{ results.length }}</p>
       </section>
     </main>
 
