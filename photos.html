@@ -27,20 +27,18 @@
         </ul>
       </div>
 
-      <div class="tag-dropdown dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by Tag
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <div ng-repeat="(fKey, fValue) in tagsObj">
-            <li> <a ng-click="selectTags(fValue)">{{ fKey }}</a></li>
-          <div>
-        </ul>
+      <div class="form-group dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="submit"  ng-click="selectTag()">Filter by Tag</button>
+        <select multiple="true" class="form-control" ng-model="selectedTags" ng-options="key for (key, value) in tagsObj">
+        </select>    
       </div>
-    </div>
+
+    </div>  
 
     <div class="container">
       <div class="row">
-        <div class="col-sm-4 picture-panel" ng-repeat="photo in photosArr | filter: { filter: currentFilter}" >
+        <div class="col-sm-4 picture-panel" ng-repeat="photo in photosArr | filter: { filter: currentFilter} | tagFilter: selectedTags: photosArr" >
+      
           <div class="panel panel-default">
             <div class="panel-heading">
               <a ng-href="http://www.instagram.com/{{ photo['username'] }}">

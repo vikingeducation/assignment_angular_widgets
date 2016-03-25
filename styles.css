@@ -6,3 +6,8 @@
 .dropdown {
   display: inline-block;
 }
+
+
+select.form-control {
+  float: right;
+}
