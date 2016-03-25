@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ng-app='widgets'>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+    <script src="app.js"></script>
+  </head>
+  <body>
+
+    <div ng-controller='RestaurantCtrl' class="">
+
+      <label for="name">Name</label><br>
+      <input type="text" name="name" ng-model='name' value="">
+
+      <br>
+
+      <label for="typeOfFood">Type of Food</label><br>
+      <input type="text" name="typeOfFood" ng-model='typeOfFood' value="">
+
+      <br>
+
+      <label for="imgUrl">Image URL</label><br>
+      <input type="text" name="imgUrl" ng-model='imgUrl' value="">
+
+      <br>
+
+      <input type="button" name="create-restaurant" ng-click="createRestaurant()" value="Create Restaurant">
+
+      <br>
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>
+              Name
+            </th>
+            <th>
+              Type of Food
+            </th>
+            <th>
+              Image
+            </th>
+            <th>
+              Delete
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="restaurant in restaurants | orderBy: '+typeOfFood'">
+            <td>
+              {{ restaurant.name }}
+            </td>
+            <td>
+              {{ restaurant.typeOfFood }}
+            </td>
+            <td>
+              <img width="32" ng-src="{{restaurant.url}}">
+            </td>
+            <td>
+              <button type="delete" ng-click="removeRestaurant(restaurant)">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <br>
+      <hr>
+      <br>
+
+      <input type="text" name="searchTerm" ng-model="searchTerm" value="">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>
+              <a href="" ng-click="order('name')">Name</a>
+            </th>
+            <th>
+              <a href="" ng-click="order('typeOfFood')">Type of Food</a>
+            </th>
+            <th>
+              Image
+            </th>
+            <th>
+              Delete
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="restaurant in restaurants | orderBy: orderCategory | filter: searchTerm">
+            <td>
+              {{ restaurant.name }}
+            </td>
+            <td>
+              {{ restaurant.typeOfFood }}
+            </td>
+            <td>
+              <img width="32" ng-src="{{restaurant.url}}">
+            </td>
+            <td>
+              <button type="delete" ng-click="removeRestaurant(restaurant)">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+  <head>
+    <meta charset="utf-8">
+    <title>Photos</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="photos.js"></script>
+
+    <script src="app.js"></script>
+  </head>
+
+  <body>
+
+
+    <main class="container">
+
+      <h1 class="text-center">Photos</h1>
+
+      <div ng-controller="PhotosCtrl" class="">
+        <section class="row">
+          <section class="col-sm-12">
+
+            <div class="form-group">
+              <label for="filter">Filter</label>
+              <select class="form-control" name="filter" ng-model="igFilter">
+                <option></option>
+                <option ng-repeat="filter in filters">{{ filter }}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="filter">Tag</label>
+              <select class="form-control" name="tag" ng-model="igTag">
+                <option></option>
+                <option ng-repeat="tag in tags">{{ tag }}</option>
+              </select>
+            </div>
+
+          </section>
+        </section>
+
+        <section class="row">
+
+          <p>{{ results.length }} results</p>
+
+          <section ng-repeat="photo in pageResults() | filter: { filter: igFilter, tags: igTag } as results" class="col-sm-3">
+
+            <div class="panel panel-default">
+
+              <div class="panel-heading">
+                  <a ng-href="http://instagram.com/{{ photo.userName }}">{{ photo.userName }}</a>
+              </div>
+
+              <div class="panel-body">
+                <a ng-href="{{ photo.link }}"><img ng-src="{{ photo.imageUrl }}" class="img-responsive"></a>
+              </div>
+
+              <div class="panel-footer">
+                <!-- <p>{{ photo.desc }}</p> -->
+                <p>{{ (photo.createdTime)*1000 | date:'yyyy-MM-dd HH:mm:ss Z' }}</p>
+                <p>
+                  <h4>Likes <span class="badge">{{ photo.likes }}</span></h4>
+                  <h4>Comments <span class="badge">{{ photo.comments }}</span></h4>
+                </p>
+                <!-- <p>
+                  <ul>
+                    <li ng-repeat="tag in photo.tags">{{ tag }}</li>
+                  </ul>
+                </p> -->
+              </div>
+            </div>
+
+          </section>
+
+
+        </section>
+
+        <button class="btn btn-primary" type="button" name="button" ng-click="previousPage()">Previous</button>
+
+        <button class="btn btn-primary" type="button" name="button" ng-click="nextPage()">Next</button>
+      </div>
+
+      <br>
+      <hr>
+      <br>
+
+      <h2 class="text-center">Users</h2>
+
+      <div class="" ng-controller="UsersCtrl">
+
+        <div class="row">
+
+          <section ng-repeat="user in users" class="col-sm-3">
+
+            <div class="panel panel-default">
+
+              <div class="panel-heading">
+                <a ng-href="http://instagram.com/{{ user.userName }}">{{ user.userName }}</a>
+              </div>
+
+              <div class="panel-body">
+                <a ng-click="" href=""><img ng-src="{{ user.imageUrl }}" class="img-responsive"></a>
+              </div>
+
+              <div class="panel-footer">
+                <p>
+                  {{ user.fullName }}
+                </p>
+              </div>
+            </div>
+
+          </section>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </body>
+</html>
