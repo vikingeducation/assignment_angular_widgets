@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div ng-controller="RestaurantCtrl">
+
+      <form ng-submit="createRestaurant()">
+        <input type="text" ng-model="name" placeholder="Name">
+        <input type="text" ng-model="foodType" placeholder="Type of Food">
+        <input type='text' ng-model='imageURL' placeholder='Image URL'>
+        <input type="submit" value="Create Restaurant">
+      </form>
+
+      <table>
+        <tr>
+          <th ng-repeat='h in headers' ng-click='orderByHeading($index)'>
+            {{ h }}
+          </th>
+        </tr>
+        <tr ng-repeat="r in restaurants | filter:query | orderBy: orderHeading : false ">
+          <td>{{ r.name }}</td>
+          <td>{{ r.foodType }}</td>
+          <td><input type="submit" value="Delete" ng-click="removeRestaurant(r)"></td>
+          <td><img ng-src='{{ imageURL }}'></td>
+        </tr>
+      </table>
+
+      <h3>Search Restaurants</h3>
+
+      <input type='text' ng-model='query' placeholder='Search Term'>
+    </div>
+  </body>
+</html>

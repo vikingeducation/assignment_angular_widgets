@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="photos.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="container" ng-controller="PhotosCtrl">
+      <div class="row">
+        <!-- Show by Filter -->
+        <div class="col-md-6">
+          <label for="filter">Show by filter:</label>
+          <select name="filter" ng-model="selectFilter">
+            <option value=""></option>
+            <option ng-repeat="filter in filters" value="{{ filter }}">{{ filter }}</option>
+          </select>
+        </div>
+        <!-- Filter by Tags -->
+        <div class="col-md-6">
+          <label for="hashtag">Show by hashtag:</label>
+          <select name="hashtag" ng-model="selectTag" multiple>
+            <option value=""></option>
+            <option ng-repeat="hashtag in hashtags" value="{{ hashtag }}">{{ hashtag }}</option>
+          </select>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h3>Query results: {{ queryResults.length }}</h3>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="row">
+        <div class="col-md-12">
+          <div>Pages:</div>
+          <a href="#" style="float:left" ng-repeat="page in totalPages" ng-click="setPage(page)">{{page}}</a>
+        </div>
+      </div>
+
+      <!-- Photo Gallery -->
+      <div class="row" style="margin-top: 25px;">
+        <div class="col-md-4" ng-repeat="photo in photos | filter: photoFilter | filter: selectFilter | filter: renderPic as queryResults ">
+          <a ng-href="{{'http://instagram.com/' + photo.username}}">
+            <h4> Username: {{photo.username}} </h4>
+          </a>
+          <a ng-href="{{photo.photoLink}}"><img ng-src="{{photo.url}}"></a>
+          <div>
+            <p> Posted At: {{photo.createdAt*1000 | date:'yyyy-MM-dd HH:mm:ss Z'}} </p>
+            <p> Like Count: {{photo.likes}} </p>
+            <p> Comment Count: {{photo.comments}} </p>
+            <p> Tags: {{photo.hashtags}}</p>
+            <p> Filter: {{photo.filter}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
