@@ -77,6 +77,7 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
     return tagMatch;
   };
 
+  // total pages is not dynamic need to fix this
   $scope.totalPages = new Array(Math.floor($scope.photos.length/12));
   for(i = 0; i < $scope.totalPages.length; i++) $scope.totalPages[i] = i;
   $scope.currentPage = 0;
