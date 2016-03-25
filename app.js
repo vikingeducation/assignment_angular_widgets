@@ -52,7 +52,7 @@ widgets.controller( 'PhotosCtrl', [
       $scope.filtersObj= { "All": ""};
       $scope.tagsObj= { " All": ""};
       $scope.currentFilter = "";
-      $scope.selectedTags = [];
+      $scope.selectedTags = [""];
 
 
       $scope.rawFeed.data.forEach( function(elt){
@@ -94,44 +94,19 @@ widgets.filter('tagFilter', function() {
   return function(collection, selectedTags) {
     var filteredCollection = [];
 
-    console.log("collection: "+ collection)
     console.log(selectedTags)
 
-    // angular.forEach(collection, function(photo) {
+    if (selectedTags.indexOf("") > -1) {
+      return collection;
+    }
 
     for (var j = 0; j < collection.length; j++) {
-      console.log(collection[j]["hashtags"])
       for (var i = 0; i < selectedTags.length; i++ ) {
-
         if (collection[j]["hashtags"].indexOf(selectedTags[i]) > -1) {
           filteredCollection.push(collection[j]);
         }
       }
     }
-      console.log(filteredCollection)
   return filteredCollection;
-
   }
 })
-
-
-
-//   yourApp.filter('filterPlayful', function() {
-//   // `activatePlayfulFilter` is a boolean the user
-//   //    can set in the DOM to turn on this filter
-//   return function( collection, activatePlayfulFilter ) {
-//     // Only run the filter if it has been activated
-//     //   by the optional parameter we take
-//     if( !activatePlayfulFilter ){ return false }
-
-//     var filteredCollection = []
-
-//     angular.forEach( collection, function( kitten ){
-//       // If the kitten is playful, keep it!
-//       if( kitten.Playfulness == "Playful" ){
-//         filteredCollection.push( kitten ); 
-//       }
-//     })
-//     return filteredCollection;
-//   };
-// });
