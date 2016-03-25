@@ -5,9 +5,32 @@
 
 Widgets.controller('PhotosCtrl', ['$scope', function($scope) {
 
-  // feed
+  // Filters
+  $scope.filterType = '';
+  $scope.filterTypes = [];
+  $scope.filterUsers = [];
+  $scope.filterTags = [];
+  $scope.tags = [];
+
+  // Get photos
   $scope.feed = instagramResponse['data'];
   $scope.photos = $scope.feed.map(function(object) {
+
+    // FilterTypes
+    if ( $scope.filterTypes.indexOf(object.filter) < 0) {
+      $scope.filterTypes.push(object.filter);
+    }
+
+    // Tags
+    var tags = object.tags;
+    for (var j = 0; j < tags.length; j++) {
+      var tag = tags[j];
+      if ($scope.tags.indexOf(tag) < 0) {
+        $scope.tags.push(tag);
+      }
+    }
+
+    // Map Photo Objects
     return {
       profileUrl: 'http://instagram.com/' + object['user']['username'],
       username: object['user']['username'],
@@ -20,82 +43,45 @@ Widgets.controller('PhotosCtrl', ['$scope', function($scope) {
     };
   });
 
-  // filters
-  $scope.filterType = '';
-  $scope.filterTypes = [];
-  $scope.filterUsers = [];
-  $scope.filterTags = [];
-  $scope.tags = [];
-
-  for (var i = 0; i < $scope.feed.length; i++) {
-    var object = $scope.feed[i];
-    for (var key in object) {
-
-      // filterTypes
-      if (key == 'filter' && $scope.filterTypes.indexOf(object[key]) < 0) {
-        $scope.filterTypes.push(object[key]);
-      }
-
-      // tags
-      if (key == 'tags') {
-        var tags = object[key];
-        for (var j = 0; j < tags.length; j++) {
-          var tag = tags[j];
-          if ($scope.tags.indexOf(tag) < 0) {
-            $scope.tags.push(tag);
-          }
-        }
-      }
-    }
-  }
-
-  // filtering
+  // Filtering
   $scope.filterPhoto = function(photo) {
-    if ($scope.filterType == '' &&
-        $scope.filterTags.length == 0 &&
-        $scope.filterUsers.length == 0) {
-      return true
+
+    // if no filter type selected
+    // else
+
+    if ($scope.filterType === '' &&
+        ($scope.filterTags.length === 0 || $scope.filterTags.length === 1 && $scope.filterTags[0] === '') &&
+        ($scope.filterUsers.length === 0 || $scope.filterUsers.length === 1 && $scope.filterUsers[0] === '')) {
+      return true;
     }
 
+    var hasFilter = photo.filter === $scope.filterType,
+        hasTag = hasUser = false;
 
-    var hasTag = false;
     for (var i = 0; i < $scope.filterTags.length; i++) {
-      var filterTag = $scope.filterTags[i];
-      for (var j = 0; j < photo.tags.length; j++) {
-        var photoTag = photo.tags[j];
-        if (filterTag == photoTag) {
-          hasTag = true;
-          break;
-        }
-      }
-      if (hasTag) {
-        break;
-      }
+      var tag = $scope.filterTags[i];
+      hasTag = !!~photo.tags.indexOf(tag);
+      if (hasTag) break;
     }
 
-    console.log($scope.filterUsers);
-
-    var hasUser = false;
     for (var i = 0; i < $scope.filterUsers.length; i++) {
-      var filterUser = $scope.filterUsers[i];
-      if (photo.username == filterUser) {
-        hasUser = true;
-        break;
-      }
+      var user = $scope.filterUsers[i];
+      hasUser = photo.username == user;
+      if (hasUser) break;
     }
 
-    var hasFilter = photo.filter == $scope.filterType;
+    console.log(hasFilter, hasTag, hasUser);
 
     return hasFilter || hasTag || hasUser;
   };
 
 
-  // pagination
+  // Pagination
   $scope.page = 0;
   $scope.pageSize = 12;
 
 
-  // users
+  // Users
   $scope.users = $scope.feed.map(function(object) {
     return object['user'];    
   });
