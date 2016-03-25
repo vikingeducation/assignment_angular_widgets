@@ -15,16 +15,16 @@
       <div class="row">
         <h1>{{newQuery.length}}</h1>
         <select ng-model="filterQuery">
-          <option ng-repeat="instaObj in rawFeed | unique: 'filter'" 
+          <option ng-repeat="instaObj in rawFeed | unique: 'filter'"
               value={{instaObj.filter}}>{{instaObj.filter}}</option>
-        </select> 
+        </select>
         <select ng-model="hashtagQuery">
           <option ng-repeat="htags in hashtags() | unique: htags"
               value={{htags}}>{{htags}}</option>
-        </select> 
-      </div> 
+        </select>
+      </div>
       <div class="row">
-        <div class="col-md-4" ng-repeat='photo in photos | filter: filterQuery | filter:hashtagQuery as newQuery'>
+        <div class="col-xs-4" ng-repeat='photo in photos | filter: filterQuery | filter:hashtagQuery as newQuery'>
           <a ng-href="{{photo.photoLink}}"><img ng-src="{{photo.url}}"></a>
           <div>
             <a ng-href="{{'http://instagram.com/' + photo.username}}">
@@ -38,6 +38,8 @@
           </div>
         </div>
       </div>
+      <button ng-click='addPage()'>Next</button>
+      <button ng-click='subPage()'>Back</button>
     </div>
   </body>
 </html>
