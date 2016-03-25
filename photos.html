@@ -67,8 +67,8 @@
                 <!-- <p>{{ photo.desc }}</p> -->
                 <p>{{ (photo.createdTime)*1000 | date:'yyyy-MM-dd HH:mm:ss Z' }}</p>
                 <p>
-                  <span>Likes: {{ photo.likes }}</span>
-                  <span>Comments: {{ photo.comments }}</span>
+                  <h4>Likes <span class="badge">{{ photo.likes }}</span></h4>
+                  <h4>Comments <span class="badge">{{ photo.comments }}</span></h4>
                 </p>
                 <!-- <p>
                   <ul>
