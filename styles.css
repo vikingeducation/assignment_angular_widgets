@@ -1,0 +1,13 @@
+
+.picture-panel {
+  height: 640px;
+}
+
+.dropdown {
+  display: inline-block;
+}
+
+
+select.form-control {
+  float: right;
+}

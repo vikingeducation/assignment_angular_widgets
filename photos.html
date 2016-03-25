@@ -1,0 +1,66 @@
+
+
+<html ng-app="widgetsApp">
+<head>
+  <title>Widgets App</title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  
+  <script src="photos.js"></script>
+  <script src="app.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+  <body ng-controller="PhotosCtrl">
+    <div class="header-bar">
+      <div class="filter-dropdown dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by Filter
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <div ng-repeat="(fKey, fValue) in filtersObj">
+            <li> <a ng-click="selectFilter(fValue)">{{ fKey }}</a></li>
+          <div>
+        </ul>
+      </div>
+
+      <div class="form-group dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="submit"  ng-click="selectTag()">Filter by Tag</button>
+        <select multiple="true" class="form-control" ng-model="selectedTags" ng-options="key for (key, value) in tagsObj">
+        </select>    
+      </div>
+
+    </div>  
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 picture-panel" ng-repeat="photo in photosArr | filter: { filter: currentFilter} | tagFilter: selectedTags" >
+      
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <a ng-href="http://www.instagram.com/{{ photo['username'] }}">
+              <h3 class="panel-title">{{ photo["username"]}}</h3></a>
+              <h5>Posted on: {{ photo["date"] | date:'yyyy-MM-dd HH:mm:ss' }}</h5>
+              <h5>Filter: {{ photo["filter"] }}</h5>
+            </div>
+            <div class="panel-body">
+              <a ng-href="{{ photo['link'] }}">
+              <img class="img-responsive" ng-src="{{ photo['url'] }}"/> </a>
+            </div>
+            <div class="panel-footer">  
+              <h5 ng-repeat="tag in photo['hashtags'] | limitTo: 3">#{{ tag }}</h5>
+           
+              <h5>Likes: {{ photo["likes"]}}</h5>
+              <h5>Comments: {{ photo["comments"]}}</h5>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

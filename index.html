@@ -1,0 +1,55 @@
+
+
+<html ng-app="widgetsApp">
+<head>
+  <title>Widgets App</title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  
+  <script src="app.js"></script>
+</head>
+
+  <body ng-controller="RestaurantCtrl">
+    <form>
+      <input type="text" label="Name" ng-model="name" name="name"> 
+      <input type="text" label="Type of Food" ng-model="foodType" name="foodType">
+      <input type="text" label="Image URL" name="img" ng-model="img">
+      <input type="submit" ng-click="addRestaurant({name: name, foodType: foodType, img: img})">
+    </form>
+
+    <table>
+    <thead>
+      <tr>
+        <th ng-click="changeSortOrder('name')">Name (click to sort)</th>
+        <th ng-click="changeSortOrder('foodType')">Food Type (click to sort)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="r in restaurants | orderBy: sortBy">
+        <td>{{ r.name }}</td>
+        <td>{{ r.foodType }}</td>
+        <td ng-click="deleteRestaurant($index)">Delete</td>
+        <td>
+          <img ng-src="{{ r.img }}">
+        </td>
+      </tr>
+    </tbody>
+    </table>
+
+    <h3>Search Restaurants</h3>
+    <input type="text" label="search" ng-model="searchText">
+      <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Food Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="r in restaurants | filter: {foodType: searchText} ">
+          <td>{{ r.name }}</td>
+          <td>{{ r.foodType }}</td>
+        </tr>
+      </tbody>
+  </body>
+</html>
