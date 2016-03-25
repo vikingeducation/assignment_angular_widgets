@@ -4,7 +4,7 @@
     <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Include the AngularJS library -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
   </head>
   <body ng-app="RestaurantApp">
     <div ng-controller="PhotosCtrl">
@@ -14,29 +14,34 @@
 
           <div class="col-sm-6">
             <label>Search by filter</label>
-            <select class='filter' ng-model="filters.filter">
+            <select class='filter form-control' ng-model="filters.filter">
+              <option value="">All</option>
               <option ng-repeat="instagramFilter in instagramFilters" value="{{instagramFilter}}">
-                {{instagramFilter}}
+              {{instagramFilter}}
               </option>
             </select>
           </div>
-          
+
           <div class="col-sm-6">
             <label>Search by Tags</label>
-            <select class='filter_tags' ng-model="filters.tags">
+            <select multiple class='filter_tags form-control' ng-model="filters.tags">
               <option ng-repeat="instagramTag in instagramTags" value="{{instagramTag}}">
-                {{instagramTag}}
+              {{instagramTag}}
               </option>
             </select>
           </div>
 
         </div>
-        
+
         <h1>Photos</h1>
+        <h5>{{filteredPhotos.length}} / {{rawFeed.length}} Results</h5>
+        Page: {{pageNumber + 1}}
+        <div class="btn btn-default" ng-click="nextPage()">Next Page</div>
+        <div class="btn btn-default" ng-click="lastPage()">Previous Page</div>
         <div class="row">
 
-          <div class="col-sm-4" ng-repeat="photo in rawFeed | filter:filters">
-      
+          <div class="col-sm-4" ng-repeat="photo in rawFeed | photoFilter: filters | limitTo : perPage : pageNumber * perPage as filteredPhotos">
+
             <div class="panel panel-default">
               <div class="panel-heading">
                 <div class="panel-title">

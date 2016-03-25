@@ -40,15 +40,32 @@ app.controller('RestaurantCtrl',
 app.controller('PhotosCtrl',
     ['$scope',
       function($scope) {
-        var unique = function (value, index, self) { 
+        var unique = function (value, index, self) {
              return self.indexOf(value) === index;
         };
 
-        $scope.filters = {};
+        $scope.nextPage = function() {
+          $scope.pageNumber += 1;
+            Math.max(($scope.filteredPhotos.length / $scope.perPage), pageNumber);
+        };
+
+        $scope.lastPage = function() {
+          $scope.pageNumber -= 1;
+        };
+
+        $scope.pageNumber = 0
+        $scope.perPage = 12
+        $scope.filters = {filter: "", tags: []};
         $scope.rawFeed = instagramResponse['data'];
         $scope.instagramFilters = instagramResponse['data'].map(function(photoBlob) {
           return photoBlob["filter"];
         }).filter(unique);
+
+        $scope.containsComparator = function(expected, actual){
+          return actual.indexOf(expected) > -1;
+        };
+
+        $scope.photoPages = [];
 
         $scope.instagramTags = instagramResponse['data'].map(function(photoBlob) {
           return (photoBlob["tags"]);
@@ -56,3 +73,29 @@ app.controller('PhotosCtrl',
              return a.concat(b);
            }, []);
     }]);
+
+
+app.filter('photoFilter', function () {
+
+    return function (input, filters) {
+      var output = input;
+      output = output.filter(function (item) {
+        if (filters.filter == "" || item.filter == filters.filter) {
+          return true
+        }});
+
+      output = output.filter(function (item) {
+        if (filters.tags == 0) {
+          return true
+        } else {
+          console.log("hi");
+          return filters.tags.every(function(filteredTag){
+            return item.tags.some(function(photoTag)  {
+              return photoTag == filteredTag;
+            })
+          })
+        }});
+
+      return output;
+    }
+})
