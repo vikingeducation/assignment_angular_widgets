@@ -72,8 +72,26 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
     $scope.selectTag.forEach(function(tag) {
       if (photo.hashtags.indexOf(tag) === -1) {
         tagMatch = false;
-      };
+      }
     });
     return tagMatch;
   };
+
+  $scope.totalPages = new Array(Math.floor($scope.photos.length/12));
+  for(i = 0; i < $scope.totalPages.length; i++) $scope.totalPages[i] = i;
+  $scope.currentPage = 0;
+
+  $scope.setPage = function(page) {
+    $scope.currentPage = page;
+  };
+
+  $scope.renderPic = function(collection , index, comparator) {
+    if (index >= $scope.currentPage * 12 && index <= $scope.currentPage * 12 + 11) {
+      return true;
+    } else {
+      return false;
+    }
+    //return true;
+  };
+
 }]);
