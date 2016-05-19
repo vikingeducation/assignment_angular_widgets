@@ -23,20 +23,14 @@ Widgets.controller('RestaurantsCtrl', ['$scope', function($scope) {
   };
 
   $scope.setSort = function(value) {
-    console.log($scope.sort);
+    console.log($scope.sort, value);
 
-    var sortings = {
+    $scope.sort = {
       "name": "-name",
       "food": "-food",
       "-name": "name",
       "-food": "food"
-    };
-
-    if (value == $scope.sort) {
-      $scope.sort = sortings[value];
-    } else if (Object.keys(sortings).indexOf(value) > 0) {
-      $scope.sort = value;
-    }
+    }[$scope.sort] || value;
   };
 
 }]);
