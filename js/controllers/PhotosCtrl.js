@@ -78,7 +78,7 @@ Widgets.controller('PhotosCtrl', ['$scope', function($scope) {
 
   // Pagination
   $scope.page = 0;
-  $scope.pageSize = 12;
+  $scope.pageSize = 6;
 
 
   // Users
