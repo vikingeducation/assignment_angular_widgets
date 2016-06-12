@@ -165,12 +165,6 @@ var Main = React.createClass({
   },
 
   deleteRestaurant: function(restaurantId, event){
-    // // Optimistically set restaurants
-    var restaurants = this.state.restaurants;
-    // restaurant.id = Date.now();
-    // var newRestaurants = restaurants.concat([restaurant]);
-    // this.setState({restaurants: newRestaurants});
-
     $.ajax({
       url: this.state.restaurantsUrl,
       dataType: 'json',
@@ -180,7 +174,6 @@ var Main = React.createClass({
         this.setState({restaurants: data});
       }.bind(this),
       error: function(xhr, status, err){
-        this.setState({restaurants: restaurants})
         console.error(this.state.restaurantsUrl, status, err.toString());
       }.bind(this)
     })
