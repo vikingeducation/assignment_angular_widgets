@@ -72,14 +72,29 @@ var RestaurantForm = React.createClass({
 var Main = React.createClass({
   getInitialState: function(){
     return {
-      restaurants: [
-        {
-          name: "Kokkari Estiatorio",
-          foodType: "Greek",
-          image_url: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-1oisTZ251MAhJBNv2jZNi_TT1g62Kehgyx-KePkJ0f3F_Y6cGw"
-        }
-      ]
+      restaurants: [],
+      restaurantsUrl: '/api/restaurants',
+      pollInterval: 2000
     }
+  },
+
+  loadRestaurantsFromServer: function(){
+    $.ajax({
+      url: this.state.restaurantsUrl,
+      dataType: 'json',
+      cache: false,
+      success: function(data){
+        this.setState({restaurants: data});
+      }.bind(this),
+      error: function(xhr, status, err){
+        console.error(this.state.restaurantsUrl, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  componentDidMount: function(){
+    this.loadRestaurantsFromServer();
+    // setInterval(this.loadRestaurantsFromServer, this.state.pollInterval);
   },
 
   addRestaurant: function(restaurant){

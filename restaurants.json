@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Kokkari Estiatorio",
+    "foodType": "Greek",
+    "image_url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-1oisTZ251MAhJBNv2jZNi_TT1g62Kehgyx-KePkJ0f3F_Y6cGw"
+  },
+  {
+    "id": 2,
+    "name": "Dat Dog",
+    "foodType": "Hotdogs",
+    "image_url": "http://thedishh.com/wp-content/uploads/2016/04/Freret-Dat-Dog-1.jpg?4483fb"
+  },
+  {
+    "id": 3,
+    "name": "High Hat Cafe",
+    "foodType": "Southern",
+    "image_url": "http://www.epicurious.com/images/articlesguides/diningtravel/restaurants/high-hat-cafe_612.jpg"
+  }
+]
