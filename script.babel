@@ -2,26 +2,22 @@
 var Restaurants = React.createClass({
   render: function(){
     var restaurants = this.props.restaurants,
-        restaurantRows = restaurants.map(function(restaurant){
+        restaurantCards = restaurants.map(function(restaurant){
           return (
-            <tr>
-              <td>{restaurant.name}</td>
-              <td>{restaurant.foodType}</td>
-            </tr>
+            <div className="well restaurant">
+              <img src={restaurant.image_url} className="img-thumbnail" />
+              <h4>{restaurant.name}</h4>
+              <p className="text-muted">
+                <em>{restaurant.foodType}</em>
+              </p>
+
+            </div>
           )
         });
 
     return (
       <div id="restaurants">
-        <table className="table">
-          <thead>
-            <th>Restaurant</th>
-            <th>Cuisine</th>
-          </thead>
-          <tbody>
-            {restaurantRows}
-          </tbody>
-        </table>
+        {restaurantCards}
       </div>
     )
   }
@@ -37,15 +33,18 @@ var RestaurantForm = React.createClass({
 
     var nameInput = ReactDOM.findDOMNode(this.refs.name),
         foodTypeInput = ReactDOM.findDOMNode(this.refs.foodType),
+        imageInput = ReactDOM.findDOMNode(this.refs.image_url),
         newRestaurant = {
           name: nameInput.value,
-          foodType: foodTypeInput.value
+          foodType: foodTypeInput.value,
+          image_url: imageInput.value
         };
 
     this.props.addRestaurant(newRestaurant);
     // clear form
     nameInput.value = '';
     foodTypeInput.value = '';
+    imageInput.value = '';
   },
 
   render: function(){
@@ -56,6 +55,9 @@ var RestaurantForm = React.createClass({
         </div>
         <div className="form-group">
           <input type="text" placeholder="Type of cuisine" ref="foodType" className="form-control" />
+        </div>
+        <div className="form-group">
+          <input type="text" placeholder="Image URL" ref="image_url" className="form-control" />
         </div>
         <input type="submit" value="Add restaurant!" className="btn btn-default" />
       </form>
@@ -73,7 +75,8 @@ var Main = React.createClass({
       restaurants: [
         {
           name: "Kokkari Estiatorio",
-          foodType: "Greek"
+          foodType: "Greek",
+          image_url: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-1oisTZ251MAhJBNv2jZNi_TT1g62Kehgyx-KePkJ0f3F_Y6cGw"
         }
       ]
     }

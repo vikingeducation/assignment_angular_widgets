@@ -1,0 +1,14 @@
+#restaurants {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.restaurant {
+  width: 30%;
+  margin-bottom: 20px;
+}
+
+.restaurant img {
+  max-height: 150px;
+}
