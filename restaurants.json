@@ -1,20 +1,38 @@
 [
-  {
-    "id": 1,
-    "name": "Kokkari Estiatorio",
-    "foodType": "Greek",
-    "image_url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-1oisTZ251MAhJBNv2jZNi_TT1g62Kehgyx-KePkJ0f3F_Y6cGw"
-  },
-  {
-    "id": 2,
-    "name": "Dat Dog",
-    "foodType": "Hotdogs",
-    "image_url": "http://thedishh.com/wp-content/uploads/2016/04/Freret-Dat-Dog-1.jpg?4483fb"
-  },
-  {
-    "id": 3,
-    "name": "High Hat Cafe",
-    "foodType": "Southern",
-    "image_url": "http://www.epicurious.com/images/articlesguides/diningtravel/restaurants/high-hat-cafe_612.jpg"
-  }
+    {
+        "id": 1,
+        "name": "Kokkari Estiatorio",
+        "foodType": "Greek",
+        "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-1oisTZ251MAhJBNv2jZNi_TT1g62Kehgyx-KePkJ0f3F_Y6cGw"
+    },
+    {
+        "id": 2,
+        "name": "Dat Dog",
+        "foodType": "Hotdogs",
+        "imageUrl": "http://thedishh.com/wp-content/uploads/2016/04/Freret-Dat-Dog-1.jpg?4483fb"
+    },
+    {
+        "id": 3,
+        "name": "High Hat Cafe",
+        "foodType": "Southern",
+        "imageUrl": "http://www.epicurious.com/images/articlesguides/diningtravel/restaurants/high-hat-cafe_612.jpg"
+    },
+    {
+        "id": 1465757100379,
+        "name": "Bacchanal",
+        "foodType": "Wine bar",
+        "imageUrl": "http://www.neworleansonline.com/images/slideshows/listings/2204/09.jpg"
+    },
+    {
+        "id": 1465757229025,
+        "name": "Cafe Atchafalaya",
+        "foodType": "Creole",
+        "imageUrl": "http://nomenu.com/wp-content/uploads/2013/09/CafeAtchafalaya.jpg"
+    },
+    {
+        "id": 1465757585373,
+        "name": "Cowbell",
+        "foodType": "Fancy burgers",
+        "imageUrl": "http://media.nola.com/diningguide_impact/photo/10162541-large.jpg"
+    }
 ]

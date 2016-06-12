@@ -4,13 +4,9 @@ Wee! Restaurant reviews!
 
 by Sia Karamalegos
 
-To run locally, you may need to run a tiny webserver:
+This application needs a server to run. A small server has been provided which can access the fake API (json files included in this repo). To run the server locally:
 ```
-$ ruby -run -e httpd . -p 3000
+$ ruby server.rb
 ```
 
-## Restaurants
-
-Image URLs
-* [Kokkari](https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-1oisTZ251MAhJBNv2jZNi_TT1g62Kehgyx-KePkJ0f3F_Y6cGw)
-* [Dat Dog](http://thedishh.com/wp-content/uploads/2016/04/Freret-Dat-Dog-1.jpg?4483fb)
+The application will be at localhost:3000.

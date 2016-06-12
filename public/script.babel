@@ -5,7 +5,7 @@ var Restaurants = React.createClass({
         restaurantCards = restaurants.map(function(restaurant){
           return (
             <div className="well restaurant">
-              <img src={restaurant.image_url} className="img-thumbnail" />
+              <img src={restaurant.imageUrl} className="img-thumbnail" />
               <h4>{restaurant.name}</h4>
               <p className="text-muted">
                 <em>{restaurant.foodType}</em>
@@ -28,36 +28,72 @@ var Restaurants = React.createClass({
 
 // Restaurant Form
 var RestaurantForm = React.createClass({
+  getInitialState: function(){
+    return {
+      name: '',
+      foodType: '',
+      imageUrl: ''
+    };
+  },
+
+  handleNameChange: function(event){
+    this.setState({name: event.target.value});
+  },
+
+  handleFoodTypeChange: function(event){
+    this.setState({foodType: event.target.value});
+  },
+
+  handleImageUrlChange: function(event){
+    this.setState({imageUrl: event.target.value});
+  },
+
   handleSubmit: function(event){
     event.preventDefault();
 
-    var nameInput = ReactDOM.findDOMNode(this.refs.name),
-        foodTypeInput = ReactDOM.findDOMNode(this.refs.foodType),
-        imageInput = ReactDOM.findDOMNode(this.refs.image_url),
-        newRestaurant = {
-          name: nameInput.value,
-          foodType: foodTypeInput.value,
-          image_url: imageInput.value
-        };
+    var name = this.state.name.trim(),
+        foodType = this.state.foodType.trim(),
+        imageUrl = this.state.imageUrl.trim();
 
-    this.props.addRestaurant(newRestaurant);
-    // clear form
-    nameInput.value = '';
-    foodTypeInput.value = '';
-    imageInput.value = '';
+    if (!name || !foodType || !imageUrl){
+      return
+    }
+
+    this.props.restaurantSubmit({
+      name: name,
+      foodType: foodType,
+      imageUrl: imageUrl
+    })
+
+    this.replaceState(this.getInitialState());
   },
 
   render: function(){
     return (
       <form className="form-inline" onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <input type="text" placeholder="Restaurant name" ref="name" className="form-control" />
+          <input
+            type="text"
+            placeholder="Restaurant name"
+            className="form-control"
+            value={this.state.name}
+            onChange={this.handleNameChange} />
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Type of cuisine" ref="foodType" className="form-control" />
+          <input
+            type="text"
+            placeholder="Type of cuisine"
+            className="form-control"
+            value={this.state.foodType}
+            onChange={this.handleFoodTypeChange} />
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Image URL" ref="image_url" className="form-control" />
+          <input
+            type="text"
+            placeholder="Image URL"
+            className="form-control"
+            value={this.state.imageUrl}
+            onChange={this.handleImageUrlChange} />
         </div>
         <input type="submit" value="Add restaurant!" className="btn btn-default" />
       </form>
@@ -92,6 +128,29 @@ var Main = React.createClass({
     });
   },
 
+  // Submit to the server and refresh the list
+  restaurantSubmit: function(restaurant){
+    // Optimistically set restaurants
+    var restaurants = this.state.restaurants;
+    restaurant.id = Date.now();
+    var newRestaurants = restaurants.concat([restaurant]);
+    this.setState({restaurants: newRestaurants});
+
+    $.ajax({
+      url: this.state.restaurantsUrl,
+      dataType: 'json',
+      type: 'POST',
+      data: restaurant,
+      success: function(data){
+        this.setState({restaurants: data});
+      }.bind(this),
+      error: function(xhr, status, err){
+        this.setState({restaurants: restaurants})
+        console.error(this.state.restaurantsUrl, status, err.toString());
+      }.bind(this)
+    })
+  },
+
   componentDidMount: function(){
     this.loadRestaurantsFromServer();
     // setInterval(this.loadRestaurantsFromServer, this.state.pollInterval);
@@ -108,7 +167,7 @@ var Main = React.createClass({
       <div id="main">
         <h1>Restaurants I've Visited</h1>
         <hr />
-        <RestaurantForm addRestaurant={this.addRestaurant} />
+        <RestaurantForm addRestaurant={this.addRestaurant} restaurantSubmit={this.restaurantSubmit} />
         <br />
         <Restaurants restaurants={this.state.restaurants} />
       </div>
