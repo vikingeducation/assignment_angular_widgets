@@ -32,9 +32,25 @@ var Restaurants = React.createClass({
 
 // Restaurant Form
 var RestaurantForm = React.createClass({
+  handleSubmit: function(event){
+    event.preventDefault();
+
+    var nameInput = ReactDOM.findDOMNode(this.refs.name),
+        foodTypeInput = ReactDOM.findDOMNode(this.refs.foodType),
+        newRestaurant = {
+          name: nameInput.value,
+          foodType: foodTypeInput.value
+        };
+
+    this.props.addRestaurant(newRestaurant);
+    // clear form
+    nameInput.value = '';
+    foodTypeInput.value = '';
+  },
+
   render: function(){
     return (
-      <form className="form-inline">
+      <form className="form-inline" onSubmit={this.handleSubmit}>
         <div className="form-group">
           <input type="text" placeholder="Restaurant name" ref="name" className="form-control" />
         </div>
@@ -63,12 +79,18 @@ var Main = React.createClass({
     }
   },
 
+  addRestaurant: function(restaurant){
+    this.setState({
+      restaurants: this.state.restaurants.concat(restaurant)
+    });
+  },
+
   render: function(){
     return (
       <div id="main">
         <h1>Restaurants I've Visited</h1>
         <hr />
-        <RestaurantForm />
+        <RestaurantForm addRestaurant={this.addRestaurant} />
         <br />
         <Restaurants restaurants={this.state.restaurants} />
       </div>
