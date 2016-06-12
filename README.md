@@ -5,8 +5,9 @@ Wee! Restaurant reviews!
 by Sia Karamalegos
 
 This application needs a server to run. A small server has been provided which can access the fake API (json files included in this repo). To run the server locally:
-```
-$ ruby server.rb
+```sh
+npm install
+node server.js
 ```
 
 The application will be at localhost:3000.
