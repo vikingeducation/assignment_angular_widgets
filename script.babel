@@ -1,8 +1,52 @@
+// Restaurant Table
+var Restaurants = React.createClass({
+  render: function(){
+    var restaurants = this.props.restaurants,
+        restaurantRows = restaurants.map(function(restaurant){
+          return (
+            <tr>
+              <td>{restaurant.name}</td>
+              <td>{restaurant.foodType}</td>
+            </tr>
+          )
+        });
+
+    return (
+      <div id="restaurants">
+        <table className="table">
+          <thead>
+            <th>Restaurant</th>
+            <th>Cuisine</th>
+          </thead>
+          <tbody>
+            {restaurantRows}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+});
+
+
+
+// Main component controlling app
 var Main = React.createClass({
+  getInitialState: function(){
+    return {
+      restaurants: [
+        {
+          name: "Kokkari Estiatorio",
+          foodType: "Greek"
+        }
+      ]
+    }
+  },
+
   render: function(){
     return (
       <div id="main">
         <h1>Restaurants I've Visited</h1>
+        <Restaurants restaurants={this.state.restaurants} />
       </div>
     );
   }
