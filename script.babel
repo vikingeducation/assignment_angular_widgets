@@ -29,6 +29,27 @@ var Restaurants = React.createClass({
 
 
 
+
+// Restaurant Form
+var RestaurantForm = React.createClass({
+  render: function(){
+    return (
+      <form className="form-inline">
+        <div className="form-group">
+          <input type="text" placeholder="Restaurant name" ref="name" className="form-control" />
+        </div>
+        <div className="form-group">
+          <input type="text" placeholder="Type of cuisine" ref="foodType" className="form-control" />
+        </div>
+        <input type="submit" value="Add restaurant!" className="btn btn-default" />
+      </form>
+    );
+  }
+})
+
+
+
+
 // Main component controlling app
 var Main = React.createClass({
   getInitialState: function(){
@@ -46,6 +67,9 @@ var Main = React.createClass({
     return (
       <div id="main">
         <h1>Restaurants I've Visited</h1>
+        <hr />
+        <RestaurantForm />
+        <br />
         <Restaurants restaurants={this.state.restaurants} />
       </div>
     );
