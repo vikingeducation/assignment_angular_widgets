@@ -2,12 +2,20 @@
 var Restaurants = React.createClass({
   render: function(){
     var restaurants = this.props.restaurants,
+        deleteRestaurant = this.props.deleteRestaurant,
         restaurantCards = restaurants.map(function(restaurant){
           return (
             <div className="well restaurant">
               <img src={restaurant.imageUrl} className="img-thumbnail" />
               <h4>{restaurant.name}</h4>
               <p className="text-muted">
+                <span className="pull-right">
+                  <button
+                    className="btn btn-danger btn-xs"
+                    onClick={deleteRestaurant.bind(null, restaurant.id)}>
+                    Delete
+                  </button>
+                </span>
                 <em>{restaurant.foodType}</em>
               </p>
 
@@ -156,10 +164,26 @@ var Main = React.createClass({
     // setInterval(this.loadRestaurantsFromServer, this.state.pollInterval);
   },
 
-  addRestaurant: function(restaurant){
-    this.setState({
-      restaurants: this.state.restaurants.concat(restaurant)
-    });
+  deleteRestaurant: function(restaurantId, event){
+    // // Optimistically set restaurants
+    var restaurants = this.state.restaurants;
+    // restaurant.id = Date.now();
+    // var newRestaurants = restaurants.concat([restaurant]);
+    // this.setState({restaurants: newRestaurants});
+
+    $.ajax({
+      url: this.state.restaurantsUrl,
+      dataType: 'json',
+      type: 'DELETE',
+      data: {id: restaurantId},
+      success: function(data){
+        this.setState({restaurants: data});
+      }.bind(this),
+      error: function(xhr, status, err){
+        this.setState({restaurants: restaurants})
+        console.error(this.state.restaurantsUrl, status, err.toString());
+      }.bind(this)
+    })
   },
 
   render: function(){
@@ -167,9 +191,12 @@ var Main = React.createClass({
       <div id="main">
         <h1>Restaurants I've Visited</h1>
         <hr />
-        <RestaurantForm addRestaurant={this.addRestaurant} restaurantSubmit={this.restaurantSubmit} />
+        <RestaurantForm
+          restaurantSubmit={this.restaurantSubmit} />
         <br />
-        <Restaurants restaurants={this.state.restaurants} />
+        <Restaurants
+          restaurants={this.state.restaurants}
+          deleteRestaurant={this.deleteRestaurant} />
       </div>
     );
   }

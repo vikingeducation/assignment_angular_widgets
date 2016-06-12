@@ -72,6 +72,29 @@ app.post('/api/restaurants', function(req, res) {
   });
 });
 
+app.delete('/api/restaurants', function(req, res) {
+  fs.readFile(RESTAURANTS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var restaurants = JSON.parse(data);
+    var deletedRestaurantId = parseInt(req.body.id);
+
+    restaurants = restaurants.filter(function(restaurant){
+      return restaurant.id !== deletedRestaurantId;
+    });
+
+    fs.writeFile(RESTAURANTS_FILE, JSON.stringify(restaurants, null, 4), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.json(restaurants);
+    });
+  });
+});
+
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');
 });
