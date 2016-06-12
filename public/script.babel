@@ -78,36 +78,67 @@ var RestaurantForm = React.createClass({
 
   render: function(){
     return (
-      <form className="form-inline" onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Restaurant name"
-            className="form-control"
-            value={this.state.name}
-            onChange={this.handleNameChange} />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Type of cuisine"
-            className="form-control"
-            value={this.state.foodType}
-            onChange={this.handleFoodTypeChange} />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Image URL"
-            className="form-control"
-            value={this.state.imageUrl}
-            onChange={this.handleImageUrlChange} />
-        </div>
-        <input type="submit" value="Add restaurant!" className="btn btn-default" />
-      </form>
+      <div className="well">
+        <form className="form-inline" onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Restaurant name"
+              className="form-control"
+              value={this.state.name}
+              onChange={this.handleNameChange} />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Type of cuisine"
+              className="form-control"
+              value={this.state.foodType}
+              onChange={this.handleFoodTypeChange} />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Image URL"
+              className="form-control"
+              value={this.state.imageUrl}
+              onChange={this.handleImageUrlChange} />
+          </div>
+          <input type="submit" value="Add restaurant!" className="btn btn-default" />
+        </form>
+      </div>
     );
   }
 })
+
+
+
+
+// Search form
+var SearchForm = React.createClass({
+  handleFilterChange: function(event){
+    var newFilterText = ReactDOM.findDOMNode(this.refs.search).value;
+    this.props.filter(newFilterText);
+  },
+
+  render: function(){
+    return (
+      <div className="text-right">
+        <form className="form-inline">
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Search text"
+              className="form-control"
+              ref="search"
+              value={this.props.filterText}
+              onChange={this.handleFilterChange} />
+          </div>
+        </form>
+      </div>
+    );
+  }
+});
 
 
 
@@ -118,7 +149,8 @@ var Main = React.createClass({
     return {
       restaurants: [],
       restaurantsUrl: '/api/restaurants',
-      pollInterval: 2000
+      pollInterval: 2000,
+      filterText: ''
     }
   },
 
@@ -179,6 +211,24 @@ var Main = React.createClass({
     })
   },
 
+  filter: function(newText){
+    this.setState({filterText: newText});
+  },
+
+  filteredRestaurants: function(){
+    var restaurants = this.state.restaurants,
+        filterTextLower = this.state.filterText.toLowerCase();
+
+    if (filterTextLower !== ''){
+      restaurants = restaurants.filter(function(restaurant){
+        var restaurantNameLower = restaurant.name.toLowerCase();
+        return (restaurantNameLower.indexOf(filterTextLower) !== -1);
+      });
+    }
+
+    return restaurants;
+  },
+
   render: function(){
     return (
       <div id="main">
@@ -186,9 +236,12 @@ var Main = React.createClass({
         <hr />
         <RestaurantForm
           restaurantSubmit={this.restaurantSubmit} />
+        <SearchForm
+          filterText={this.state.filterText}
+          filter={this.filter} />
         <br />
         <Restaurants
-          restaurants={this.state.restaurants}
+          restaurants={this.filteredRestaurants()}
           deleteRestaurant={this.deleteRestaurant} />
       </div>
     );
