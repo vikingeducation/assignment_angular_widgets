@@ -124,7 +124,7 @@ var SearchForm = React.createClass({
   render: function(){
     return (
       <div className="text-right">
-        <form className="form-inline">
+        <form>
           <div className="form-group">
             <input
               type="text"
@@ -143,6 +143,46 @@ var SearchForm = React.createClass({
 
 
 
+// Sort Buttons
+var SortButtons = React.createClass({
+  render: function(){
+    var sortField = this.props.sortField,
+        sortDirection = this.props.sortDirection,
+        sortedIcon = (<i className={"fa fa-sort-" + sortDirection} aria-hidden="true"></i>),
+        notSortedIcon = (<i className="fa fa-sort" aria-hidden="true"></i>),
+        nameSortIcon = notSortedIcon,
+        foodTypeSortIcon = notSortedIcon;
+
+    if (sortField === 'name') {
+      nameSortIcon = sortedIcon;
+    } else if (sortField === 'foodType') {
+      foodTypeSortIcon = sortedIcon;
+    }
+
+    return (
+      <div id="sort-buttons">
+      <div className="col-sm-4">
+        <button className="btn btn-default btn-block">
+          {nameSortIcon}
+          &nbsp;
+          Sort by Name
+        </button>
+      </div>
+      <div className="col-sm-4">
+        <button className="btn btn-default btn-block">
+          {foodTypeSortIcon}
+          &nbsp;
+          Sort by Cuisine
+        </button>
+      </div>
+      </div>
+    );
+  }
+});
+
+
+
+
 // Main component controlling app
 var Main = React.createClass({
   getInitialState: function(){
@@ -150,7 +190,9 @@ var Main = React.createClass({
       restaurants: [],
       restaurantsUrl: '/api/restaurants',
       pollInterval: 2000,
-      filterText: ''
+      filterText: '',
+      sortField: null,
+      sortDirection: null
     }
   },
 
@@ -236,9 +278,16 @@ var Main = React.createClass({
         <hr />
         <RestaurantForm
           restaurantSubmit={this.restaurantSubmit} />
-        <SearchForm
-          filterText={this.state.filterText}
-          filter={this.filter} />
+        <div className="row">
+          <SortButtons
+            sortField={this.state.sortField}
+            sortDirection={this.state.sortDirection} />
+          <div className="col-sm-4">
+            <SearchForm
+              filterText={this.state.filterText}
+              filter={this.filter} />
+          </div>
+        </div>
         <br />
         <Restaurants
           restaurants={this.filteredRestaurants()}
