@@ -34,5 +34,17 @@
         "name": "Cowbell",
         "foodType": "Fancy burgers",
         "imageUrl": "http://media.nola.com/diningguide_impact/photo/10162541-large.jpg"
+    },
+    {
+        "id": 1465856880592,
+        "name": "Company Burger",
+        "foodType": "Burgers",
+        "imageUrl": "http://image.nola.com/home/nola-media/width620/img/tpphotos/photo/2014/08/26/15701257-mmmain.jpg"
+    },
+    {
+        "id": 1466465316266,
+        "name": "Parkway Bakery & Tavern",
+        "foodType": "Po'boys",
+        "imageUrl": "http://www.nolahomes.net/wp-content/uploads/2014/01/Parkway-Bakery-on-Hagan-Street-e1389496733226.jpg"
     }
 ]
