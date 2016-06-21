@@ -7,7 +7,8 @@ class SortButtons extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick (sortField) {
+  handleClick (sortField, event) {
+    event.preventDefault();
     this.props.sort(sortField);
   }
 

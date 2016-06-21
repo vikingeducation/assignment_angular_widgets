@@ -24,6 +24,7 @@ class Main extends React.Component {
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.filter = this.filter.bind(this);
     this.sort = this.sort.bind(this);
+    this.sortRestaurants = this.sortRestaurants.bind(this);
   }
 
   loadRestaurantsFromServer () {
@@ -120,8 +121,20 @@ class Main extends React.Component {
       sortField: sortField,
       sortDirection: nextDirection
     }, function(){
-      console.log("finished " + this.state.sortField + ' ' + this.state.sortDirection);
+      this.sortRestaurants();
     })
+  }
+
+  sortRestaurants () {
+    var restaurants = this.state.restaurants,
+        sortField = this.state.sortField,
+        sortDirection = this.state.sortDirection;
+
+    restaurants = sort.sort(restaurants, sortField, sortDirection);
+
+    this.setState({
+      restaurants: restaurants
+    });
   }
 
   render () {

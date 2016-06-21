@@ -20900,7 +20900,8 @@
 	
 	  _createClass(SortButtons, [{
 	    key: "handleClick",
-	    value: function handleClick(sortField) {
+	    value: function handleClick(sortField, event) {
+	      event.preventDefault();
 	      this.props.sort(sortField);
 	    }
 	  }, {
@@ -21336,6 +21337,7 @@
 	    _this.deleteRestaurant = _this.deleteRestaurant.bind(_this);
 	    _this.filter = _this.filter.bind(_this);
 	    _this.sort = _this.sort.bind(_this);
+	    _this.sortRestaurants = _this.sortRestaurants.bind(_this);
 	    return _this;
 	  }
 	
@@ -21443,7 +21445,20 @@
 	        sortField: sortField,
 	        sortDirection: nextDirection
 	      }, function () {
-	        console.log("finished " + this.state.sortField + ' ' + this.state.sortDirection);
+	        this.sortRestaurants();
+	      });
+	    }
+	  }, {
+	    key: 'sortRestaurants',
+	    value: function sortRestaurants() {
+	      var restaurants = this.state.restaurants,
+	          sortField = this.state.sortField,
+	          sortDirection = this.state.sortDirection;
+	
+	      restaurants = sort.sort(restaurants, sortField, sortDirection);
+	
+	      this.setState({
+	        restaurants: restaurants
 	      });
 	    }
 	  }, {
@@ -21497,35 +21512,34 @@
   \*********************/
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.sortAsc = sortAsc;
-	exports.sortDesc = sortDesc;
-	function sortAsc(items, field) {
-	  return items.sort(function (a, b) {
-	    if (a[field] < b[field]) {
-	      return -1;
-	    } else if (a[field] > b[field]) {
-	      return 1;
-	    } else {
-	      return 0;
-	    }
-	  });
-	}
-	
-	function sortDesc(items, field) {
-	  return items.sort(function (a, b) {
-	    if (a[field] > b[field]) {
-	      return -1;
-	    } else if (a[field] < b[field]) {
-	      return 1;
-	    } else {
-	      return 0;
-	    }
-	  });
+	exports.sort = sort;
+	function sort(items, field, direction) {
+	  if (direction === 'asc') {
+	    return items.sort(function (a, b) {
+	      if (a[field] < b[field]) {
+	        return -1;
+	      } else if (a[field] > b[field]) {
+	        return 1;
+	      } else {
+	        return 0;
+	      }
+	    });
+	  } else {
+	    return items.sort(function (a, b) {
+	      if (a[field] > b[field]) {
+	        return -1;
+	      } else if (a[field] < b[field]) {
+	        return 1;
+	      } else {
+	        return 0;
+	      }
+	    });
+	  }
 	}
 
 /***/ }
