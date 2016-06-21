@@ -11,3 +11,5 @@ $ node server.js
 ```
 
 The application will be at localhost:3000.
+
+To access the second part of the assignment on photos, go to [this separate repo](https://github.com/siakaramalegos/react-photos).
