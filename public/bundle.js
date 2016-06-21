@@ -20889,13 +20889,21 @@
 	var SortButtons = function (_React$Component) {
 	  _inherits(SortButtons, _React$Component);
 	
-	  function SortButtons() {
+	  function SortButtons(props) {
 	    _classCallCheck(this, SortButtons);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SortButtons).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SortButtons).call(this, props));
+	
+	    _this.handleClick = _this.handleClick.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(SortButtons, [{
+	    key: "handleClick",
+	    value: function handleClick(sortField) {
+	      this.props.sort(sortField);
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      var sortField = this.props.sortField,
@@ -20919,7 +20927,7 @@
 	          { className: "col-sm-4" },
 	          _react2.default.createElement(
 	            "button",
-	            { className: "btn btn-default btn-block" },
+	            { className: "btn btn-default btn-block", onClick: this.handleClick.bind(null, 'name') },
 	            nameSortIcon,
 	            "  Sort by Name"
 	          )
@@ -20929,7 +20937,7 @@
 	          { className: "col-sm-4" },
 	          _react2.default.createElement(
 	            "button",
-	            { className: "btn btn-default btn-block" },
+	            { className: "btn btn-default btn-block", onClick: this.handleClick.bind(null, 'foodType') },
 	            foodTypeSortIcon,
 	            "  Sort by Cuisine"
 	          )
@@ -21287,6 +21295,12 @@
 	
 	var _restaurants_frame2 = _interopRequireDefault(_restaurants_frame);
 	
+	var _sort = __webpack_require__(/*! ./sort.js */ 173);
+	
+	var sort = _interopRequireWildcard(_sort);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21297,6 +21311,8 @@
 	
 	// Components
 	
+	
+	// to use: sort.sortAsc
 	
 	// Main component controlling app
 	
@@ -21319,6 +21335,7 @@
 	    _this.restaurantSubmit = _this.restaurantSubmit.bind(_this);
 	    _this.deleteRestaurant = _this.deleteRestaurant.bind(_this);
 	    _this.filter = _this.filter.bind(_this);
+	    _this.sort = _this.sort.bind(_this);
 	    return _this;
 	  }
 	
@@ -21406,6 +21423,30 @@
 	      return restaurants;
 	    }
 	  }, {
+	    key: 'sort',
+	    value: function sort(sortField) {
+	      var nextDirection,
+	          currentSortField = this.state.sortField,
+	          currentSortDirection = this.state.sortDirection;
+	
+	      if (sortField === currentSortField) {
+	        var NEXT_DIRECTION = {
+	          asc: 'desc',
+	          desc: 'asc'
+	        };
+	        nextDirection = NEXT_DIRECTION[currentSortDirection];
+	      } else {
+	        nextDirection = 'asc';
+	      }
+	
+	      this.setState({
+	        sortField: sortField,
+	        sortDirection: nextDirection
+	      }, function () {
+	        console.log("finished " + this.state.sortField + ' ' + this.state.sortDirection);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -21424,7 +21465,8 @@
 	          { className: 'row' },
 	          _react2.default.createElement(_sort_buttons2.default, {
 	            sortField: this.state.sortField,
-	            sortDirection: this.state.sortDirection }),
+	            sortDirection: this.state.sortDirection,
+	            sort: this.sort }),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-sm-4' },
@@ -21447,6 +21489,44 @@
 	;
 	
 	exports.default = Main;
+
+/***/ },
+/* 173 */
+/*!*********************!*\
+  !*** ./app/sort.js ***!
+  \*********************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.sortAsc = sortAsc;
+	exports.sortDesc = sortDesc;
+	function sortAsc(items, field) {
+	  return items.sort(function (a, b) {
+	    if (a[field] < b[field]) {
+	      return -1;
+	    } else if (a[field] > b[field]) {
+	      return 1;
+	    } else {
+	      return 0;
+	    }
+	  });
+	}
+	
+	function sortDesc(items, field) {
+	  return items.sort(function (a, b) {
+	    if (a[field] > b[field]) {
+	      return -1;
+	    } else if (a[field] < b[field]) {
+	      return 1;
+	    } else {
+	      return 0;
+	    }
+	  });
+	}
 
 /***/ }
 /******/ ]);

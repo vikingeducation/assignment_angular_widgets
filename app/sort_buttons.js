@@ -2,6 +2,15 @@ import React from 'react';
 
 // Sort Buttons
 class SortButtons extends React.Component {
+  constructor (props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick (sortField) {
+    this.props.sort(sortField);
+  }
+
   render () {
     var sortField = this.props.sortField,
         sortDirection = this.props.sortDirection,
@@ -19,14 +28,14 @@ class SortButtons extends React.Component {
     return (
       <div id="sort-buttons">
       <div className="col-sm-4">
-        <button className="btn btn-default btn-block">
+        <button className="btn btn-default btn-block" onClick={this.handleClick.bind(null, 'name')}>
           {nameSortIcon}
           &nbsp;
           Sort by Name
         </button>
       </div>
       <div className="col-sm-4">
-        <button className="btn btn-default btn-block">
+        <button className="btn btn-default btn-block" onClick={this.handleClick.bind(null, 'foodType')}>
           {foodTypeSortIcon}
           &nbsp;
           Sort by Cuisine

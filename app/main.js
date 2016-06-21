@@ -5,6 +5,8 @@ import SortButtons from './sort_buttons.js';
 import SearchForm from './search_form.js';
 import RestaurantForm from './restaurant_form.js';
 import RestaurantsFrame from './restaurants_frame.js';
+import * as sort from './sort.js';
+// to use: sort.sortAsc
 
 // Main component controlling app
 class Main extends React.Component {
@@ -21,6 +23,7 @@ class Main extends React.Component {
     this.restaurantSubmit = this.restaurantSubmit.bind(this);
     this.deleteRestaurant = this.deleteRestaurant.bind(this);
     this.filter = this.filter.bind(this);
+    this.sort = this.sort.bind(this);
   }
 
   loadRestaurantsFromServer () {
@@ -98,6 +101,29 @@ class Main extends React.Component {
     return restaurants;
   }
 
+  sort (sortField) {
+    var nextDirection,
+        currentSortField = this.state.sortField,
+        currentSortDirection = this.state.sortDirection;
+
+    if (sortField === currentSortField) {
+      const NEXT_DIRECTION = {
+        asc: 'desc',
+        desc: 'asc'
+      }
+      nextDirection = NEXT_DIRECTION[currentSortDirection];
+    } else {
+      nextDirection = 'asc';
+    }
+
+    this.setState({
+      sortField: sortField,
+      sortDirection: nextDirection
+    }, function(){
+      console.log("finished " + this.state.sortField + ' ' + this.state.sortDirection);
+    })
+  }
+
   render () {
     return (
       <div id="main">
@@ -108,7 +134,8 @@ class Main extends React.Component {
         <div className="row">
           <SortButtons
             sortField={this.state.sortField}
-            sortDirection={this.state.sortDirection} />
+            sortDirection={this.state.sortDirection}
+            sort={this.sort} />
           <div className="col-sm-4">
             <SearchForm
               filterText={this.state.filterText}

@@ -1,4 +1,4 @@
-var sortAsc = function (items, field){
+export function sortAsc (items, field){
   return items.sort(function(a, b){
     if (a[field] < b[field]) {
       return -1
@@ -10,7 +10,7 @@ var sortAsc = function (items, field){
   });
 }
 
-var sortDesc = function (items, field){
+export function sortDesc (items, field){
   return items.sort(function(a, b){
     if (a[field] > b[field]) {
       return -1
