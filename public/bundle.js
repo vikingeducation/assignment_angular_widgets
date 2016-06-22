@@ -55,13 +55,19 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 38);
 	
-	var _main = __webpack_require__(/*! ./main.js */ 172);
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _main = __webpack_require__(/*! ./main.js */ 168);
 	
 	var _main2 = _interopRequireDefault(_main);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	(0, _reactDom.render)(_react2.default.createElement(_main2.default, null), document.getElementById('container'));
+	// var React = require('react');
+	// var ReactDOM = require('react-dom');
+	
+	
+	_reactDom2.default.render(_react2.default.createElement(_main2.default, null), document.getElementById('container'));
 
 /***/ },
 /* 1 */
@@ -20859,410 +20865,6 @@
 
 /***/ },
 /* 168 */
-/*!*****************************!*\
-  !*** ./app/sort_buttons.js ***!
-  \*****************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// Sort Buttons
-	
-	var SortButtons = function (_React$Component) {
-	  _inherits(SortButtons, _React$Component);
-	
-	  function SortButtons(props) {
-	    _classCallCheck(this, SortButtons);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SortButtons).call(this, props));
-	
-	    _this.handleClick = _this.handleClick.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(SortButtons, [{
-	    key: "handleClick",
-	    value: function handleClick(sortField, event) {
-	      event.preventDefault();
-	      this.props.sort(sortField);
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      var sortField = this.props.sortField,
-	          sortDirection = this.props.sortDirection,
-	          sortedIcon = _react2.default.createElement("i", { className: "fa fa-sort-" + sortDirection, "aria-hidden": "true" }),
-	          notSortedIcon = _react2.default.createElement("i", { className: "fa fa-sort", "aria-hidden": "true" }),
-	          nameSortIcon = notSortedIcon,
-	          foodTypeSortIcon = notSortedIcon;
-	
-	      if (sortField === 'name') {
-	        nameSortIcon = sortedIcon;
-	      } else if (sortField === 'foodType') {
-	        foodTypeSortIcon = sortedIcon;
-	      }
-	
-	      return _react2.default.createElement(
-	        "div",
-	        { id: "sort-buttons" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "col-sm-4" },
-	          _react2.default.createElement(
-	            "button",
-	            { className: "btn btn-default btn-block", onClick: this.handleClick.bind(null, 'name') },
-	            nameSortIcon,
-	            "  Sort by Name"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "col-sm-4" },
-	          _react2.default.createElement(
-	            "button",
-	            { className: "btn btn-default btn-block", onClick: this.handleClick.bind(null, 'foodType') },
-	            foodTypeSortIcon,
-	            "  Sort by Cuisine"
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return SortButtons;
-	}(_react2.default.Component);
-	
-	exports.default = SortButtons;
-
-/***/ },
-/* 169 */
-/*!****************************!*\
-  !*** ./app/search_form.js ***!
-  \****************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 38);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// Search form
-	
-	var SearchForm = function (_React$Component) {
-	  _inherits(SearchForm, _React$Component);
-	
-	  function SearchForm(props) {
-	    _classCallCheck(this, SearchForm);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchForm).call(this, props));
-	
-	    _this.handleFilterChange = _this.handleFilterChange.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(SearchForm, [{
-	    key: 'handleFilterChange',
-	    value: function handleFilterChange(event) {
-	      var newFilterText = _reactDom2.default.findDOMNode(this.refs.search).value;
-	      this.props.filter(newFilterText);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'text-right' },
-	        _react2.default.createElement(
-	          'form',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              placeholder: 'Search text',
-	              className: 'form-control',
-	              ref: 'search',
-	              value: this.props.filterText,
-	              onChange: this.handleFilterChange })
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return SearchForm;
-	}(_react2.default.Component);
-	
-	exports.default = SearchForm;
-
-/***/ },
-/* 170 */
-/*!********************************!*\
-  !*** ./app/restaurant_form.js ***!
-  \********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// Restaurant Form
-	
-	var RestaurantForm = function (_React$Component) {
-	  _inherits(RestaurantForm, _React$Component);
-	
-	  function RestaurantForm(props) {
-	    _classCallCheck(this, RestaurantForm);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RestaurantForm).call(this, props));
-	
-	    _this.state = {
-	      name: '',
-	      foodType: '',
-	      imageUrl: ''
-	    };
-	    _this.handleNameChange = _this.handleNameChange.bind(_this);
-	    _this.handleFoodTypeChange = _this.handleFoodTypeChange.bind(_this);
-	    _this.handleImageUrlChange = _this.handleImageUrlChange.bind(_this);
-	    _this.handleSubmit = _this.handleSubmit.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(RestaurantForm, [{
-	    key: 'handleNameChange',
-	    value: function handleNameChange(event) {
-	      this.setState({ name: event.target.value });
-	    }
-	  }, {
-	    key: 'handleFoodTypeChange',
-	    value: function handleFoodTypeChange(event) {
-	      this.setState({ foodType: event.target.value });
-	    }
-	  }, {
-	    key: 'handleImageUrlChange',
-	    value: function handleImageUrlChange(event) {
-	      this.setState({ imageUrl: event.target.value });
-	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(event) {
-	      event.preventDefault();
-	
-	      var name = this.state.name.trim(),
-	          foodType = this.state.foodType.trim(),
-	          imageUrl = this.state.imageUrl.trim();
-	
-	      if (!name || !foodType || !imageUrl) {
-	        return;
-	      }
-	
-	      this.props.restaurantSubmit({
-	        name: name,
-	        foodType: foodType,
-	        imageUrl: imageUrl
-	      });
-	
-	      this.setState({
-	        name: '',
-	        foodType: '',
-	        imageUrl: ''
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'well' },
-	        _react2.default.createElement(
-	          'form',
-	          { className: 'form-inline', onSubmit: this.handleSubmit },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              placeholder: 'Restaurant name',
-	              className: 'form-control',
-	              value: this.state.name,
-	              onChange: this.handleNameChange })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              placeholder: 'Type of cuisine',
-	              className: 'form-control',
-	              value: this.state.foodType,
-	              onChange: this.handleFoodTypeChange })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              placeholder: 'Image URL',
-	              className: 'form-control',
-	              value: this.state.imageUrl,
-	              onChange: this.handleImageUrlChange })
-	          ),
-	          _react2.default.createElement('input', { type: 'submit', value: 'Add restaurant!', className: 'btn btn-default' })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return RestaurantForm;
-	}(_react2.default.Component);
-	
-	exports.default = RestaurantForm;
-
-/***/ },
-/* 171 */
-/*!**********************************!*\
-  !*** ./app/restaurants_frame.js ***!
-  \**********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// Restaurant Table
-	
-	var RestaurantsFrame = function (_React$Component) {
-	  _inherits(RestaurantsFrame, _React$Component);
-	
-	  function RestaurantsFrame() {
-	    _classCallCheck(this, RestaurantsFrame);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(RestaurantsFrame).apply(this, arguments));
-	  }
-	
-	  _createClass(RestaurantsFrame, [{
-	    key: "render",
-	    value: function render() {
-	      var restaurants = this.props.restaurants,
-	          deleteRestaurant = this.props.deleteRestaurant,
-	          restaurantCards = restaurants.map(function (restaurant) {
-	        return _react2.default.createElement(
-	          "div",
-	          { className: "well restaurant", key: restaurant.id },
-	          _react2.default.createElement("img", { src: restaurant.imageUrl, className: "img-thumbnail" }),
-	          _react2.default.createElement(
-	            "h4",
-	            null,
-	            restaurant.name
-	          ),
-	          _react2.default.createElement(
-	            "p",
-	            { className: "text-muted" },
-	            _react2.default.createElement(
-	              "span",
-	              { className: "pull-right" },
-	              _react2.default.createElement(
-	                "button",
-	                {
-	                  className: "btn btn-danger btn-xs",
-	                  onClick: deleteRestaurant.bind(null, restaurant.id) },
-	                "Delete"
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "em",
-	              null,
-	              restaurant.foodType
-	            )
-	          )
-	        );
-	      });
-	
-	      return _react2.default.createElement(
-	        "div",
-	        { id: "restaurants" },
-	        restaurantCards
-	      );
-	    }
-	  }]);
-	
-	  return RestaurantsFrame;
-	}(_react2.default.Component);
-	
-	exports.default = RestaurantsFrame;
-
-/***/ },
-/* 172 */
 /*!*********************!*\
   !*** ./app/main.js ***!
   \*********************/
@@ -21280,19 +20882,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _sort_buttons = __webpack_require__(/*! ./sort_buttons.js */ 168);
+	var _sort_buttons = __webpack_require__(/*! ./sort_buttons.js */ 169);
 	
 	var _sort_buttons2 = _interopRequireDefault(_sort_buttons);
 	
-	var _search_form = __webpack_require__(/*! ./search_form.js */ 169);
+	var _search_form = __webpack_require__(/*! ./search_form.js */ 170);
 	
 	var _search_form2 = _interopRequireDefault(_search_form);
 	
-	var _restaurant_form = __webpack_require__(/*! ./restaurant_form.js */ 170);
+	var _restaurant_form = __webpack_require__(/*! ./restaurant_form.js */ 171);
 	
 	var _restaurant_form2 = _interopRequireDefault(_restaurant_form);
 	
-	var _restaurants_frame = __webpack_require__(/*! ./restaurants_frame.js */ 171);
+	var _restaurants_frame = __webpack_require__(/*! ./restaurants_frame.js */ 172);
 	
 	var _restaurants_frame2 = _interopRequireDefault(_restaurants_frame);
 	
@@ -21308,7 +20910,8 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // var React = require('react');
+	
 	
 	// Components
 	
@@ -21504,6 +21107,411 @@
 	;
 	
 	exports.default = Main;
+
+/***/ },
+/* 169 */
+/*!*****************************!*\
+  !*** ./app/sort_buttons.js ***!
+  \*****************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var React = __webpack_require__(/*! react */ 1);
+	// import React from 'react';
+	
+	// Sort Buttons
+	
+	var SortButtons = function (_React$Component) {
+	  _inherits(SortButtons, _React$Component);
+	
+	  function SortButtons(props) {
+	    _classCallCheck(this, SortButtons);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SortButtons).call(this, props));
+	
+	    _this.handleClick = _this.handleClick.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(SortButtons, [{
+	    key: "handleClick",
+	    value: function handleClick(sortField, event) {
+	      event.preventDefault();
+	      this.props.sort(sortField);
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var sortField = this.props.sortField,
+	          sortDirection = this.props.sortDirection,
+	          sortedIcon = React.createElement("i", { className: "fa fa-sort-" + sortDirection, "aria-hidden": "true" }),
+	          notSortedIcon = React.createElement("i", { className: "fa fa-sort", "aria-hidden": "true" }),
+	          nameSortIcon = notSortedIcon,
+	          foodTypeSortIcon = notSortedIcon;
+	
+	      if (sortField === 'name') {
+	        nameSortIcon = sortedIcon;
+	      } else if (sortField === 'foodType') {
+	        foodTypeSortIcon = sortedIcon;
+	      }
+	
+	      return React.createElement(
+	        "div",
+	        { id: "sort-buttons" },
+	        React.createElement(
+	          "div",
+	          { className: "col-sm-4" },
+	          React.createElement(
+	            "button",
+	            { className: "btn btn-default btn-block", onClick: this.handleClick.bind(null, 'name') },
+	            nameSortIcon,
+	            "  Sort by Name"
+	          )
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "col-sm-4" },
+	          React.createElement(
+	            "button",
+	            { className: "btn btn-default btn-block", onClick: this.handleClick.bind(null, 'foodType') },
+	            foodTypeSortIcon,
+	            "  Sort by Cuisine"
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return SortButtons;
+	}(React.Component);
+	
+	exports.default = SortButtons;
+
+/***/ },
+/* 170 */
+/*!****************************!*\
+  !*** ./app/search_form.js ***!
+  \****************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 38);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // var React = require('react');
+	// var ReactDOM = require('react-dom');
+	
+	
+	// Search form
+	
+	var SearchForm = function (_React$Component) {
+	  _inherits(SearchForm, _React$Component);
+	
+	  function SearchForm(props) {
+	    _classCallCheck(this, SearchForm);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchForm).call(this, props));
+	
+	    _this.handleFilterChange = _this.handleFilterChange.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(SearchForm, [{
+	    key: 'handleFilterChange',
+	    value: function handleFilterChange(event) {
+	      var newFilterText = _reactDom2.default.findDOMNode(this.refs.search).value;
+	      this.props.filter(newFilterText);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'text-right' },
+	        _react2.default.createElement(
+	          'form',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'Search text',
+	              className: 'form-control',
+	              ref: 'search',
+	              value: this.props.filterText,
+	              onChange: this.handleFilterChange })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return SearchForm;
+	}(_react2.default.Component);
+	
+	exports.default = SearchForm;
+
+/***/ },
+/* 171 */
+/*!********************************!*\
+  !*** ./app/restaurant_form.js ***!
+  \********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // var React = require('react');
+	
+	
+	// Restaurant Form
+	
+	var RestaurantForm = function (_React$Component) {
+	  _inherits(RestaurantForm, _React$Component);
+	
+	  function RestaurantForm(props) {
+	    _classCallCheck(this, RestaurantForm);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RestaurantForm).call(this, props));
+	
+	    _this.state = {
+	      name: '',
+	      foodType: '',
+	      imageUrl: ''
+	    };
+	    _this.handleNameChange = _this.handleNameChange.bind(_this);
+	    _this.handleFoodTypeChange = _this.handleFoodTypeChange.bind(_this);
+	    _this.handleImageUrlChange = _this.handleImageUrlChange.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(RestaurantForm, [{
+	    key: 'handleNameChange',
+	    value: function handleNameChange(event) {
+	      this.setState({ name: event.target.value });
+	    }
+	  }, {
+	    key: 'handleFoodTypeChange',
+	    value: function handleFoodTypeChange(event) {
+	      this.setState({ foodType: event.target.value });
+	    }
+	  }, {
+	    key: 'handleImageUrlChange',
+	    value: function handleImageUrlChange(event) {
+	      this.setState({ imageUrl: event.target.value });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	
+	      var name = this.state.name.trim(),
+	          foodType = this.state.foodType.trim(),
+	          imageUrl = this.state.imageUrl.trim();
+	
+	      if (!name || !foodType || !imageUrl) {
+	        return;
+	      }
+	
+	      this.props.restaurantSubmit({
+	        name: name,
+	        foodType: foodType,
+	        imageUrl: imageUrl
+	      });
+	
+	      this.setState({
+	        name: '',
+	        foodType: '',
+	        imageUrl: ''
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'well' },
+	        _react2.default.createElement(
+	          'form',
+	          { className: 'form-inline', onSubmit: this.handleSubmit },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'Restaurant name',
+	              className: 'form-control',
+	              value: this.state.name,
+	              onChange: this.handleNameChange })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'Type of cuisine',
+	              className: 'form-control',
+	              value: this.state.foodType,
+	              onChange: this.handleFoodTypeChange })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'Image URL',
+	              className: 'form-control',
+	              value: this.state.imageUrl,
+	              onChange: this.handleImageUrlChange })
+	          ),
+	          _react2.default.createElement('input', { type: 'submit', value: 'Add restaurant!', className: 'btn btn-default' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return RestaurantForm;
+	}(_react2.default.Component);
+	
+	exports.default = RestaurantForm;
+
+/***/ },
+/* 172 */
+/*!**********************************!*\
+  !*** ./app/restaurants_frame.js ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // var React = require('react');
+	
+	
+	// Restaurant Table
+	
+	var RestaurantsFrame = function (_React$Component) {
+	  _inherits(RestaurantsFrame, _React$Component);
+	
+	  function RestaurantsFrame() {
+	    _classCallCheck(this, RestaurantsFrame);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(RestaurantsFrame).apply(this, arguments));
+	  }
+	
+	  _createClass(RestaurantsFrame, [{
+	    key: "render",
+	    value: function render() {
+	      var restaurants = this.props.restaurants,
+	          deleteRestaurant = this.props.deleteRestaurant,
+	          restaurantCards = restaurants.map(function (restaurant) {
+	        return _react2.default.createElement(
+	          "div",
+	          { className: "well restaurant", key: restaurant.id },
+	          _react2.default.createElement("img", { src: restaurant.imageUrl, className: "img-thumbnail" }),
+	          _react2.default.createElement(
+	            "h4",
+	            null,
+	            restaurant.name
+	          ),
+	          _react2.default.createElement(
+	            "p",
+	            { className: "text-muted" },
+	            _react2.default.createElement(
+	              "span",
+	              { className: "pull-right" },
+	              _react2.default.createElement(
+	                "button",
+	                {
+	                  className: "btn btn-danger btn-xs",
+	                  onClick: deleteRestaurant.bind(null, restaurant.id) },
+	                "Delete"
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "em",
+	              null,
+	              restaurant.foodType
+	            )
+	          )
+	        );
+	      });
+	
+	      return _react2.default.createElement(
+	        "div",
+	        { id: "restaurants" },
+	        restaurantCards
+	      );
+	    }
+	  }]);
+	
+	  return RestaurantsFrame;
+	}(_react2.default.Component);
+	
+	exports.default = RestaurantsFrame;
 
 /***/ },
 /* 173 */

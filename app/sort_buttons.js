@@ -1,4 +1,5 @@
-import React from 'react';
+var React = require('react');
+// import React from 'react';
 
 // Sort Buttons
 class SortButtons extends React.Component {
