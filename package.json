@@ -1,0 +1,31 @@
+{
+  "name": "assignment_angular_widgets",
+  "version": "1.0.0",
+  "description": "Wee! Restaurant reviews! [A React.js JavaScript project from the Viking Code School](http://www.vikingcodeschool.com)... the original assignment was on Angular controllers, directives, bindings, filters, and more, but I chose to do this project in React.js instead.",
+  "main": "photos.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/siakaramalegos/assignment_angular_widgets.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siakaramalegos/assignment_angular_widgets/issues"
+  },
+  "homepage": "https://github.com/siakaramalegos/assignment_angular_widgets",
+  "dependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "webpack": "^1.13.1"
+  }
+}
