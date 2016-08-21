@@ -1,0 +1,54 @@
+<html ng-app='widgets'>
+<head>
+	<title>Angular Widgets</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+	<script type="text/javascript" src='app.js'></script>
+</head>
+<body ng-controller='RestaurantCtrl'>
+
+	<form name='newRestaurantForm'ng-submit='createRestaurant(formData)'>
+		<label>Name</label>
+		<input type='text' ng-model='formData.name' name='name'>
+
+		<label>Type of Food</label>
+		<input type='text' ng-model='formData.foodType' name='foodType'>
+
+		<label>Image</label>
+		<input type='text' ng-model='formData.image' name='image'>
+
+		<input type='submit' value='Create Restaurant'>
+	</form>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Image</th>
+				<th ng-click='orderColumn("name")'>Name <i>{{ getIcon("name") }}</i></th>
+
+				<th ng-click='orderColumn("foodType")'>Food Type <i>{{ getIcon("foodType") }}</i></th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr ng-repeat='restaurant in restaurants | filter:restaurantSearch | orderBy: order: orderReverse'>
+				<td><img ng-src="{{ restaurant.image }}"></td>
+				<td>{{ restaurant.name }}</td>
+				<td>{{ restaurant.foodType }}</td>
+				<td ng-click='deleteRestaurant(restaurant)'>Delete</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div>
+		<h2>Search Restaurant</h2>
+		<input type='text' ng-model='restaurantSearch'>
+
+
+	</div>
+	
+
+</body>
+</html>
