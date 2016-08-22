@@ -49,7 +49,42 @@ widgets.controller('RestaurantCtrl',
 				return icon;
 			}
 		}
-	}])
+	}]);
+
+widgets.controller("PhotosCtrl",
+	["$scope", "$window", function($scope, $window) {
+
+		$scope.rawFeed = $window.instagramResponse;
+
+	}]);
+
+
+widgets.filter("uniq", function() {
+	return function(collection, filter) {
+
+		var uniqueItems = [];
+
+		angular.forEach(collection, function(item) {
+			var isUnique = true;
+
+			for (var i = 0; i < uniqueItems.length; i++) {
+				var currentItem = uniqueItems[i];
+
+				isUnique = (currentItem[filter] !== item[filter]);
+
+				if (!isUnique) {
+					break;
+				}
+			}
+			if (isUnique) {
+				uniqueItems.push(item);
+			}
+		})
+
+		return uniqueItems;
+	}
+});
+
 
 
 

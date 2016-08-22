@@ -1,0 +1,66 @@
+.panel {
+	margin-top: 50px;
+}
+
+/*
+	Panel Heading
+*/
+
+.panel-heading {
+	padding: 0 auto;
+}
+
+.panel-heading p {
+	float: left;
+	line-height: 50px;
+	margin-left: 10px;
+}
+
+.profile-pic {
+	float: left;
+	border-radius: 50%;
+	width: 50px;
+}
+
+
+/*
+	Panel Photo
+*/
+
+.tags li {
+	list-style: none;
+	display: inline-block;
+}
+
+.panel-photo {
+	text-align: center;
+}
+
+.panel-photo .panel-body {
+	padding: 0;
+}
+
+.panel-body img {
+	width: 100%;
+}
+
+
+/*
+	Panel Footer
+*/
+
+.clear-fix {
+	clear: both;
+}
+
+.likes {
+	float: left;
+}
+
+.comments {
+	float: right;
+}
+
+.filter {
+	float: right;
+}
