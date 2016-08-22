@@ -56,8 +56,8 @@ widgets.controller("PhotosCtrl",
 
 		$scope.rawFeed = $window.instagramResponse;
 		$scope.userFilter;
-		$scope.selectUserFilter = function(id) {
-			$scope.userFilter = id;
+		$scope.selectUserFilter = function(username) {
+			$scope.userFilter = username;
 		}
 	}]);
 

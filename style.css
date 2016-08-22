@@ -6,6 +6,15 @@
 	Panel Heading
 */
 
+#navbar {
+	background-color: MediumVioletRed;
+	height: 100px;
+	border-radius: 0;
+	margin-bottom: 0;
+	line-height: 80px;	
+	color: white;
+}
+
 .panel-heading {
 	padding: 0 auto;
 }
@@ -26,6 +35,25 @@
 /*
 	Panel Photo
 */
+
+#container {
+	width: 800px;
+	margin: 0 auto;
+}
+
+#myContent {
+	margin-top: 30px;
+	column-count: 3;
+	column-gap: 0px;
+	width: 800px;
+}
+
+#myContent .panel-photo {
+	display: inline-block;
+	margin-bottom: 0px;
+	width: 100%;
+}
+
 
 .tags li {
 	list-style: none;
@@ -70,13 +98,43 @@
 
 */
 
+.sidebar-user-search {
+	background-color: DeepPink;
+	color: white;
+}
+
+.users li:first {
+	margin-left: 60px;
+	font-size: 24px;
+}
+
 .users li {
+	list-style: none;
 	width: 300px;
-	margin: 10px 15px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
+	margin: 20px 15px;
+	font-size: 20px;
+	font-weight: 100;
 }
 
 .users img {
 	width: 50px;
+	border-radius: 50%;
+	margin-right: 10px;
 }
+
+.search-user {
+	width: 100%;
+}
+
+.search-user input {
+	width: 100%;
+	margin-top: 1px;
+	padding: 10px 25px;
+	border: 0;
+	color: DeepPink;
+	font-size: 20px;
+	font-weight: 100;
+}
+
+
+

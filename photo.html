@@ -17,82 +17,97 @@
 
 	<div class='row container-fluid'>
 
-		<div class='col-xs-6'>
-			<select ng-model='filterSelection'>
-				<option value=''>All Filters</option>
-				<option ng-repeat='image in rawFeed.data | uniq:"filter" ' value="{{ image.filter }}">
-					{{ image.filter }}</option>
-			</select>
+		<div id='navbar'>
+			<div class='col-xs-6'>
+				<select ng-model='filterSelection'>
+					<option value=''>All Filters</option>
+					<option ng-repeat='image in rawFeed.data | uniq:"filter" ' value="{{ image.filter }}">
+						{{ image.filter }}</option>
+				</select>
+			</div>
+
+			<div class='col-xs-6'>
+				<select ng-model='tagFilter' ng-options='tag as tag.tags for tag in rawFeed.data'>
+				</select>
+			</div>
+
+			<div class='col-xs-12'>
+				There is {{ filtered.length }} results.
+			</div>
 		</div>
 
-		<div class='col-xs-6'>
-			<select ng-model='tagFilter' ng-options='tag as tag.tags for tag in rawFeed.data'>
-			</select>
-		</div>
+		<div class='col-xs-3 sidebar-user-search'>
+			<div class='row'>
+				<div class='col-xs-12'>
+					<div class='search-user'>
+						<input type='text' placeholder='Find a User' ng-model='userFilter'>
+					</div>
 
-		<div class='col-xs-12'>
-			There is {{ filtered.length }} results.
-		</div>
-
-		<!-- Wrapper of all the picture panels -->
-		<div class='col-sm-4 panel-photo' ng-repeat='image in rawFeed.data | filter: { filter: filterSelection } | filter: {user: {id: userFilter}} as filtered'>
-
-			<!-- Single Panel -->
-			<div class='panel panel-default'>
-
-				<!-- header -->
-				<div class='panel-heading'>
-					<img class='profile-pic' ng-src="{{ image.user.profile_picture }}">
-					<p>{{ image.user.username }}</p>
-
-					<div class='clear-fix'></div>
-				</div>
-
-				<!-- body -->
-				<div class='panel-body'>
-					<p>{{ image.caption.text }}</p>
-
-					<div class='tags' ng-hide='image.tags.length === 0'>
+					<div class='users'>
 						<ul>
-							<li ng-repeat='tag in image.tags'>{{ tag }}</li>
+							<li ng-click='selectUserFilter("")'>All Users</li>
+							<li ng-click='selectUserFilter(user.user.username)' ng-repeat='user in rawFeed.data'><img ng-src="{{ user.user.profile_picture }}">{{ user.user.username }}</li>
 						</ul>
 					</div>
-
-					<a ng-href="{{ image.link }}">
-						<img ng-src="{{ image.images.low_resolution.url }}">
-					</a>
 				</div>
-
-				<!-- footer -->
-				<div class='panel-footer'>
-					<div class='likes'>
-						Likes: <span>{{ image.likes.count }}</span>
-					</div>
-
-					<div class='comments'>
-						Comments: <span>{{ image.likes.count }}</span>
-					</div>
-
-					<div class='clear-fix'></div>
-
-					<div class='filter'>
-						Filter: <span>{{ image.filter }}</span>
-					</div>
-
-					<div class='clear-fix'></div>
-				</div>
-			</div>
-		</div><!-- End of pictures section -->
-
-		<div class='col-xs-12'>
-			<div class='users'>
-				<ul>
-					<li ng-click='selectUserFilter("")'>All Users</li>
-					<li ng-click='selectUserFilter(user.user.id)' ng-repeat='user in rawFeed.data'><img ng-src="{{ user.user.profile_picture }}">{{ user.user.username }}</li>
-				</ul>
 			</div>
 		</div>
 
+		<div class='col-xs-9'>
+			<div id='container' class='row'>
+				<div id='myContent'>
+					<!-- Wrapper of all the picture panels -->
+					<div class='col-sm-4 panel-photo' ng-repeat='image in rawFeed.data | filter: { filter: filterSelection } | filter: {user: {username: userFilter}} as filtered'>
+
+						<!-- Single Panel -->
+						<div class='panel panel-default'>
+
+							<!-- header -->
+							<div class='panel-heading'>
+								<img class='profile-pic' ng-src="{{ image.user.profile_picture }}">
+								<p>{{ image.user.username }}</p>
+
+								<div class='clear-fix'></div>
+							</div>
+
+							<!-- body -->
+							<div class='panel-body'>
+								<p>{{ image.caption.text }}</p>
+
+								<div class='tags' ng-hide='image.tags.length === 0'>
+									<ul>
+										<li ng-repeat='tag in image.tags'>{{ tag }}</li>
+									</ul>
+								</div>
+
+								<a ng-href="{{ image.link }}">
+									<img ng-src="{{ image.images.low_resolution.url }}">
+								</a>
+							</div>
+
+							<!-- footer -->
+							<div class='panel-footer'>
+								<div class='likes'>
+									Likes: <span>{{ image.likes.count }}</span>
+								</div>
+
+								<div class='comments'>
+									Comments: <span>{{ image.likes.count }}</span>
+								</div>
+
+								<div class='clear-fix'></div>
+
+								<div class='filter'>
+									Filter: <span>{{ image.filter }}</span>
+								</div>
+
+								<div class='clear-fix'></div>
+							</div>
+						</div>
+					</div><!-- End of pictures section -->
+				</div>
+			</div>
+		</div>
 
 	</div>
 
