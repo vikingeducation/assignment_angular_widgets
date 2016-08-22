@@ -35,7 +35,7 @@
 		</div>
 
 		<!-- Wrapper of all the picture panels -->
-		<div class='col-sm-4 panel-photo' ng-repeat='image in rawFeed.data | filter: { filter: filterSelection } as filtered'>
+		<div class='col-sm-4 panel-photo' ng-repeat='image in rawFeed.data | filter: { filter: filterSelection } | filter: {user: {id: userFilter}} as filtered'>
 
 			<!-- Single Panel -->
 			<div class='panel panel-default'>
@@ -82,7 +82,18 @@
 					<div class='clear-fix'></div>
 				</div>
 			</div>
+		</div><!-- End of pictures section -->
+
+		<div class='col-xs-12'>
+			<div class='users'>
+				<ul>
+					<li ng-click='selectUserFilter("")'>All Users</li>
+					<li ng-click='selectUserFilter(user.user.id)' ng-repeat='user in rawFeed.data'><img ng-src="{{ user.user.profile_picture }}">{{ user.user.username }}</li>
+				</ul>
+			</div>
 		</div>
+
+
 	</div>
 
 </body>

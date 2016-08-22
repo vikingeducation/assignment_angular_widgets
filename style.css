@@ -64,3 +64,19 @@
 .filter {
 	float: right;
 }
+
+/*
+	Widget User
+
+*/
+
+.users li {
+	width: 300px;
+	margin: 10px 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.users img {
+	width: 50px;
+}
