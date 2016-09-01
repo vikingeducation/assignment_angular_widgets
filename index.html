@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Angular Widgets!</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-app="widgets">
+    <div class="header">
+      <h1>Widgets</h1>
+    </div>
+
+    <div class="main" ng-controller="RestaurantCtrl">
+      <form name="newRestaurant">
+        <label for="restaurantName">
+          Name
+          <input id="restaurantName" type="text" ng-model="name">
+        </label>
+
+        <label for="restaurantType">
+          Type
+          <input id="restaurantType" type="text" ng-model="type">
+        </label>
+        <input type="submit" value="Create Restaurant" ng-click="createRestaurant()">
+      </form>
+
+      <div>
+        
+      </div>
+
+      <div ng-repeat="restaurant in restaurants">
+        <div ng-repeat="(key, value) in restaurant">
+          {{ key }} : {{ value }}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
