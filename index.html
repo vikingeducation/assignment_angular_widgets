@@ -29,10 +29,11 @@
         <tbody>
           <tr>
             <th>Restaurant</th>
-            <th>Value</th>
+            <th>Type</th>
           </tr>
-          <tr ng-repeat="restaurant in restaurants">
-            <td ng-repeat="(key, value) in restaurant">{{ value }}</td>
+          <tr ng-repeat="restaurant in restaurants | orderBy: '-foodType' ">
+            <td>{{ restaurant.name }}</td>
+            <td>{{ restaurant.foodType }}</td>
           </tr>
         </tbody>
       </table>
