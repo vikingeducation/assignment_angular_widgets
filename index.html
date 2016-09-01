@@ -22,6 +22,12 @@
           Type
           <input id="restaurantType" type="text" ng-model="type">
         </label>
+
+        <label for="restaurantImage">
+          Restaurant Image URL
+          <input id="restaurantImage" type="text" ng-model="imageUrl">
+        </label>
+
         <input type="submit" value="Create Restaurant" ng-click="createRestaurant()">
       </form>
       
@@ -34,6 +40,12 @@
           <tr ng-repeat="restaurant in restaurants | orderBy: '-foodType' ">
             <td>{{ restaurant.name }}</td>
             <td>{{ restaurant.foodType }}</td>
+            <td><img ng-src="{{ restaurant.imageUrl }}"></td>
+            <td>
+              <a href="" ng-click="deleteRestaurant($index)">
+                Delete
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>
