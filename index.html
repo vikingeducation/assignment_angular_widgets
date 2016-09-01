@@ -24,16 +24,18 @@
         </label>
         <input type="submit" value="Create Restaurant" ng-click="createRestaurant()">
       </form>
-
-      <div>
-        
-      </div>
-
-      <div ng-repeat="restaurant in restaurants">
-        <div ng-repeat="(key, value) in restaurant">
-          {{ key }} : {{ value }}
-        </div>
-      </div>
+      
+      <table>
+        <tbody>
+          <tr>
+            <th>Restaurant</th>
+            <th>Value</th>
+          </tr>
+          <tr ng-repeat="restaurant in restaurants">
+            <td ng-repeat="(key, value) in restaurant">{{ value }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </body>
 </html>
