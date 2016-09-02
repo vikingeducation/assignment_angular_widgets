@@ -8,7 +8,7 @@
   </head>
   <body ng-app="widgets">
     <div class="header">
-      <h1>Widgets</h1>
+      <h1>Create Restaurant</h1>
     </div>
 
     <div class="main" ng-controller="RestaurantCtrl">
@@ -30,14 +30,22 @@
 
         <input type="submit" value="Create Restaurant" ng-click="createRestaurant()">
       </form>
-      
+
+      <div class="header">
+        <h1>Search Restaurants</h1>
+      </div>
+
+      <form name="searchRestaurant">
+        <input type="text" ng-model="searchTerm">
+      </form>
+
       <table>
         <tbody>
           <tr>
-            <th>Restaurant</th>
-            <th>Type</th>
+            <th ng-click="setOrderKey('name')">Restaurant</th>
+            <th ng-click="setOrderKey('foodType')">Type</th>
           </tr>
-          <tr ng-repeat="restaurant in restaurants | orderBy: '-foodType' ">
+          <tr ng-repeat="restaurant in restaurants | orderBy: orderKey | filter: searchTerm ">
             <td>{{ restaurant.name }}</td>
             <td>{{ restaurant.foodType }}</td>
             <td><img ng-src="{{ restaurant.imageUrl }}"></td>
@@ -49,6 +57,7 @@
           </tr>
         </tbody>
       </table>
+
     </div>
   </body>
 </html>
