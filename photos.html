@@ -28,9 +28,11 @@
       <div class="main" ng-controller="PhotosCtrl">
         <div class="row">
           <div class="col-xs-4" ng-repeat="d in rawFeed['data']">
-            <img src="{{ d['images'].low_resolution.url }}">
-            <p>{{ d['user'].username }}</p>
+            <a ng-href="{{ d.link }}"><img src="{{ d['images'].low_resolution.url }}"></a>
+            <p>{{ d.user.username }}</p>
             <p>{{ convertToDate(d.created_time) }}</p>
+            <p>Likes: {{ d.likes.count }}</p>
+            <p>Comments: {{ d.comments.count }}</p>
           </div>
         </div>
       </div>
