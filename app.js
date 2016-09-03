@@ -51,17 +51,27 @@ app.controller("RestaurantCtrl", ['$scope', function($scope){
 }]);
 
 app.controller("PhotosCtrl", ['$scope', function($scope){
+	$scope.instagramObjects = instagramResponse.data;
+	$scope.photoFilter = "";
 	$scope.rawFeed = instagramResponse;
+
 	$scope.convertToDate = function(createdTime){
 		var date = new Date(parseInt(createdTime) * 1000);
 		return moment(date).format("MMM Do YY");               // Sep 3rd 16
 	};
+
+	$scope.filterInstagramObjects = function(){
+		$scope.instagramObjects = $.grep(instagramResponse.data, function(iO){
+			return iO.filter === $scope.photoFilter;
+		});
+	};
+
 	$scope.returnUniqueFiltersFromInstagramJson = function( i ){
 		var filters = [];
 		for(var a = 0; a < i.data.length; a++){
 			filters.push(i.data[a].filter);
 		};
-		return $.unique(filters);
+		return $.unique(filters).sort();
 	};
 	$scope.filters = $scope.returnUniqueFiltersFromInstagramJson( instagramResponse );
 }]);
