@@ -35,6 +35,7 @@
             <p>Likes: {{ d.likes.count }}</p>
             <p>Comments: {{ d.comments.count }}</p>
             <p>Tags: <a ng-repeat="tag in d.tags" href="">#{{ tag }} </a></p>
+            <p>Filters: {{ d.filter }}</p>
           </div>
 
           <div class="col-xs-4" ng-if="rawFeed['data'].length > ($index + 1)">
@@ -44,6 +45,7 @@
             <p>Likes: {{ rawFeed['data'][$index + 1].likes.count }}</p>
             <p>Comments: {{ rawFeed['data'][$index + 1].comments.count }}</p>
             <p>Tags: <a ng-repeat="tag in rawFeed['data'][$index + 1].tags" href="">#{{ tag }} </a></p>
+            <p>Filters: {{ rawFeed['data'][$index + 1].filter }}</p>
           </div>
 
           <div class="col-xs-4" ng-if="rawFeed['data'].length > ($index + 2)">
@@ -53,6 +55,7 @@
             <p>Likes: {{ rawFeed['data'][$index + 2].likes.count }}</p>
             <p>Comments: {{ rawFeed['data'][$index + 2].comments.count }}</p>
             <p>Tags: <a ng-repeat="tag in rawFeed['data'][$index + 2].tags" href="">#{{ tag }} </a></p>
+            <p>Filters: {{ rawFeed['data'][$index + 2].filter }}</p>
           </div>
         </div>
 
