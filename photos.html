@@ -27,7 +27,8 @@
 
       <div class="main" ng-controller="PhotosCtrl">
         <div id="filter-drop-down">
-          <select ng-model="photoFilter" ng-change="filterInstagramObjects()" ng-options="filter as filter for filter in filters"></select>
+          <select ng-model="photoFilter" ng-change="filterInstagramObjects()" ng-options="filter as filter for filter in filters">
+            <option value="">Everything</option>
           </select>
 
           <select ng-model="tagFilter" ng-options="tag as tag for tag in tags" ng-change="filterInstagramObjects()" multiple>
