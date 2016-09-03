@@ -52,4 +52,8 @@ app.controller("RestaurantCtrl", ['$scope', function($scope){
 
 app.controller("PhotosCtrl", ['$scope', function($scope){
 	$scope.rawFeed = instagramResponse;
+	$scope.convertToDate = function(createdTime){
+		var date = new Date(parseInt(createdTime) * 1000);
+		return moment(date).format("MMM Do YY");               // Sep 3rd 16
+	};
 }]);
