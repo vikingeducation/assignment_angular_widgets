@@ -62,10 +62,13 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 		return moment(date).format("MMM Do YY");               // Sep 3rd 16
 	};
 
+	// So the multi select does work
 	$scope.filterInstagramObjects = function(){
-		$scope.instagramObjects = $.grep(instagramResponse.data, function(iO){
+		if ($scope.photoFilter !== ""){
+			$scope.instagramObjects = $.grep(instagramResponse.data, function(iO){
 			return iO.filter === $scope.photoFilter;
-		});
+			});
+		};
 	};
 
 	$scope.returnUniqueFiltersFromInstagramJson = function(){
