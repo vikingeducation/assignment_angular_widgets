@@ -56,4 +56,12 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 		var date = new Date(parseInt(createdTime) * 1000);
 		return moment(date).format("MMM Do YY");               // Sep 3rd 16
 	};
+	$scope.returnUniqueFiltersFromInstagramJson = function( i ){
+		var filters = [];
+		for(var a = 0; a < i.data.length; a++){
+			filters.push(i.data[a].filter);
+		};
+		return $.unique(filters);
+	};
+	$scope.filters = $scope.returnUniqueFiltersFromInstagramJson( instagramResponse );
 }]);
