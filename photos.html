@@ -26,10 +26,12 @@
       </div>
 
       <div class="main" ng-controller="PhotosCtrl">
-
         <div id="filter-drop-down">
-          <select ng-model="photoFilter" ng-change="filterInstagramObjects()">
-            <option value="{{ filter }}" ng-repeat="filter in filters">{{ filter }}</option>
+          <select ng-model="photoFilter" ng-change="filterInstagramObjects()" ng-options="filter as filter for filter in filters"></select>
+          </select>
+
+          <select ng-model="tagFilter" multiple>
+            <option value="{{ tag }}" ng-repeat="tag in tags">{{ tag }}</option>
           </select>
         </div>
 

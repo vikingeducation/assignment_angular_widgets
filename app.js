@@ -51,8 +51,10 @@ app.controller("RestaurantCtrl", ['$scope', function($scope){
 }]);
 
 app.controller("PhotosCtrl", ['$scope', function($scope){
+
 	$scope.instagramObjects = instagramResponse.data;
 	$scope.photoFilter = "";
+	$scope.tagFilter = [];
 	$scope.rawFeed = instagramResponse;
 
 	$scope.convertToDate = function(createdTime){
@@ -66,12 +68,28 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 		});
 	};
 
-	$scope.returnUniqueFiltersFromInstagramJson = function( i ){
+	$scope.returnUniqueFiltersFromInstagramJson = function(){
+		var i = $scope.instagramObjects;
 		var filters = [];
-		for(var a = 0; a < i.data.length; a++){
-			filters.push(i.data[a].filter);
+		for(var a = 0; a < i.length; a++){
+			filters.push(i[a].filter);
 		};
 		return $.unique(filters).sort();
 	};
+
 	$scope.filters = $scope.returnUniqueFiltersFromInstagramJson( instagramResponse );
+
+	$scope.returnUniqueTagsFromInstagramJson = function(){
+		var i = $scope.instagramObjects;
+		var tags = [];
+		for(var a = 0; a < i.length; a++){
+			for(var b = 0; b < i[a].tags.length; b++){
+				tags.push(i[a].tags[b]);
+			};
+		};
+		return $.unique(tags).sort();
+	};
+
+	$scope.tags = $scope.returnUniqueTagsFromInstagramJson();
+
 }]);
