@@ -26,15 +26,36 @@
       </div>
 
       <div class="main" ng-controller="PhotosCtrl">
-        <div class="row">
-          <div class="col-xs-4" ng-repeat="d in rawFeed['data']">
+
+        <div ng-repeat="d in rawFeed['data']" ng-if="$index % 3 == 0" class="row">
+          <div class="col-xs-4">
             <a ng-href="{{ d.link }}"><img src="{{ d['images'].low_resolution.url }}"></a>
             <p><a href="https://www.instagram.com/{{ d.user.username }}">{{ d.user.username }}</a></p>
             <p>{{ convertToDate(d.created_time) }}</p>
             <p>Likes: {{ d.likes.count }}</p>
             <p>Comments: {{ d.comments.count }}</p>
+            <p>Tags: <a ng-repeat="tag in d.tags" href="">#{{ tag }} </a></p>
+          </div>
+
+          <div class="col-xs-4" ng-if="rawFeed['data'].length > ($index + 1)">
+            <a ng-href="{{ rawFeed['data'][$index + 1].link }}"><img src="{{ rawFeed['data'][$index + 1]['images'].low_resolution.url }}"></a>
+            <p><a href="https://www.instagram.com/{{ rawFeed['data'][$index + 1].user.username }}">{{ rawFeed['data'][$index + 1].user.username }}</a></p>
+            <p>{{ convertToDate(rawFeed['data'][$index + 1].created_time) }}</p>
+            <p>Likes: {{ rawFeed['data'][$index + 1].likes.count }}</p>
+            <p>Comments: {{ rawFeed['data'][$index + 1].comments.count }}</p>
+            <p>Tags: <a ng-repeat="tag in rawFeed['data'][$index + 1].tags" href="">#{{ tag }} </a></p>
+          </div>
+
+          <div class="col-xs-4" ng-if="rawFeed['data'].length > ($index + 2)">
+            <a ng-href="{{ rawFeed['data'][$index + 2].link }}"><img src="{{ rawFeed['data'][$index + 2]['images'].low_resolution.url }}"></a>
+            <p><a href="https://www.instagram.com/{{ rawFeed['data'][$index + 2].user.username }}">{{ rawFeed['data'][$index + 2].user.username }}</a></p>
+            <p>{{ convertToDate(rawFeed['data'][$index + 2].created_time) }}</p>
+            <p>Likes: {{ rawFeed['data'][$index + 2].likes.count }}</p>
+            <p>Comments: {{ rawFeed['data'][$index + 2].comments.count }}</p>
+            <p>Tags: <a ng-repeat="tag in rawFeed['data'][$index + 2].tags" href="">#{{ tag }} </a></p>
           </div>
         </div>
+
       </div>
     </div>
   </body>
