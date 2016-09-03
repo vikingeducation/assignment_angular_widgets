@@ -49,3 +49,7 @@ app.controller("RestaurantCtrl", ['$scope', function($scope){
 	};
 
 }]);
+
+app.controller("PhotosCtrl", ['$scope', function($scope){
+	$scope.rawFeed = instagramResponse;
+}]);
