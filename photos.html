@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>The Photo Gallery</title>
+    <!-- Latest compiled and minified CSS Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="moment.js"></script>
+    <script src="photos.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-app="widgets">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="header">
+            <h1>Instagram Photos</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="main" ng-controller="PhotosCtrl">
+        <div id="filter-drop-down">
+          <select ng-model="photoFilter" ng-change="filterInstagramObjects()" ng-options="filter as filter for filter in filters">
+            <option value="">Everything</option>
+          </select>
+
+          <select ng-model="tagFilter" ng-options="tag as tag for tag in tags" ng-change="filterInstagramObjects()" multiple>
+          </select>
+        </div>
+
+        <div id='filter-count'>
+          <p>Results: {{ instagramObjects.length }}</p>
+        </div>
+
+        <div class="page-numbers">
+          <p>
+            Page: <a href="" ng-click="changePages( $index / 12 + 1 )" ng-repeat = "iO in instagramObjects" ng-if="$index % 12 === 0">{{ $index / 12 + 1 }} </a>
+          </p>
+        </div>
+
+        <div ng-repeat="iO in instagramObjectsForPage" ng-if="$index % 3 == 0" class="row">
+
+          <div ng-repeat="instagramObject in instagramObjectsForPage | limitTo : 3 : $parent.$index" class="col-xs-4">
+            <div class="photo-and-info-container">
+              <a ng-href="{{ instagramObject.link }}"><img src="{{ instagramObject['images'].low_resolution.url }}"></a>
+              <p><a href="https://www.instagram.com/{{ instagramObject.user.username }}">{{ instagramObject.user.username }}</a></p>
+              <p>{{ convertToDate(instagramObject.created_time) }}</p>
+              <p>Likes: {{ instagramObject.likes.count }}</p>
+              <p>Comments: {{ instagramObject.comments.count }}</p>
+              <p>Tags: <a ng-repeat="tag in instagramObject.tags" href="">#{{ tag }} </a></p>
+              <p>Filters: {{ instagramObject.filter }}</p>
+            </div>
+          </div>
+
+        </div>
+        
+        <hr>
+
+        <h3>
+          <a href="" ng-click="filterByUser()">All Users</a>
+        </h3>
+        
+        <!-- Using rawfeed where it's always going to use all the objects -->
+        <div ng-repeat="iO in rawFeed.data" ng-if="$index % 3 == 0" class="row">
+          <div ng-repeat="instagramObject in rawFeed.data | limitTo : 3 : $parent.$index" class="col-xs-4">
+            <div class="user-and-info-container" ng-click="filterByUser(instagramObject.user.id)">
+              <a href=""><img src="{{ instagramObject.user.profile_picture }}"></a>
+              <p><a href="">{{ instagramObject.user.username }}</a></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
