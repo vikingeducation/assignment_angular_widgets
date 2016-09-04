@@ -50,6 +50,8 @@ app.controller("RestaurantCtrl", ['$scope', function($scope){
 
 }]);
 
+///////////////////////// PHOTOS ///////////////////////////////////
+
 app.controller("PhotosCtrl", ['$scope', function($scope){
 
 	$scope.pageNumber = 1;
@@ -73,6 +75,21 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 		$scope.filterAsPerPhotoFilter();
 
 		$scope.filterAsPerTags();
+
+		$scope.pageNumber = 1;
+
+		$scope.setObjectsForPage();
+	};
+
+	$scope.filterByUser = function( userId ){
+
+		// How am I going to filter out only by the user_id
+		$scope.instagramObjects = [];
+		for (var i = 0; i < instagramResponse.data.length; i++){
+			if(instagramResponse.data[i].user.id === userId){
+				$scope.instagramObjects.push( instagramResponse.data[i] );
+			};
+		};
 
 		$scope.pageNumber = 1;
 

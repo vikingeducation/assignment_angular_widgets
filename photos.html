@@ -60,6 +60,18 @@
           </div>
 
         </div>
+        
+        <hr>
+        
+        <!-- Using rawfeed where it's always going to use all the objects -->
+        <div ng-repeat="iO in rawFeed.data" ng-if="$index % 3 == 0" class="row">
+          <div ng-repeat="instagramObject in rawFeed.data | limitTo : 3 : $parent.$index" class="col-xs-4">
+            <div class="user-and-info-container" ng-click="filterByUser(instagramObject.user.id)">
+              <a href=""><img src="{{ instagramObject.user.profile_picture }}"></a>
+              <p><a href="">{{ instagramObject.user.username }}</a></p>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
