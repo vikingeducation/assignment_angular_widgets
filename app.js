@@ -54,7 +54,7 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 
 	$scope.instagramObjects = instagramResponse.data;
 	$scope.photoFilter = null;
-	$scope.tagFilter = [];
+	$scope.tagFilter = ["Everything"];
 	$scope.rawFeed = instagramResponse;
 
 	$scope.convertToDate = function(createdTime){
@@ -64,9 +64,12 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 
 	$scope.filterInstagramObjects = function(){
 
+		// Resetting instagramObjects
+		// Way more efficient ways to do this but right now I just want this to work.
+		$scope.instagramObjects = instagramResponse.data;
+
 		$scope.filterAsPerPhotoFilter();
 
-		// At this point $scope.instagramObjects should be all instagramObjects that are left over after the photo filters have done their thing...
 		$scope.filterAsPerTags();
 
 	};
@@ -76,19 +79,30 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 		// If 'Everything' has't been chosen from the tags
 		// Let's start looking for some things
 		if ($.inArray("Everything", $scope.tagFilter) < 0){
-			console.log( $scope.tagFilter );
-		};
+			var filteredObjects = [];
+			for (var i = ($scope.instagramObjects.length - 1); i >= 0; i--){
+				// We're going through each object, Now we wanna go through each objects tags,
 
+				// Best to do it this way because the an individuals tags will be much smaller than the full list of tags.
+				// So now we're going through each tag in the current object
+				for (var j = 0; j < $scope.instagramObjects[i].tags.length; j++){
+					var tag = $scope.instagramObjects[i].tags[j];
+					if ( $.inArray( tag, $scope.tagFilter ) >= 0 ){
+						filteredObjects.push( $scope.instagramObjects[i] );
+						break;
+					};
+				};
+			};
+			$scope.instagramObjects = filteredObjects;
+		};
 	};
 
 	$scope.filterAsPerPhotoFilter = function(){
 		// if user selects on the everything option, return all instagram objects
 		// else filter
-		if ($scope.photoFilter === null){
-			$scope.instagramObjects = instagramResponse.data;
-		} else {
+		if ($scope.photoFilter !== null){
 			$scope.instagramObjects = $.grep(instagramResponse.data, function(iO){
-			return iO.filter === $scope.photoFilter;
+				return iO.filter === $scope.photoFilter;
 			});
 		};
 	};
