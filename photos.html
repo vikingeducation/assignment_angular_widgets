@@ -35,6 +35,10 @@
           </select>
         </div>
 
+        <div id='filter-count'>
+          <p>Results: {{ instagramObjects.length }}</p>
+        </div>
+
         <div ng-repeat="iO in instagramObjects" ng-if="$index % 3 == 0" class="row">
 
           <div ng-repeat="instagramObject in instagramObjects | limitTo : 3 : $parent.$index" class="col-xs-4">
