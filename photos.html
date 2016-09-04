@@ -41,13 +41,13 @@
 
         <div class="page-numbers">
           <p>
-            Page: <a href="" ng-repeat = "iO in instagramObjects" ng-if="$index % 12 === 0">{{ $index / 12 + 1 }} </a>
+            Page: <a href="" ng-click="changePages( $index / 12 + 1 )" ng-repeat = "iO in instagramObjects" ng-if="$index % 12 === 0">{{ $index / 12 + 1 }} </a>
           </p>
         </div>
 
-        <div ng-repeat="iO in instagramObjects | limitTo : 12" ng-if="$index % 3 == 0" class="row">
+        <div ng-repeat="iO in instagramObjectsForPage" ng-if="$index % 3 == 0" class="row">
 
-          <div ng-repeat="instagramObject in instagramObjects | limitTo : 3 : $parent.$index" class="col-xs-4">
+          <div ng-repeat="instagramObject in instagramObjectsForPage | limitTo : 3 : $parent.$index" class="col-xs-4">
             <div class="photo-and-info-container">
               <a ng-href="{{ instagramObject.link }}"><img src="{{ instagramObject['images'].low_resolution.url }}"></a>
               <p><a href="https://www.instagram.com/{{ instagramObject.user.username }}">{{ instagramObject.user.username }}</a></p>

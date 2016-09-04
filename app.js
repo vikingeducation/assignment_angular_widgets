@@ -52,7 +52,10 @@ app.controller("RestaurantCtrl", ['$scope', function($scope){
 
 app.controller("PhotosCtrl", ['$scope', function($scope){
 
+	$scope.pageNumber = 1;
 	$scope.instagramObjects = instagramResponse.data;
+	$scope.instagramObjectsForPage;
+
 	$scope.photoFilter = null;
 	$scope.tagFilter = ["Everything"];
 	$scope.rawFeed = instagramResponse;
@@ -63,7 +66,6 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 	};
 
 	$scope.filterInstagramObjects = function(){
-
 		// Resetting instagramObjects
 		// Way more efficient ways to do this but right now I just want this to work.
 		$scope.instagramObjects = instagramResponse.data;
@@ -72,6 +74,9 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 
 		$scope.filterAsPerTags();
 
+		$scope.pageNumber = 1;
+
+		$scope.setObjectsForPage();
 	};
 
 	$scope.filterAsPerTags = function(){
@@ -137,5 +142,15 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 	};
 
 	$scope.tags = $scope.returnUniqueTagsFromInstagramJson();
+
+	$scope.changePages = function( value ){
+		$scope.pageNumber = value;
+
+		$scope.setObjectsForPage();
+	};
+
+	$scope.setObjectsForPage = function(){
+		$scope.instagramObjectsForPage = $scope.instagramObjects.slice(($scope.pageNumber - 1) * 12, $scope.pageNumber * 12);
+	};
 
 }]);
