@@ -81,6 +81,8 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 		$scope.setObjectsForPage();
 	};
 
+	// In the Idea world we'd have a option to select all users...
+	// Also would need to update the filters for this user. 
 	$scope.filterByUser = function( userId ){
 
 		// How am I going to filter out only by the user_id
@@ -94,6 +96,10 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 		$scope.pageNumber = 1;
 
 		$scope.setObjectsForPage();
+
+		$scope.filters = $scope.returnUniqueFiltersFromInstagramJson( instagramResponse );
+
+		$scope.tags = $scope.returnUniqueTagsFromInstagramJson();
 	};
 
 	$scope.filterAsPerTags = function(){
