@@ -86,16 +86,23 @@ app.controller("PhotosCtrl", ['$scope', function($scope){
 	$scope.filterByUser = function( userId ){
 
 		// How am I going to filter out only by the user_id
-		$scope.instagramObjects = [];
-		for (var i = 0; i < instagramResponse.data.length; i++){
-			if(instagramResponse.data[i].user.id === userId){
-				$scope.instagramObjects.push( instagramResponse.data[i] );
+		if (userId === undefined){
+			$scope.instagramObjects = instagramResponse.data;
+		} else {
+			$scope.instagramObjects = [];
+			for (var i = 0; i < instagramResponse.data.length; i++){
+				if(instagramResponse.data[i].user.id === userId){
+					$scope.instagramObjects.push( instagramResponse.data[i] );
+				};
 			};
 		};
 
 		$scope.pageNumber = 1;
 
 		$scope.setObjectsForPage();
+
+		// Gotta tell angular the value for instagramObjectsForPage has been updated.
+		$scope.apply();
 
 		$scope.filters = $scope.returnUniqueFiltersFromInstagramJson( instagramResponse );
 
