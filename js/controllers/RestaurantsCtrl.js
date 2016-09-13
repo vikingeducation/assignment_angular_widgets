@@ -18,12 +18,16 @@ Widgets.controller('RestaurantsCtrl', ['$scope', function($scope) {
     console.log($scope.restaurants);
   };
 
-  $scope.destroyRestaurant = function(id) {
-    $scope.restaurants.splice(id, 1);
+  $scope.destroyRestaurant = function(restaurant) {
+    $scope.restaurants.splice(
+      $scope.restaurants.indexOf(restaurant),
+      1
+    );   
   };
 
   $scope.setSort = function(value) {
     console.log($scope.sort, value);
+    console.log($scope.restaurants);
 
     $scope.sort = {
       "name": "-name",
