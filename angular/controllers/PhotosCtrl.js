@@ -17,3 +17,21 @@ app.controller("PhotosCtrl", ["$scope", "instagramResponse", function($scope, in
     return filterList;
   })();
 }]);
+
+app.filter('tagFilter', function(){
+  return function( collection, selectedTags ){
+
+    var filteredCollection = [];
+
+    angular.forEach(collection, function(photo){
+      for(var i= 0; i < selectedTags.length; i++){
+
+
+
+        photo.tags
+      }
+    }
+
+  }
+
+})
