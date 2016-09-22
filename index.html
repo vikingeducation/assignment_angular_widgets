@@ -21,6 +21,7 @@
     </p>
     <input type="text" name="foodType" ng-model="foodType">
     <br>
+    <input type='text' name='webAddress' ng-model='webAddress'>
     <input type="submit" name="submit" value="Submit">
   </form>
 
@@ -42,6 +43,9 @@
       </td>
       <td>
         <input type="button" name="delete" value="Delete" ng-click="deleteRestaurant(restaurant)">
+      </td>
+      <td>
+        <img ng-src={{restaurant.webAddress}} height='25' width='25'>
       </td>
     </tr>
   </table>
