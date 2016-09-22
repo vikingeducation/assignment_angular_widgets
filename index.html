@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
+  <script type="text/javascript" src="app.js">
+  </script>
+</head>
+
+<body ng-controller="RestaurantCtrl">
+  <form name="foodForm" ng-submit="onClick(foodForm)" novalidate>
+    <p>
+      Name:
+    </p>
+    <input type="text" name="name" ng-model="name">
+    <p>
+      Type of Food:
+    </p>
+    <input type="text" name="foodType" ng-model="foodType">
+    <br>
+    <input type="submit" name="submit" value="Submit">
+  </form>
+
+  <table>
+    <tr>
+      <th>
+        Restaurant Name
+      </th>
+      <th>
+        Type of Food
+      </th>
+    </tr>
+    <tr ng-repeat="restaurant in restaurants | orderBy : 'foodType'">
+      <td>
+        {{restaurant.name}}
+      </td>
+      <td>
+        {{restaurant.foodType}}
+      </td>
+      <td>
+        <input type="button" name="delete" value="Delete" ng-click="deleteRestaurant(restaurant)">
+      </td>
+    </tr>
+  </table>
+
+</body>
+
+</html>
