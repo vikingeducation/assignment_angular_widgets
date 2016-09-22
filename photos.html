@@ -23,9 +23,13 @@
 <div class="row">
 
   <div class="col-sm-3" ng-repeat="photo in rawFeed.data">
-    <img class="img-responsive" ng-src="{{ photo.images.standard_resolution.url }}"><br>
-    <strong>{{ photo.user.username }}</strong><br>
-    <p>{{ translateDate(photo.created_time) | date: 'short' }}</p><br>
+    <a ng-href="{{ photo.link }}"><img class="img-responsive" ng-src="{{ photo.images.standard_resolution.url }}"></a><br>
+    <strong><a ng-href="{{getUserProfilePage(photo.user.username)}}">{{ photo.user.username }}</a></strong><br>
+    <p>{{ translateDate(photo.created_time) | date: 'short' }}</p>
+    <p><strong>Likes</strong>: {{ photo.likes.count }}</p>
+    <p><strong>Comments</strong>: {{ photo.comments.count }} </p>
+    <strong>Hashtags</strong>: <div ng-repeat= "tag in photo.tags">#{{tag}} </div></br>
+    <p><strong>Filter</strong>: {{photo.filter}} </p>
 
   </div>
 
