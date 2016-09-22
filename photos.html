@@ -29,12 +29,19 @@
     </option>
   </select>
 
+  <select class="col-xs-6" ng-model="userTag">
+    <option ng-repeat="tag in allTags | unique">
+      {{tag}}
+    </option>
+  </select>
+
+  <button ng-click="getTags(rawFeed)">Click</button>
 
   <br><br><br><br>
 
   <div class="col-xs-12" style="border: 1px solid black; background-color: grey">
 
-    <div class="col-xs-4 col-height" ng-repeat="photo in rawFeed | filter: {filter: userFilter.trim()}" style="margin-top: 10px; border: 1px solid black">
+    <div class="col-xs-4 col-height" ng-repeat="photo in rawFeed | filter: filterPhoto" style="margin-top: 10px; border: 1px solid black">
       <!-- <img ng-src={{photo.from.profile_picture}}> -->
 
 

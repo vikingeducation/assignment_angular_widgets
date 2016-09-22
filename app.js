@@ -5,8 +5,28 @@ widgets.factory('_', ['$window', function($window) {return $window._}]);
 widgets.controller('PhotosCtrl', ['$scope', '_', function($scope,_) { 
   $scope.rawFeed = instagramResponse.data;
   $scope.userFilter;
-
-
+  $scope.userTag;
+  $scope.allTags = [];
+  var getTags = function(data) {
+    data.forEach(function(ele) {
+      ele.tags.forEach(function(tag) {
+        $scope.allTags.push(tag);
+      })
+    })
+  };
+  getTags($scope.rawFeed);
+  $scope.filterPhoto = function(photo) {
+    if ($scope.userFilter) {
+      if (photo.filter !== $scope.userFilter) {
+        return false;
+      }
+    }
+    if ($scope.userTag) {
+      if (photo.filter !== $scope.userFilter) {
+        return false;
+      }
+    }
+  };
 }]);
 
 widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
