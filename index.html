@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Angular Widgets</title>
+
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-app="widgets" ng-controller="Restaurant">
+  <input type="text" name="name" ng-model="name">
+  <input type="text" name="food" ng-model="food">
+  <button ng-click="createRestaurant()">Create Restaurant</button>
+</body>
+</html>
