@@ -3,22 +3,50 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="app.js"></script>
+    <<link rel="stylesheet" href="styles.css">
   </head>
+
   <body ng-controller="RestaurantCtrl">
+    <label>Restaurant Name</label>
     <input type="text" name="Name" ng-model="name">
+
+    <label>Food Type</label>
     <input type="text" name="Type of Food" ng-model="food">
+
+    <label>Image URL</label>
+    <input type="text" name="Image URL" ng-model="imgUrl">
+
     <label>Create Restaurant</label>
     <input type="submit" ng-click="createRestaurant()">
-  </body>
 
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Food</th>
-    </tr>
-    <tr ng-repeat="restaurant in restaurants">
-      <td>{{ restaurant.name }}</td>
-      <td>{{ restaurant.foodType }}</td>
-    </tr>
-  </table>
+    <table>
+      <tr>
+        <th ng-click="sortElements($event)">name</th>
+        <th ng-click="sortElements($event)">foodType</th>
+      </tr>
+      <tr ng-repeat="restaurant in restaurants | orderBy: 'foodType'">
+        <td>{{ restaurant.name }}</td>
+        <td>{{ restaurant.foodType }}</td>
+        <td><img ng-src="{{ restaurant.imgUrl }}"></td>
+        <td ng-click="deleteRestaurant($index)">Delete</td>
+      </tr>
+    </table>
+
+    <h1>Search for Restaurants</h1>
+    <input type="text" ng-model="searchWord">
+
+    <table>
+      <tr>
+        <th ng-click="sortElements($event)">name</th>
+        <th ng-click="sortElements($event)">foodType</th>
+      </tr>
+      <tr ng-repeat="restaurant in restaurants | filter: { name: searchWord }">
+        <td>{{ restaurant.name }}</td>
+        <td>{{ restaurant.foodType }}</td>
+        <td><img ng-src="{{ restaurant.imgUrl }}"></td>
+        <td ng-click="deleteRestaurant($index)">Delete</td>
+      </tr>
+    </table>
+
+  </body>
 </html>
