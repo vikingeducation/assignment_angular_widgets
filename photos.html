@@ -6,12 +6,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="photos.js"></script>
     <script src="app.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" title="no title">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" media="screen" title="no title">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body class="row" ng-controller="PhotosCtrl">
-    <div class="col-xs-2" ng-repeat="post in rawFeed">
-      <img ng-src="{{post.images.thumbnail.url}}">
+  <body ng-controller="PhotosCtrl">
+    <select ng-model="searchTerm">
+      <option></option>
+      <option ng-repeat="filter in filters">{{ filter }}</option>
+    </select>
+    <select ng-model="searchTerm" multiple>
+      <option></option>
+      <option ng-repeat="filter in filters">{{ filter }}</option>
+    </select>
+    <div class="row">
+      <div class="col-xs-3" ng-repeat="post in rawFeed | filter: { filter : searchTerm }">
+        <div class="card">
+          <div class="card-block">
+            <a ng-href="{{ post.link }}"><img ng-src="{{post.images.thumbnail.url}}"></a>
+            <a ng-href="{{ 'https://www.instagram.com/' + post.user.username + '/' }}"><h4 class="card-title">{{ post.user.username }}</h4></a>
+            <p class="card-text">Posted On: {{ post.caption.created_time * 1000 | date }}</p>
+            <p class="card-text">Likes: {{ post.likes.count }}</p>
+            <p class="card-text">Comments: {{ post.comments.count }}</p>
+            <p class="card-text">Filter: {{ post.filter }}</p>
+            <p><span ng-repeat="tag in post.tags"> #{{ tag }}</span></p>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

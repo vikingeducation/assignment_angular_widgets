@@ -38,5 +38,19 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
 widgets.controller('PhotosCtrl',
   ['$scope', 'instagramResponse',
   function($scope, instagramResponse) {
+
   $scope.rawFeed = instagramResponse.data;
+  $scope.searchTerm = '';
+
+  var buildFilters = function() {
+    var post = instagramResponse.data
+    var filters = {};
+    for (var i = 0; i < post.length; i++) {
+      filters[post[i].filter] = true;
+    }
+    return Object.keys(object);
+  };
+
+  $scope.filters = buildFilters();
+
 }]);
