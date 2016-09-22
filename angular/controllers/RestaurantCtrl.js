@@ -17,8 +17,7 @@ app.controller("RestaurantCtrl",
 
   $scope.clickSort = function(sortEl){
     $scope.sort = sortEl;
-    $scope.descending = $scope.descending ? false : true;
-    console.log($scope.descending);
+    $scope.descending = !$scope.descending;
     if ($scope.descending) {
       $scope.sort = "-" + $scope.sort;
     }

@@ -19,29 +19,30 @@
 
 <div class="container">
   <select ng-model="selectedTag" ng-options="tag for tag in tags"></select>
+  <select ng-model="selectedFilter" ng-options="filter for filter in filters"></select>
   <div class="row">
-    <div class="card col-sm-3" ng-repeat="photos in rawFeed.data">
-      <h3><a href="https://www.instagram.com/{{photos.user.username}}">{{photos.user.username}}</a></h3>
+    <div class="card col-sm-3" ng-repeat="photo in rawFeed.data | filter:{tags: selectedTag}">
+      <h3><a href="https://www.instagram.com/{{photo.user.username}}">{{photo.user.username}}</a></h3>
       <p>
-        posted: {{photos.created_time | date}}
+        posted: {{photo.created_time | date }}
       </p>
       <div class='row'>
         <div class="col-sm-12">
-          <a href="{{photos.link}}"><img class="img-responsive" ng-src="{{ photos.images.standard_resolution.url }}"></a>
+          <a href="{{photo.link}}"><img class="img-responsive" ng-src="{{ photo.images.standard_resolution.url }}"></a>
         </div>
         <div class="col-xs-4">
-          Comments: {{photos.comments.count}}
+          Comments: {{photo.comments.count}}
         </div>
         <div class="col-xs-4 pull-right text-right">
-          Likes: {{photos.likes.count}}
+          Likes: {{photo.likes.count}}
         </div>
       </div>
       <div class="row">
         <div class="col-sm-3">
-          Filter type: {{photos.filter}}
+          Filter type: {{photo.filter}}
         </div>
         <div class="col-sm-3 pull-right">
-          <span ng-repeat="tag in photos.tags"><a>#{{tag}}</a> </span>
+          <span ng-repeat="tag in photo.tags"><a>#{{tag}}</a> </span>
         </div>
       </div>
     </div>

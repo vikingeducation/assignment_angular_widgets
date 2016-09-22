@@ -9,4 +9,11 @@ app.controller("PhotosCtrl", ["$scope", "instagramResponse", function($scope, in
     }
     return tagList;
   })();
+  $scope.filters = (function(){
+    var filterList = [];
+    for(var i = 0; i < $scope.rawFeed.data.length; i++){
+      filterList.push($scope.rawFeed.data[i].filter);
+    }
+    return filterList;
+  })();
 }]);
