@@ -4,11 +4,15 @@ widgets.controller('PhotosCtrl',
   ['$scope', function($scope){
 
     $scope.rawFeed = instagramResponse.data;
-    $scope.first = $scope.rawFeed[0];
+    $scope.first = $scope.rawFeed[1];
 
     $scope.getUrl = function(image){
       return "http://www.instagram.com/" + image.user.username
-    }
+    };
+
+    $scope.getDate = function(image){
+      return new Date(parseInt(image.created_time)*1000);
+    };
 
   }]
 );
