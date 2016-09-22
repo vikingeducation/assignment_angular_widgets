@@ -21,8 +21,7 @@
 </head>
 <body ng-app="widgets" ng-controller="PhotosCtrl" class="container" class="photos-app">
 <div class="row">
-
-  <div class="col-sm-3" ng-repeat="photo in rawFeed.data | filter: { tags: searchTags, filter: searchFilter }">
+  <div class="col-sm-3" ng-repeat="photo in rawFeed.data | filter: {filter: searchFilter} | customPagination: page">
     <a ng-href="{{ photo.link }}"><img class="img-responsive" ng-src="{{ photo.images.standard_resolution.url }}"></a><br>
     <strong><a ng-href="{{getUserProfilePage(photo.user.username)}}">{{ photo.user.username }}</a></strong><br>
     <p>{{ translateDate(photo.created_time) | date: 'short' }}</p>
@@ -39,17 +38,20 @@
 
 <div class="row">
   <select multiple ng-model='searchTags'>
-    <option ng-repeat="tag in hashTags">
+    <option value="{{tag}}" ng-repeat="tag in hashTags">
       {{ tag }}
     </option>
   </select>
 
   <select ng-model="searchFilter">
-    <option ng-repeat="filter in filters">
+    <option value="{{filter}}" ng-repeat="filter in filters">
       {{ filter }}
     </option>
   </select>
 </div>
+
+<button ng-click="upPage()">Next</button>
+<button ng-click="downPage()">Previous</button>
 
 </body>
 </html>

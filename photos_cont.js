@@ -18,6 +18,7 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
   
   $scope.filters = {};
   $scope.hashTags = {};
+  $scope.page = 1;
 
   // initialize
   for(var i = 0; i < $scope.rawFeed.data.length; i++) {
