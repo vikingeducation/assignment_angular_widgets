@@ -44,6 +44,7 @@ widgets.controller('PhotosCtrl',
   $scope.filterSearch = '';
   $scope.tagSearch = '';
   $scope.page = 0;
+  $scope.filteredArray = $scope.rawFeed
 
   var buildFilters = function() {
     var post = instagramResponse.data;
@@ -63,8 +64,8 @@ widgets.controller('PhotosCtrl',
   $scope.filters = buildFilters().filters;
   $scope.tags = buildFilters().tags;
 
-  $scope.changePageFor = function(filtered) {
-    if ($scope.page < 1  && filtered.length === 12) {
+  $scope.changePageFor = function() {
+    if ($scope.page < $scope.filteredArray.length / 12 - 1) {
       $scope.page++;
     }
   };
@@ -75,24 +76,25 @@ widgets.controller('PhotosCtrl',
     }
   };
 
-  $scope.filteredRawFeed = function(filterSearch, tagSearch) {
-    var values = $scope.rawFeed;
-    if(filterSearch){
-      values = values.filter(function(post){
-        return post.filter === filterSearch;
-      });
-    }
-    if (tagSearch[0]){
-      console.log(tagSearch);
-      values = values.filter(function(post){
-        return tagSearch.every(function(tag){
-          return post.tags.includes(tag);
-        });
-      });
-    }
-    $scope.feedLength = values.length;
-    return values;
-  };
+
+  $scope.$watchGroup(['tagSearch', 'filterSearch'], function() {
+                $scope.page = 0
+                var values = $scope.rawFeed;
+                if($scope.filterSearch){
+                  values = values.filter(function(post){
+                    return post.filter === $scope.filterSearch;
+                  });
+                }
+                if ($scope.tagSearch[0]){
+                  values = values.filter(function(post){
+                    return $scope.tagSearch.every(function(tag){
+                      return post.tags.includes(tag);
+                    });
+                  });
+                }
+                $scope.feedLength = values.length;
+                $scope.filteredArray = values;
+              });
 
 }]);
 
