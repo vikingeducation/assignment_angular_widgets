@@ -8,6 +8,14 @@ widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
   $scope.typeOfFood;
   $scope.url;
   $scope.searchFood;
+  $scope.sortCol = 'typeOfFood';
+  $scope.revOrder = false;
+  $scope.sortBy = function(col) {
+    if (col === $scope.sortCol) {
+      $scope.revOrder = !$scope.revOrder
+    }
+    $scope.sortCol = col;
+  };
 
   $scope.processForm = function(form) {
     var restaurant = {

@@ -33,14 +33,14 @@
         <thead>
           <tr>
             <th> #</th>
-            <th>Food</th>
-            <th>Type of Food </th>
+            <th ng-click="sortBy('food')">Food</th>
+            <th ng-click="sortBy('typeOfFood')">Type of Food </th>
             <th>Address </th>
             <th>Options </th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="rest in restaurants | orderBy:'typeOfFood' | filter:'searchFood'">
+          <tr ng-repeat="rest in restaurants | orderBy : sortCol | filter:{food:searchFood} | orderBy : reverse : revOrder">
             <td>
               {{$index + 1}}
             </td>
