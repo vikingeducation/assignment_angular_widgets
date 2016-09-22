@@ -18,16 +18,63 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div>
+  <div class="container">
+    <div class="row">
+      <form name="myForm">
+        <input type="text" name="food" ng-model="food">
+        <input type="text" name="typeOfFood" ng-model="typeOfFood">
+        <input type="text" name="url" ng-model="url">
+        <input type="submit" value="Create Restaurant" ng-click="processForm(myForm)">
+      </form>
+    </div>
 
-    <form name="myForm">
-      <input type="text" ng-model="food">
-      <input type="text" ng-model="typeOfFood">
-      <input type="submit" value="Create Restaurant" ng-click="processForm(myForm)">
-    </form>
+    <div class="row">
+      <table class="table table-inverse">
+        <thead>
+          <tr>
+            <th> #</th>
+            <th>Food</th>
+            <th>Type of Food </th>
+            <th>Address </th>
+            <th>Options </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="rest in restaurants | orderBy:'typeOfFood' | filter:'searchFood'">
+            <td>
+              {{$index + 1}}
+            </td>
+            <td>
+              {{rest.food}}
+            </td>
+            <td>
+              {{rest.typeOfFood}}
+            </td>
+            <td>
+              <img ng-src={{rest.url}}> 
+            </td>
+            <td>
+              <button class="btn btn-danger" ng-click="deleteRestaurant(restaurants.indexOf(rest))">
+                delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>
+
+
+    <div class="row">
+      <h1>Search Restaurants </h1>
+      <form name="search-form">
+        <input type="text" ng-model="searchFood">
+        <input type="submit" value="Search Restaurants" ng-click="">
+        
+      </form>
+    </div> 
 
   </div>
+  
   <script src="app.js"></script>
-
 </body>
 </html>
