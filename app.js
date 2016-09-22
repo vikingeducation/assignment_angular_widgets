@@ -2,6 +2,17 @@ var widgets = angular.module('widgets', []);
 
 widgets.factory('_', ['$window', function($window) {return $window._}]);
 
+widgets.controller('PhotosCtrl', ['$scope', '_', function($scope,_) { 
+  $scope.rawFeed = instagramResponse.data;
+  $scope.log = function() { 
+    console.log("hi");
+    return $scope.rawFeed;
+  };
+
+
+
+}]);
+
 widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
   $scope.restaurants = [];
   $scope.food;
@@ -30,7 +41,6 @@ widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
   };
 
   $scope.deleteRestaurant = function(index) {
-    console.log(index);
     $scope.restaurants.splice(index,1);
   };
 

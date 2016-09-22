@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="widgets" ng-controller="PhotosCtrl">
+<head>
+  <title></title>
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <!-- Lodash -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
+
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="col-xs-12" style="border: 1px solid black; background-color: grey">
+    <div class="col-xs-4" ng-repeat="photo in rawFeed" style="margin-top: 10px;">
+      <!-- <img ng-src={{photo.from.profile_picture}}> -->
+      
+      <p>{{photo.caption.text}} </p>
+      <p>{{user.username}}</p>
+
+      <img ng-src={{photo.images.standard_resolution.url}} style="width: 100%; border:1px solid grey; border-radius:50px">
+
+      
+    
+    </div> 
+  </div>
+
+
+  <script src="photos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
