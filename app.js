@@ -1,11 +1,14 @@
 var widgets = angular.module('widgets', []);
 
+widgets.factory('instagramResponse', ['$window', function($window){
+  return $window.instagramResponse;
+}]);
 
 widgets.controller('RestaurantCtrl', ['$scope', function($scope){
   $scope.restaurants = [];
   $scope.order = true;
 
-  $scope.searchBy = "Food"
+  $scope.searchBy = "Food";
 
   $scope.createRestaurant = function() {
     var restaurant = {
@@ -20,18 +23,20 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
   };
 
   $scope.deleteRestaurant = function(i) {
-    $scope.restaurants.splice(i,1)
+    $scope.restaurants.splice(i,1);
   };
 
   $scope.sortElements = function(e) {
     if ($scope.searchBy === angular.element(e.target).text()) {
-      $scope.order = !$scope.order
+      $scope.order = !$scope.order;
     } else {
-      $scope.searchBy = angular.element(e.target).text()
+      $scope.searchBy = angular.element(e.target).text();
     }
   };
 }]);
 
-widgets.controller('PhotosCtrl', ['$scope', instagramResponse, function($scope, instagramResponse) {
-  $scope.rawFeed = instagramResponse;
+widgets.controller('PhotosCtrl',
+  ['$scope', 'instagramResponse',
+  function($scope, instagramResponse) {
+  $scope.rawFeed = instagramResponse.data;
 }]);
