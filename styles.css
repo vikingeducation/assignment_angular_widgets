@@ -1,3 +1,17 @@
 img {
-  width:150px;
+  width:100px;
+}
+
+.arrow{
+  height: 20px;
+  width: auto;
+  vertical-align: center;
+}
+
+th {
+  line-height: 20px;
+}
+
+.photos-app img {
+  /*width: 100%;*/
 }

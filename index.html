@@ -7,6 +7,7 @@
   <!-- Angular -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
   <script src="app.js"></script>
+  <script src="widgets_cont.js"></script>
 </head>
 <body ng-controller="Restaurant">
   <input type="text" name="name" ng-model="name">
@@ -31,12 +32,11 @@
   </table>
 
   <h3>Search Restaurants</h3>
-  <img ng-src="{{arrow}}">
   <table>
     <tr>
-      <th ng-click="changeFilter('image')">Image<img ng-src="{{arrow}}"></th>
-      <th ng-click="changeFilter('name')">Name<img ng-src="{{arrow}}"></th>
-      <th ng-click="changeFilter('food')">Food<img ng-if ="filter:'food'" ng-src="{{arrow}}"></th>
+      <th>Image</th>
+      <th ng-click="changeFilter('name')">Name<img class="arrow" ng-if="restaurantFilter ==='name' || restaurantFilter ==='-name'" ng-src="{{arrow}}"></th>
+      <th ng-click="changeFilter('food')">Food<img class="arrow" ng-if="restaurantFilter ==='food' || restaurantFilter ==='-food'" ng-src="{{arrow}}"></th>
     </tr>
     <tr ng-repeat="restaurant in restaurants | orderBy: restaurantFilter | filter: {name: search, food: search}">
       <td><img ng-src="{{ restaurant.image }}"></td>
