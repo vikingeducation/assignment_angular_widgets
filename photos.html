@@ -21,7 +21,7 @@
   <h1>Photos</h1>
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-8">
         <select ng-model="selectedFilter">
           <option ng-repeat="filter in filters" value={{filter}}>{{filter}}</option>
         </select>
@@ -32,25 +32,25 @@
           {{selectedHashtags}}
         </div>
       </div>
+      <div class="col-sm-4">
+        <button ng-disabled="currentPage <= 0" ng-click="currentPage=currentPage-1">
+          Previous
+        </button>
+        <span>Page: {{currentPage + 1}}/{{originalPictures.length/numPerPage}}</span>
+        <button ng-disabled="currentPage >= originalPictures.length/numPerPage - 1" ng-click="currentPage=currentPage+1">
+          Next
+        </button>
+      </div>
     </div>
     <br>
     <div class="row">
       <div class="col-sm-12">
         <p>Results: {{ filtered.length }}</p>
-        <p>Results in this page: {{ pictures.length }}</p>
-
-        <button ng-disabled="currentPage <= 1" ng-click="currentPage=currentPage-1">
-            Previous
-        </button>
-        <button ng-disabled="currentPage >= pictures.length/numPerPage - 1" ng-click="currentPage=currentPage+1">
-            Next
-        </button>
-
         <div class="col-sm-3" ng-repeat="picture in pictures | filter:{filter:selectedFilter} | hashtagFilter: selectedHashtags as filtered">
           <a ng-href={{picture.link}}><img ng-src={{picture.url}}></a><br>
           <div name='photo-details'>
             <div>{{picture.user}}</div><br>
-            <div>{{picture.time | date:'yyyy-MM-dd HH:mm:ss Z'}}</div><br>
+            <div>{{picture.time*1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}</div><br>
             <div>
               <div>Filter: {{picture.filter}}</div><br>
               <span>Likes: {{picture.likes}}</span>

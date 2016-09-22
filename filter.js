@@ -3,7 +3,7 @@ widgets.filter('hashtagFilter', ['_', function() {
   // Collection is all the pictures.
   // Hashtagsfilter is the filter that we input by selecting tags.
   return function(collection, hashtagsFilter) {
-    if ( !hashtagsFilter ) {
+    if ( !hashtagsFilter || !hashtagsFilter.length) {
       return collection;
     }
     var filteredCollection = [];

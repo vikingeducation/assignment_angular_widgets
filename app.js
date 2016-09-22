@@ -28,9 +28,9 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
 
   $scope.rawFeed = instagramResponse;
   $scope.filters = [];
+  $scope.originalPictures = [];
   $scope.pictures = [];
   $scope.hashtags = [];
-
 
   for (var i = 0; i < $scope.rawFeed.data.length; i++) {
     var picture = {};
@@ -44,16 +44,16 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
     picture['filter'] = pictureData.filter;
     picture['hashtags'] = pictureData.tags;
     $scope.filters.push(picture['filter']);
-    $scope.pictures.push(picture);
+    $scope.originalPictures.push(picture);
+    $scope.numPictures++;
     $scope.hashtags = $scope.hashtags.concat(picture['hashtags']);
   }
   $scope.filters = _.uniqBy($scope.filters);
   $scope.hashtags = _.uniqBy($scope.hashtags);
-
-
+  $scope.pictures = $scope.originalPictures;
 
   // Photo pagination.
-  $scope.currentPage = 1;
+  $scope.currentPage = 0;
   $scope.numPerPage = 12;
   $scope.maxSize = 5;
 
@@ -66,7 +66,7 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
     console.log($scope.currentPage);
     var firstPhotoIndex = ($scope.currentPage) * $scope.numPerPage;
     var lastPhotoIndex = firstPhotoIndex + $scope.numPerPage;
-    $scope.pictures.splice(firstPhotoIndex,lastPhotoIndex);
+    $scope.pictures = $scope.originalPictures.slice(firstPhotoIndex,lastPhotoIndex);
   });
 
 }]);
