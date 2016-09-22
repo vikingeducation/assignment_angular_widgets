@@ -8,8 +8,7 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope,_) {
     console.log("hi");
     return $scope.rawFeed;
   };
-
-
+  
 
 }]);
 
