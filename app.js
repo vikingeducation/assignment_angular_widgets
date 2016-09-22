@@ -3,11 +3,11 @@ var widgets = angular.module("widgets", []);
 widgets.filter("customPagination", function() {
 
   return function(photos, page) {
-    var pages = []
-    pages = photos.slice((page - 1) * 12, page * 12)
-    return pages
-  }
-})
+    var pages = [];
+    pages = photos.slice((page - 1) * 12, page * 12);
+    return pages;
+  };
+});
 
 
 
@@ -21,16 +21,16 @@ widgets.filter('photoFilter', function() {
     console.log(photos);
     var filteredPhotos = photos.filter(function(photo) {
       var tags = photo.tags;
-      for(var tag in tags) {
-         if(searchTags.includes(tag)) {
+      for(var i in tags) {
+         if ( searchTags.includes(tags[i]) ) {
           return true;
-          break;
          }
       }
       return false;
-    })
+    });
     return filteredPhotos;
-  }
+  };
+
 });
 
 //     for (var photo in photos) {
