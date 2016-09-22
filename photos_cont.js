@@ -12,22 +12,23 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
   };
 
   $scope.getUserProfilePage = function(user) {
-    return "https://www.instagram.com/" + user + "/"
-  }
+    return "https://www.instagram.com/" + user + "/";
+  };
 
-  $scope.hashTags = {};
+  
   $scope.filters = {};
+  $scope.hashTags = {};
 
-  $scope.getHashTags = function() {
-    for(var i = 0; i < $scope.rawFeed.data.length; i++) {
-      for(var j = 0; j < $scope.rawFeed.data[i].tags.length; j++) {
-        $scope.hashTags[$scope.rawFeed.data[i].tags[j]] = true;
-      }
+  // initialize
+  for(var i = 0; i < $scope.rawFeed.data.length; i++) {
+      // filters
+    $scope.filters[$scope.rawFeed.data[i].filter] = $scope.rawFeed.data[i].filter;
+    
+    for(var j = 0; j < $scope.rawFeed.data[i].tags.length; j++) {
+      // hash tags
+      $scope.hashTags[$scope.rawFeed.data[i].tags[j]] = $scope.rawFeed.data[i].tags[j];
     }
   }
 
-  $scope.getFilters = function() {
-
-  }
 
 }]);

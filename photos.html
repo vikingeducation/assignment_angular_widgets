@@ -22,7 +22,7 @@
 <body ng-app="widgets" ng-controller="PhotosCtrl" class="container" class="photos-app">
 <div class="row">
 
-  <div class="col-sm-3" ng-repeat="photo in rawFeed.data">
+  <div class="col-sm-3" ng-repeat="photo in rawFeed.data | filter: { tags: searchTags, filter: searchFilter }">
     <a ng-href="{{ photo.link }}"><img class="img-responsive" ng-src="{{ photo.images.standard_resolution.url }}"></a><br>
     <strong><a ng-href="{{getUserProfilePage(photo.user.username)}}">{{ photo.user.username }}</a></strong><br>
     <p>{{ translateDate(photo.created_time) | date: 'short' }}</p>
@@ -34,5 +34,22 @@
   </div>
 
 </div>
+<p>{{searchTags}}</p>
+<p>{{searchFilter}}</p>
+
+<div class="row">
+  <select multiple ng-model='searchTags'>
+    <option ng-repeat="tag in hashTags">
+      {{ tag }}
+    </option>
+  </select>
+
+  <select ng-model="searchFilter">
+    <option ng-repeat="filter in filters">
+      {{ filter }}
+    </option>
+  </select>
+</div>
+
 </body>
 </html>
