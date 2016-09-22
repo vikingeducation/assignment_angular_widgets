@@ -22,6 +22,16 @@ widgets.controller('PhotosCtrl',
       return filters
     })();
 
+    $scope.allHashtags = (function(){
+      var tags = [];
+      for (var i = 0; i < $scope.rawFeed.length; i++){
+        for(var j = 0; j < $scope.rawFeed[i].tags.length; j++){
+          tags.push($scope.rawFeed[i].tags[j]);
+        }
+      }
+      return tags;
+    })();
+
     $scope.getFilter = function(choice){
       if(choice){
         return {'filter': choice};
@@ -31,8 +41,30 @@ widgets.controller('PhotosCtrl',
       }
     };
 
+    $scope.filterPhoto = function(photo){
+      console.log(photo);
+      return true;
+    };
+
+     $scope.filterPhoto2 = function(photo){
+      console.log(photo);
+      return true;
+    };
+
   }]
 );
+
+widgets.filter('byTag', function(choices){
+  return function(collection, choices){
+    console.log(choices);
+    for(var i = 0; i < collection.length; i++){
+      var image = collection[i];
+      var tags = image.tags;
+
+    }
+  };
+
+});
 
 widgets.filter('unique', function() {
 
