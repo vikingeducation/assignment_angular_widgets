@@ -60,7 +60,6 @@
         </div>
       </div>
     </div>
-  </div>
 
 <table>
   <tr>
@@ -71,24 +70,22 @@
       Full Name
     </th>
     <th>
-      Link
-    </th>
-    <th>
       Profile Pic
     </th>
   </tr>
+  <div>
+    THIS IS WHERE THE USERNAME SHOULD BE<br>
+    {{ filterUser }}
+  </div>
   <tr ng-repeat="user in users">
     <td>
-      user.username
+      <a href='#' ng-click='filterUser=username'>{{user.username}}</a>
     </td>
     <td>
-      user.fullName
+      {{user.fullName}}
     </td>
     <td>
-      user.link
-    </td>
-    <td>
-      <img ng-src={{user.profilePic}}>
+      <img ng-src={{user.profilePic}} height='50' width='50'>
     </td>
   </tr>
 

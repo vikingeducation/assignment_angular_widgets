@@ -25,7 +25,7 @@ widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
 
 
 widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
-
+  $scope.filterUser;
   $scope.rawFeed = instagramResponse;
   $scope.filters = [];
   $scope.originalPictures = [];
@@ -51,14 +51,14 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
 
     user['username'] = userData.username;
     user['profilePic'] = userData.profile_picture;
-    user['fullName'] = userData.fullName;
-    user['profilePic'] = userData.profile_picture;
+    user['fullName'] = userData.full_name;
 
 
     $scope.filters.push(picture['filter']);
     $scope.originalPictures.push(picture);
     $scope.numPictures++;
     $scope.hashtags = $scope.hashtags.concat(picture['hashtags']);
+    $scope.users.push(user);
   }
   $scope.filters = _.uniqBy($scope.filters);
   $scope.hashtags = _.uniqBy($scope.hashtags);
