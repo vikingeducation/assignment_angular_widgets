@@ -22,6 +22,15 @@ widgets.controller('PhotosCtrl',
       return filters
     })();
 
+    $scope.getFilter = function(choice){
+      if(choice){
+        return {'filter': choice};
+      }
+      else{
+        return false;
+      }
+    };
+
   }]
 );
 
