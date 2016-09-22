@@ -68,10 +68,30 @@ widgets.controller('PhotosCtrl',
       $scope.page++;
     }
   };
+
   $scope.changePageBack = function() {
     if ($scope.page > 0) {
       $scope.page--;
     }
+  };
+
+  $scope.filteredRawFeed = function(filterSearch, tagSearch) {
+    var values = $scope.rawFeed;
+    if(filterSearch){
+      values = values.filter(function(post){
+        return post.filter === filterSearch;
+      });
+    }
+    if (tagSearch[0]){
+      console.log(tagSearch);
+      values = values.filter(function(post){
+        return tagSearch.every(function(tag){
+          return post.tags.includes(tag);
+        });
+      });
+    }
+    $scope.feedLength = values.length;
+    return values;
   };
 
 }]);
@@ -83,6 +103,6 @@ widgets.filter('tagFilter', function() {
       return tagSearchValue.every(function(tag) {
         return post.tags.includes(tag);
       });
-    })
-  }
+    });
+  };
 });

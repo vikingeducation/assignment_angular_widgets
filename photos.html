@@ -18,10 +18,11 @@
       <option></option>
       <option ng-repeat="tag in tags">{{ tag }}</option>
     </select>
-    <p>{{ (rawFeed|filter: { filter: filterSearch } | tagFilter: tagSearch ).length }}</p>
+    <p>{{ feedLength }}</p>
     <span ng-click="changePageFor(filtered)">Go Forth</span><span ng-click="changePageBack()">Go Back</span>
     <div class="row">
-      <div class="col-xs-3" ng-repeat="post in rawFeed | filter: { filter: filterSearch } | tagFilter: tagSearch | limitTo:12:(page * 12)">
+      <!-- <div class="col-xs-3" ng-repeat="post in rawFeed | filter: { filter: filterSearch } | tagFilter: tagSearch | limitTo:12:(page * 12)"> -->
+      <div class="col-xs-3" ng-repeat="post in filteredRawFeed(filterSearch, tagSearch) | limitTo:12:(page * 12)">
         <div class="card">
           <div class="card-block">
             <a ng-href="{{ post.link }}"><img ng-src="{{post.images.thumbnail.url}}"></a>
