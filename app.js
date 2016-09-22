@@ -3,6 +3,7 @@ var widgets = angular.module('widgets', []);
 
 widgets.controller('RestaurantCtrl', ['$scope', function($scope){
   $scope.restaurants = [];
+  $scope.order = true;
 
   $scope.searchBy = "Food"
 
@@ -23,7 +24,14 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
   };
 
   $scope.sortElements = function(e) {
-
-    $scope.searchBy = angular.element(e.target).text()
+    if ($scope.searchBy === angular.element(e.target).text()) {
+      $scope.order = !$scope.order
+    } else {
+      $scope.searchBy = angular.element(e.target).text()
+    }
   };
+}]);
+
+widgets.controller('PhotosCtrl', ['$scope', instagramResponse, function($scope, instagramResponse) {
+  $scope.rawFeed = instagramResponse;
 }]);

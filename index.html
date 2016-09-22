@@ -3,7 +3,7 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="app.js"></script>
-    <<link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
   </head>
 
   <body ng-controller="RestaurantCtrl">
@@ -23,8 +23,9 @@
       <tr>
         <th ng-click="sortElements($event)">name</th>
         <th ng-click="sortElements($event)">foodType</th>
+        <th>{{ order? "^" : "v" }}</th>
       </tr>
-      <tr ng-repeat="restaurant in restaurants | orderBy: 'foodType'">
+      <tr ng-repeat="restaurant in restaurants | orderBy: searchBy : order">
         <td>{{ restaurant.name }}</td>
         <td>{{ restaurant.foodType }}</td>
         <td><img ng-src="{{ restaurant.imgUrl }}"></td>
@@ -39,8 +40,10 @@
       <tr>
         <th ng-click="sortElements($event)">name</th>
         <th ng-click="sortElements($event)">foodType</th>
+        <th ng-if="order">^</th>
+        <th ng-if="!order">v</th>
       </tr>
-      <tr ng-repeat="restaurant in restaurants | filter: { name: searchWord }">
+      <tr ng-repeat="restaurant in restaurants | filter: { name: searchWord } | orderBy: searchBy : order">
         <td>{{ restaurant.name }}</td>
         <td>{{ restaurant.foodType }}</td>
         <td><img ng-src="{{ restaurant.imgUrl }}"></td>

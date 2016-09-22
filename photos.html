@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="widget">
+  <head>
+    <meta charset="utf-8">
+    <title>PHOTOS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="photos.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" title="no title">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body ng-controller="PhotosCtrl">
+    <div>
+      {{ $scope.rawFeed | json }}
+    </div>
+  </body>
+</html>
