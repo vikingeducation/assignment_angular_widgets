@@ -56,14 +56,14 @@
   <input type='text' name='searchTerm' ng-model='searchTerm'>
   <table>
     <tr>
-      <th>
-        Restaurant Name
+      <th ng-click="sortType='restoName'">
+        <a href='#'>Restaurant Name</a>
       </th>
-      <th>
-        Type of Food
+      <th ng-click="sortType='foodType'">
+        <a href='#'>Type of Food</a>
       </th>
     </tr>
-    <tr ng-repeat="restaurant in restaurants | orderBy : 'foodType' | filter:searchTerm">
+    <tr ng-repeat="restaurant in restaurants | orderBy : sortType | filter:searchTerm">
       <td>
         {{restaurant.name}}
       </td>
