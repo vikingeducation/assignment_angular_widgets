@@ -18,7 +18,7 @@
 <body ng-controller="PhotosCtrl">
 
 <div class="container">
-
+  <select ng-model="selectedTag" ng-options="tag for tag in tags"></select>
   <div class="row">
     <div class="card col-sm-3" ng-repeat="photos in rawFeed.data">
       <h3><a href="https://www.instagram.com/{{photos.user.username}}">{{photos.user.username}}</a></h3>
