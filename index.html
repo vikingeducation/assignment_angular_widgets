@@ -23,7 +23,7 @@
     <td ng-click="clickSort('foodType')">Type of Food</td>
   </th>
   <tbody>
-    <tr ng-repeat="restaurant in restaurants | filter:{foodType: filterType} | orderBy: {  } ">
+    <tr ng-repeat="restaurant in restaurants | filter:{foodType: filterType} | orderBy: sort ">
       <td>{{ restaurant.name }}</td>
       <td>{{ restaurant.foodType }}</td>
       <td><img ng-src="{{ restaurant.imageSrc }}"></td>

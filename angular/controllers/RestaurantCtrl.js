@@ -16,8 +16,11 @@ app.controller("RestaurantCtrl",
   };
 
   $scope.clickSort = function(sortEl){
-    $scope.sort = {
-      col: sortEl,
-      order: order ? false : true
-  };
+    $scope.sort = sortEl;
+    $scope.descending = $scope.descending ? false : true;
+    console.log($scope.descending);
+    if ($scope.descending) {
+      $scope.sort = "-" + $scope.sort;
+    }
+  }
 }])
