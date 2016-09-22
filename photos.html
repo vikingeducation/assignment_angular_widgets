@@ -6,6 +6,8 @@
   <title></title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
+  <!-- angular ui bootstrap for pagination -->
+  <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
@@ -34,7 +36,16 @@
     <br>
     <div class="row">
       <div class="col-sm-12">
-        <p>Result count: {{ filtered.length }}</p>
+        <p>Results: {{ filtered.length }}</p>
+        <p>Results in this page: {{ pictures.length }}</p>
+
+        <button ng-disabled="currentPage <= 1" ng-click="currentPage=currentPage-1">
+            Previous
+        </button>
+        <button ng-disabled="currentPage >= pictures.length/numPerPage - 1" ng-click="currentPage=currentPage+1">
+            Next
+        </button>
+
         <div class="col-sm-3" ng-repeat="picture in pictures | filter:{filter:selectedFilter} | hashtagFilter: selectedHashtags as filtered">
           <a ng-href={{picture.link}}><img ng-src={{picture.url}}></a><br>
           <div name='photo-details'>

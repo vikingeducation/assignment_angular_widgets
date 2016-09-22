@@ -51,6 +51,24 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
   $scope.hashtags = _.uniqBy($scope.hashtags);
 
 
+
+  // Photo pagination.
+  $scope.currentPage = 1;
+  $scope.numPerPage = 12;
+  $scope.maxSize = 5;
+
+  // Tells you how many pages there are.
+  $scope.numPages = function () {
+    return Math.ceil($scope.pictures.length / $scope.numPerPage);
+  };
+
+  $scope.$watch("currentPage", function() {
+    console.log($scope.currentPage);
+    var firstPhotoIndex = ($scope.currentPage) * $scope.numPerPage;
+    var lastPhotoIndex = firstPhotoIndex + $scope.numPerPage;
+    $scope.pictures.splice(firstPhotoIndex,lastPhotoIndex);
+  });
+
 }]);
 
 
