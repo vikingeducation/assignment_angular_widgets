@@ -16,16 +16,14 @@
 <input type="text" name="image_src" ng-model="imageSrc">
 <input type="submit" ng-click="onClick()">
 
-<input type="text" name="filter" ng-model="filterType">
-
 
 <table>
   <th>
-    <td>Name</td>
-    <td>Type of Food</td>
+    <td ng-click="clickSort('name')">Name</td>
+    <td ng-click="clickSort('foodType')">Type of Food</td>
   </th>
   <tbody>
-    <tr ng-repeat="restaurant in restaurants | filter:{foodType: filterType}">
+    <tr ng-repeat="restaurant in restaurants | filter:{foodType: filterType} | orderBy: {  } ">
       <td>{{ restaurant.name }}</td>
       <td>{{ restaurant.foodType }}</td>
       <td><img ng-src="{{ restaurant.imageSrc }}"></td>
@@ -33,6 +31,9 @@
     </tr>
   </tbody>
 </table>
+
+<h2>Search Restaurants</h2>
+<input type="text" name="filter" ng-model="filterType">
 
   <script src="angular/app.js"></script>
 

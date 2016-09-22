@@ -1,4 +1,4 @@
-app.controller("RestaurantCtrl", 
+app.controller("RestaurantCtrl",
   ["$scope", function($scope) {
   $scope.restaurants = [];
   $scope.onClick = function() {
@@ -10,9 +10,14 @@ app.controller("RestaurantCtrl",
     $scope.name = "";
     $scope.type = "";
     $scope.imageSrc = "";
-  }
+  };
   $scope.deleteRestaurant = function($index) {
     $scope.restaurants.splice($index, 1);
-    console.log("Trying to delete")
-  }
+  };
+
+  $scope.clickSort = function(sortEl){
+    $scope.sort = {
+      col: sortEl,
+      order: order ? false : true
+  };
 }])
