@@ -1,0 +1,18 @@
+<html ng-app="widgets" ng-controller="RestaurantCtrl">
+<head>
+  <title>Angular Practice</title>
+<!-- Here's the Angular CDN-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <!-- Here's the local app.js -->
+  <script src="app.js"></script>
+</head>
+<body>
+<form name="new-rest">
+<label for="name">Name<label>
+  <input type="text" name="name" ng-model="formData.name">
+  <label for="food-type">Type of Food</label>
+  <input type="text" name="food-type" ng-model="formData.foodType">
+  <input type="submit" value="Create Restaurant" ng-click="makeRest()">
+</form>
+</body>
+</html>
