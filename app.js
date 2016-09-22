@@ -2,7 +2,7 @@ var widgets = angular.module('widgets', []);
 
 
 widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
-
+  $scope.reverse = true;
 
   $scope.restaurants = [];
   $scope.onClick = function(form){
