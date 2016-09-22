@@ -34,9 +34,9 @@
   <img ng-src="{{arrow}}">
   <table>
     <tr>
-      <th ng-click="changeFilter('image')">Image</th>
-      <th ng-click="changeFilter('name')">Name</th>
-      <th ng-click="changeFilter('food')">Food</th>
+      <th ng-click="changeFilter('image')">Image<img ng-src="{{arrow}}"></th>
+      <th ng-click="changeFilter('name')">Name<img ng-src="{{arrow}}"></th>
+      <th ng-click="changeFilter('food')">Food<img ng-if ="filter:'food'" ng-src="{{arrow}}"></th>
     </tr>
     <tr ng-repeat="restaurant in restaurants | orderBy: restaurantFilter | filter: {name: search, food: search}">
       <td><img ng-src="{{ restaurant.image }}"></td>
