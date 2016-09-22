@@ -1,4 +1,31 @@
 var widgets = angular.module('widgets', []);
+
+widgets.controller('PhotosCtrl',
+  ['$scope', function($scope){
+
+    $scope.rawFeed = instagramResponse.data;
+    $scope.first = $scope.rawFeed[0];
+
+    $scope.getUrl = function(image){
+      return "http://www.instagram.com/" + image.user.username
+    }
+
+  }]
+);
+
+
+// username image.user.username
+// user url "www.instagram.com/" + image.user.username
+// caption image.caption.text
+// photo url image.images.standard_resolution.url 
+// instagram page, image.link
+// hashtag info, image.tags -- array
+// posttime image.created_time
+// filter info, image.filter
+// like count, image.likes.count
+// comment count image.comments.count
+
+
 widgets.controller("RestaurantCtrl",
   ['$scope',
   function($scope){
