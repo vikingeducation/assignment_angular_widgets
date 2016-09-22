@@ -62,6 +62,39 @@
     </div>
   </div>
 
+<table>
+  <tr>
+    <th>
+      Username
+    </th>
+    <th>
+      Full Name
+    </th>
+    <th>
+      Link
+    </th>
+    <th>
+      Profile Pic
+    </th>
+  </tr>
+  <tr ng-repeat="user in users">
+    <td>
+      user.username
+    </td>
+    <td>
+      user.fullName
+    </td>
+    <td>
+      user.link
+    </td>
+    <td>
+      <img ng-src={{user.profilePic}}>
+    </td>
+  </tr>
+
+</table>
+
+
 </body>
 
 </html>

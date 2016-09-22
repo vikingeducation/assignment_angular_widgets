@@ -31,10 +31,14 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
   $scope.originalPictures = [];
   $scope.pictures = [];
   $scope.hashtags = [];
+  $scope.users = [];
 
   for (var i = 0; i < $scope.rawFeed.data.length; i++) {
     var picture = {};
+    var user = {};
     var pictureData = $scope.rawFeed.data[i];
+    var userData = pictureData.user;
+
     picture['url'] = pictureData.images.thumbnail.url;
     picture['user'] = pictureData.user.username;
     picture['time'] = pictureData.created_time;
@@ -43,6 +47,14 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
     picture['link'] = pictureData.link;
     picture['filter'] = pictureData.filter;
     picture['hashtags'] = pictureData.tags;
+
+
+    user['username'] = userData.username;
+    user['profilePic'] = userData.profile_picture;
+    user['fullName'] = userData.fullName;
+    user['profilePic'] = userData.profile_picture;
+
+
     $scope.filters.push(picture['filter']);
     $scope.originalPictures.push(picture);
     $scope.numPictures++;
