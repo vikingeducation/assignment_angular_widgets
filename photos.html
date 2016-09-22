@@ -18,10 +18,10 @@
 <body ng-controller="PhotosCtrl">
 
 <div class="container">
-  <select multiple="true" ng-model="selectedTag" ng-options="tag for tag in tags"></select>
+  <select multiple ng-multiple="true" ng-model="selectedTags" ng-options="tag for tag in tags"></select>
   <select ng-model="selectedFilter" ng-options="filter for filter in filters"></select>
-  <div class="row">
-    <div class="card col-sm-3" ng-repeat="photo in rawFeed.data | filter:{tags: selectedTag} | filter:{filter: selectedFilter} ">
+  <div class="row"><p>{{ selectedTags }} </p>
+    <div class="card col-sm-3" ng-repeat="photo in rawFeed.data | filterMultipleTags:selectedTags | filter:{filter: selectedFilter} ">
       <h3><a href="https://www.instagram.com/{{photo.user.username}}">{{photo.user.username}}</a></h3>
       <p>
         posted: {{photo.created_time | date }}
