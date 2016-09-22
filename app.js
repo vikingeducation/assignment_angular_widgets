@@ -1,12 +1,19 @@
 var widgets = angular.module("widgets", []);
 
-widgets.controller('Restaurant', [$scope, function($scope) {
+widgets.controller('Restaurant', ["$scope", function($scope) {
   $scope.restaurants = [];
 
-  $scope.name = "";
-
   $scope.createRestaurant = function() {
-    alert($scope.food);
+    var object = {}
+    object.name = $scope.name;
+    object.food = $scope.food;
+    $scope.restaurants.push(object);
+    $scope.name = "";
+    $scope.food = "";
   };
+
+  $scope.deleteRestaurant = function(name, food) {
+    for(var i = 0;)
+  }
 
 }]);
