@@ -5,27 +5,40 @@ widgets.factory('_', ['$window', function($window) {return $window._}]);
 widgets.controller('PhotosCtrl', ['$scope', '_', function($scope,_) { 
   $scope.rawFeed = instagramResponse.data;
   $scope.userFilter;
-  $scope.userTag;
+  $scope.userTags= [];
   $scope.allTags = [];
-  var getTags = function(data) {
+  $scope.searchCount = 0;
+
+  console.log("step 1");
+
+  var getTags = (function(data) {
     data.forEach(function(ele) {
       ele.tags.forEach(function(tag) {
         $scope.allTags.push(tag);
       })
     })
-  };
-  getTags($scope.rawFeed);
+  })($scope.rawFeed);
+
+  console.log("step 2");
+
   $scope.filterPhoto = function(photo) {
     if ($scope.userFilter) {
-      if (photo.filter !== $scope.userFilter) {
+      if (photo.filter !== $scope.userFilter.trim()) {
+        
         return false;
       }
     }
-    if ($scope.userTag) {
-      if (photo.filter !== $scope.userFilter) {
-        return false;
+    if ($scope.userTags.length > 0) {
+      for (var i = 0; i < $scope.userTags.length; i++) {
+        if (photo.tags.indexOf($scope.userTags[i].trim()) === -1) {
+          
+          return false;
+        }
       }
     }
+    console.log("only 1 true");
+    $scope.searchCount++;
+    return true;
   };
 }]);
 

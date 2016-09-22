@@ -22,6 +22,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
+  <br><br><br><br>
 
   <select class="col-xs-6" ng-model="userFilter">
     <option ng-repeat="photo in rawFeed | unique: 'filter'">
@@ -29,15 +30,18 @@
     </option>
   </select>
 
-  <select class="col-xs-6" ng-model="userTag">
+  <select multiple class="col-xs-6" ng-model="userTags" style="height: 200px">
     <option ng-repeat="tag in allTags | unique">
       {{tag}}
     </option>
   </select>
 
-  <button ng-click="getTags(rawFeed)">Click</button>
 
-  <br><br><br><br>
+  <br>
+
+  <h1> Display Search Count: {{ searchCount }} </h1>
+
+  <br>
 
   <div class="col-xs-12" style="border: 1px solid black; background-color: grey">
 
