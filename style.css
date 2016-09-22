@@ -1,0 +1,6 @@
+.col-height {
+  display: table-cell;
+  float: none;
+  height: 600px;
+
+}

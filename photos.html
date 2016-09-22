@@ -2,6 +2,8 @@
 <html ng-app="widgets" ng-controller="PhotosCtrl">
 <head>
   <title></title>
+  <link rel="stylesheet" href="style.css">
+
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
@@ -9,7 +11,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
 
   <!-- Angular -->
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -18,19 +22,30 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
+
+  <select class="col-xs-6" ng-model="userFilter">
+    <option ng-repeat="photo in rawFeed | unique: 'filter'">
+      {{photo.filter}}
+    </option>
+  </select>
+
+
+  <br><br><br><br>
+
   <div class="col-xs-12" style="border: 1px solid black; background-color: grey">
-    <div class="col-xs-4" ng-repeat="photo in rawFeed" style="margin-top: 10px;">
+
+    <div class="col-xs-4 col-height" ng-repeat="photo in rawFeed | filter: {filter: userFilter.trim()}" style="margin-top: 10px; border: 1px solid black">
       <!-- <img ng-src={{photo.from.profile_picture}}> -->
-    <div class="col-xs-12">
-      <div class="row">
-        <p>{{photo.caption.text}} </p>
-        <p>{{user.username}}</p>
-      </div>
 
-      <img ng-src={{photo.images.standard_resolution.url}} style="width: 100%; border:1px solid grey; border-radius:50px">
 
-    </div>
-    
+      <a href={{photo.link}}><img ng-src={{photo.images.standard_resolution.url}} style="width: 100%; border:1px solid grey; border-radius:50px"></a>
+
+      <a href="https://www.instagram.com/{{photo.user.username}}">{{photo.user.username}}</a>
+      <p>{{(photo.created_time * 1000) | date }}</p>
+      <p>Likes: {{photo.likes.count}}</p>
+      <p>Comments: {{photo.comments.count}}</p>
+      <span ng-repeat="tag in photo.tags">#{{tag}} </span>
+
     </div> 
   </div>
 
