@@ -27,14 +27,14 @@ widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
 widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
 
   $scope.rawFeed = instagramResponse;
-  $scope.filters = []
-  $scope.pictures = []
-  $scope.hashtags = []
+  $scope.filters = [];
+  $scope.pictures = [];
+  $scope.hashtags = [];
 
 
   for (var i = 0; i < $scope.rawFeed.data.length; i++) {
     var picture = {};
-    var pictureData = $scope.rawFeed.data[i]
+    var pictureData = $scope.rawFeed.data[i];
     picture['url'] = pictureData.images.thumbnail.url;
     picture['user'] = pictureData.user.username;
     picture['time'] = pictureData.created_time;
@@ -45,10 +45,10 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
     picture['hashtags'] = pictureData.tags;
     $scope.filters.push(picture['filter']);
     $scope.pictures.push(picture);
-    $scope.hashtags = $scope.hashtags.concat(picture['hashtags'])
+    $scope.hashtags = $scope.hashtags.concat(picture['hashtags']);
   }
-  $scope.filters = _.uniqBy($scope.filters)
-  $scope.hashtags = _.uniqBy($scope.hashtags)
+  $scope.filters = _.uniqBy($scope.filters);
+  $scope.hashtags = _.uniqBy($scope.hashtags);
 
 
 }]);

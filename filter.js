@@ -1,17 +1,18 @@
 widgets.filter('hashtagFilter', ['_', function() {
 
+  // Collection is all the pictures.
+  // Hashtagsfilter is the filter that we input by selecting tags.
   return function(collection, hashtagsFilter) {
     if ( !hashtagsFilter ) {
-
-      return collection
+      return collection;
     }
-    var filteredCollection = []
+    var filteredCollection = [];
+    // Iterate through the entire collection of pictures.
     angular.forEach(collection, function(picture) {
-
       if (_.intersection(picture.hashtags, hashtagsFilter).length) {
-        filteredCollection.push(picture)
+        filteredCollection.push(picture);
       }
-    })
+    });
     return filteredCollection;
   };
-}])
+}]);

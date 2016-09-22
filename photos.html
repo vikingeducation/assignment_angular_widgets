@@ -34,7 +34,8 @@
     <br>
     <div class="row">
       <div class="col-sm-12">
-        <div class="col-sm-3" ng-repeat="picture in pictures | filter:{filter:selectedFilter} | hashtagFilter: selectedHashtags">
+        <p>Result count: {{ filtered.length }}</p>
+        <div class="col-sm-3" ng-repeat="picture in pictures | filter:{filter:selectedFilter} | hashtagFilter: selectedHashtags as filtered">
           <a ng-href={{picture.link}}><img ng-src={{picture.url}}></a><br>
           <div name='photo-details'>
             <div>{{picture.user}}</div><br>
