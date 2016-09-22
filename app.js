@@ -43,6 +43,7 @@ widgets.controller('PhotosCtrl',
   $scope.rawFeed = instagramResponse.data;
   $scope.filterSearch = '';
   $scope.tagSearch = '';
+  $scope.page = 0;
 
   var buildFilters = function() {
     var post = instagramResponse.data;
@@ -62,14 +63,26 @@ widgets.controller('PhotosCtrl',
   $scope.filters = buildFilters().filters;
   $scope.tags = buildFilters().tags;
 
+  $scope.changePageFor = function(filtered) {
+    if ($scope.page < 1  && filtered.length === 12) {
+      $scope.page++;
+    }
+  };
+  $scope.changePageBack = function() {
+    if ($scope.page > 0) {
+      $scope.page--;
+    }
+  };
 
 }]);
 
 widgets.filter('tagFilter', function() {
-  return function(post, tagSearchValue) {
-    if(tagSearchValue === "") { return true }
-    return posts.filter(function(tag) {
-      tag.includes(tagSearchValue)
+  return function(rawFeed, tagSearchValue) {
+    if (tagSearchValue == false) {return rawFeed;}
+    return rawFeed.filter(function(post) {
+      return tagSearchValue.every(function(tag) {
+        return post.tags.includes(tag);
+      });
     })
   }
 });
