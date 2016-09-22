@@ -17,10 +17,37 @@
 </head>
 <body ng-controller="PhotosCtrl">
 
-  <div class="card" ng-repeat="photos in rawFeed.data">
-    <img ng-src="{{ photos.images.standard_resolution.url }}">
+<div class="container">
+
+  <div class="row">
+    <div class="card col-sm-3" ng-repeat="photos in rawFeed.data">
+      <h3><a href="https://www.instagram.com/{{photos.user.username}}">{{photos.user.username}}</a></h3>
+      <p>
+        posted: {{photos.created_time | date}}
+      </p>
+      <div class='row'>
+        <div class="col-sm-12">
+          <a href="{{photos.link}}"><img class="img-responsive" ng-src="{{ photos.images.standard_resolution.url }}"></a>
+        </div>
+        <div class="col-xs-4">
+          Comments: {{photos.comments.count}}
+        </div>
+        <div class="col-xs-4 pull-right text-right">
+          Likes: {{photos.likes.count}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          Filter type: {{photos.filter}}
+        </div>
+        <div class="col-sm-3 pull-right">
+          <span ng-repeat="tag in photos.tags"><a>#{{tag}}</a> </span>
+        </div>
+      </div>
+    </div>
   </div>
 
+</div>
 
 
 
