@@ -45,6 +45,7 @@ widgets.controller('PhotosCtrl',
   $scope.tagSearch = '';
   $scope.page = 0;
   $scope.filteredArray = $scope.rawFeed
+  $scope.userSearch = "";
 
   var buildFilters = function() {
     var post = instagramResponse.data;
@@ -76,8 +77,11 @@ widgets.controller('PhotosCtrl',
     }
   };
 
+  $scope.searchByUser = function(username) {
+    $scope.userSearch = username;
+  }
 
-  $scope.$watchGroup(['tagSearch', 'filterSearch'], function() {
+  $scope.$watchGroup(['tagSearch', 'filterSearch', 'userSearch'], function() {
                 $scope.page = 0
                 var values = $scope.rawFeed;
                 if($scope.filterSearch){
@@ -90,6 +94,11 @@ widgets.controller('PhotosCtrl',
                     return $scope.tagSearch.every(function(tag){
                       return post.tags.includes(tag);
                     });
+                  });
+                }
+                if($scope.userSearch){
+                  values = values.filter(function(post){
+                    return post.user.username === $scope.userSearch;
                   });
                 }
                 $scope.feedLength = values.length;
@@ -108,3 +117,10 @@ widgets.filter('tagFilter', function() {
     });
   };
 });
+
+// widgets.controller('UsersCtrl',
+//   ['$scope', 'instagramResponse',
+//   function($scope, instagramResponse) {
+//     $scope.rawFeed = instagramResponse.data;
+//
+// }]);
