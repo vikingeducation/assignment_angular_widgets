@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="RestaurantCtrl">
+    <input type="text" name="Name" ng-model="name">
+    <input type="text" name="Type of Food" ng-model="food">
+    <label>Create Restaurant</label>
+    <input type="submit" ng-click="createRestaurant()">
+  </body>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Food</th>
+    </tr>
+    <tr ng-repeat="restaurant in restaurants">
+      <td>{{ restaurant.name }}</td>
+      <td>{{ restaurant.foodType }}</td>
+    </tr>
+  </table>
+</html>
