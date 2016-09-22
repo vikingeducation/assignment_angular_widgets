@@ -20,8 +20,13 @@
 </form>
 <table>
   <tr>
-    <th ng-click="setOrder(name)">Restaurant name</th>
-    <th ng-click="setOrder(foodType)">Food Type</th>
+    <th ng-click="setOrder('name')">Restaurant name
+     <img ng-if="orderProp =='name'" ng-src="http://vignette2.wikia.nocookie.net/community-sitcom/images/7/7b/Arrow_down.png/revision/latest?cb=20131015141652">
+     <img ng-if="orderProp == '-name'" ng-src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Arrow_north.svg/2000px-Arrow_north.svg.png">
+    </th>
+    <th ng-click="setOrder('foodType')">Food Type
+    <img ng-if="orderProp == 'foodType'" ng-src="http://vignette2.wikia.nocookie.net/community-sitcom/images/7/7b/Arrow_down.png/revision/latest?cb=20131015141652">
+     <img ng-if="orderProp =='-foodType'" ng-src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Arrow_north.svg/2000px-Arrow_north.svg.png"></th>
     <th>Image</th>
     <th>Delete</th>
   </tr>

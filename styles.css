@@ -2,9 +2,18 @@ td{
   border: 1px solid black;
   height: 100px;
   width: 100px;
+  text-align: center;
 }
 
 td img{
   height: 100px;
   width: 100px;
+}
+
+th {
+  border: 1px solid black;
+}
+
+th img {
+  height: 10px;
 }
