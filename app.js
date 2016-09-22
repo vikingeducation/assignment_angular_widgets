@@ -7,11 +7,9 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope,_) {
   $scope.userFilter;
   $scope.userTags= [];
   $scope.allTags = [];
-  $scope.searchCount = 0;
+  $scope.userName;
 
-  console.log("step 1");
-
-  var getTags = (function(data) {
+  (function(data) {
     data.forEach(function(ele) {
       ele.tags.forEach(function(tag) {
         $scope.allTags.push(tag);
@@ -19,25 +17,29 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope,_) {
     })
   })($scope.rawFeed);
 
-  console.log("step 2");
+  $scope.updateName = function(name) {
+    $scope.userName = name;
+  };
 
   $scope.filterPhoto = function(photo) {
+    console.log($scope.userName);
     if ($scope.userFilter) {
       if (photo.filter !== $scope.userFilter.trim()) {
-        
         return false;
       }
     }
     if ($scope.userTags.length > 0) {
       for (var i = 0; i < $scope.userTags.length; i++) {
         if (photo.tags.indexOf($scope.userTags[i].trim()) === -1) {
-          
           return false;
         }
       }
     }
-    console.log("only 1 true");
-    $scope.searchCount++;
+    if ($scope.userName) {
+      if (photo.user.username !== $scope.userName.trim()) {
+        return false;
+      }
+    }
     return true;
   };
 }]);
