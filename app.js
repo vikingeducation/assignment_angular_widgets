@@ -12,6 +12,7 @@ widgets.controller('Restaurant', ["$scope", function($scope) {
     $scope.name = "";
     $scope.food = "";
     $scope.image = "";
+    $scope.arrow = "http://www.iconsdb.com/icons/preview/deep-pink/up-circular-xxl.png";
   };
 
   $scope.deleteRestaurant = function(name, food) {
@@ -25,7 +26,14 @@ widgets.controller('Restaurant', ["$scope", function($scope) {
   };
 
   $scope.changeFilter = function(filter) {
-    $scope.restaurantFilter = filter;
+    if(filter[0] !== "-" && $scope.restaurantFilter === filter) {
+      $scope.restaurantFilter = "-" + filter;
+      $scope.arrow = "http://www.iconsdb.com/icons/preview/deep-pink/down-circular-xxl.png"
+    }
+    else {
+      $scope.restaurantFilter = filter;
+      $scope.arrow = "http://www.iconsdb.com/icons/preview/deep-pink/up-circular-xxl.png"
+    }
   };
 
 }]);

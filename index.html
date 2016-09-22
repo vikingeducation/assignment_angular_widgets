@@ -14,7 +14,7 @@
   <input type="text" name="image" ng-model="image">
   <button ng-click="createRestaurant()">Create Restaurant</button>
 
-  <p>Try: http://blogs-images.forbes.com/clareoconnor/files/2015/12/7_Drive_thru_current-e1450205465424.jpg</p>
+  <p>http://blogs-images.forbes.com/clareoconnor/files/2015/12/7_Drive_thru_current-e1450205465424.jpg</p>
 
   <table>
     <tr>
@@ -31,13 +31,14 @@
   </table>
 
   <h3>Search Restaurants</h3>
+  <img ng-src="{{arrow}}">
   <table>
     <tr>
       <th ng-click="changeFilter('image')">Image</th>
       <th ng-click="changeFilter('name')">Name</th>
       <th ng-click="changeFilter('food')">Food</th>
     </tr>
-    <tr ng-repeat="restaurant in restaurants | orderBy: restaurantFilter">
+    <tr ng-repeat="restaurant in restaurants | orderBy: restaurantFilter | filter: {name: search, food: search}">
       <td><img ng-src="{{ restaurant.image }}"></td>
       <td> {{ restaurant.name }}</td>
       <td> {{ restaurant.food }}</td>
