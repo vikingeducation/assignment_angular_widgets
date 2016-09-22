@@ -21,14 +21,27 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-4 photo-box" ng-repeat="image in rawFeed">
-        <a ng-href="{{getUrl(image)}}"> {{image.user.username}}</a>
-        {{ getDate(image) | date}}
-        <a ng-href="{{image.link}}"><img class="img-responsive photo" ng-src="{{image.images.standard_resolution.url}}"></a>
-        <p>Likes: {{image.likes.count}}</p>
-        <p>Comments: {{image.comments.count}}</p>
-        <p>Filter: {{image.filter}}</p>
-        <p ng-repeat="tag in image.tags" class="hashtag">#{{tag}}</p>
+      <div class="col-xs-12">
+        <select ng-model="filterChoice">
+          <option></option>
+          <option ng-repeat="option in allFilters | unique" value="{{option}}">
+            {{ option }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" ng-repeat="image in rawFeed | filter : filterChoice">
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-1 photo-box">
+            <a ng-href="{{getUrl(image)}}"> {{image.user.username}}</a>
+            {{ getDate(image) | date}}
+            <a ng-href="{{image.link}}"><img class="img-responsive photo" ng-src="{{image.images.standard_resolution.url}}"></a>
+            <p><strong>Likes:</strong> {{image.likes.count}} <strong>Comments:</strong> {{image.comments.count}}</p>
+            <p><strong>Filter:</strong> {{image.filter}}</p>
+            <p ng-repeat="tag in image.tags | limitTo: 5" class="hashtag">#{{tag}}&nbsp</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

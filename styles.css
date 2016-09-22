@@ -20,14 +20,15 @@ th img {
 
 .hashtag{
   display: inline-block;
-  margin-left: 5px;
 }
 
 .photo-box{
   border: 2px solid black;
   margin-top: 10px;
+  height: 450px;
 }
 
 .photo{
   border-radius: 5%;
+  max-height: 300px;
 }
