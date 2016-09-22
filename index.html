@@ -11,6 +11,7 @@
 </head>
 
 <body ng-controller="RestaurantCtrl">
+  <h1>Restaurant</h1>
   <form name="foodForm" ng-submit="onClick(foodForm)" novalidate>
     <p>
       Name:
@@ -35,6 +36,34 @@
       </th>
     </tr>
     <tr ng-repeat="restaurant in restaurants | orderBy : 'foodType'">
+      <td>
+        {{restaurant.name}}
+      </td>
+      <td>
+        {{restaurant.foodType}}
+      </td>
+      <td>
+        <input type="button" name="delete" value="Delete" ng-click="deleteRestaurant(restaurant)">
+      </td>
+      <td>
+        <img ng-src={{restaurant.webAddress}} height='25' width='25'>
+      </td>
+    </tr>
+  </table>
+
+
+  <h1>Search and Sort</h1>
+  <input type='text' name='searchTerm' ng-model='searchTerm'>
+  <table>
+    <tr>
+      <th>
+        Restaurant Name
+      </th>
+      <th>
+        Type of Food
+      </th>
+    </tr>
+    <tr ng-repeat="restaurant in restaurants | orderBy : 'foodType' | filter:searchTerm">
       <td>
         {{restaurant.name}}
       </td>
