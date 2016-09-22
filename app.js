@@ -5,7 +5,7 @@ widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
   $scope.reverse = true;
 
   $scope.restaurants = [];
-  $scope.onClick = function(form){
+  $scope.onClick = function(form) {
     var obj = {};
     obj['name'] = $scope.name;
     obj['foodType'] = $scope.foodType;
@@ -14,7 +14,6 @@ widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
     $scope.name = '';
     $scope.foodType = '';
     $scope.webAddress = '';
-    console.log(obj);
   };
 
   $scope.deleteRestaurant = function(restaurant) {
@@ -27,27 +26,30 @@ widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
 
 widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
 
-  // Data:
-  // user
-  // time
-  // like
-  // comment count
-  // other stuff
-
-  // Click to see image.
-
   $scope.rawFeed = instagramResponse;
+  $scope.filters = []
   $scope.pictures = []
+  $scope.hashtags = []
+
+
   for (var i = 0; i < $scope.rawFeed.data.length; i++) {
     var picture = {};
-    picture['url'] = $scope.rawFeed.data[i].images.thumbnail.url;
-    picture['user'] = $scope.rawFeed.data[i].user.username;
-    picture['time'] = $scope.rawFeed.data[i].created_time;
-    picture['likes'] = $scope.rawFeed.data[i].likes.count;
-    picture['comments'] = $scope.rawFeed.data[i].comments.count;
-    picture['link'] = $scope.rawFeed.data[i].link;
+    var pictureData = $scope.rawFeed.data[i]
+    picture['url'] = pictureData.images.thumbnail.url;
+    picture['user'] = pictureData.user.username;
+    picture['time'] = pictureData.created_time;
+    picture['likes'] = pictureData.likes.count;
+    picture['comments'] = pictureData.comments.count;
+    picture['link'] = pictureData.link;
+    picture['filter'] = pictureData.filter;
+    picture['hashtags'] = pictureData.tags;
+    $scope.filters.push(picture['filter']);
     $scope.pictures.push(picture);
+    $scope.hashtags = $scope.hashtags.concat(picture['hashtags'])
   }
+  $scope.filters = _.uniqBy($scope.filters)
+  $scope.hashtags = _.uniqBy($scope.hashtags)
+
 
 }]);
 

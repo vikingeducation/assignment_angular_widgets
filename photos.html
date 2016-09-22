@@ -8,9 +8,10 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
   <script type="text/javascript" src="photos.js"></script>
   <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="filter.js"></script>
   </script>
 </head>
 
@@ -19,12 +20,27 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <div class="col-sm-3" ng-repeat="picture in pictures">
+        <select ng-model="selectedFilter">
+          <option ng-repeat="filter in filters" value={{filter}}>{{filter}}</option>
+        </select>
+        <select multiple ng-model="selectedHashtags">
+          <option ng-repeat="hashtag in hashtags" value={{hashtag}}>{{hashtag}}</option>
+        </select>
+        <div>
+          {{selectedHashtags}}
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-sm-3" ng-repeat="picture in pictures | filter:{filter:selectedFilter} | hashtagFilter: selectedHashtags">
           <a ng-href={{picture.link}}><img ng-src={{picture.url}}></a><br>
           <div name='photo-details'>
             <div>{{picture.user}}</div><br>
             <div>{{picture.time | date:'yyyy-MM-dd HH:mm:ss Z'}}</div><br>
             <div>
+              <div>Filter: {{picture.filter}}</div><br>
               <span>Likes: {{picture.likes}}</span>
               <span>Comments: {{picture.comments}}</span>
             </div><br>
