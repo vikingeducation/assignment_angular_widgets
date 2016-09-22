@@ -25,9 +25,20 @@ widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
 }]);
 
 
+widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
+
+  $scope.rawFeed = instagramResponse;
+  $scope.pictures = []
+  for (var i = 0; i < $scope.rawFeed.data.length; i++) {
+    var picture = {};
+    picture['url'] = $scope.rawFeed.data[i].images.thumbnail.url;
+    $scope.pictures.push(picture);
+  }
+
+}]);
 
 
-
+// adding lodash
 widgets.factory('_', ['$window', function($window) {
   return $window._;
 }]);

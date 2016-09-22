@@ -58,9 +58,13 @@
     <tr>
       <th ng-click="sortType='restoName'; sortReverse=!sortReverse">
         <a href='#'>Restaurant Name</a>
+        <span ng-if="sortType === 'restoName' && sortReverse">^</span>
+        <span ng-if="sortType === 'restoName' && !sortReverse">v</span>
       </th>
       <th ng-click="sortType='foodType'; sortReverse=!sortReverse">
         <a href='#'>Type of Food</a>
+        <span ng-if="sortType === 'foodType' && sortReverse">^</span>
+        <span ng-if="sortType === 'foodType' && !sortReverse">v</span>
       </th>
     </tr>
     <tr ng-repeat="restaurant in restaurants | orderBy : sortType : sortReverse | filter:searchTerm">
