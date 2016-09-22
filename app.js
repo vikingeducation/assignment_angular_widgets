@@ -13,4 +13,13 @@ widgets.controller("RestaurantCtrl",
     $scope.removeRest = function(restaurant){
       $scope.restaurants.splice(restaurant.id, 1);
     };
+
+    $scope.setOrder = function(prop){
+      if($scope.orderProp == prop){
+        $scope.orderProp = "-"+prop;
+      }
+      else{
+        $scope.orderProp = prop;
+      }
+    };
   }]);

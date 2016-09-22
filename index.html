@@ -20,17 +20,26 @@
 </form>
 <table>
   <tr>
-    <th>Restaurant name</th>
-    <th>Food Type</th>
+    <th ng-click="setOrder(name)">Restaurant name</th>
+    <th ng-click="setOrder(foodType)">Food Type</th>
     <th>Image</th>
     <th>Delete</th>
   </tr>
-  <tr ng-repeat="restaurant in restaurants | orderBy : '+foodType' " >
+  <tr ng-repeat="restaurant in restaurants | filter: q | orderBy: orderProp" >
     <td>{{restaurant.name}}</td>
     <td>{{restaurant.foodType }}</td>
     <td><img ng-src="{{restaurant.image}}"></td>
     <td><button name="delete" ng-click="removeRest(restaurant)" value="Delete">Delete</button>
   </tr>
 </table>
+<hr>
+<h2>Search Restaurants</h2>
+<form>
+  <label for="search">Search:</label>
+  <input type="text" name="search" ng-model="q">
+</form>
+
+
+
 </body>
 </html>
