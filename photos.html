@@ -10,16 +10,16 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body ng-controller="PhotosCtrl">
-    <select ng-model="searchTerm">
+    <select ng-model="filterSearch">
       <option></option>
       <option ng-repeat="filter in filters">{{ filter }}</option>
     </select>
-    <select ng-model="searchTerm" multiple>
+    <select ng-model="tagSearch" multiple>
       <option></option>
-      <option ng-repeat="filter in filters">{{ filter }}</option>
+      <option ng-repeat="tag in tags">{{ tag }}</option>
     </select>
     <div class="row">
-      <div class="col-xs-3" ng-repeat="post in rawFeed | filter: { filter : searchTerm }">
+      <div class="col-xs-3" ng-repeat="post in rawFeed | filter: { filter : filterSearch, tag: tagSearch }">
         <div class="card">
           <div class="card-block">
             <a ng-href="{{ post.link }}"><img ng-src="{{post.images.thumbnail.url}}"></a>

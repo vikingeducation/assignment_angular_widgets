@@ -40,17 +40,25 @@ widgets.controller('PhotosCtrl',
   function($scope, instagramResponse) {
 
   $scope.rawFeed = instagramResponse.data;
-  $scope.searchTerm = '';
+  $scope.filterSearch = '';
+  $scope.tagSearch = '';
 
   var buildFilters = function() {
-    var post = instagramResponse.data
+    var post = instagramResponse.data;
     var filters = {};
+    var tags = {};
     for (var i = 0; i < post.length; i++) {
       filters[post[i].filter] = true;
+      for(var tag in post[i].tags){
+        tags[(post[i].tags[tag])] = true;
+      }
     }
-    return Object.keys(object);
+    return {
+      filters: Object.keys(filters),
+      tags: Object.keys(tags)
+    };
   };
-
-  $scope.filters = buildFilters();
+  $scope.filters = buildFilters().filters;
+  $scope.tags = buildFilters().tags;
 
 }]);
