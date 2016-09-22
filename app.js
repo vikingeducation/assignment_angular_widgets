@@ -22,7 +22,8 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
     $scope.imgUrl = "";
   };
 
-  $scope.deleteRestaurant = function(i) {
+  $scope.deleteRestaurant = function(rest) {
+    var i = $scope.restaurants.indexOf(restaurants)
     $scope.restaurants.splice(i,1);
   };
 
@@ -61,4 +62,14 @@ widgets.controller('PhotosCtrl',
   $scope.filters = buildFilters().filters;
   $scope.tags = buildFilters().tags;
 
+
 }]);
+
+widgets.filter('tagFilter', function() {
+  return function(post, tagSearchValue) {
+    if(tagSearchValue === "") { return true }
+    return posts.filter(function(tag) {
+      tag.includes(tagSearchValue)
+    })
+  }
+});

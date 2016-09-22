@@ -29,7 +29,7 @@
         <td>{{ restaurant.name }}</td>
         <td>{{ restaurant.foodType }}</td>
         <td><img ng-src="{{ restaurant.imgUrl }}"></td>
-        <td ng-click="deleteRestaurant($index)">Delete</td>
+        <td ng-click="deleteRestaurant(restaurant)">Delete</td>
       </tr>
     </table>
 

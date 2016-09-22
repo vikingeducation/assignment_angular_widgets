@@ -19,7 +19,7 @@
       <option ng-repeat="tag in tags">{{ tag }}</option>
     </select>
     <div class="row">
-      <div class="col-xs-3" ng-repeat="post in rawFeed | filter: { filter : filterSearch, tag: tagSearch }">
+      <div class="col-xs-3" ng-repeat="post in rawFeed | filter: { filter : filterSearch } | tagFilter: tagSearch">
         <div class="card">
           <div class="card-block">
             <a ng-href="{{ post.link }}"><img ng-src="{{post.images.thumbnail.url}}"></a>
