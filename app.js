@@ -41,30 +41,39 @@ widgets.controller('PhotosCtrl',
       }
     };
 
-    $scope.filterPhoto = function(photo){
-      console.log(photo);
-      return true;
+    $scope.filterFilter = function(photo){
+      if ($scope.filterChoice) {
+        return photo.filter === $scope.filterChoice
+      } else {
+        return true;
+      }
     };
 
-     $scope.filterPhoto2 = function(photo){
-      console.log(photo);
-      return true;
+    $scope.tagFilter = function(photo){
+      if ($scope.tagChoice && $scope.tagChoice[0]) {
+        var tagsClone = $scope.tagChoice.slice(0)
+        for (var i = 0; i < tagsClone.length; i++) {
+          if (!photo.tags.includes(tagsClone[i])) {
+            return false;
+          }
+        }
+        return true;
+      } else {
+        return true;
+      }
     };
+
+    $scope.displayFilteredResults = function(results) {
+      if (results.length === 1) {
+        return "Showing 1 photo";
+      } else {
+        return "Showing " + results.length + " photos";
+      }
+    }
 
   }]
 );
 
-widgets.filter('byTag', function(choices){
-  return function(collection, choices){
-    console.log(choices);
-    for(var i = 0; i < collection.length; i++){
-      var image = collection[i];
-      var tags = image.tags;
-
-    }
-  };
-
-});
 
 widgets.filter('unique', function() {
 

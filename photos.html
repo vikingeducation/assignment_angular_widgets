@@ -21,7 +21,7 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-4">
         <select ng-model="filterChoice">
           <option></option>
           <option ng-repeat="option in allFilters | unique" value="{{option}}">
@@ -29,7 +29,7 @@
           </option>
         </select>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-4">
         <select ng-model="tagChoice" multiple>
           <option></option>
           <option ng-repeat="tag in allHashtags | unique" value="{{tag}}">
@@ -37,9 +37,12 @@
           </option>
         </select>
       </div>
+      <div class="col-xs-4">
+        <p>{{displayFilteredResults(filteredResults)}}</p>
+      </div>
     </div>
     <div class="row">
-      <div class="col-md-4" ng-repeat="image in rawFeed | filter: filterPhoto | filter: filterPhoto2">
+      <div class="col-md-4" ng-repeat="image in rawFeed | filter: filterFilter | filter: tagFilter as filteredResults">
         <div class="row">
           <div class="col-xs-10 col-xs-offset-1 photo-box">
             <a ng-href="{{getUrl(image)}}"> {{image.user.username}}</a>
