@@ -1,8 +1,8 @@
 var widgets = angular.module('widgets', []);
 
 widgets.controller('PhotosCtrl',
-  ['$scope', function($scope){
-
+  ['$scope', function($scope){ 
+    $scope.offset = 0;
     $scope.rawFeed = instagramResponse.data;
     $scope.first = $scope.rawFeed[1];
 
@@ -32,6 +32,18 @@ widgets.controller('PhotosCtrl',
       return tags;
     })();
 
+    $scope.anotherPage = function(){
+      return $scope.offset + 12 < $scope.totalResults;
+    };
+
+    $scope.nextPage = function(){
+      $scope.offset += 12;
+    }
+
+    $scope.previousPage = function(){
+      $scope.offset -= 12;
+    }
+
     $scope.getFilter = function(choice){
       if(choice){
         return {'filter': choice};
@@ -40,6 +52,7 @@ widgets.controller('PhotosCtrl',
         return false;
       }
     };
+
 
     $scope.filterFilter = function(photo){
       if ($scope.filterChoice) {
@@ -63,11 +76,31 @@ widgets.controller('PhotosCtrl',
       }
     };
 
-    $scope.displayFilteredResults = function(results) {
-      if (results.length === 1) {
+    $scope.totalResults = 0;
+    $scope.filteredResults = function(image){
+      if($scope.filterFilter(image) && $scope.tagFilter(image)){
+          $scope.totalResults ++;
+          return true;
+        }
+        else{
+          return false;
+        }
+      // var results = [];
+      // for(var i = 0; i < $scope.rawFeed.length; i++){
+      //   var image = $scope.rawFeed[i];
+      //   if($scope.filterFilter(image) && $scope.tagFilter(image)){
+      //     results.push(image);
+      //   }
+      // }
+      // return results;
+    };
+
+    $scope.displayFilteredResults = function() {
+      var results = $(".photo-box").length;
+      if (results === 1) {
         return "Showing 1 photo";
       } else {
-        return "Showing " + results.length + " photos";
+        return "Showing " + results + " photos";
       }
     }
 
