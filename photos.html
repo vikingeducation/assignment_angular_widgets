@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+  <!-- angular ui bootstrap for pagination -->
+  <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
+  <script type="text/javascript" src="photos.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="filter.js"></script>
+  </script>
+</head>
+
+<body ng-controller="PhotosCtrl">
+  <h1>Photos</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <select ng-model="selectedFilter">
+          <option ng-repeat="filter in filters" value={{filter}}>{{filter}}</option>
+        </select>
+        <select multiple ng-model="selectedHashtags">
+          <option ng-repeat="hashtag in hashtags" value={{hashtag}}>{{hashtag}}</option>
+        </select>
+        <div>
+          {{selectedHashtags}}
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <button ng-disabled="currentPage <= 0" ng-click="currentPage=currentPage-1">
+          Previous
+        </button>
+        <span>Page: {{currentPage + 1}}/{{originalPictures.length/numPerPage}}</span>
+        <button ng-disabled="currentPage >= originalPictures.length/numPerPage - 1" ng-click="currentPage=currentPage+1">
+          Next
+        </button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-12">
+        <p>Results: {{ filtered.length }}</p>
+        <div class="col-sm-3" ng-repeat="picture in pictures | filter:{filter:selectedFilter} | filter:{user:filterUser} | hashtagFilter: selectedHashtags as filtered">
+          <a ng-href={{picture.link}}><img ng-src={{picture.url}}></a><br>
+          <div name='photo-details'>
+            <div>{{picture.user}}</div><br>
+            <div>{{picture.time*1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}</div><br>
+            <div>
+              <div>Filter: {{picture.filter}}</div><br>
+              <span>Likes: {{picture.likes}}</span>
+              <span>Comments: {{picture.comments}}</span>
+            </div><br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+
+      <input type="text" class="form-control" name="userinfo" ng-model="userSearch" typeahead="info for info in userInfo | filter:$viewValue | limitTo:5">
+    </div>
+
+    <button ng-click="filterUser = undefined; selectedHashtags = undefined; selectedFilter = undefined">Show All Pictures</button>
+    <table class="table table-striped">
+      <tr>
+        <th>
+          Username
+        </th>
+        <th>
+          Full Name
+        </th>
+        <th>
+          Profile Pic
+        </th>
+      </tr>
+      <tr ng-repeat="user in users | filter: userSearch">
+        <td>
+          <!-- creates a different scope within ng-repeat! -->
+          <button ng-click="$parent.filterUser = user.username">My Pics</button> {{user.username}}
+        </td>
+        <td>
+          {{user.fullName}}
+        </td>
+        <td>
+          <img ng-src={{user.profilePic}} height='50' width='50'>
+        </td>
+      </tr>
+    </table>
+
+</body>
+
+</html>
