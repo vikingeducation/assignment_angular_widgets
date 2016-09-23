@@ -39,32 +39,46 @@
 
   <br>
 
-  <h1> Display Search Count: {{ filteredPhotos.length }} </h1>
+  <h1 class="btn btn-warning active btn-lg"> Display Search Count: {{ filteredPhotos.length }} </h1>
 
-  <br>
+  <br>  
 
-  <div class="col-xs-12" style="border: 1px solid black; background-color: grey">
+  <div class="col-xs-12" style="border: 1px solid black; background-color: #0099e5; border-radius: 10px">
 
-    <div class="col-xs-4 col-height" ng-repeat="photo in rawFeed | filter: filterPhoto as filteredPhotos" style="margin-top: 10px; border: 1px solid black">
+    <div class="col-xs-3 col-height" ng-repeat="photo in rawFeed | filter: filterPhoto as filteredPhotos" style="margin-top: 10px; border: 1px solid black; border-radius: 25px">
 
       <a href={{photo.link}}><img ng-src={{photo.images.standard_resolution.url}} style="width: 100%; border:1px solid grey; border-radius:50px"></a>
 
-      <a href="https://www.instagram.com/{{photo.user.username}}">{{photo.user.username}}</a>
+      <a class='btn btn-success active' href="https://www.instagram.com/{{photo.user.username}}">{{photo.user.username}}</a>
+      
       <p>{{(photo.created_time * 1000) | date }}</p>
-      <p>Likes: {{photo.likes.count}}</p>
-      <p>Comments: {{photo.comments.count}}</p>
-      <span ng-repeat="tag in photo.tags">#{{tag}} </span>
+
+      <div class="col-xs-4">
+        Likes:
+      </div>
+      <div class="col-xs-8">
+        {{photo.likes.count}}
+      </div>
+      
+      <div class="col-xs-4">
+        Comments:
+      </div>
+      <div class="col-xs-8">
+        {{photo.comments.count}}
+      </div>
+
+      <span style="color: black" ng-repeat="tag in photo.tags">#{{tag}} </span>
 
     </div> 
   </div>
 
-  <div class="col-xs-12" style="border: 1px solid black; background-color: grey">
+  <div class="col-xs-12" style="border: 1px solid black; background-color: #8b9dc3">
 
     <div class="col-xs-2 user-height" ng-repeat="photo in rawFeed" style="margin-top: 10px; border: 1px solid black">
 
       <img ng-click="updateName(photo.user.username)" ng-src={{photo.user.profile_picture}} class="img-circle" style="width: 100%; border:1px solid grey; border-radius:120px">
 
-      <p ng-click="updateName(photo.user.username)">{{ photo.user.username }}</p>
+      <p class="btn btn-danger primary" ng-click="updateName(photo.user.username)">{{ photo.user.username }}</p>
 
     </div> 
   </div>
