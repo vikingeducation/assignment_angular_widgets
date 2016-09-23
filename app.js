@@ -10,6 +10,22 @@ widgets.filter("customPagination", function() {
 });
 
 
+widgets.filter("photoUserFilter", function() {
+
+  return function(photos, user) {
+    if (!user) {
+      return photos;
+    }
+    var filteredPhotos = [];
+    for(var i = 0; i < photos.length; i++) {
+      if(photos[i].user.username === user) {
+        filteredPhotos.push(photos[i]);
+      }
+    }
+    return filteredPhotos;
+  };
+});
+
 
 
 

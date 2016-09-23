@@ -26,6 +26,14 @@ widgets.controller('PhotosCtrl', ['$scope', function($scope){
     }
   };
 
+  $scope.changeUserFilter = function(name) {
+    $scope.userFilter = name;
+  }
+
+  $scope.clearUserFilter = function() {
+    $scope.userFilter = "";
+  }
+
   
   $scope.filters = {};
   $scope.hashTags = {};
