@@ -43,9 +43,9 @@
 
   <br>  
 
-  <div class="col-xs-12" style="border: 1px solid black; background-color: #0099e5; border-radius: 10px">
+  <div class="col-xs-12" style="border: 1px solid black; background-color: #c4dff6; border-radius: 10px">
 
-    <div class="col-xs-3 col-height" ng-repeat="photo in rawFeed | filter: filterPhoto as filteredPhotos" style="margin-top: 10px; border: 1px solid black; border-radius: 25px">
+    <div class="col-xs-3 col-height" ng-repeat="photo in rawFeed | filter: filterPhoto as filteredPhotos" style="margin-top: 10px; border: 1px solid black; ">
 
       <a href={{photo.link}}><img ng-src={{photo.images.standard_resolution.url}} style="width: 100%; border:1px solid grey; border-radius:50px"></a>
 
