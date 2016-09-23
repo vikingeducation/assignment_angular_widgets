@@ -1,0 +1,50 @@
+<html ng-app="widgets" ng-controller="RestaurantCtrl">
+<head>
+  <title>Angular Practice</title>
+<!-- Here's the Angular CDN-->
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <!-- Here's the local app.js -->
+  <script src="app.js"></script>
+</head>
+<body>
+<form name="new-rest">
+  <label for="name">Name</label>
+  <input type="text" name="name" ng-model="formData.name">
+  <label for="food-type">Type of Food</label>
+  <input type="text" name="food-type" ng-model="formData.foodType">
+  <label for="image">Image</label>
+  <input type="text" name="image" ng-model="formData.image">
+  <input type="submit" value="Create Restaurant" ng-click="makeRest()">
+
+</form>
+<table>
+  <tr>
+    <th ng-click="setOrder('name')">Restaurant name
+     <img ng-if="orderProp =='name'" ng-src="http://vignette2.wikia.nocookie.net/community-sitcom/images/7/7b/Arrow_down.png/revision/latest?cb=20131015141652">
+     <img ng-if="orderProp == '-name'" ng-src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Arrow_north.svg/2000px-Arrow_north.svg.png">
+    </th>
+    <th ng-click="setOrder('foodType')">Food Type
+    <img ng-if="orderProp == 'foodType'" ng-src="http://vignette2.wikia.nocookie.net/community-sitcom/images/7/7b/Arrow_down.png/revision/latest?cb=20131015141652">
+     <img ng-if="orderProp =='-foodType'" ng-src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Arrow_north.svg/2000px-Arrow_north.svg.png"></th>
+    <th>Image</th>
+    <th>Delete</th>
+  </tr>
+  <tr ng-repeat="restaurant in restaurants | filter: q | orderBy: orderProp" >
+    <td>{{restaurant.name}}</td>
+    <td>{{restaurant.foodType }}</td>
+    <td><img ng-src="{{restaurant.image}}"></td>
+    <td><button name="delete" ng-click="removeRest(restaurant)" value="Delete">Delete</button>
+  </tr>
+</table>
+<hr>
+<h2>Search Restaurants</h2>
+<form>
+  <label for="search">Search:</label>
+  <input type="text" name="search" ng-model="q">
+</form>
+
+
+
+</body>
+</html>
