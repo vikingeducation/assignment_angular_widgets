@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
+  <script type="text/javascript" src="app.js">
+  </script>
+</head>
+
+<body ng-controller="RestaurantCtrl">
+  <h1>Restaurant</h1>
+  <form name="foodForm" ng-submit="onClick(foodForm)" novalidate>
+    <p>
+      Name:
+    </p>
+    <input type="text" name="name" ng-model="name">
+    <p>
+      Type of Food:
+    </p>
+    <input type="text" name="foodType" ng-model="foodType">
+    <br>
+    <input type='text' name='webAddress' ng-model='webAddress'>
+    <input type="submit" name="submit" value="Submit">
+  </form>
+
+  <table>
+    <tr>
+      <th>
+        Restaurant Name
+      </th>
+      <th>
+        Type of Food
+      </th>
+    </tr>
+    <tr ng-repeat="restaurant in restaurants | orderBy : 'foodType'">
+      <td>
+        {{restaurant.name}}
+      </td>
+      <td>
+        {{restaurant.foodType}}
+      </td>
+      <td>
+        <input type="button" name="delete" value="Delete" ng-click="deleteRestaurant(restaurant)">
+      </td>
+      <td>
+        <img ng-src={{restaurant.webAddress}} height='25' width='25'>
+      </td>
+    </tr>
+  </table>
+
+
+  <h1>Search and Sort</h1>
+  <input type='text' name='searchTerm' ng-model='searchTerm'>
+  <table>
+    <tr>
+      <th ng-click="sortType='restoName'; sortReverse=!sortReverse">
+        <a href='#'>Restaurant Name</a>
+        <span ng-if="sortType === 'restoName' && sortReverse">^</span>
+        <span ng-if="sortType === 'restoName' && !sortReverse">v</span>
+      </th>
+      <th ng-click="sortType='foodType'; sortReverse=!sortReverse">
+        <a href='#'>Type of Food</a>
+        <span ng-if="sortType === 'foodType' && sortReverse">^</span>
+        <span ng-if="sortType === 'foodType' && !sortReverse">v</span>
+      </th>
+    </tr>
+    <tr ng-repeat="restaurant in restaurants | orderBy : sortType : sortReverse | filter:searchTerm">
+      <td>
+        {{restaurant.name}}
+      </td>
+      <td>
+        {{restaurant.foodType}}
+      </td>
+      <td>
+        <input type="button" name="delete" value="Delete" ng-click="deleteRestaurant(restaurant)">
+      </td>
+      <td>
+        <img ng-src={{restaurant.webAddress}} height='25' width='25'>
+      </td>
+    </tr>
+  </table>
+
+</body>
+
+</html>
