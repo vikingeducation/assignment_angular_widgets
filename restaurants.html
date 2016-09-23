@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="widgets" ng-controller="RestaurantCtrl">
+<head>
+  <title></title>
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <!-- Lodash -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
+
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <form name="myForm">
+        <input type="text" name="food" ng-model="food">
+        <input type="text" name="typeOfFood" ng-model="typeOfFood">
+        <input type="text" name="url" ng-model="url">
+        <input type="submit" value="Create Restaurant" ng-click="processForm(myForm)">
+      </form>
+    </div>
+
+    <div class="row">
+      <table class="table table-inverse">
+        <thead>
+          <tr>
+            <th> #</th>
+            <th ng-click="sortBy('food')">Food</th>
+            <th ng-click="sortBy('typeOfFood')">Type of Food </th>
+            <th>Address </th>
+            <th>Options </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="rest in restaurants | orderBy : sortCol | filter:{food:searchFood} | orderBy : reverse : revOrder">
+            <td>
+              {{$index + 1}}
+            </td>
+            <td>
+              {{rest.food}}
+            </td>
+            <td>
+              {{rest.typeOfFood}}
+            </td>
+            <td>
+              <img ng-src={{rest.url}}> 
+            </td>
+            <td>
+              <button class="btn btn-danger" ng-click="deleteRestaurant(restaurants.indexOf(rest))">
+                delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>
+
+
+    <div class="row">
+      <h1>Search Restaurants </h1>
+      <form name="search-form">
+        <input type="text" ng-model="searchFood">
+        <input type="submit" value="Search Restaurants" ng-click="">
+        
+      </form>
+    </div> 
+
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>

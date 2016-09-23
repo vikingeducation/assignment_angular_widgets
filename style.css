@@ -1,0 +1,12 @@
+.col-height {
+  display: table-cell;
+  float: none;
+  height: 450px;
+
+}
+
+.user-height {
+  display: table-cell;
+  float: none;
+  height: 250px;
+}
