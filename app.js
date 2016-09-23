@@ -46,6 +46,7 @@ widgets.controller('PhotosCtrl',
   $scope.page = 0;
   $scope.filteredArray = $scope.rawFeed
   $scope.userSearch = "";
+  $scope.highlightIndex;
 
   var buildFilters = function() {
     var post = instagramResponse.data;
@@ -79,7 +80,7 @@ widgets.controller('PhotosCtrl',
 
   $scope.searchByUser = function(username) {
     $scope.userSearch = username;
-  }
+  };
 
   $scope.$watchGroup(['tagSearch', 'filterSearch', 'userSearch'], function() {
                 $scope.page = 0
@@ -104,6 +105,28 @@ widgets.controller('PhotosCtrl',
                 $scope.feedLength = values.length;
                 $scope.filteredArray = values;
               });
+
+    $scope.selectResult = function(e) {
+      if(e.keyCode === 40){
+        if($scope.highlightIndex){
+          if($scope.highlightIndex < $scope.possiblePeeps.length - 1){
+            $scope.highlightIndex++;
+          }
+        } else {
+          $scope.highlightIndex = 0;
+        }
+      } else if(e.keyCode === 38) {
+        if($scope.highlightIndex){
+          if($scope.highlightIndex > 0){
+            $scope.highlightIndex--;
+          }
+        }
+      }
+    };
+
+    // $scope.$watch('highlightIndex', function(){
+
+    // });
 
 }]);
 

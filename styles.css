@@ -2,3 +2,7 @@
 .card {
   height: 500px;
 }
+
+.highlight_true{
+    background-color: maroon;
+}
