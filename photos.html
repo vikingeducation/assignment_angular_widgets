@@ -6,6 +6,7 @@
   <title></title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
   <!-- angular ui bootstrap for pagination -->
   <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
   <!-- Latest compiled and minified CSS -->
@@ -46,7 +47,7 @@
     <div class="row">
       <div class="col-sm-12">
         <p>Results: {{ filtered.length }}</p>
-        <div class="col-sm-3" ng-repeat="picture in pictures | filter:{filter:selectedFilter} | hashtagFilter: selectedHashtags as filtered">
+        <div class="col-sm-3" ng-repeat="picture in pictures | filter:{filter:selectedFilter} | filter:{user:filterUser} | hashtagFilter: selectedHashtags as filtered">
           <a ng-href={{picture.link}}><img ng-src={{picture.url}}></a><br>
           <div name='photo-details'>
             <div>{{picture.user}}</div><br>
@@ -60,37 +61,37 @@
         </div>
       </div>
     </div>
+    <div class="form-group">
 
-<table>
-  <tr>
-    <th>
-      Username
-    </th>
-    <th>
-      Full Name
-    </th>
-    <th>
-      Profile Pic
-    </th>
-  </tr>
-  <div>
-    THIS IS WHERE THE USERNAME SHOULD BE<br>
-    {{ filterUser }}
-  </div>
-  <tr ng-repeat="user in users">
-    <td>
-      <a href='#' ng-click='filterUser=username'>{{user.username}}</a>
-    </td>
-    <td>
-      {{user.fullName}}
-    </td>
-    <td>
-      <img ng-src={{user.profilePic}} height='50' width='50'>
-    </td>
-  </tr>
+      <input type="text" class="form-control" name="userinfo" ng-model="userSearch" typeahead="info for info in userInfo | filter:$viewValue | limitTo:5">
+    </div>
 
-</table>
-
+    <button ng-click="filterUser = undefined; selectedHashtags = undefined; selectedFilter = undefined">Show All Pictures</button>
+    <table class="table table-striped">
+      <tr>
+        <th>
+          Username
+        </th>
+        <th>
+          Full Name
+        </th>
+        <th>
+          Profile Pic
+        </th>
+      </tr>
+      <tr ng-repeat="user in users | filter: userSearch">
+        <td>
+          <!-- creates a different scope within ng-repeat! -->
+          <button ng-click="$parent.filterUser = user.username">My Pics</button> {{user.username}}
+        </td>
+        <td>
+          {{user.fullName}}
+        </td>
+        <td>
+          <img ng-src={{user.profilePic}} height='50' width='50'>
+        </td>
+      </tr>
+    </table>
 
 </body>
 

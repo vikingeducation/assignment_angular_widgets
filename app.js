@@ -1,4 +1,4 @@
-var widgets = angular.module('widgets', []);
+var widgets = angular.module('widgets', ["ui.bootstrap"]);
 
 
 widgets.controller('RestaurantCtrl', ['$scope', '_', function($scope, _) {
@@ -32,6 +32,7 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
   $scope.pictures = [];
   $scope.hashtags = [];
   $scope.users = [];
+  $scope.userInfo = [];
 
   for (var i = 0; i < $scope.rawFeed.data.length; i++) {
     var picture = {};
@@ -52,7 +53,8 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
     user['username'] = userData.username;
     user['profilePic'] = userData.profile_picture;
     user['fullName'] = userData.full_name;
-
+    $scope.userInfo.push(user['username'])
+    $scope.userInfo.push(user['fullName']);
 
     $scope.filters.push(picture['filter']);
     $scope.originalPictures.push(picture);
@@ -63,6 +65,7 @@ widgets.controller('PhotosCtrl', ['$scope', '_', function($scope, _) {
   $scope.filters = _.uniqBy($scope.filters);
   $scope.hashtags = _.uniqBy($scope.hashtags);
   $scope.pictures = $scope.originalPictures;
+
 
   // Photo pagination.
   $scope.currentPage = 0;
