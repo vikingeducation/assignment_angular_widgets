@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="widgets" >
+<head>
+  <title>Angular Widgets</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="app.js"></script>
+  <script src="widgets_cont.js"></script>
+</head>
+<body ng-controller="Restaurant">
+  <input type="text" name="name" ng-model="name">
+  <input type="text" name="food" ng-model="food">
+  <input type="text" name="image" ng-model="image">
+  <button ng-click="createRestaurant()">Create Restaurant</button>
+
+  <p>http://blogs-images.forbes.com/clareoconnor/files/2015/12/7_Drive_thru_current-e1450205465424.jpg</p>
+
+  <table>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Food</th>
+    </tr>
+    <tr ng-repeat="restaurant in restaurants | orderBy: 'food'">
+      <td><img ng-src="{{ restaurant.image }}"></td>
+      <td> {{ restaurant.name }}</td>
+      <td> {{ restaurant.food }}</td>
+      <td><button ng-click="deleteRestaurant(restaurant.name, restaurant.food)">Delete Restaurant</button></td>
+    </tr>
+  </table>
+
+  <h3>Search Restaurants</h3>
+  <table>
+    <tr>
+      <th>Image</th>
+      <th ng-click="changeFilter('name')">Name<img class="arrow" ng-if="restaurantFilter ==='name' || restaurantFilter ==='-name'" ng-src="{{arrow}}"></th>
+      <th ng-click="changeFilter('food')">Food<img class="arrow" ng-if="restaurantFilter ==='food' || restaurantFilter ==='-food'" ng-src="{{arrow}}"></th>
+    </tr>
+    <tr ng-repeat="restaurant in restaurants | orderBy: restaurantFilter | filter: {name: search, food: search}">
+      <td><img ng-src="{{ restaurant.image }}"></td>
+      <td> {{ restaurant.name }}</td>
+      <td> {{ restaurant.food }}</td>
+      <td><button ng-click="deleteRestaurant(restaurant.name, restaurant.food)">Delete Restaurant</button></td>
+    </tr>
+  </table>
+  <input type="text" name="search" ng-model="search">
+</body>
+</html>
