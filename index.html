@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body ng-controller="RestaurantCtrl">
+    <label>Restaurant Name</label>
+    <input type="text" name="Name" ng-model="name">
+
+    <label>Food Type</label>
+    <input type="text" name="Type of Food" ng-model="food">
+
+    <label>Image URL</label>
+    <input type="text" name="Image URL" ng-model="imgUrl">
+
+    <label>Create Restaurant</label>
+    <input type="submit" ng-click="createRestaurant()">
+
+    <table>
+      <tr>
+        <th ng-click="sortElements($event)">name</th>
+        <th ng-click="sortElements($event)">foodType</th>
+        <th>{{ order? "^" : "v" }}</th>
+      </tr>
+      <tr ng-repeat="restaurant in restaurants | orderBy: searchBy : order">
+        <td>{{ restaurant.name }}</td>
+        <td>{{ restaurant.foodType }}</td>
+        <td><img ng-src="{{ restaurant.imgUrl }}"></td>
+        <td ng-click="deleteRestaurant(restaurant)">Delete</td>
+      </tr>
+    </table>
+
+    <h1>Search for Restaurants</h1>
+    <input type="text" ng-model="searchWord">
+
+    <table>
+      <tr>
+        <th ng-click="sortElements($event)">name</th>
+        <th ng-click="sortElements($event)">foodType</th>
+        <th ng-if="order">^</th>
+        <th ng-if="!order">v</th>
+      </tr>
+      <tr ng-repeat="restaurant in restaurants | filter: { name: searchWord } | orderBy: searchBy : order">
+        <td>{{ restaurant.name }}</td>
+        <td>{{ restaurant.foodType }}</td>
+        <td><img ng-src="{{ restaurant.imgUrl }}"></td>
+        <td ng-click="deleteRestaurant($index)">Delete</td>
+      </tr>
+    </table>
+
+  </body>
+</html>

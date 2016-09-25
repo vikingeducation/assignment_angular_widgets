@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+  <head>
+    <meta charset="utf-8">
+    <title>PHOTOS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="photos.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" media="screen" title="no title">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div ng-controller="PhotosCtrl">
+      <select ng-model="filterSearch">
+        <option></option>
+        <option ng-repeat="filter in filters">{{ filter }}</option>
+      </select>
+      <select ng-model="tagSearch" multiple>
+        <option></option>
+        <option ng-repeat="tag in tags">{{ tag }}</option>
+      </select>
+      <p>{{ feedLength }}</p>
+      <span ng-click="changePageBack()">Go Back</span>
+      <span ng-click="changePageFor()">Go Forth</span>
+      <div class="row">
+
+        <div class="col-xs-3" ng-repeat="post in filteredArray | limitTo:12:(page * 12)">
+          <div class="card">
+            <div class="card-block">
+              <a ng-href="{{ post.link }}"><img ng-src="{{post.images.thumbnail.url}}"></a>
+              <a ng-href="{{ 'https://www.instagram.com/' + post.user.username + '/' }}"><h4 class="card-title">{{ post.user.username }}</h4></a>
+              <p class="card-text">Posted On: {{ post.caption.created_time * 1000 | date }}</p>
+              <p class="card-text">Likes: {{ post.likes.count }}</p>
+              <p class="card-text">Comments: {{ post.comments.count }}</p>
+              <p class="card-text">Filter: {{ post.filter }}</p>
+              <p><span ng-repeat="tag in post.tags"> #{{ tag }}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="text" ng-model="dynoSearch" ng-keydown="selectResult($event)">
+      <ul>
+        <li ng-if="dynoSearch" class="highlight_{{ $index === highlightIndex }}" ng-repeat="peeps in possiblePeeps | limitTo: 5">{{ peeps.user.username }} </li>
+      </ul>
+      <div class="card" ng-repeat="user in rawFeed | filter: dynoSearch as possiblePeeps">
+        <div class="card-block">
+          <img ng-src="{{user.user.profile_picture}}">
+          <a ng-click="searchByUser(user.user.username)"><h4 class="card-title">{{ user.user.username }}</h4></a>
+          <p>{{ user.user.full_name }}</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
