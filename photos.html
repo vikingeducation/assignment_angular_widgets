@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="widgets" ng-controller="PhotosCtrl">
+<head>
+  <title></title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <!-- Lodash -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
+
+  <!-- Angular -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+  <br><br><br><br>
+
+  <select class="col-xs-6" ng-model="userFilter">
+    <option ng-repeat="photo in rawFeed | unique: 'filter'">
+      {{photo.filter}}
+    </option>
+  </select>
+
+  <select multiple class="col-xs-6" ng-model="userTags" style="height: 130px">
+    <option ng-repeat="tag in allTags | unique">
+      {{tag}}
+    </option>
+  </select>
+
+
+  <br>
+
+  <h1 class="btn btn-warning active btn-lg"> Display Search Count: {{ (rawFeed | filter: filterPhoto).length }} </h1>
+
+  <br>  
+
+  <div class="col-xs-12" style="border: 1px solid black; background-color: #c4dff6; border-radius: 10px">
+
+    <div class="col-xs-3 col-height" ng-repeat="photo in rawFeed | filter: filterPhoto as filteredPhotos" style="margin-top: 10px; border: 1px solid black; ">
+
+      <a href={{photo.link}}><img ng-src={{photo.images.standard_resolution.url}} style="width: 100%; border:1px solid grey; border-radius:50px"></a>
+
+      <a class='btn btn-success active' href="https://www.instagram.com/{{photo.user.username}}">{{photo.user.username}}</a>
+      
+      <p>{{(photo.created_time * 1000) | date }}</p>
+
+      <div class="col-xs-4">
+        Likes:
+      </div>
+      <div class="col-xs-8">
+        {{photo.likes.count}}
+      </div>
+      
+      <div class="col-xs-4">
+        Comments:
+      </div>
+      <div class="col-xs-8">
+        {{photo.comments.count}}
+      </div>
+
+      <span style="color: black" ng-repeat="tag in photo.tags">#{{tag}} </span>
+
+    </div> 
+  </div>
+
+  <div class="col-xs-12" style="border: 1px solid black; background-color: #8b9dc3">
+
+    <div class="col-xs-2 user-height" ng-repeat="photo in rawFeed" style="margin-top: 10px; border: 1px solid black">
+
+      <img ng-click="updateName(photo.user.username)" ng-src={{photo.user.profile_picture}} class="img-circle" style="width: 100%; border:1px solid grey; border-radius:120px">
+
+      <p class="btn btn-danger primary" ng-click="updateName(photo.user.username)">{{ photo.user.username }}</p>
+
+    </div> 
+  </div>
+
+
+  <script src="photos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
