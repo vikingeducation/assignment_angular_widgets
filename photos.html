@@ -39,7 +39,7 @@
 
   <br>
 
-  <h1 class="btn btn-warning active btn-lg"> Display Search Count: {{ filteredPhotos.length }} </h1>
+  <h1 class="btn btn-warning active btn-lg"> Display Search Count: {{ (rawFeed | filter: filterPhoto).length }} </h1>
 
   <br>  
 
