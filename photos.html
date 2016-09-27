@@ -37,6 +37,10 @@
     </div>
 
     <p>Filtered Results: {{filtered.length}}</p>
+
+    <p>Current Page: {{currentPage}}</p>
+    <p ng-click="currentPage = currentPage + 1">Next Page</p>
+    <p ng-click="currentPage = currentPage - 1">Previous page</p>
   </div>
 
   <div class="row">

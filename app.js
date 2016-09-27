@@ -91,4 +91,14 @@ widgets.controller('PhotosCtrl',
     };
 
     $scope.images = $scope.allImages;
+
+    $scope.currentPage = 1;
+
+    $scope.$watch("currentPage", function(){
+      var first = ($scope.currentPage - 1) * 12;
+      var last = first + 12;
+
+      $scope.images = $scope.allImages.slice(first, last)
+    });
+
   }]);
