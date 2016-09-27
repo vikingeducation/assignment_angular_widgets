@@ -38,10 +38,32 @@ widgets.controller('PhotosCtrl',
     $scope.rawFeed = instagramResponse;
     $scope.selectedFilter = "";
     $scope.selectedUser = "";
+    $scope.selectedHashtags = [];
     $scope.allImages = [];
     $scope.filters = [];
     $scope.hashtags = [];
     $scope.users = [];
+
+    $scope.filterByTags = function(image){
+      if($scope.selectedHashtags.length > 0){
+        var imageTags = image.hashtags;
+
+        
+        for(var i = 0; i < $scope.selectedHashtags.length; i++){
+          var tag = $scope.selectedHashtags[i];
+          if(imageTags.indexOf(tag) === -1){
+            return false;
+          }
+        }
+          
+        
+        
+      } 
+
+      return true;
+      
+
+    };
 
     for(var i = 0; i < $scope.rawFeed.data.length; i++){
       var data = $scope.rawFeed.data[i];
