@@ -35,10 +35,12 @@
         <option ng-repeat="hashtag in hashtags track by $index" value={{hashtag}}>{{hashtag}}</option>
       </select>
     </div>
+
+    <p>Filtered Results: {{filtered.length}}</p>
   </div>
 
   <div class="row">
-    <div class="col-md-3 panel panel-default" ng-repeat="img in images | filter:{filter: selectedFilter} | filter:{user: selectedUser}">
+    <div class="col-md-3 panel panel-default" ng-repeat="img in images | filter:{filter: selectedFilter} | filter:{user: selectedUser} as filtered">
       <div class="panel-heading">
         <h4>{{img.user}}</h4>
         <h4>{{img.time*1000 | date : 'yyyy'-'mm'-'dd'}}</h4>
