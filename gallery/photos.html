@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Photo Gallery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="photos.js" charset="utf-8"></script>
+    <script src="app.js" charset="utf-8"></script>
+  </head>
+  <body ng-app="photoGalley">
+
+
+    <div class="photo-gallery" ng-controller="PhotosCtrl">
+      <div class="col-md-12">
+        <h4>Hashtags</h4>
+        <select multiple ng-model="tagsSelect" class="form-control">
+          <option ng-repeat="tag in tags | uniq">{{ tag }}</option>
+          <option></option>
+        </select>
+      </div>
+
+      <div class="col-md-12">
+        <h4>Filter Select</h4>
+        <select ng-model="filterSelect" class="form-control">
+          <option ng-repeat="filter in filters">{{ filter }}</option>
+          <option></option>
+        </select>
+      </div>
+
+      <h3 class="col-md-12">{{ filtered.length }} results found</h3>
+
+      <div class="col-sm-6 col-md-4" ng-repeat="user in users | filter: {filter: filterSelect} | tagsFilter: tagsSelect | limitTo: 12 : startIndex as filtered">
+        <div class="thumbnail">
+          <a ng-href="{{ user.link }}"><img ng-src="{{ user.images.low_resolution.url }}" alt="image"></a>
+          <div class="caption text-center">
+            <h3><a ng-href="{{ user.user.profile_picture }}">{{ user.user.username }}</a></h3>
+            <p class="text-muted">
+              Posting time: {{ user.caption.created_time }}
+            </p>
+            <p>Likes: {{ user.likes.count }}</p>
+            <p>Comments: {{ user.comments.count }}</p>
+            <p>Filter: {{ user.filter }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li><a ng-href="" ng-repeat="page in pages" ng-click="setCurrentPage(page)">{{ page }}</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js" charset="utf-8"></script>
+    <script src="app.js" charset="utf-8"></script>
+  </head>
+  <body ng-app="widgets">
+    <div ng-controller="RestaurantCtrl">
+      <div class="form">
+        <label for="name">Name</label>
+        <input type="text" name="name" value="" ng-model="name">
+        <br>
+        <label for="type_of_food">Type Of Food</label>
+        <input type="text" name="type_of_food" value="" ng-model="type_of_food">
+        <br>
+        <label for="img-url">Image</label>
+        <input type="text" name="img-url" value="" ng-model="img_url">
+        <br>
+        <button type="button" name="Create Restaurant" ng-click="createRestaurant()">Create Restaurant</button>
+      </div>
+
+      <div class="search-restaurant">
+        <h2>Search Restaurants</h2>
+        <input type="text" name="search" value="" ng-model="searchKeyWords">
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <td><a href="" ng-click="sortByName()">Name{{ orderSign }}</a></td>
+            <td><a href="" ng-click="sortByFoodType()">Food Type{{ orderSign }}</a></td>
+            <td>Image</td>
+            <td>Delete</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="restaurant in restaurants | orderBy: sortItem : sequence | filter: {name: searchKeyWords} ">
+            <td>{{ restaurant.name }}</td>
+            <td>{{ restaurant.foodType }}</td>
+            <td><img ng-src="{{ restaurant.imgUrl }}" alt="img" /></td>
+            <td><button type="button" name="delete_button" ng-click="removeRestaurant(restaurant)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </body>
+</html>
