@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app='WidgetsApp'>
+<head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="photos.js"></script>
+  <script src="app.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body ng-controller='PhotosCtrl'>
+<h1> photos</h1>
+<div class="container">
+<div class="col-xs-4" ng-repeat='photo in rawFeed.data'>
+<h3><a href="{{'https://www.instragram.com/'+photo.user.username}}">{{photo.user.username}}</a></h3>
+<weak>{{photo.created_time*1000 | date}}</weak><br>
+<a href="{{photo.link}}">image/link</a>
+<p>likes: {{photo.likes.count}}, comments: {{photo.comments.count}}</p>
+<p>filter: {{photo.filter}}</p>
+
+</div>
+
+</div>
+</body>
+</html>
