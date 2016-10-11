@@ -6,10 +6,43 @@
   <script src="app.js"></script>
 </head>
 <body ng-controller='RestaurantCtrl'>
-<h1>title</h1>
+<h1>restaurants factory</h1>
+
+<form name='myForm' ng-submit="createRestaurant()">
+  name:
+<input ng-model='name'><br>
+
+type:
+<input ng-model='typeOfFood'><br>
+
+pic: <input ng-model='icon'><br><br>
 
 
+<input type="submit" value="Create Restaurant">
+</form><br>
 
+<br>
+<label>Search: <input ng-model='query'></label>
+<table>
+  <tr><th>Name</th><th>Type</th><th>remove</th></tr>
+  <tr ng-repeat='rest in restaurants | filter:{foodType: query}'>
+  <td>{{rest.name}}</td><td>{{rest.foodType}}</td><td><img ng-src="{{rest.icon}}"></td>
+  <td><button ng-click='removeRest($index)'>delete</button></td>
+</tr>
+</table>
+<br>
+<br>
+<h3>Search restaurants</h3>
+<form name="searchForm">
+<label>query: <input name="search" ng-model='query1'></label>
+{{search.$dirty}}
+</form>
 
+<table ng-if="activeSearch()">
+  <tr><th ng-click='clickSort("name")'>Name</th><th ng-click='clickSort("foodType")'>Type</th></tr>
+  <tr ng-repeat='rest in restaurants | filter:query1 | orderBy: clickOrder'>
+  <td>{{rest.name}}</td><td>{{rest.foodType}}</td>
+  </tr>
+</table>
 </body>
 </html>
