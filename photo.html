@@ -1,0 +1,62 @@
+<!doctype html>
+<html ng-app='WidgetsApp'>
+<head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="photos.js"></script>
+  <script src="app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body ng-controller='PhotosCtrl'>
+<h1> photos</h1>
+<div class="container">
+  <div class="row">
+  <div class="col-xs-2">
+    <p>sort by:</p><br>
+  selected user: "{{selectedUser | json}}"
+    <p>Showing <strong>{{results.length}}</strong> results</p>
+  </div>
+  <div class='col-xs-5'>
+    filter:
+    <select ng-model="filterSelect">
+      <option></option>
+      <option ng-repeat="filter in filters">{{filter}}</option>
+    </select>
+  </div>
+  <div class='col-xs-5'>
+    <select multiple ng-model="tagSelect">
+      <option></option>
+      <option ng-repeat="tag in tags">{{tag}}</option>
+    </select>
+
+  </div>
+</div>
+
+<h2>The Gallery</h2>
+<div class="row">
+<div class="col-xs-4" ng-repeat='photo in rawFeed.data | filter:{filter: filterSelect} | tagFilter:tagSelect | filter:{user: selectedUser} as results'>
+<h3><a href="{{'https://www.instragram.com/'+photo.user.username}}">{{photo.user.username}}</a></h3>
+<weak>{{photo.created_time*1000 | date}}</weak><br>
+<a href="{{photo.link}}"><img ng-src="{{photo.images.thumbnail.url}}"></a>
+<p>likes: {{photo.likes.count}}, comments: {{photo.comments.count}}</p>
+<p>filter: {{photo.filter}}</p>
+  <p>tags:
+<ul>
+
+  <li ng-repeat="tag in photo.tags">{{tag}}</li>
+</ul></p>
+
+
+</div>
+</div>
+<h2>The Users</h2>
+<div class="row">
+  <div class='col-xs-4' ng-repeat="photo in rawFeed.data | uniqBy:'user.username'">
+      <img ng-click='selectUser(photo.user)' ng-src="{{photo.user.profile_picture}}">
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
