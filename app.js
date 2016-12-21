@@ -1,4 +1,9 @@
-var widgets = angular.module('widgets', []);
+var underscore = angular.module('underscore', []);
+underscore.factory('_', ['$window', function() {
+  return $window._;
+}]);
+
+var widgets = angular.module('widgets', ['underscore']);
 widgets.controller('RestaurantCtrl',
     ['$scope',
     function($scope){
@@ -32,4 +37,51 @@ widgets.controller('RestaurantCtrl',
           return true;
         }
       }
-    }]);
+    }]
+);
+
+widgets.filter('tagFilter', function() {
+  return function( collection, target ) {
+    if (!target || target == '') return collection;
+    var filteredCollection = []
+    angular.forEach( collection, function( photo ){
+      if( _.intersection(photo.tags, _.flatten(target)).length > 0) {
+        filteredCollection.push( photo );
+      }
+    })
+    return filteredCollection;
+  };
+});
+
+widgets.controller('PhotoCtrl',
+  ['$scope',
+  function($scope){
+    $scope.rawFeed = instagramResponse;
+    $scope.photos = [];
+    $scope.filters = [];
+    $scope.tags = [];
+    $scope.rawFeed.data.forEach(function(data) {
+      if (data.caption != null) {
+        $scope.filters.push(data.filter);
+        $scope.tags.push(data.tags);
+        $scope.photos.push({
+          username: data.caption.from.username,
+          created_at: Number(data.caption.created_time),
+          url: data.images["low_resolution"].url,
+          likes_count: data.likes.count,
+          comments_count: data.comments.count,
+          filter: data.filter,
+          instagram_link: data.link,
+          tags: data.tags
+        });
+        $scope.tags.push('');
+        $scope.tags = _.sortBy(_.uniq(_.flatten($scope.tags)));
+        $scope.filters.push('');
+        $scope.filters = _.sortBy(_.uniq($scope.filters));
+      }
+    })
+    $scope.userlink = function(photo) {
+      return 'https://www.instagram.com/'+photo.username+'/'
+    }
+  }]
+);

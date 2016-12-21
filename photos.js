@@ -3683,17 +3683,17 @@ var instagramResponse = {
       },
       "images": {
         "low_resolution": {
-          "url": "https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s320x320/e35/11875415_1056101737773400_442807512_n.jpg",
+          "url": "https://instagram.fsnc1-2.fna.fbcdn.net/t51.2885-15/e35/15251797_1203772476379756_9095185787263123456_n.jpg",
           "width": 320,
           "height": 320
         },
         "thumbnail": {
-          "url": "https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s150x150/e35/11875415_1056101737773400_442807512_n.jpg",
+          "url": "https://instagram.fsnc1-2.fna.fbcdn.net/t51.2885-15/e35/15251797_1203772476379756_9095185787263123456_n.jpg",
           "width": 150,
           "height": 150
         },
         "standard_resolution": {
-          "url": "https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s640x640/sh0.08/e35/11875415_1056101737773400_442807512_n.jpg",
+          "url": "https://instagram.fsnc1-2.fna.fbcdn.net/t51.2885-15/e35/15251797_1203772476379756_9095185787263123456_n.jpg",
           "width": 640,
           "height": 640
         }
