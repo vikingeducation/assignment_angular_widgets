@@ -32,7 +32,7 @@
       <p>Showing {{filtered.length}} Photos</p>
     </div>
     <div class="row">
-      <div class="col-sm-4" ng-repeat="photo in photos | filter: selectedFilter | tagFilter: selectedTags as filtered">
+      <div class="col-sm-4" ng-repeat="photo in filtered = (photos | filter: selectedFilter | tagFilter: selectedTags) | limitTo : 12 : page*12 as filtered">
         <div class="photo">
           <a ng-href="{{userlink(photo)}}">@{{ photo.username }}</a>
           <p>{{ photo.created_at | date:'medium' }}</p>
@@ -46,7 +46,11 @@
         </div>
       </div>
     </div>
-
+    <div class="text-center">
+      <a class="paginationLink" href ng-click="prevPage()">PrevPage</a>/
+      <span>Current Page : {{page+1}}</span>/
+      <a class="paginationLink" href ng-click="nextPage(filtered.length)">NextPage</a>
+    </div>
   </div>
 </div>
 

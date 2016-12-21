@@ -56,10 +56,12 @@ widgets.filter('tagFilter', function() {
 widgets.controller('PhotoCtrl',
   ['$scope',
   function($scope){
+    $scope.Math = window.Math;
     $scope.rawFeed = instagramResponse;
     $scope.photos = [];
     $scope.filters = [];
     $scope.tags = [];
+    $scope.page = 0;
     $scope.rawFeed.data.forEach(function(data) {
       if (data.caption != null) {
         $scope.filters.push(data.filter);
@@ -79,9 +81,20 @@ widgets.controller('PhotoCtrl',
         $scope.filters.push('');
         $scope.filters = _.sortBy(_.uniq($scope.filters));
       }
-    })
+    });
     $scope.userlink = function(photo) {
       return 'https://www.instagram.com/'+photo.username+'/'
+    };
+    $scope.nextPage = function(filteredLength) {
+      $scope.page += 1;
+      var maxPage = Math.floor(filteredLength/ 12);
+      if ($scope.page > maxPage) $scope.page = maxPage;
+      console.log("current_page" + $scope.page);
+    };
+    $scope.prevPage = function() {
+      $scope.page -= 1;
+      if ($scope.page < 0) $scope.page = 0;
+      console.log("current_page" + $scope.page);
     }
   }]
 );

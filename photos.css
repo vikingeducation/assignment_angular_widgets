@@ -23,3 +23,6 @@ a {
 p {
   margin: 0;
 }
+a.paginationLink {
+  display: inline-block;
+}
