@@ -53,6 +53,19 @@ widgets.filter('tagFilter', function() {
   };
 });
 
+widgets.filter('userFilter', function() {
+  return function( collection, targetUser ) {
+    if (!targetUser || targetUser == '') return collection;
+    var filteredCollection = []
+    angular.forEach( collection, function( photo ){
+      if( photo.user_id == targetUser.id) {
+        filteredCollection.push( photo );
+      }
+    })
+    return filteredCollection;
+  };
+});
+
 widgets.controller('PhotoCtrl',
   ['$scope',
   function($scope){
@@ -61,21 +74,30 @@ widgets.controller('PhotoCtrl',
     $scope.photos = [];
     $scope.filters = [];
     $scope.tags = [];
+    $scope.users = [];
     $scope.page = 0;
+    $scope.userToFilter = '';
     $scope.rawFeed.data.forEach(function(data) {
       if (data.caption != null) {
         $scope.filters.push(data.filter);
         $scope.tags.push(data.tags);
         $scope.photos.push({
           username: data.caption.from.username,
-          created_at: Number(data.caption.created_time),
+          created_at: Number(data.caption.created_time) * 1000,
           url: data.images["low_resolution"].url,
           likes_count: data.likes.count,
           comments_count: data.comments.count,
           filter: data.filter,
           instagram_link: data.link,
-          tags: data.tags
+          tags: data.tags,
+          user_id: data.user.id
         });
+        $scope.users.push({
+          username: data.user.username,
+          fullname: data.user.full_name,
+          id: data.user.id,
+          profile_picture: data.user.profile_picture
+        })
         $scope.tags.push('');
         $scope.tags = _.sortBy(_.uniq(_.flatten($scope.tags)));
         $scope.filters.push('');
@@ -89,12 +111,14 @@ widgets.controller('PhotoCtrl',
       $scope.page += 1;
       var maxPage = Math.floor(filteredLength/ 12);
       if ($scope.page > maxPage) $scope.page = maxPage;
-      console.log("current_page" + $scope.page);
     };
     $scope.prevPage = function() {
       $scope.page -= 1;
       if ($scope.page < 0) $scope.page = 0;
-      console.log("current_page" + $scope.page);
-    }
+    };
+    $scope.selectedUser = function(user) {
+      $scope.userToFilter  = ($scope.userToFilter == user) ? '' : user;
+      console.log(user);
+    };
   }]
 );
