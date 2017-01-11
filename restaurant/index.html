@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body ng-app="widgets">
+    <div ng-controller="RestarauntCtrl">
+
+      <h2>Create Restaurant</h2>
+      <form>
+        Restaurant: <input name="name" ng-model="name"><br />
+
+        Food: <input name="foodType" ng-model="foodType"><br />
+        URL: <input type="text" name="url" ng-model="url">
+        <button ng-click="createRest()">Create Restaurant</button>
+      </form>
+
+
+
+      <p></p>
+      <h2>Restaurants</h2>
+
+      <label><input ng-model="filterFood"></label><br />
+      <table >
+        <tr>
+          <th>Name</th>
+          <th>Food</th>
+          <th>Image URL</th>
+          <th>Delete</th>
+        </tr>
+
+        <tr>
+          <tr ng-repeat="restaurant in restaurants | filter:filterFood">
+            <td >{{ restaurant.name }}</td>
+            <td>{{ restaurant.foodType }}</td>
+            <td><img ng-src="{{ restaurant.url }}" /></td>
+            <td><button ng-click="destroyit(restaurant)">Delete</button></td>
+          </tr>
+        </tr>
+      </table>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript" src="app.js">
+    </script>
+  </body>
+</html>
