@@ -2,6 +2,8 @@ var widgets = angular.module('widgets', []);
 
 widgets.controller("PhotosCtrl", ['$scope', function($scope) {
   $scope.rawFeed = instagramResponse;
+  $scope.photoList = $scope.rawFeed['data'];
+  $scope.beginPage = 0;
 
   $scope.getFilters = function(){
     var filters = [];
@@ -23,11 +25,16 @@ widgets.controller("PhotosCtrl", ['$scope', function($scope) {
     return hashtags;
   };
 
-  // $scope.filterTags = function(object){
-  // }
-
   $scope.resetFilters = function(){
+    $scope.photoList = $scope.rawFeed['data'];
     $scope.selectedFilter = undefined;
     $scope.selectedHashtags = undefined;
-  }
+  };
+
+  $scope.adjustPage = function(adjustment) {
+    if (!($scope.beginPage === 0 && adjustment < 0)) {
+      $scope.beginPage += adjustment;
+      console.log('adjusting!');
+    }
+  };
 }]);
