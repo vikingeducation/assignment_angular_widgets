@@ -2,7 +2,7 @@
 <html ng-app="widgets">
 <head>
   <title>Angular Widgets</title>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="/css/main.css"> -->
 </head>
@@ -21,7 +21,7 @@
         <br>
         <button ng-click="resetFilters()">Reset Filters! </button>
         <br>
-        <span>{{ photoList.length }}</span>
+        <span>Number of displayed results: {{ photoList.length }}</span>
       </div>
 
       <div class="row">
@@ -30,7 +30,30 @@
       </div>
 
       <div class="row">
-        <div class="col-md-3" data-ng-repeat="obj in photoList | filter: selectedFilter | tagFilter: selectedHashtags | limitTo: 12 : beginPage as photoList">
+        <div class="col-md-3" ng-repeat="user in userList ">
+          <div class="info">
+            <ul>
+              <li>
+                <strong>username:</strong> <span ng-click="setCurrentUser(user['username'])">
+                {{ user['username'] }}
+                </span>
+              </li>
+
+              <li>
+              <strong>Full Name</strong>
+                <a href="{{'https://instagram.com/' + user['username']}}">
+                  {{ user['full_name'] }}
+                </a>
+              </li>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3" ng-repeat="obj in photoList = (rawFeed['data'] | filter: selectedFilter | tagFilter: selectedHashtags | userFilter : currentUser | limitTo: 12 : beginPage) ">
+
+          {{selectedUser}}
+
           <a href="{{obj['link']}}">
             <img ng-src="{{ obj['images']['low_resolution']['url'] }}" alt="">
           </a>
@@ -54,6 +77,9 @@
           </div>
         </div>
       </div>
+
+
+
     </div>
   </div>
 

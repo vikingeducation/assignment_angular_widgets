@@ -4,6 +4,18 @@ widgets.controller("PhotosCtrl", ['$scope', function($scope) {
   $scope.rawFeed = instagramResponse;
   $scope.photoList = $scope.rawFeed['data'];
   $scope.beginPage = 0;
+  $scope.userList = (function(){
+    var userList = [];
+    $scope.rawFeed["data"].forEach(function(obj){
+      userList.push(obj["user"]);
+    });
+    return userList;
+  })();
+  $scope.currentUser = undefined
+
+  $scope.setCurrentUser = function(selectedUser){
+    $scope.currentUser = selectedUser
+  }
 
   $scope.getFilters = function(){
     var filters = [];
@@ -32,9 +44,13 @@ widgets.controller("PhotosCtrl", ['$scope', function($scope) {
   };
 
   $scope.adjustPage = function(adjustment) {
+    if($scope.beginPage >= $scope.rawFeed["data"].length - 12){
+      if(adjustment > 0){
+        adjustment = 0;
+      }
+    }
     if (!($scope.beginPage === 0 && adjustment < 0)) {
       $scope.beginPage += adjustment;
-      console.log('adjusting!');
     }
   };
 }]);

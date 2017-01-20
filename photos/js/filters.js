@@ -58,3 +58,23 @@ widgets.filter('tagFilter', function(){
     return filteredCollection;
   };
 });
+
+
+widgets.filter('userFilter', function(){
+  return function(collection, username){
+
+    if(username === undefined){
+      return collection;
+    }
+
+    var filteredCollection = [];
+
+    for(var i = 0; i < collection.length; i++){
+      if(collection[i]["user"]["username"] === username){
+        filteredCollection.push(collection[i]);
+      };
+    }
+
+    return filteredCollection;
+  };
+});
