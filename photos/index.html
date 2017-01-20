@@ -8,14 +8,24 @@
 </head>
 <body>
   <div ng-controller="PhotosCtrl">
+    <select>
+      <option ng-repeat="filt in getFilters() | unique" value="{{filt}}" ng-click="setFilter(filt)">{{filt}} </option>
+    </select>
+
+
+
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3" ng-repeat="obj in rawFeed['data']">
-          <img ng-src="{{ obj['images']['low_resolution']['url'] }}" alt="">
+        <div class="col-md-3" ng-repeat="obj in rawFeed['data'] | filter: filtering">
+          <a href="{{obj['link']}}"> 
+            <img ng-src="{{ obj['images']['low_resolution']['url'] }}" alt="">
+          </a>
           <div class="info">
             <div>
               <strong>user:</strong>
+              <a href="{{'https://instagram.com/' + obj['user']['username']}}">
               {{ obj['user']['username'] }}
+              </a>
             </div>
             <div>
               <strong>caption:</strong>
@@ -35,5 +45,6 @@
 
   <script type="text/javascript" src="/js/photos.js"></script>
   <script type="text/javascript" src="/js/app.js"></script>
+  <script type="text/javascript" src="/js/unique_filter.js"></script>
 </body>
 </html>
