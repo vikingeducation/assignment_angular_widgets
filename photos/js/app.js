@@ -12,7 +12,18 @@ widgets.controller("PhotosCtrl", ['$scope', function($scope) {
     return filters;
   };
 
+  $scope.getHashtags = function() {
+    var hashtags = [];
+    for(var i = 0; i < $scope.rawFeed["data"].length; i++){
+      var currPhoto = $scope.rawFeed["data"][i];
+      for (var j = 0; j < currPhoto["tags"].length; j++) {
+        hashtags.push(currPhoto["tags"][j]);
+      }
+    }
+    return hashtags;
+  };
+
   $scope.setFilter = function(filt){
-    console.log(filt)
-  }
+    console.log(filt);
+  };
 }]);

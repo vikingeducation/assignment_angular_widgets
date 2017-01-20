@@ -8,16 +8,19 @@
 </head>
 <body>
   <div ng-controller="PhotosCtrl">
-    <select>
-      <option ng-repeat="filt in getFilters() | unique" value="{{filt}}" ng-click="setFilter(filt)">{{filt}} </option>
+    <!-- ng-options="textItAppearsAs for item in collection" -->
+    <!-- option tag's text is being assigned to ng-model? -->
+    <select ng-model="selectedFilter" ng-options="item for item in getFilters() | unique">
     </select>
 
-
+    <!-- TODO multiselect hashtags -->
+    <select ng-model="selectedHashtags" ng-options="tag for tag in getHashtags() | unique">
+    </select>
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3" ng-repeat="obj in rawFeed['data'] | filter: filtering">
-          <a href="{{obj['link']}}"> 
+        <div class="col-md-3" ng-repeat="obj in rawFeed['data'] | filter: selectedFilter | filter: selectedHashtags">
+          <a href="{{obj['link']}}">
             <img ng-src="{{ obj['images']['low_resolution']['url'] }}" alt="">
           </a>
           <div class="info">
