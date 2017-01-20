@@ -15,13 +15,13 @@
     <table>
       <thead>
         <tr>
-          <td>Name</td>
-          <td>Type of Food</td>
+          <td ng-click="orderColumn('name')">Name</td>
+          <td ng-click="orderColumn('foodType')">Type of Food</td>
           <td>What it looks like</td>
           <td>Delete?</td>
         </tr>
       </thead>
-      <tbody ng-repeat="res in restaurants | orderBy: 'foodType' ">
+      <tbody ng-repeat="res in restaurants | orderBy: returnColumn()  | filter: search ">
         <tr>
           <td>{{ res.name }}</td>
           <td>{{ res.foodType }}</td>
@@ -30,6 +30,11 @@
         </tr>
       </tbody>
     </table>
+
+    <hr>
+
+    <h1>Search Resturants!</h1>
+    <input type="text" ng-model="search">
 
   </div>
 
