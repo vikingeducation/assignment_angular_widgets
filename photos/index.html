@@ -14,12 +14,13 @@
     </select>
 
     <!-- TODO multiselect hashtags -->
-    <select ng-model="selectedHashtags" ng-options="tag for tag in getHashtags() | unique">
+    <select ng-model="selectedHashtags" ng-options="tag for tag in getHashtags() | unique" multiple>
     </select>
 
+    <button ng-click="resetFilters()">Reset Filters! </button>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3" ng-repeat="obj in rawFeed['data'] | filter: selectedFilter | filter: selectedHashtags">
+        <div class="col-md-3" ng-repeat="obj in rawFeed['data'] | filter: selectedFilter | filter: selectedHashtags[0]">
           <a href="{{obj['link']}}">
             <img ng-src="{{ obj['images']['low_resolution']['url'] }}" alt="">
           </a>

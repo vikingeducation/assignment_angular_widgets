@@ -23,7 +23,11 @@ widgets.controller("PhotosCtrl", ['$scope', function($scope) {
     return hashtags;
   };
 
-  $scope.setFilter = function(filt){
-    console.log(filt);
-  };
+  // $scope.filterTags = function(object){
+  // }
+
+  $scope.resetFilters = function(){
+    $scope.selectedFilter = undefined;
+    $scope.selectedHashtags = undefined;
+  }
 }]);
