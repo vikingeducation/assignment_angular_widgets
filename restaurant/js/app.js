@@ -7,12 +7,15 @@ widgets.controller("RestaurantCtrl", ["$scope", function($scope){
   $scope.imageUrl = "lookin good!";
   $scope.columnType = 'foodType';
   $scope.columnDirection = "+";
+  $scope.id = 0
 
   $scope.createRestaurant = function(){
     var res = {};
     res.name = $scope.name;
     res.foodType = $scope.foodType;
     res.imageUrl = $scope.imageUrl;
+    res.id = $scope.id
+    $scope.id += 1
 
     $scope.restaurants.push(res);
 
@@ -20,8 +23,12 @@ widgets.controller("RestaurantCtrl", ["$scope", function($scope){
     $scope.foodType = undefined;
     $scope.imageUrl = undefined;
   };
-  $scope.deleteRestaurant = function(index) {
-    $scope.restaurants.splice(index, 1);
+  $scope.deleteRestaurant = function(id) {
+    for(var i = 0; i < $scope.restaurants.length; i++){
+      if($scope.restaurants[i].id === id){
+        $scope.restaurants.splice(i, 1)
+      }
+    }
   };
 
   $scope.returnColumn = function(){
