@@ -34,13 +34,13 @@
           <div class="info">
             <ul>
               <li>
-                <strong>username:</strong> <span ng-click="setCurrentUser(user['username'])">
+                <strong>Username:</strong> <a ng-click="setCurrentUser(user['username'])">
                 {{ user['username'] }}
-                </span>
+                </a>
               </li>
 
               <li>
-              <strong>Full Name</strong>
+              <strong>Full Name:</strong>
                 <a href="{{'https://instagram.com/' + user['username']}}">
                   {{ user['full_name'] }}
                 </a>
