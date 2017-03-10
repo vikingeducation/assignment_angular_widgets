@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="widgets">
+<head>
+  <title>Widgets</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-controller="RestaurantCtrl">
+
+<div class="form">
+  <label>Name</label>
+  <input type="text" name="name" ng-model="name">
+  <label>Type of Food</label>
+  <input type="text" name="foodType" ng-model="foodType">
+  <label>Img Source</label>
+  <input type="text" name="img" ng-model="img">
+  <button type="submit" ng-click="newRestaurant()">Create Restaurant</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type of Food</th>
+      <th>Image</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="restaurant in restaurants | orderBy: '+foodType'">
+      <td>{{ restaurant.name }}</td>
+      <td>{{ restaurant.foodType }}</td>
+      <td><img ng-src="{{ restaurant.img }}"></td>
+      <td ng-click="deleteRestaurant(restaurant)">Delete</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+</body>
+</html>
