@@ -4,8 +4,6 @@
   <title>Photo Gallery</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  < !-- Lodash -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
   <script type="text/javascript" src="photos.js"></script>
   <script type="text/javascript" src="app.js"></script>
 
@@ -45,7 +43,7 @@
       Results: {{ filtered.length }}
     </h4>
 
-    <div class="col-sm-4" ng-repeat="post in filtered = (rawFeed | filter: {filter: selectedFilter} | filterTags: selectedTags | limitTo: 12 : (pageNum * 12) )">
+    <div class="col-sm-4" ng-repeat="post in filtered = (rawFeed | filter: selectedFilter | filter: currentUser | filterTags: selectedTags | limitTo: 12 : (pageNum * 12) )">
       <div class="photo-post text-center">
         <h5>
           <a href="{{ igURL + post.user.username }}">
@@ -67,7 +65,22 @@
     <p class="text-center" ng-click="changePage()"><a href="">{{pageValue}}</a></p>
 
 
+    <div class="row">
+      <div class="col-sm-12">
+          <h3 class="text-center">Users</h3>
+          <hr>
+          <div class="col-sm-3" ng-repeat="post in rawFeed" ng-click="setUser(post.user.username)">
+            <div class="user">
+              <img ng-src="{{post.user.profile_picture}}">
+              <h6>Username: {{ post.user.username }}</h6>
+              <h6>Full Name: {{ post.user.full_name }}</h6>
+              <h6>ID: {{post.user.id }}</h6>
+            </div>
+          </div>    
+      </div>
     </div>
+
+  </div>
   </div>
 </body>
 </html>

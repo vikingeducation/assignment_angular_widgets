@@ -39,11 +39,12 @@ gallery.controller('PhotosCtrl',
         this.pageValue = "more >>";
       }
     }
+    $scope.currentUser;
+    $scope.setUser = function(user) {
+      $scope.currentUser = user;
+      console.log($scope.currentUser)
+    }
   }]);
-
-// gallery.factory('_', [$window, function($window) {
-//   return $window._;
-// }]);
 
 gallery.filter('filterTags', function() {
   return function( collection, tags ) {
