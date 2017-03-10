@@ -4,6 +4,8 @@
   <title>Photo Gallery</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  < !-- Lodash -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
   <script type="text/javascript" src="photos.js"></script>
   <script type="text/javascript" src="app.js"></script>
 
@@ -21,17 +23,35 @@
   <div class="container">
     <div class="row">
 
-    <h1 class="text-center">Photos</h1><br>
+    <hr>
+      <h1 class="text-center">Photos</h1>
+    <hr>
 
+    <form name="form">
+      <h3>Search photos by:</h3>
+      <p>
+        <label>Filter</label><br>
+        <select name="filter" ng-model="selectedFilter" ng-options="filter for filter in filterList()"></select>        
+      </p>
+      <p>
+        <label>Hashtag</label><br>
+        <select multiple name="tag" ng-model="selectedTags" ng-options="tag for tag in tagList()"></select>        
+      </p>      
+    </form>
 
+    <hr>
 
-      <div class="col-sm-4" ng-repeat="post in rawFeed">
+    <h4 ng-if="form.tag.$touched || form.filter.$touched" class="text-center">
+      Results: {{ filtered.length }}
+    </h4>
+
+    <div class="col-sm-4" ng-repeat="post in filtered = (rawFeed | filter: {filter: selectedFilter} | filterTags: selectedTags | limitTo: 12 : (pageNum * 12) )">
       <div class="photo-post text-center">
-        <h6>
+        <h5>
           <a href="{{ igURL + post.user.username }}">
             {{ post.user.username }}
           </a>
-        </h6>
+        </h5>
         <h6>{{ post.created_time }}</h6>
         <a href="{{ post.link }}">
           <img src="{{ post.images.thumbnail.url }}">
@@ -40,11 +60,11 @@
         <h6>{{ post.likes.count }} likes</h6>
         <h6>{{ post.comments.count }} comments</h6>
         <h6>Filter: {{ post.filter }}</h6>
-<!--         <h6>Tags: </h6>
-        <span ng-repeat="tag in post.tags">{{tag + ' '}}</span> -->
       </div>
 
-      </div>
+    </div>
+
+    <p class="text-center" ng-click="changePage()"><a href="">{{pageValue}}</a></p>
 
 
     </div>
