@@ -7,27 +7,31 @@
 </head>
 <body ng-controller="RestaurantCtrl">
 
-<div class="form">
+<h2>Restaurants</h2>
+
+<form>
   <label>Name</label>
   <input type="text" name="name" ng-model="name">
   <label>Type of Food</label>
   <input type="text" name="foodType" ng-model="foodType">
   <label>Img Source</label>
   <input type="text" name="img" ng-model="img">
-  <button type="submit" ng-click="newRestaurant()">Create Restaurant</button>
-</div>
+  <button type="submit" ng-click="newRestaurant()">Create Restaurant</button>  
+</form>
 
+
+<br>
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type of Food</th>
-      <th>Image</th>
+      <th ng-click="setOrderQuery('name')">Name {{ displaySortValue() }}</th>
+      <th ng-click="setOrderQuery('foodType')">Type of Food {{ displaySortValue() }}</th>
+      <th ng-click="">Image</th>
       <th>Delete</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="restaurant in restaurants | orderBy: '+foodType'">
+    <tr ng-repeat="restaurant in restaurants | orderBy: orderQuery: sortValue">
       <td>{{ restaurant.name }}</td>
       <td>{{ restaurant.foodType }}</td>
       <td><img ng-src="{{ restaurant.img }}"></td>
@@ -36,7 +40,19 @@
   </tbody>
 </table>
 
+<hr>
+<h2>Search and Sort</h2>
+<form>
+  <label>Search</label>
+  <input type="text" name="search" ng-model="search">
+</form>
 
+<div class="results">
+  <h3>Restaurants matching search term:</h3>
+  <ul>
+    <li ng-repeat="restaurant in restaurants | filter: {name: search}">{{restaurant.name }}</li>
+  </ul>
+</div>
 
 </body>
 </html>

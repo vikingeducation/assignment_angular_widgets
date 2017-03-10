@@ -20,5 +20,25 @@ widgets.controller('RestaurantCtrl',
           $scope.restaurants.splice(i, 1);
         }
       }
+    };
+    $scope.search; // becomes new search criteria
+    $scope.sortValue = true;
+    $scope.displaySortValue = function() {
+      var display;
+      if (this.sortValue === true) {
+        display = '^';
+      } else if (this.sortValue === false) {
+        display = 'v';
+      }      
+      return display;
+    };
+    $scope.orderQuery;
+    $scope.setOrderQuery = function(query) {
+      $scope.orderQuery = query;
+      this.reverseSortValue();
+      console.log($scope.orderQuery)
+    };
+    $scope.reverseSortValue = function() {
+      this.sortValue = !this.sortValue;
     }
   }]);
