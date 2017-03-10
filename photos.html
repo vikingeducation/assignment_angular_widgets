@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<title></title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="photos.js"></script>
+	</head>
+	
+	<body class="container" ng-app="WidgetsApp">
+		
+		<div class="col-sm-10 col-sm-offset-1" ng-controller="PhotosCtrl">
+			<div class="row">
+				<section class="search col-sm-12">
+					<h3>Filter Photos:</h3>
+
+					<div class="form-group">
+						<select ng-model="filterName">
+							<option value="">Select Filter</option>
+							<option ng-repeat="filter in filters()">{{ filter }}</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<select ng-model="filterName">
+							<option value="">Select Tag</option>
+							<option ng-repeat="tag in hashtags()">{{ tag }}</option>
+						</select>
+					</div>
+
+					<div class="displaying">
+						<p>Showing {{ filtered.length }} Results</p>
+					</div>
+
+					<nav>
+						<ul class="pagination">
+							<li ng-hide="currentPage == 0"><a ng-click="currentPage = currentPage-1">&laquo;</a></li>
+							<li><a ng-click="currentPage = 0">1</a></li>
+							<li><a ng-click="currentPage = 1">2</a></li>
+							<li ng-hide="currentPage == 1"><a ng-click="currentPage = currentPage+1">&raquo;</a></li>
+						</ul>
+					</nav>
+
+				</section>
+			</div>
+			
+			<div class="user-photo col-sm-4" ng-repeat="data in filtered = (pagedItems()[currentPage] | filter:filterName )">
+				<a href="{{ data.link }}"><img ng-src="{{ data.images.standard_resolution.url }}" style="width:100%;"></a>
+				<div class="col-sm-12" class="photo-meta">
+					<p>Username: <a href="http://instagram.com/{{data.user.username}}">{{ data.user.username }}</a></p>
+					<p>Created at: {{ data.created_time | date:'medium' }}</p>
+					<p>Likes: {{ data.likes.count }}</p>
+					<p>Comments: {{ data.comments.count }}</p>
+				</div>
+			</div>
+
+			<section class="user-filter">
+				<h2>All Users:</h2>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>User ID</th>
+							<th>Full Name</th>
+							<th>Profile URL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="data in rawFeed.data">
+							<td ng-click="filterUserName(data.user.username)"><a href="">{{ data.user.username }}</a></td>
+							<td>{{ data.user.id }}</td>
+							<td>{{ data.user.fullname }}</td>
+							<td><a href="http://instagram.com/{{data.user.username}}">Profile</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+		</div>
+		<!-- END PhotoCtrl -->
+
+	</body>
+
+	<!-- Include Angular and Bootstrap -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers/PhotosCtrl.js"></script>
+</html>
