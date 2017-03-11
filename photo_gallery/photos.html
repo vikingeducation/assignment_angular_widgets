@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="gallery">
+<head>
+  <title>Photo Gallery</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="photos.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body ng-controller="PhotosCtrl">
+  <div class="container">
+    <div class="row">
+
+    <hr>
+      <h1 class="text-center">Photos</h1>
+    <hr>
+
+    <form name="form">
+      <h3>Search photos by:</h3>
+      <p>
+        <label>Filter</label><br>
+        <select name="filter" ng-model="selectedFilter" ng-options="filter for filter in filterList()"></select>        
+      </p>
+      <p>
+        <label>Hashtag</label><br>
+        <select multiple name="tag" ng-model="selectedTags" ng-options="tag for tag in tagList()"></select>        
+      </p>      
+    </form>
+
+    <hr>
+
+    <h4 ng-if="form.tag.$touched || form.filter.$touched" class="text-center">
+      Results: {{ filtered.length }}
+    </h4>
+
+    <div class="col-sm-4" ng-repeat="post in filtered = (rawFeed | filter: selectedFilter | filter: currentUser | filterTags: selectedTags | limitTo: 12 : (pageNum * 12) )">
+      <div class="photo-post text-center">
+        <h5>
+          <a href="{{ igURL + post.user.username }}">
+            {{ post.user.username }}
+          </a>
+        </h5>
+        <h6>{{ post.created_time }}</h6>
+        <a href="{{ post.link }}">
+          <img src="{{ post.images.thumbnail.url }}">
+        </a>
+        <h6>Caption: {{ post.caption.text }}</h6>
+        <h6>{{ post.likes.count }} likes</h6>
+        <h6>{{ post.comments.count }} comments</h6>
+        <h6>Filter: {{ post.filter }}</h6>
+      </div>
+
+    </div>
+
+    <p class="text-center" ng-click="changePage()"><a href="">{{pageValue}}</a></p>
+
+
+    <div class="row">
+      <div class="col-sm-12">
+          <h3 class="text-center">Users</h3>
+          <hr>
+          <div class="col-sm-3" ng-repeat="post in rawFeed" ng-click="setUser(post.user.username)">
+            <div class="user">
+              <img ng-src="{{post.user.profile_picture}}">
+              <h6>Username: {{ post.user.username }}</h6>
+              <h6>Full Name: {{ post.user.full_name }}</h6>
+              <h6>ID: {{post.user.id }}</h6>
+            </div>
+          </div>    
+      </div>
+    </div>
+
+  </div>
+  </div>
+</body>
+</html>
