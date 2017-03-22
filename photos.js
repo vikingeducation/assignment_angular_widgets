@@ -190,7 +190,7 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "ilovegettingagiftforabsolutelynoreason",
+        "boats",
         "squad",
         "family",
         "spoiled",
@@ -365,7 +365,7 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "49ers"
+        "boats"
       ],
       "type": "image",
       "location": {
@@ -902,12 +902,12 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "ขอบค",
-        "ร",
+        "fuck",
+        "shoes",
         "nnyellowbd",
-        "ใครม",
-        "เพ",
-        "แมทหน"
+        "boats",
+        "hats",
+        "cats"
       ],
       "type": "image",
       "location": null,
@@ -1258,7 +1258,7 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "f21xalec"
+        "fuck"
       ],
       "type": "image",
       "location": null,
@@ -1465,9 +1465,9 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "hindukush",
-        "afghanistan",
-        "bamiyan"
+        "hats",
+        "boats",
+        "cats"
       ],
       "type": "image",
       "location": null,
@@ -1637,14 +1637,14 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "turkey",
+        "boats",
         "istanbul",
         "quattro",
         "black",
-        "yenikoymotors",
+        "fuck",
         "2015",
         "new",
-        "rs6",
+        "cats",
         "izmir",
         "audi"
       ],
@@ -2305,9 +2305,9 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "aus",
-        "naturalbeauty",
-        "bondi"
+        "fuck",
+        "boats",
+        "cats"
       ],
       "type": "image",
       "location": null,
@@ -2494,7 +2494,7 @@ var instagramResponse = {
         }
       },
       "tags": [
-        "fashionarttut"
+        "fuck"
       ],
       "type": "video",
       "location": null,
@@ -3383,8 +3383,8 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "хб",
-        "камеди"
+        "boats",
+        "cats"
       ],
       "type": "image",
       "location": null,
@@ -3722,7 +3722,7 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "danielwellington"
+        "boats"
       ],
       "type": "image",
       "location": null,
@@ -4060,7 +4060,7 @@ var instagramResponse = {
     {
       "attribution": null,
       "tags": [
-        "joyfolie",
+        "cats",
         "ad"
       ],
       "type": "image",
