@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="widgets">
+<head>
+  <title>Photos, Bro!</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+  <link rel="stylesheet" href="custom.css">
+  <script src="photos.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-controller="PhotosCtrl" ng-init="init()">
+
+<select multiple ng-model="selectedHashTags" ng-options="o as o for o in hashTags | orderBy">
+</select>
+
+<select ng-model="selectedImageFilter" ng-options="o as o for o in imageFilters" ng-init="selectedImageFilter=''">
+</select>
+Total: {{ filteredOutput().length }}
+
+<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>{{currentPage+1}}/{{numberOfPages()}}<button ng-disabled="currentPage+1 >= numberOfPages()" ng-click="currentPage=currentPage+1">Next</button>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 big-block" >
+    <div class="row">
+      <div class="col-md-3 photo-cell" ng-repeat="image in images | filter: {filter: selectedImageFilter, user: { username: selectedUser } } | hashTagFilter:selectedHashTags | startFrom:currentPage*pageSize | limitTo:pageSize">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <a href="{{ image.link }}">
+              <img ng-src="{{ image.images.thumbnail.url }}" >
+            </a>
+          </div>
+          <div class="col-md-12 text-center">
+            <a href="https://www.instagram.com/{{image.user.username}}">{{ image.user.username }}</a>
+          </div>
+          <div class="col-md-12 text-center">
+            {{ image.created_time | filterDate:'month' }}/{{ image.created_time | filterDate:'day' }}/{{ image.created_time | filterDate:'year' }}
+          </div>
+          <div class="col-md-12 text-center">
+            Likes: {{ image.likes.count }}
+          </div>
+          <div class="col-md-12 text-center">
+            Comments: {{ image.comments.count }}
+          </div>
+          <div class="col-md-12 text-center">
+            Filter: {{ image.filter }}
+          </div>
+          <div class="col-md-12 text-center">
+            <span ng-repeat="tag in image.tags">{{tag}} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 user-cell text-center" ng-repeat="user in users">
+        <button ng-click="changeSelectedUser(user.username)">{{ user.username }}</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button ng-click="changeSelectedUser('')">Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
