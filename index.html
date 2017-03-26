@@ -5,15 +5,19 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
   <script src="app.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <div ng-controller="restaurantCtrl">
     <label>
-      name: <input type = "text" ng-model="name">
+      Name: <input type="text" ng-model="name">
     </label>
     <label>
-      Food Type: <input type = "text" ng-model="type">
+      Food Type: <input type="text" ng-model="type">
+    </label>
+    <label>
+      Image: <input type="text" ng-model="image">
     </label>
     <br>
     <button type=button ng-click="createRestaurant()">Create Restaurant</button>
@@ -28,6 +32,9 @@
             <a>Type of Food</a>
             <span ng-if="order === 'type'">{{ (direction ? '&#8593;' : '&#8595;') }}</span>
           </th>
+          <th>
+            Image
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -35,6 +42,7 @@
           <!-- <td>{{restaurant}}</td> -->
           <td>{{ restaurant.name }}</td>
           <td>{{ restaurant.type }}</td>
+          <td><img ng-if="restaurant.image" ng-src="{{ restaurant.image}}"></td>
           <td><a ng-click="deleteR(restaurant)">Delete</a> </td>
         </tr>
       </tbody>

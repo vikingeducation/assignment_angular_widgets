@@ -5,7 +5,8 @@ widgets.controller('restaurantCtrl', ['$scope', function($scope){
   $scope.restaurants = [
     {
       name: "test",
-      type: "Testican"
+      type: "Testican",
+      image: "http://parkresto.com/wp-content/themes/parkrestaurant/images/11onlinereservationpark.jpg"
     },
     {
       name: "test2",
@@ -13,11 +14,13 @@ widgets.controller('restaurantCtrl', ['$scope', function($scope){
     },
     {
       name: "test the third",
-      type: "Mexican"
+      type: "Mexican",
+      image: "https://media-cdn.tripadvisor.com/media/photo-s/0a/7b/7b/c6/restaurant-view.jpg"
     },
     {
       name: "fourth test",
-      type: "Italian"
+      type: "Italian",
+      image: "https://static1.squarespace.com/static/51ab58f4e4b0361e5f3ed294/51ab58f4e4b0361e5f3ed29a/51ab80bee4b0058e26cfcb1f/1370194240299/Benchmark_Restaurant_Dining_Room_Photographed_by_Evan_Sung.jpg"
     }
   ];
 
@@ -25,11 +28,13 @@ widgets.controller('restaurantCtrl', ['$scope', function($scope){
     if ($scope.name && $scope.type) {
       var newRestaurant = {
         name: $scope.name,
-        type: $scope.type
+        type: $scope.type,
+        image: $scope.image
       };
       $scope.restaurants.push(newRestaurant);
       $scope.name = "";
       $scope.type = "";
+      $scope.image = "";
     }
   };
 
