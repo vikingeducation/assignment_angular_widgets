@@ -43,4 +43,13 @@ widgets.controller('restaurantCtrl', ['$scope', function($scope){
       $scope.order = column;
     }
   };
+
+  $scope.deleteR = function(r) {
+    for (var i = 0; i < $scope.restaurants.length; i++) {
+      if ($scope.restaurants[i] === r) {
+        $scope.restaurants.splice(i, 1);
+        return;
+      }
+    }
+  };
 }]);
