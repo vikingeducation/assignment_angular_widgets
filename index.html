@@ -10,6 +10,7 @@
 
 <body>
   <div ng-controller="restaurantCtrl">
+    <h3>Add a Restaurant</h3>
     <label>
       Name: <input type="text" ng-model="name">
     </label>
@@ -19,8 +20,9 @@
     <label>
       Image: <input type="text" ng-model="image">
     </label>
-    <br>
     <button type=button ng-click="createRestaurant()">Create Restaurant</button>
+
+    <h3>Past Restaurants</h3>
     <table ng-if="restaurants.length">
       <thead>
         <tr>
@@ -38,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat= "restaurant in restaurants | orderBy:i=order:direction">
+        <tr ng-repeat= "restaurant in restaurants | orderBy:i=order:direction | filter:searchText" >
           <!-- <td>{{restaurant}}</td> -->
           <td>{{ restaurant.name }}</td>
           <td>{{ restaurant.type }}</td>
@@ -47,6 +49,9 @@
         </tr>
       </tbody>
     </table>
+
+    <h3>Search Restaurants</h3>
+    <input ng-model="searchText"
   </div>
 
 
