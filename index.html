@@ -15,24 +15,29 @@
     <label>
       Food Type: <input type = "text" ng-model="type">
     </label>
+    <br>
     <button type=button ng-click="createRestaurant()">Create Restaurant</button>
-    <!-- <div> -->
     <table ng-if="restaurants.length">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Type of Food</th>
+          <th ng-click="sort('name')">
+            <a>Name</a>
+            <span ng-if="order === 'name'">{{ (direction ? '&#8593;' : '&#8595;') }}</span>
+          </th>
+          <th ng-click="sort('type')">
+            <a>Type of Food</a>
+            <span ng-if="order === 'type'">{{ (direction ? '&#8593;' : '&#8595;') }}</span>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat= "restaurant in restaurants">
+        <tr ng-repeat= "restaurant in restaurants | orderBy:i=order:direction">
           <!-- <td>{{restaurant}}</td> -->
           <td>{{ restaurant.name }}</td>
           <td>{{ restaurant.type }}</td>
         </tr>
       </tbody>
     </table>
-    <!-- </div> -->
   </div>
 
 
