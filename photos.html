@@ -18,8 +18,12 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-xs-3" ng-repeat="image in images">
-        <img ng-src="{{image.images.standard_resolution.url}}">
+      <div class="col-xs-6 img-box" ng-repeat="image in images">
+        <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png">
+        <div class="img-info">
+          <div>User: {{image.user.username}}</div>
+          <div>Posted: {{image.created_time | date }}</div>
+        </div>
       </div>
     </div>
   </div>
