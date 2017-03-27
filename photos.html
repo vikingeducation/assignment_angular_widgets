@@ -23,6 +23,14 @@
         <div class="img-info">
           <div>User: {{image.user.username}}</div>
           <div>Posted: {{image.created_time | date }}</div>
+          <div>Likes: {{image.likes.count}}</div>
+          <div>Comments: {{image.comments.count}}</div>
+          <div ng-repeat="like in image.likes">
+            {{like.data.username}} Likes this
+          </div>
+          <span ng-repeat="tag in image.tags">
+                <a href="http://instagram.com/explore/tags/{{ tag }}">#{{ tag }}</a>
+              </span>
         </div>
       </div>
     </div>
