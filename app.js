@@ -58,3 +58,8 @@ widgets.controller('restaurantCtrl', ['$scope', function($scope){
     }
   };
 }]);
+
+widgets.controller('PhotoCtrl', ['$scope', function($scope){
+  $scope.rawFeed = instagramResponse;
+  $scope.images = $scope.rawFeed.data;
+}]);
