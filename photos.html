@@ -16,14 +16,13 @@
 </head>
 <body ng-controller="PhotoCtrl">
 
-  <!-- <div class="container">
+  <div class="container">
     <div class="row">
-      <div class="col-xs-6"> -->
-        <img ng-src="{{images[1].images.standard_resolution.url}}">
-        {{images[1].images.standard_resolution.url}}
-      <!-- </div>
+      <div class="col-xs-3" ng-repeat="image in images">
+        <img ng-src="{{image.images.standard_resolution.url}}">
+      </div>
     </div>
-  </div> -->
+  </div>
 
 
 </body>
