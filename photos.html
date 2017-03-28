@@ -20,16 +20,19 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-6 img-box" ng-repeat="image in images">
+        <a href="{{ image.link }}">
         <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png">
+        </a>
         <div class="img-info">
           <div>{{image.caption.text}}</div>
           <div>User: {{image.user.username}}</div>
           <div>Posted: {{image.created_time * 1000 | date }}</div>
           <div>Likes: {{image.likes.count}}</div>
           <div>Comments: {{image.comments.count}}</div>
-          <span ng-repeat="like in image.likes.data | limitTo:3">
+
+          <!-- <span ng-repeat="like in image.likes.data | limitTo:3">
             <a href="https://www.instagram.com/{{like.username}}">@{{like.username}}</a>
-          </span> Likes this
+          </span> Likes this -->
           <span ng-repeat="tag in image.tags">
                 <a href="http://instagram.com/explore/tags/{{ tag }}">#{{ tag }}</a>
               </span>
