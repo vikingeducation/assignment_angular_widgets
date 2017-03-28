@@ -5,4 +5,5 @@
 .img-box {
   /*height: 100px;*/
   position: relative;
+  border: 1px solid black;
 }

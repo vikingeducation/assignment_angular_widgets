@@ -28,7 +28,7 @@
           <div>Likes: {{image.likes.count}}</div>
           <div>Comments: {{image.comments.count}}</div>
           <span ng-repeat="like in image.likes.data | limitTo:3">
-            {{like.username}}
+            <a href="https://www.instagram.com/{{like.username}}">@{{like.username}}</a>
           </span> Likes this
           <span ng-repeat="tag in image.tags">
                 <a href="http://instagram.com/explore/tags/{{ tag }}">#{{ tag }}</a>
