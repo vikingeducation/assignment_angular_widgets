@@ -10,17 +10,20 @@
 
 <body>
   <div ng-controller="restaurantCtrl">
+    <!-- TODO turn into a form and use ng-submit to allow hitting enter to submit # ng-submit may go on form instead of button-->
     <h3>Add a Restaurant</h3>
-    <label>
-      Name: <input type="text" ng-model="name">
-    </label>
-    <label>
-      Food Type: <input type="text" ng-model="type">
-    </label>
-    <label>
-      Image: <input type="text" ng-model="image">
-    </label>
-    <button type=button ng-click="createRestaurant()">Create Restaurant</button>
+    <form>
+      <label>
+        Name: <input type="text" ng-model="name">
+      </label>
+      <label>
+        Food Type: <input type="text" ng-model="type">
+      </label>
+      <label>
+        Image: <input type="text" ng-model="image">
+      </label>
+      <button type=button ng-click="createRestaurant()">Create Restaurant</button>
+    </form>
 
     <h3>Past Restaurants</h3>
     <table ng-if="restaurants.length">
