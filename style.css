@@ -12,5 +12,9 @@
 .img-link {
   float: left;
   width: auto;
-  margin: 2px;
+  /*margin: 2px;*/
+}
+
+.box-row {
+  clear: none;
 }

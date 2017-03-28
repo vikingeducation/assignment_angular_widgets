@@ -18,11 +18,13 @@
 <body ng-controller="PhotoCtrl">
 
   <div class="container">
-    <div class="row">
-      <div class="col-xs-6 img-box" ng-repeat="image in images">
+    <h3>Filters</h3>
+    {{ filters }}
+    <div class="row box-row">
+      <div class="col-xs-3 img-box" ng-repeat="image in images">
         <div class="img-link">
           <a href="{{ image.link }}">
-          <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png">
+          <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png" class="img-responsive">
           </a>
         </div>
         <!-- <div class="img-info"> -->

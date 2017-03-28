@@ -62,6 +62,17 @@ widgets.controller('restaurantCtrl', ['$scope', function($scope){
 widgets.controller('PhotoCtrl', ['$scope', function($scope){
   $scope.rawFeed = instagramResponse;
   $scope.images = $scope.rawFeed.data;
+
+  $scope.getFilters = function() {
+    var filters = [];
+    for (var i = 0; i < $scope.images.length; i++) {
+      var filter = $scope.images[i].filter;
+      filters.indexOf(filter) === -1 ? filters.push(filter) : console.log("Filter already exists");
+    }
+    return filters;
+  };
+
+  $scope.filters = $scope.getFilters();
 }]);
 
 
