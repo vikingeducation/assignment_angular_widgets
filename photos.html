@@ -20,10 +20,12 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-6 img-box" ng-repeat="image in images">
-        <a href="{{ image.link }}">
-        <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png">
-        </a>
-        <div class="img-info">
+        <div class="img-link">
+          <a href="{{ image.link }}">
+          <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png">
+          </a>
+        </div>
+        <!-- <div class="img-info"> -->
           <div>{{image.caption.text}}</div>
           <div>Filter: {{image.filter}}</div>
           <div>User: <a href="http://instagram.com/{{ image.user.username }}">{{image.user.username}}</a></div>
@@ -37,7 +39,7 @@
           <span ng-repeat="tag in image.tags">
                 <a href="http://instagram.com/explore/tags/{{ tag }}">#{{ tag }}</a>
               </span>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>

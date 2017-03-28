@@ -6,4 +6,11 @@
   /*height: 100px;*/
   position: relative;
   border: 1px solid black;
+  /*clear:both;*/
+}
+
+.img-link {
+  float: left;
+  width: auto;
+  margin: 2px;
 }
