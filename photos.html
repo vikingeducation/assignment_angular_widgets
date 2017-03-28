@@ -26,7 +26,7 @@
         <div class="img-info">
           <div>{{image.caption.text}}</div>
           <div>Filter: {{image.filter}}</div>
-          <div>User: {{image.user.username}}</div>
+          <div>User: <a href="http://instagram.com/{{ image.user.username }}">{{image.user.username}}</a></div>
           <div>Posted: {{image.created_time * 1000 | date }}</div>
           <div>Likes: {{image.likes.count}}</div>
           <div>Comments: {{image.comments.count}}</div>
