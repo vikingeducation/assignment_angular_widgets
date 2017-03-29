@@ -7,10 +7,13 @@
   <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
 
   <!-- Bootstrap  -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
+ <link data-require="bootstrap-css@*" data-semver="3.3.1" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <script data-require="angular.js@*" data-semver="1.3.15" src="https://code.angularjs.org/1.3.15/angular.js"></script>
+ <script data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
   <!-- Angular -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script> -->
 
   <!-- Local JS -->
   <script src="photos.js"></script>
@@ -38,8 +41,13 @@
     <div>
       Number of Photos: {{filteredImages.length}}
     </div>
+    <pagination
+      ng-model="currentPage"
+      total-items="images.length"
+      boundary-links="true">
+    </pagination>
     <div class="row box-row">
-      <div class="col-xs-3 img-box" ng-repeat="image in images | filter:filterSet | tagFilter:tagSet as filteredImages">
+      <div class="col-xs-3 img-box" ng-repeat="image in currentPhotos | filter:filterSet | tagFilter:tagSet as filteredImages">
         <div class="img-link">
           <a href="{{ image.link }}">
           <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png" class="img-responsive">
@@ -63,6 +71,11 @@
       </div>
     </div>
   </div>
+  <pagination
+    ng-model="currentPage"
+    total-items="images.length"
+    boundary-links="true">
+  </pagination>
 
 
 </body>

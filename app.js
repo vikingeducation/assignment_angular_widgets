@@ -1,4 +1,4 @@
-var widgets = angular.module('widgets', []);
+var widgets = angular.module('widgets', ['ui.bootstrap']);
 
 widgets.controller('restaurantCtrl', ['$scope', function($scope){
 
@@ -62,6 +62,8 @@ widgets.controller('restaurantCtrl', ['$scope', function($scope){
 widgets.controller('PhotoCtrl', ['$scope', function($scope){
   $scope.rawFeed = instagramResponse;
   $scope.images = $scope.rawFeed.data;
+  $scope.currentPage = 1;
+  $scope.numPerPage = 12;
 
   $scope.getFilters = function() {
     var filters = [];
@@ -93,6 +95,13 @@ widgets.controller('PhotoCtrl', ['$scope', function($scope){
     $scope.tagSet = tagSet;
     console.log("getting run");
   };
+
+  $scope.$watch("currentPage + numPerPage", function() {
+    var begin = (($scope.currentPage - 1) * $scope.numPerPage),
+    end = begin + $scope.numPerPage;
+
+    $scope.currentPhotos = $scope.images.slice(begin, end);
+  });
 
 }]);
 
