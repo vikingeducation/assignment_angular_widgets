@@ -25,8 +25,15 @@
       ng-change="setFilterSet(filterSet)">
     </select>
 
+    <h3>#Hashtags</h3>
+    <select ng-if="tags.length"
+      ng-model="tagSet"
+      ng-options="tag for tag in tags"
+      ng-change="setTagSet(tagSet)">
+    </select>
+
     <div class="row box-row">
-      <div class="col-xs-3 img-box" ng-repeat="image in images | filter:filterSet">
+      <div class="col-xs-3 img-box" ng-repeat="image in images | filter:filterSet | filter:tagSet">
         <div class="img-link">
           <a href="{{ image.link }}">
           <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png" class="img-responsive">

@@ -72,10 +72,25 @@ widgets.controller('PhotoCtrl', ['$scope', function($scope){
     return filters;
   };
 
+  $scope.getTags = function() {
+    var tags = [];
+    for (var i = 0; i < $scope.images.length; i++) {
+      var tagArr = $scope.images[i].tags;
+      tags = tags.concat(tagArr);
+    }
+    return tags;
+  };
+
   $scope.filters = $scope.getFilters();
+  $scope.tags = $scope.getTags();
 
   $scope.setFilterSet = function(set) {
     $scope.filterSet = set;
+    console.log("getting run!!!!!!!!!!!!!!!!!!!!!!!");
+  };
+
+  $scope.setTagSet = function(set) {
+    $scope.tagSet = set;
     console.log("getting run");
   };
 
