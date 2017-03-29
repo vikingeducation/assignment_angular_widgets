@@ -35,9 +35,11 @@
       ng-change="setTagSet(tagSet)"
       multiple="true">
     </select>
-
+    <div>
+      Number of Photos: {{filteredImages.length}}
+    </div>
     <div class="row box-row">
-      <div class="col-xs-3 img-box" ng-repeat="image in images | filter:filterSet | tagFilter:tagSet">
+      <div class="col-xs-3 img-box" ng-repeat="image in images | filter:filterSet | tagFilter:tagSet as filteredImages">
         <div class="img-link">
           <a href="{{ image.link }}">
           <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png" class="img-responsive">
