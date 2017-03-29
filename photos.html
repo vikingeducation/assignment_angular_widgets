@@ -19,9 +19,14 @@
 
   <div class="container">
     <h3>Filters</h3>
-    {{ filters }}
+    <select ng-if="filters.length"
+      ng-model="filterSet"
+      ng-options="filter for filter in filters"
+      ng-change="setFilterSet(filterSet)">
+    </select>
+
     <div class="row box-row">
-      <div class="col-xs-3 img-box" ng-repeat="image in images">
+      <div class="col-xs-3 img-box" ng-repeat="image in images | filter:filterSet">
         <div class="img-link">
           <a href="{{ image.link }}">
           <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png" class="img-responsive">

@@ -73,6 +73,12 @@ widgets.controller('PhotoCtrl', ['$scope', function($scope){
   };
 
   $scope.filters = $scope.getFilters();
+
+  $scope.setFilterSet = function(set) {
+    $scope.filterSet = set;
+    console.log("getting run");
+  };
+
 }]);
 
 

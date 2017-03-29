@@ -7,6 +7,7 @@
   position: relative;
   border: 1px solid black;
   /*clear:both;*/
+  height: 500px;
 }
 
 .img-link {
@@ -15,6 +16,6 @@
   /*margin: 2px;*/
 }
 
-.box-row {
-  clear: none;
-}
+/*.box-row {
+  height: 500px;
+}*/
