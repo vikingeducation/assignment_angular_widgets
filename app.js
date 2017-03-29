@@ -89,13 +89,32 @@ widgets.controller('PhotoCtrl', ['$scope', function($scope){
     console.log("getting run!!!!!!!!!!!!!!!!!!!!!!!");
   };
 
-  $scope.setTagSet = function(set) {
-    $scope.tagSet = set;
+  $scope.setTagSet = function(tagSet) {
+    $scope.tagSet = tagSet;
     console.log("getting run");
   };
 
 }]);
 
+widgets.filter('tagFilter', function() {
+  var findOne = function (haystack, arr) {
+    return arr.some(function (v) {
+      return haystack.indexOf(v) >= 0;
+    });
+  };
+  return function(photos, tags) {
+    if (tags === undefined){
+      return photos;
+    }
+    returnImages = [];
+    for (var i = 0; i < photos.length; i++) {
+      if (findOne(photos[i].tags, tags)) {
+        returnImages.push(photos[i]);
+      }
+    }
+    return returnImages;
+  };
+});
 
 widgets.directive('errSrc', function() {
   return {
