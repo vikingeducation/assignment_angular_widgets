@@ -1,0 +1,63 @@
+<html ng-app="widgets">
+<head>
+  <title>Restaurants</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+  <script src="app.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div ng-controller="restaurantCtrl">
+    <!-- TODO turn into a form and use ng-submit to allow hitting enter to submit # ng-submit may go on form instead of button-->
+    <h3>Add a Restaurant</h3>
+    <form>
+      <label>
+        Name: <input type="text" ng-model="name">
+      </label>
+      <label>
+        Food Type: <input type="text" ng-model="type">
+      </label>
+      <label>
+        Image: <input type="text" ng-model="image">
+      </label>
+      <button type=button ng-click="createRestaurant()">Create Restaurant</button>
+    </form>
+
+    <h3>Past Restaurants</h3>
+    <table ng-if="restaurants.length">
+      <thead>
+        <tr>
+          <th ng-click="sort('name')">
+            <a>Name</a>
+            <span ng-if="order === 'name'">{{ (direction ? '&#8593;' : '&#8595;') }}</span>
+          </th>
+          <th ng-click="sort('type')">
+            <a>Type of Food</a>
+            <span ng-if="order === 'type'">{{ (direction ? '&#8593;' : '&#8595;') }}</span>
+          </th>
+          <th>
+            Image
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat= "restaurant in restaurants | orderBy:i=order:direction | filter:searchText" >
+          <!-- <td>{{restaurant}}</td> -->
+          <td>{{ restaurant.name }}</td>
+          <td>{{ restaurant.type }}</td>
+          <td><img ng-if="restaurant.image" ng-src="{{ restaurant.image}}"></td>
+          <td><a ng-click="deleteR(restaurant)">Delete</a> </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Search Restaurants</h3>
+    <input ng-model="searchText">
+  </div>
+
+
+  <script src="app.js"></script>
+</body>
+</html>

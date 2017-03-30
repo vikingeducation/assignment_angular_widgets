@@ -1,0 +1,36 @@
+/*img {
+  height: 50px;
+}*/
+
+.img-box {
+  /*height: 100px;*/
+  position: relative;
+  border: 1px solid black;
+  /*clear:both;*/
+  height: 600px;
+}
+
+.img-link {
+  float: left;
+  width: auto;
+  /*margin: 2px;*/
+}
+
+/*.box-row {
+  height: 500px;
+}*/
+
+.user-box {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 125px;
+  width: 100px;
+}
+
+.filter {
+  margin: 2px;
+}
+
+.user-img {
+  max-height: 100px;
+}

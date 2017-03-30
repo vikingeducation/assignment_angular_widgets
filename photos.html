@@ -1,0 +1,105 @@
+<html ng-app="widgets">
+<head>
+  <meta charset="utf-8">
+  <title>Photos</title>
+
+  <!-- lodash  -->
+  <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+
+  <!-- Bootstrap  -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
+ <link data-require="bootstrap-css@*" data-semver="3.3.1" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <script data-require="angular.js@*" data-semver="1.3.15" src="https://code.angularjs.org/1.3.15/angular.js"></script>
+ <script data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+  <!-- Angular -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script> -->
+
+  <!-- Local JS -->
+  <script src="photos.js"></script>
+  <script src="app.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="PhotoCtrl">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="filter">
+          <h3>FilterPicker</h3>
+          <select ng-if="filters.length"
+            ng-model="filterSet"
+            ng-options="filter for filter in filters"
+            ng-change="setFilterSet(filterSet)">
+          </select>
+        </div>
+        <div>
+          Number of Photos: {{filteredImages.length}}
+        </div>
+        <pagination
+          ng-model="currentPage"
+          total-items="images.length"
+          boundary-links="true">
+        </pagination>
+      </div>
+      <div class="col-sm-4">
+        <div class="filter">
+          <h3>#HashtagPicker</h3>
+          <select ng-if="tags.length"
+            ng-model="tagSet"
+            ng-options="tag for tag in tags"
+            ng-change="setTagSet(tagSet)"
+            multiple="true">
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="filter">
+          <h3>UserPicker</h3>
+          <div class="user-box">
+            <div ng-repeat="user in users" ng-click="setUserSet(user)">
+              <img ng-src="{{user.profile_picture}}" class="img-responsive user-img" err-src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png">
+              {{user.username}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row box-row">
+      <div class="col-xs-3 img-box" ng-repeat="image in currentPhotos | filter:filterSet | filter:userSet |tagFilter:tagSet as filteredImages">
+        <div class="img-link">
+          <a href="{{ image.link }}">
+          <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png" class="img-responsive">
+          </a>
+        </div>
+        <!-- <div class="img-info"> -->
+          <div>{{image.caption.text}}</div>
+          <div>Filter: {{image.filter}}</div>
+          <div>User: <a href="http://instagram.com/{{ image.user.username }}">{{image.user.username}}</a></div>
+          <div>Posted: {{image.created_time * 1000 | date }}</div>
+          <div>Likes: {{image.likes.count}}</div>
+          <div>Comments: {{image.comments.count}}</div>
+
+          <!-- <span ng-repeat="like in image.likes.data | limitTo:3">
+            <a href="https://www.instagram.com/{{like.username}}">@{{like.username}}</a>
+          </span> Likes this -->
+          <span ng-repeat="tag in image.tags">
+                <a href="http://instagram.com/explore/tags/{{ tag }}">#{{ tag }}</a>
+              </span>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+
+  <pagination
+    ng-model="currentPage"
+    total-items="images.length"
+    boundary-links="true">
+  </pagination>
+
+
+</body>
+</html>
