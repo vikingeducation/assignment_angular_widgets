@@ -97,7 +97,8 @@ widgets.controller('PhotoCtrl', ['$scope', function($scope){
   $scope.tags = $scope.getTags();
 
   $scope.setUserSet = function(set) {
-    $scope.UserSet = set;
+    $scope.userSet = set.username;
+    console.log("getting run???????????????????????");
   };
 
   $scope.setFilterSet = function(set) {

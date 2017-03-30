@@ -25,44 +25,51 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-xs-3">
-        <h3>FilterPicker</h3>
-        <select ng-if="filters.length"
-          ng-model="filterSet"
-          ng-options="filter for filter in filters"
-          ng-change="setFilterSet(filterSet)">
-        </select>
+      <div class="col-xs-4">
+        <div class="filter">
+          <h3>FilterPicker</h3>
+          <select ng-if="filters.length"
+            ng-model="filterSet"
+            ng-options="filter for filter in filters"
+            ng-change="setFilterSet(filterSet)">
+          </select>
+        </div>
+        <div>
+          Number of Photos: {{filteredImages.length}}
+        </div>
+        <pagination
+          ng-model="currentPage"
+          total-items="images.length"
+          boundary-links="true">
+        </pagination>
       </div>
-      <div class="col-xs-3">
-        <h3>#HashtagPicker</h3>
-        <select ng-if="tags.length"
-          ng-model="tagSet"
-          ng-options="tag for tag in tags"
-          ng-change="setTagSet(tagSet)"
-          multiple="true">
-        </select>
+      <div class="col-xs-4">
+        <div class="filter">
+          <h3>#HashtagPicker</h3>
+          <select ng-if="tags.length"
+            ng-model="tagSet"
+            ng-options="tag for tag in tags"
+            ng-change="setTagSet(tagSet)"
+            multiple="true">
+          </select>
+        </div>
       </div>
-      <div class="col-xs-3">
-        <h3>UserPicker</h3>
-        <div class="user-box">
-          <div ng-repeat="user in users">
-            <img ng-src="{{user.profile_picture}}" class="img-responsive" err-src="https://thesocietypages.org/socimages/files/2009/05/nopic_192.gif">
-            {{user.username}}
+      <div class="col-xs-4">
+        <div class="filter">
+          <h3>UserPicker</h3>
+          <div class="user-box">
+            <div ng-repeat="user in users" ng-click="setUserSet(user)">
+              <img ng-src="{{user.profile_picture}}" class="img-responsive user-img" err-src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png">
+              {{user.username}}
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div>
-      Number of Photos: {{filteredImages.length}}
-    </div>
-    <pagination
-      ng-model="currentPage"
-      total-items="images.length"
-      boundary-links="true">
-    </pagination>
+
     <div class="row box-row">
-      <div class="col-xs-3 img-box" ng-repeat="image in currentPhotos | filter:filterSet | tagFilter:tagSet as filteredImages">
+      <div class="col-xs-3 img-box" ng-repeat="image in currentPhotos | filter:filterSet | filter:userSet |tagFilter:tagSet as filteredImages">
         <div class="img-link">
           <a href="{{ image.link }}">
           <img ng-src="{{image.images.low_resolution.url}}" err-src="http://www.sawyermerchant.com/wp-content/uploads/2017/01/SawyerMerchantTallTransparent.png" class="img-responsive">
