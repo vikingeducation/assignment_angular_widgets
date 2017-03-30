@@ -24,20 +24,35 @@
 <body ng-controller="PhotoCtrl">
 
   <div class="container">
-    <h3>Filters</h3>
-    <select ng-if="filters.length"
-      ng-model="filterSet"
-      ng-options="filter for filter in filters"
-      ng-change="setFilterSet(filterSet)">
-    </select>
+    <div class="row">
+      <div class="col-xs-3">
+        <h3>FilterPicker</h3>
+        <select ng-if="filters.length"
+          ng-model="filterSet"
+          ng-options="filter for filter in filters"
+          ng-change="setFilterSet(filterSet)">
+        </select>
+      </div>
+      <div class="col-xs-3">
+        <h3>#HashtagPicker</h3>
+        <select ng-if="tags.length"
+          ng-model="tagSet"
+          ng-options="tag for tag in tags"
+          ng-change="setTagSet(tagSet)"
+          multiple="true">
+        </select>
+      </div>
+      <div class="col-xs-3">
+        <h3>UserPicker</h3>
+        <div class="user-box">
+          <div ng-repeat="user in users">
+            <img ng-src="{{user.profile_picture}}" class="img-responsive" err-src="https://thesocietypages.org/socimages/files/2009/05/nopic_192.gif">
+            {{user.username}}
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <h3>#Hashtags</h3>
-    <select ng-if="tags.length"
-      ng-model="tagSet"
-      ng-options="tag for tag in tags"
-      ng-change="setTagSet(tagSet)"
-      multiple="true">
-    </select>
     <div>
       Number of Photos: {{filteredImages.length}}
     </div>
@@ -71,6 +86,7 @@
       </div>
     </div>
   </div>
+
   <pagination
     ng-model="currentPage"
     total-items="images.length"

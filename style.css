@@ -19,3 +19,9 @@
 /*.box-row {
   height: 500px;
 }*/
+
+.user-box {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100px;
+}

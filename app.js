@@ -65,6 +65,15 @@ widgets.controller('PhotoCtrl', ['$scope', function($scope){
   $scope.currentPage = 1;
   $scope.numPerPage = 12;
 
+  $scope.getUsers = function () {
+    var users = [];
+    for (var i = 0; i < $scope.images.length; i++) {
+      var user = $scope.images[i].user;
+      users.push(user);
+    }
+    return users;
+  };
+
   $scope.getFilters = function() {
     var filters = [];
     for (var i = 0; i < $scope.images.length; i++) {
@@ -83,8 +92,13 @@ widgets.controller('PhotoCtrl', ['$scope', function($scope){
     return tags;
   };
 
+  $scope.users = $scope.getUsers();
   $scope.filters = $scope.getFilters();
   $scope.tags = $scope.getTags();
+
+  $scope.setUserSet = function(set) {
+    $scope.UserSet = set;
+  };
 
   $scope.setFilterSet = function(set) {
     $scope.filterSet = set;
