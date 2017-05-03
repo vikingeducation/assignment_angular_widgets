@@ -29,23 +29,25 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
 
 widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window){
   $scope.rawFeed = $window.instagramResponse['data'];
-  $scope.posts = (function(){
-    var collection = [],
-        post;
-    $scope.rawFeed.forEach(function(postJSON){
-      post = {};
+  // $scope.posts = (function(){
+  //   var collection = [],
+  //       post;
+  //   $scope.rawFeed.forEach(function(postJSON){
+  //     post = {};
+  //
+  //     post.imageUrl = postJSON['images']['thumbnail']['url'];
+  //     post.imagePageUrl = postJSON['link'];
+  //     post.username = postJSON['user']['username'];
+  //     post.userUrl = "https://www.instagram.com/" + post.username;
+  //
+  //     post.likeCount = postJSON['likes']['count'];
+  //     post.commentCount = postJSON['comments']['count'];
+  //
+  //     collection.push( post );
+  //   });
+  //   return collection;
+  // })();
 
-      post.imageUrl = postJSON['images']['low_resolution']['url'];
-      post.imagePageUrl = postJSON['link'];
-      post.username = postJSON['user']['username'];
-      post.userUrl = "https://www.instagram.com/" + post.username;
-
-      post.likeCount = postJSON['likes']['count'];
-      post.commentCount = postJSON['comments']['count'];
-
-      collection.push( post );
-    });
-    return collection;
-  })();
+  console.log(   $scope.rawFeed )
 
 }]);

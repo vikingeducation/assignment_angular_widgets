@@ -25,7 +25,26 @@
                 <div class="panel-body">
                     <div class="row">
                         <!--  -->
-                        <div class="col-sm-6 img-caption" ng-repeat="post in posts">
+                        <div class="col-xs-3 img-caption" ng-repeat="post in rawFeed">
+
+                                <a ng-href="{{ post['link'] }}">
+                                    <img ng-src="{{ post['images']['thumbnail']['url'] }}">
+                                </a>
+                                <a ng-href="{{ "https://www.instagram.com/" + post.userUrl }}">
+                                    <p>
+                                        {{ post['user']['username'] }}
+                                    </p>
+                                </a>
+                                <p>
+                                    Likes: {{ post['likes']['count'] }}
+                                </p>
+                                <p>
+                                    Comments: {{ post['comments']['count'] }}
+                                </p>
+
+                        </div>
+                        <!-- alt -->
+                        <!-- <div class="col-sm-3 img-caption" ng-repeat="post in posts">
 
                             <div>
                                 <a ng-href="{{ post.imagePageUrl }}">
@@ -44,7 +63,7 @@
                                 </p>
 
                             </div>
-                        </div>
+                        </div> -->
                         <!--  -->
                     </div>
                 </div>
