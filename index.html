@@ -7,6 +7,8 @@
     <script src="app.js"></script>
   </head>
   <body>
+    <a href="/photos.html">photos.html</a>
+    <hr>
     <h1>Some Angular Fun</h1>
     <div ng-app="WidgetsApp">
       <div ng-controller="RestaurantCtrl">
@@ -23,25 +25,25 @@
 
         <hr>
 
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Type Of Food</th>
+          </tr>
+          <tr ng-repeat="rest in restaurants | orderBy: '+type'  | filter:filterText ">
+            <td>{{ rest.name }}</td>
+            <td>{{ rest.type }}</td>
+            <td><img ng-src="{{ rest.imageUrl }}"></td>
+            <td><input type="button" value="Delete" ng-click="destroy($index)"></td>
+          </tr>
+        </table>
 
-        <div ng-repeat="rest in restaurants | orderBy: '+type'  | filter:filterText ">
-          {{ rest.name }}
-          {{ rest.type }}
-          <img ng-src="{{ rest.imageUrl }}">
-          <input type="button" value="Delete" ng-click="destroy($index)">
-          <hr>
-        </div>
-
-        <hr><hr>
+        <hr>
 
         <h2>Search Restaurants</h2>
         <input type="text" ng-model="filterText">
-        <h3>Filter By:</h3>
-        <input type="button" name="name" value="Name">
-        <input type="button" name="name" value="Type">
 
-
-      </div>
+      </div> <!-- controller end -->
     </div>
 
   </body>
