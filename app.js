@@ -29,6 +29,32 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
 
 widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window){
   $scope.rawFeed = $window.instagramResponse['data'];
+  $scope.filters = [''];
+  $scope.hashTags = [''];
+  $scope.buildFilters = function(post){
+    var filter = post['filter'];
+
+    if ( $scope.filters.indexOf( filter ) === -1 ) {
+      $scope.filters.push( filter );
+    }
+  };
+  $scope.buildHashTags = function(post){
+    var hashTags = post['tags'];
+
+    hashTags.forEach(function(hashTag){
+      if ( $scope.hashTags.indexOf( hashTag ) === -1 ) {
+        $scope.hashTags.push( hashTag );
+      }
+    });
+  };
+
+  $scope.buildAll = function(post){
+    $scope.buildFilters(post);
+    $scope.buildHashTags(post);
+  };
+  $scope.instaFilter = "";
+
+
   // $scope.posts = (function(){
   //   var collection = [],
   //       post;
@@ -49,5 +75,6 @@ widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window
   // })();
 
   console.log(   $scope.rawFeed )
+  console.log(   $scope.filters )
 
 }]);
