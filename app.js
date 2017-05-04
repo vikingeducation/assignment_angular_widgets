@@ -30,7 +30,10 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
 widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window){
   $scope.rawFeed = $window.instagramResponse['data'];
   $scope.filters = [''];
-  $scope.hashTags = [''];
+  $scope.selectedFilter = "";
+  $scope.hashTags = [];
+  $scope.selectedHashTags = [];
+
   $scope.buildFilters = function(post){
     var filter = post['filter'];
 
@@ -52,29 +55,24 @@ widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window
     $scope.buildFilters(post);
     $scope.buildHashTags(post);
   };
-  $scope.instaFilter = "";
-
-
-  // $scope.posts = (function(){
-  //   var collection = [],
-  //       post;
-  //   $scope.rawFeed.forEach(function(postJSON){
-  //     post = {};
-  //
-  //     post.imageUrl = postJSON['images']['thumbnail']['url'];
-  //     post.imagePageUrl = postJSON['link'];
-  //     post.username = postJSON['user']['username'];
-  //     post.userUrl = "https://www.instagram.com/" + post.username;
-  //
-  //     post.likeCount = postJSON['likes']['count'];
-  //     post.commentCount = postJSON['comments']['count'];
-  //
-  //     collection.push( post );
-  //   });
-  //   return collection;
-  // })();
 
   console.log(   $scope.rawFeed )
   console.log(   $scope.filters )
 
 }]);
+
+widgets.filter('selectedHashTags', function() {
+    return function(tasks, tags) {
+        return tasks.filter(function(task) {
+
+
+            for (var i in task.Tags) {
+                if (tags.indexOf(task.Tags[i]) != -1) {
+                    return true;
+                }
+            }
+            return false;
+
+        });
+    };
+});
