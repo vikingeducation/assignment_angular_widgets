@@ -24,7 +24,7 @@
         </div>
         <!-- insta filters end-->
 
-<h3 ng-repeat="tag in selectedHashTags">{{ tag }}</h3>
+<!-- <h3 ng-repeat="tag in selectedHashTags">{{ tag }}</h3> -->
 <h3>{{ selectedHashTags }}</h3>
 <!-- <h3 ng-repeat="tag in selectedHashTags">{{ tag }}</h3> -->
 
@@ -33,7 +33,7 @@
             <div class="panel panel-default col-xs-offset-1 col-xs-10">
                 <h2>Hash Tags</h2>
                 <select class="col-xs-4" ng-model="selectedHashTags"
-                  ng-options="item for item in hashTags | orderBy:item" multiple >
+                  ng-options="item for item in hashTags | orderBy:item" multiple>
                 </select>
                 </div>
             </div>
@@ -45,17 +45,15 @@
                 <div class="panel-heading row">
                     <div class="panel-title">
                         <h2 class="col-xs-offset-5 col-xs-2 text-center">
-                          Photos
+                          {{ photos.length }} Photos
                         </h2>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <!--  -->
                         <div class="col-xs-3 img-caption"
-                          ng-repeat="post in rawFeed | filter:selectedFilter | filter:selectedHashTags"
+                          ng-repeat="post in rawFeed | filter:selectedFilter | hashTagFilter:selectedHashTags"
                           ng-init="buildAll(post)" >
-
                             <a ng-href="{{ post['link'] }}">
                                 <img ng-src="{{ post['images']['thumbnail']['url'] }}">
                             </a>
@@ -74,34 +72,10 @@
                                 tags: {{ post['tags'] }}
                             </p>
                         </div>
-                        <!-- alt -->
-                        <!-- <div class="col-sm-3 img-caption" ng-repeat="post in posts">
-
-                            <div>
-                                <a ng-href="{{ post.imagePageUrl }}">
-                                    <img ng-src="{{ post.imageUrl }}">
-                                </a>
-                                <a ng-href="{{ post.userUrl }}">
-                                    <p>
-                                        {{ post.username }}
-                                    </p>
-                                </a>
-                                <p>
-                                    Likes: {{ post.likeCount }}
-                                </p>
-                                <p>
-                                    Comments: {{ post.commentCount }}
-                                </p>
-
-                            </div>
-                        </div> -->
-                        <!--  -->
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
 </body>
-
 </html>

@@ -31,8 +31,9 @@ widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window
   $scope.rawFeed = $window.instagramResponse['data'];
   $scope.filters = [''];
   $scope.selectedFilter = "";
-  $scope.hashTags = [];
-  $scope.selectedHashTags = [];
+  $scope.hashTags = [''];
+  // $scope.selectedHashTags = [];
+  // $scope.selectedHashTags = "";
 
   $scope.buildFilters = function(post){
     var filter = post['filter'];
@@ -61,18 +62,23 @@ widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window
 
 }]);
 
-widgets.filter('selectedHashTags', function() {
-    return function(tasks, tags) {
-        return tasks.filter(function(task) {
+widgets.filter('hashTagFilter', function(){
+  return function(collection, filters){
+    if ( filters === undefined ) { return collection; }
 
+    var filteredCollection = [];
 
-            for (var i in task.Tags) {
-                if (tags.indexOf(task.Tags[i]) != -1) {
-                    return true;
-                }
-            }
-            return false;
+    collection.forEach(function(photo){
+      var tags = photo['tags'];
 
+      if ( tags !== undefined ) {
+        tags.forEach(function(tag){
+          if ( filters.indexOf( tag ) !== -1 ) {
+            filteredCollection.push(photo);
+          }
         });
-    };
+      }
+    });
+    return filteredCollection;
+  };
 });
