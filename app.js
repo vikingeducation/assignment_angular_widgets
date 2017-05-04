@@ -65,6 +65,7 @@ widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window
 widgets.filter('hashTagFilter', function(){
   return function(collection, filters){
     if ( filters === undefined ) { return collection; }
+    if ( filters[0] === '' ) { return collection; }
 
     var filteredCollection = [];
 
