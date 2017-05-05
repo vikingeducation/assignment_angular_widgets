@@ -29,11 +29,12 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
 
 widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window){
   $scope.rawFeed = $window.instagramResponse['data'];
+  $scope.paginationCount = 0;
+  $scope.paginationIncrement = 12;
+
   $scope.filters = [''];
   $scope.selectedFilter = "";
   $scope.hashTags = [''];
-  // $scope.selectedHashTags = [];
-  // $scope.selectedHashTags = "";
 
   $scope.buildFilters = function(post){
     var filter = post['filter'];
@@ -42,6 +43,7 @@ widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window
       $scope.filters.push( filter );
     }
   };
+
   $scope.buildHashTags = function(post){
     var hashTags = post['tags'];
 
@@ -57,8 +59,23 @@ widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window
     $scope.buildHashTags(post);
   };
 
+  //pagination
+  $scope.paginateBack = function(){
+    if ($scope.paginationCount > 0){
+      $scope.paginationCount -= $scope.paginationIncrement;
+    }
+  };
+
+  $scope.paginateForward = function(resultCount){
+    var limit = $scope.rawFeed.length - 12;
+
+    if ($scope.paginationCount < limit){
+      $scope.paginationCount += $scope.paginationIncrement;
+    }
+
+  };
+
   console.log(   $scope.rawFeed )
-  console.log(   $scope.filters )
 
 }]);
 
