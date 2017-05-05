@@ -41,14 +41,14 @@
                 <div class="panel-heading row">
                     <div class="panel-title">
                         <h2 class="col-xs-offset-5 col-xs-2 text-center">
-                          {{ photos.length }} Photos
+                          {{ results.length }} Photos
                         </h2>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-3 img-caption"
-                          ng-repeat="post in rawFeed | filter:selectedFilter | hashTagFilter:selectedHashTags"
+                          ng-repeat="post in rawFeed | filter:selectedFilter | hashTagFilter:selectedHashTags | filter:x as results"
                           ng-init="buildAll(post)" >
                             <a ng-href="{{ post['link'] }}">
                                 <img ng-src="{{ post['images']['thumbnail']['url'] }}">
@@ -63,9 +63,6 @@
                             </p>
                             <p>
                                 Comments: {{ post['comments']['count'] }}
-                            </p>
-                            <p>
-                                tags: {{ post['tags'] }}
                             </p>
                         </div>
                     </div>
