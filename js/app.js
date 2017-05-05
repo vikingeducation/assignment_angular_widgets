@@ -1,4 +1,3 @@
-console.log('rann?')
 var widgets = angular.module('WidgetsApp', []);
 
 widgets.controller('RestaurantCtrl', ['$scope', function($scope){
@@ -11,7 +10,12 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
   };
 
   $scope.destroy = function(index){
-    $scope.restaurants.splice(index, 1);
+      $scope.restaurants.forEach(function(restaurant){
+        console.log(restaurant.idx)
+        if (restaurant.idx === index) {
+          $scope.restaurants.splice(index, 1);
+        }
+      });
   };
 
   $scope.createRestaurant = function(){
@@ -19,6 +23,8 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
     restaurant.name = $scope.name;
     restaurant.type = $scope.typeOfFood;
     restaurant.imageUrl = $scope.imageUrl;
+    restaurant.idx = $scope.restaurants.length;
+
     $scope.restaurants.push(restaurant);
 
     $scope.clearInputs();

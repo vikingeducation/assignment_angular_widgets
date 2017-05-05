@@ -32,7 +32,7 @@
             <td>{{ rest.name }}</td>
             <td>{{ rest.type }}</td>
             <td><img ng-src="{{ rest.imageUrl }}"></td>
-            <td><input type="button" value="Delete" ng-click="destroy($index)"></td>
+            <td><input type="button" value="Delete" ng-click="destroy(rest.idx)"></td>
           </tr>
         </table>
 
