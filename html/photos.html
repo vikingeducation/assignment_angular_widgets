@@ -3,12 +3,20 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Photos</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script src="photos.js"></script>
-    <script src="app.js"></script>
+    <script src="../js/photos.js"></script>
+    <script src="../js/app.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style media="screen">
+      .user {
+        /*min-height: 200px;*/
+        }
+      .user:hover {
+        cursor: pointer;
+        }
+    </style>
 </head>
 
 <body ng-app="WidgetsApp">
@@ -50,8 +58,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-3 img-caption"
-                          ng-repeat="post in rawFeed | limitTo : 12 : paginationCount |
+
+                          ng-repeat="post in rawFeed |
                                     filter:selectedFilter |
+                                    userFilter:userToFilter |
                                     hashTagFilter:selectedHashTags |
                                     filter:x as results"
                           ng-init="buildAll(post)">
@@ -72,17 +82,34 @@
                             </p>
                         </div>
                     </div>
-
-                    <!-- pagination -->
-                    <div class="row text-center col-xs-12">
-                      <button type="button" class="default" ng-click="paginateBack()">Previous</button>
-                      <button type="button" class="default" ng-click="paginateForward()">Next</button>
-                    </div>
-                    <!-- pagination end-->
-
                 </div>
             </div>
         </div>
+
+        <!-- user list -->
+        <div class="panel panel-primary">
+          <div class="panel-heading text-center">
+            <h2>Filter by User</h2>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+
+              <div class="col-xs-3 text-center user"
+                    ng-repeat="post in rawFeed"
+                    ng-click="setUserFilter(post)">
+                    <p >
+                      {{ post['user']['username'] }}
+                    </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- user list end-->
+
+
+
     </main>
 </body>
 </html>

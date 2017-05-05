@@ -1,3 +1,4 @@
+console.log('rann?')
 var widgets = angular.module('WidgetsApp', []);
 
 widgets.controller('RestaurantCtrl', ['$scope', function($scope){
@@ -29,8 +30,7 @@ widgets.controller('RestaurantCtrl', ['$scope', function($scope){
 
 widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window){
   $scope.rawFeed = $window.instagramResponse['data'];
-  $scope.paginationCount = 0;
-  $scope.paginationIncrement = 12;
+  $scope.userToFilter = '';
 
   $scope.filters = [''];
   $scope.selectedFilter = "";
@@ -59,27 +59,30 @@ widgets.controller('PhotosCtrl', ['$scope', '$window',  function($scope, $window
     $scope.buildHashTags(post);
   };
 
-  //pagination
-  $scope.paginateBack = function(){
-    if ($scope.paginationCount > 0){
-      $scope.paginationCount -= $scope.paginationIncrement;
-    }
+  //user list
+  $scope.setUserFilter = function(post){
+    var user = post['user']['username'];
+    $scope.userToFilter = user;
   };
-
-  $scope.paginateForward = function(resultCount){
-    var limit = $scope.rawFeed.length - 12;
-
-    if ($scope.paginationCount < limit){
-      $scope.paginationCount += $scope.paginationIncrement;
-    }
-
-  };
-
-  console.log(   $scope.rawFeed )
 
 }]);
 
 //filters
+
+widgets.filter('userFilter', function(){
+  return function(collection, userToFilter){
+    if ( userToFilter === '' ) { return collection; }
+
+    filteredCollection = [];
+    collection.forEach(function(photo){
+      var photosUser = photo['user']['username'];
+        if ( photosUser === userToFilter ) {
+          filteredCollection.push(photo);
+      }
+    });
+    return filteredCollection;
+  };
+});
 
 widgets.filter('hashTagFilter', function(){
   return function(collection, filters){
@@ -89,7 +92,7 @@ widgets.filter('hashTagFilter', function(){
     var filteredCollection = [];
 
     collection.forEach(function(photo){
-      var tags = photo['tags'];
+      var user = photo['user']['username'];
 
       if ( tags !== undefined ) {
         tags.forEach(function(tag){
